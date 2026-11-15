@@ -3,34 +3,32 @@ import { expectNoHorizontalOverflow } from './helpers'
 
 /**
  * Make runs fast and predictable without touching the game code:
- * - serve the bundle with a quicker, constant fall speed (as if content/doodle-items.json said so);
+ * - serve the bundle with a quicker, constant fall speed and a 30% distraction share (as if
+ *   content/doodle-items.json said so), so that one constant random value means a good habit;
  * - pin Math.random so every item is a good habit falling straight down the middle,
  *   until the test sets window.__distraction, after which a distraction falls down the middle.
+ * The good-habit phase must not depend on call order: the router also calls Math.random.
  */
+const SETTINGS = 'startSpeed:150,speedPerPoint:6,maxSpeed:340,spawnInterval:1.1,negativeShare:.7'
+const TEST_SETTINGS =
+  'startSpeed:300,speedPerPoint:0,maxSpeed:300,spawnInterval:1.1,negativeShare:.3'
+
 async function setUp(page: Page, lang = 'en') {
   let replaced = false
   await page.route(/\/assets\/index-[\w-]+\.js$/, async (route) => {
     const response = await route.fetch()
     const body = await response.text()
-    replaced = body.includes('startSpeed:150,speedPerPoint:6,maxSpeed:340')
-    await route.fulfill({
-      response,
-      body: body.replace(
-        'startSpeed:150,speedPerPoint:6,maxSpeed:340',
-        'startSpeed:300,speedPerPoint:0,maxSpeed:300',
-      ),
-    })
+    replaced = body.includes(SETTINGS)
+    await route.fulfill({ response, body: body.replace(SETTINGS, TEST_SETTINGS) })
   })
   await page.addInitScript((l) => {
     localStorage.setItem('outreach.lang', l)
     let n = 0
-    // Each new item asks for: kind (below 0.7 = distraction), which item, x position (0.5 = middle).
+    // Each new item asks for: kind (below 0.3 = distraction), which item, x position (0.5 = middle).
     Math.random = () =>
-      [
-        ...((window as unknown as { __distraction?: boolean }).__distraction
-          ? [0.1, 0.1, 0.5]
-          : [0.9, 0.5, 0.5]),
-      ][n++ % 3]!
+      (window as unknown as { __distraction?: boolean }).__distraction
+        ? [0.1, 0.1, 0.5][n++ % 3]!
+        : 0.5
   }, lang)
   await page.goto('/bhulkao/activity/doodle')
   expect(replaced, 'doodle settings found in the bundle').toBe(true)
