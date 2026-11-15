@@ -54,7 +54,7 @@ Every game, story and prasang is at most three taps from the intro page.
   website (fonts are bundled), except Firestore for the doodle leaderboard
   once Firebase is set up. The only free-text input in Bhulkao is the doodle
   player's name: a first name or nickname, letters only, up to 12 letters,
-  with a basic rude-word filter. It is shown on the leaderboard. The
+  with a basic rude-word filter. It is shown on that day's leaderboard. The
   browser's local storage keeps only the language choice, today's word-game
   guesses, the doodle best score and the doodle player's name. Every link that
   leaves the site first shows "You are leaving this site".
@@ -223,12 +223,13 @@ fall, in play-area pixels per second; the play area is 360 wide),
 ### Doodle leaderboard
 
 Before each game the player types a name. When the game ends, the score is
-saved and the game-over screen shows the top three names of all time and how
-many different names have ever played. Each name keeps only its best score
-ever; "Riya" and "riya" count as the same player. The board never resets.
+saved and the game-over screen shows today's top three names and how many
+different names played today. Each name keeps only its best score for the
+day; "Riya" and "riya" count as the same player. "Today" is the player's local
+date.
 
-Scores are stored in Firebase Firestore, one document per player at
-`doodlePlayers/<name>`. To connect a Firebase project:
+Scores are stored in Firebase Firestore, at
+`doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:
 
 1. In the Firebase console, create a Firestore database and a web app.
 2. Publish the rules in `firestore.rules` (Firestore → Rules, or
@@ -248,17 +249,41 @@ submit a false one; preventing that fully would need a server.
 
 ### Change the pill game
 
-Cards and the green pill's destination are in `content/pills.json`.
+The red cards, the blue pill's messages and the green pill pages are in
+`content/pills.json`.
 
-- `"greenPillUrl"`: where the green pill leads. While it is `null`, the green
-  pill opens an on-site placeholder screen. Set it to a full address, for
-  example `"https://example.org/next-steps"`, and the green pill opens that
-  page in a new tab.
-- Red cards (`"path": "red"`) are shown one at a time. Give each a `source`:
-  `{ "text": {…}, "url": "https://…" }` (the url is optional). A card with
-  `"source": null` shows "Source needed".
-- Blue cards (`"path": "blue"`): the **first** is the calm "look away" screen
-  that dissolves; the ones after it are shown once it has gone.
+- The flow: the landing screen offers the red and blue pills. After the last
+  red card it returns to the landing screen. The blue pill shows a dark
+  blackout for about three seconds, then a "no escape" screen, then the green
+  pill: two or three solution pages, ending with **Exit**, which returns to the
+  landing screen. Start over works from every screen.
+- `"blue"`: `blackout.message` and `blackout.note` (shown during the
+  blackout), and `reality` (`title`, `text`, `points`) for the screen after it.
+- `"green"`: `pages` (two or three). Each page has `title`, `text`, `action`
+  ("What you can do"), `why` ("Why it helps"), an optional `visual`, and a
+  `source` (plus `moreSources`) written like the red cards' sources below.
+- Red cards (`"path": "red"`) are shown one at a time. A finished red card
+  (`"placeholder": false`) needs: `title`, `text` (the main point),
+  `visual`, `takeaway`, `audienceImpacts` (`children` and `adults`),
+  `recommendation` ("What can help?") and a `source`. The takeaway and the
+  recommendation are shown together in one box.
+- Red cards and green pages cite their references in the same way.
+- **References are IEEE style.** A source is
+  `{ "citation": "…", "url": "https://…" }`. Write the citation as IEEE
+  does, for example `Organisation, "Title," Publisher, City, Country, 2023.`
+  or `A. Author and B. Author, "Title," Journal, vol. 9, Feb. 2019, doi: …`
+  (use `n.d.` when no date is known); the page adds "[Online]. Available:
+  <url>". Give `source` first, then any `moreSources`. Cite them in the
+  card's texts as `[1]`, `[2]`… by that order, at the claim they support, in
+  every language (a test checks that every reference is cited and every
+  marker has a reference). Only state what the source says, and use careful
+  wording ("is associated with", "may contribute to").
+- The `visual` is one of `impact-bars` (qualitative levels
+  `lower`/`moderate`/`higher`, never numbers), `timeline` (`steps`),
+  `before-after` (`before`, `after`) or `group-compare` (`labels` per group),
+  and always needs an `alt` text in all three languages. A card with
+  `"source": null` and `"placeholder": true` still shows the plain layout and
+  "Source needed".
 
 ### Change interface text (buttons, headings, labels)
 
@@ -298,7 +323,7 @@ From section 2 of the build plan, with their status after this build.
 | #   | Question                                             | Status                                                                                                                                                                                                                                                                                                                                                         |
 | --- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | Commit to the default branch, or a branch with a PR? | **Answered.** Work happens on `claude/webapp-build-plan-initial-0ecfpc`. When the owner asked for the site to go live, they approved fast-forwarding `main` to it, so `main` matches the build branch. No pull request has been opened.                                                                                                                        |
-| 2   | What does the green pill open?                       | Not Harvard; destination still to be supplied. `greenPillUrl` in `content/pills.json` is `null`, so the green pill opens an on-site placeholder screen until a destination is set.                                                                                                                                                                             |
+| 2   | What does the green pill open?                       | **Answered.** An on-site set of three solution pages (reconnect with people, digital boundaries, move and be present), reached from the blue pill's "no escape" screen. Nothing leaves the site except the cited sources, which ask first.                                                                                                                     |
 | 3   | Word list spellings and length rule                  | **Partly answered.** Owner-confirmed words: `seva`, `swadharma`, `prarthna` (native forms included); their meanings and reflections are placeholders. The other nine words (daya, satya, shanti, dhyan, bhakti, kshama, santosh, vinay, sanyam) are placeholders. The length rule (a–z, 3 to 10 letters) is the plan's default and **still needs confirming**. |
 | 4   | Who translates and reviews Gujarati and Hindi?       | **Open.** All Gujarati and Hindi text is a draft written by the builder, flagged unreviewed, with a note in the footer.                                                                                                                                                                                                                                        |
 | 5   | Native-script play in the word game?                 | **Open (default applied).** Played in Latin transliteration in all languages; meaning, reflection and native-script forms are shown in the chosen language.                                                                                                                                                                                                    |
@@ -322,8 +347,7 @@ Before this site is presented as final:
 3. **Sources for every red-pill claim**: each red card needs a real, checked
    source. The placeholder cards say what will go there and carry no source;
    no statistics or findings were invented.
-4. **The green pill's destination**: set `greenPillUrl` in
-   `content/pills.json`.
+4. **Green pill pages and sources**: a reviewer checks each green page and each red card against its cited source, and the Gujarati and Hindi wording.
 5. **Branding**: name, logo, palette and the organisation's name and contact.
 6. **Hosting**: decided (GitHub Pages). Remaining: a custom domain if wanted.
 
@@ -464,22 +488,4 @@ The site is a static build and can be hosted anywhere. The owner chose
   is not a file (for example Netlify `/* /index.html 200`, or nginx
   `try_files $uri /index.html`).
 - Production builds include a Content-Security-Policy meta tag that limits
-  every request to the site's own origin (plus Firestore when Firebase is set
-  up).
-
-### Vercel
-
-`.github/workflows/vercel.yml` builds the site on GitHub and deploys it to
-Vercel (production) on every push to `main`, or by hand from the Actions tab
-("Deploy to Vercel" → "Run workflow"). It does not wait for CI. `vercel.json`
-serves `index.html` for deep links and turns off Vercel's own Git builds, so
-each push is deployed once.
-
-One-time setup by a repository admin:
-
-1. Create a project in Vercel (it can be empty; the workflow uploads the build).
-2. In GitHub, **Settings → Secrets and variables → Actions**, add the names
-   listed in `.env.vercel.example`: the four `VITE_FIREBASE_*` values on the
-   **Variables** tab, and `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
-   on the **Secrets** tab.
-3. Run the workflow once by hand to check it.
+  every request to the site's own origin.

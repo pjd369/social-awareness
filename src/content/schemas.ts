@@ -92,25 +92,139 @@ export const prasangFrontMatter = z.strictObject({
 })
 export type PrasangFrontMatter = z.infer<typeof prasangFrontMatter>
 
+export const impactGroup = z.enum(['children', 'adults'])
+export type ImpactGroup = z.infer<typeof impactGroup>
+export const IMPACT_GROUPS = impactGroup.options
+
+/**
+ * A reference in IEEE style, without the "[Online]. Available:" part, which the
+ * page adds from the url. Written once, in the original language of the work.
+ * Cards cite it in their texts as [1], [2]... by its position: `source` first,
+ * then each of `moreSources`.
+ */
 export const pillSource = z.strictObject({
-  text: localizedText,
+  citation: z.string().trim().min(10, 'write the reference in IEEE style'),
   url: z.url().optional(),
 })
 
-export const pillCard = z.strictObject({
-  path: z.enum(['red', 'blue']),
+/** One text per age group. */
+const perGroup = z.strictObject({
+  children: localizedText,
+  adults: localizedText,
+})
+
+/** A qualitative level, used when exact numbers would mislead. */
+export const impactLevel = z.enum(['lower', 'moderate', 'higher'])
+
+const visualAlt = { alt: localizedText }
+
+/** A small accessible diagram. Every kind needs a text alternative (alt). */
+export const insightVisual = z.discriminatedUnion('type', [
+  /** Three rows of segmented bars with a text level. Qualitative, never a measurement. */
+  z.strictObject({
+    type: z.literal('impact-bars'),
+    values: z.strictObject({
+      children: impactLevel,
+      adults: impactLevel,
+    }),
+    ...visualAlt,
+  }),
+  /** Numbered steps in order. */
+  z.strictObject({
+    type: z.literal('timeline'),
+    steps: z.array(localizedText).min(3).max(5),
+    ...visualAlt,
+  }),
+  /** Two boxes: a habit and a swap. */
+  z.strictObject({
+    type: z.literal('before-after'),
+    before: z.strictObject({ title: localizedText, text: localizedText }),
+    after: z.strictObject({ title: localizedText, text: localizedText }),
+    ...visualAlt,
+  }),
+  /** Side-by-side groups, each with a short label. */
+  z.strictObject({
+    type: z.literal('group-compare'),
+    labels: perGroup,
+    ...visualAlt,
+  }),
+])
+export type InsightVisualData = z.infer<typeof insightVisual>
+
+export const pillCard = z
+  .strictObject({
+    /** The red pill cards only. The blue and green pills have their own sections in pills.json. */
+    path: z.literal('red'),
+    text: localizedText,
+    source: pillSource.nullable(),
+    placeholder: z.boolean().default(false),
+    /** The rest is the rich "insight" layout used by finished red cards. Plain placeholders leave it out. */
+    title: localizedText.optional(),
+    visual: insightVisual.optional(),
+    takeaway: localizedText.optional(),
+    audienceImpacts: perGroup.optional(),
+    recommendation: localizedText.optional(),
+    /** Further sources, shown after `source`. */
+    moreSources: z.array(pillSource).default([]),
+  })
+  .superRefine((card, ctx) => {
+    if (card.placeholder) return
+    const need = (ok: boolean, key: string, message: string) => {
+      if (!ok) ctx.addIssue({ code: 'custom', path: [key], message })
+    }
+    need(card.title !== undefined, 'title', 'a finished red card needs a title')
+    need(card.visual !== undefined, 'visual', 'a finished red card needs a visual with alt text')
+    need(card.takeaway !== undefined, 'takeaway', 'a finished red card needs a key takeaway')
+    need(
+      card.audienceImpacts !== undefined,
+      'audienceImpacts',
+      'needs impacts for children and adults',
+    )
+    need(
+      card.recommendation !== undefined,
+      'recommendation',
+      'a finished red card needs a "what can help" line',
+    )
+    need(
+      card.source !== null,
+      'source',
+      'a finished red card needs a source (a placeholder may use null)',
+    )
+  })
+
+/** The blue pill: a short blackout with a message, then a "no escape" screen that leads to the green pill. */
+export const pillBlue = z.strictObject({
+  blackout: z.strictObject({ message: localizedText, note: localizedText }),
+  reality: z.strictObject({
+    title: localizedText,
+    text: localizedText,
+    /** Short points shown as a list under the paragraph. */
+    points: z.array(localizedText).min(1),
+  }),
+  placeholder: z.boolean().default(false),
+})
+
+/** One green pill page: a solution with an action, why it helps, a diagram and IEEE-style references. */
+export const greenPage = z.strictObject({
+  title: localizedText,
   text: localizedText,
-  source: pillSource.nullable(),
+  action: localizedText,
+  why: localizedText,
+  visual: insightVisual.optional(),
+  source: pillSource,
+  moreSources: z.array(pillSource).default([]),
   placeholder: z.boolean().default(false),
 })
 
 export const pills = z.strictObject({
-  /** Where the green pill leads. null until the owner supplies it (shows an on-site placeholder screen). */
-  greenPillUrl: z.url().nullable(),
   cards: z.array(pillCard),
+  blue: pillBlue,
+  green: z.strictObject({ pages: z.array(greenPage).min(2).max(3) }),
 })
 export type Pills = z.infer<typeof pills>
 export type PillCard = z.infer<typeof pillCard>
+export type PillBlue = z.infer<typeof pillBlue>
+export type GreenPage = z.infer<typeof greenPage>
 
 export const wordEntry = z.strictObject({
   word: z.string().regex(/^[a-z]{3,10}$/, 'lowercase a-z only, 3 to 10 letters'),
