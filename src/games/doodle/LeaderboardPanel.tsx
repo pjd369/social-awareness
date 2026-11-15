@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react'
 import { useI18n } from '../../i18n/context'
-import { dayKey, getLeaderboard, type LeaderboardSnapshot } from './leaderboard'
+import { getLeaderboard, type LeaderboardSnapshot } from './leaderboard'
 import { nameKey } from './name'
 import styles from './DoodleGame.module.css'
 
@@ -10,7 +10,7 @@ type BoardState =
   | { status: 'error' }
   | { status: 'ready'; snapshot: LeaderboardSnapshot }
 
-/** Saves this run's score, then shows today's top players and how many played. */
+/** Saves this run's score, then shows the all-time top players and how many have played. */
 export function LeaderboardPanel({ name, score }: { name: string; score: number }) {
   const { t } = useI18n()
   const titleId = useId()
@@ -18,12 +18,11 @@ export function LeaderboardPanel({ name, score }: { name: string; score: number 
 
   useEffect(() => {
     let alive = true
-    const day = dayKey(new Date())
     getLeaderboard()
       .then(async (board): Promise<BoardState> => {
         if (!board) return { status: 'unavailable' }
-        await board.submit(day, name, score)
-        return { status: 'ready', snapshot: await board.read(day) }
+        await board.submit(name, score)
+        return { status: 'ready', snapshot: await board.read() }
       })
       .catch((): BoardState => ({ status: 'error' }))
       .then((next) => {

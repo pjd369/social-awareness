@@ -54,7 +54,7 @@ Every game, story and prasang is at most three taps from the intro page.
   website (fonts are bundled), except Firestore for the doodle leaderboard
   once Firebase is set up. The only free-text input in Bhulkao is the doodle
   player's name: a first name or nickname, letters only, up to 12 letters,
-  with a basic rude-word filter. It is shown on that day's leaderboard. The
+  with a basic rude-word filter. It is shown on the leaderboard. The
   browser's local storage keeps only the language choice, today's word-game
   guesses, the doodle best score and the doodle player's name. Every link that
   leaves the site first shows "You are leaving this site".
@@ -223,15 +223,12 @@ fall, in play-area pixels per second; the play area is 360 wide),
 ### Doodle leaderboard
 
 Before each game the player types a name. When the game ends, the score is
-saved and the game-over screen shows today's top three names and how many
-different names played today. Each name keeps only its best score for the
-day; "Riya" and "riya" count as the same player. "Today" is the US Pacific
-calendar date for every player, so everyone shares the same board, which
-starts fresh at midnight Pacific time (`LEADERBOARD_TIME_ZONE` in
-`src/games/doodle/leaderboard.ts`).
+saved and the game-over screen shows the top three names of all time and how
+many different names have ever played. Each name keeps only its best score
+ever; "Riya" and "riya" count as the same player. The board never resets.
 
-Scores are stored in Firebase Firestore, at
-`doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:
+Scores are stored in Firebase Firestore, one document per player at
+`doodlePlayers/<name>`. To connect a Firebase project:
 
 1. In the Firebase console, create a Firestore database and a web app.
 2. Publish the rules in `firestore.rules` (Firestore → Rules, or
