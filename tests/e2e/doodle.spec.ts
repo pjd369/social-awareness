@@ -12,26 +12,29 @@ async function setUp(page: Page, lang = 'en') {
   await page.route(/\/assets\/index-[\w-]+\.js$/, async (route) => {
     const response = await route.fetch()
     const body = await response.text()
-    replaced = body.includes('startSpeed:90,speedRamp:3,maxSpeed:260')
+    replaced = body.includes('startSpeed:150,speedPerPoint:6,maxSpeed:340')
     await route.fulfill({
       response,
       body: body.replace(
-        'startSpeed:90,speedRamp:3,maxSpeed:260',
-        'startSpeed:300,speedRamp:0,maxSpeed:300',
+        'startSpeed:150,speedPerPoint:6,maxSpeed:340',
+        'startSpeed:300,speedPerPoint:0,maxSpeed:300',
       ),
     })
   })
   await page.addInitScript((l) => {
     localStorage.setItem('outreach.lang', l)
     let n = 0
-    // Each new item asks for: kind (below 0.3 = distraction), which item, x position (0.5 = middle).
+    // Each new item asks for: kind (below 0.7 = distraction), which item, x position (0.5 = middle).
     Math.random = () =>
-      (window as unknown as { __distraction?: boolean }).__distraction
-        ? [0.1, 0.1, 0.5][n++ % 3]!
-        : 0.5
+      [
+        ...((window as unknown as { __distraction?: boolean }).__distraction
+          ? [0.1, 0.1, 0.5]
+          : [0.9, 0.5, 0.5]),
+      ][n++ % 3]!
   }, lang)
   await page.goto('/bhulkao/activity/doodle')
   expect(replaced, 'doodle settings found in the bundle').toBe(true)
+  await page.getByRole('textbox').fill('Riya')
   await expect(page.getByRole('button', { name: /^(Start|શરૂ કરો|शुरू करें)$/ })).toBeEnabled()
 }
 
@@ -79,6 +82,23 @@ async function point(page: Page, x: number, y: number): Promise<[number, number]
 }
 
 test.describe('doodle catcher', () => {
+  test('asks for a name first and explains a name it cannot use', async ({ page }) => {
+    await setUp(page)
+    const name = page.getByRole('textbox', { name: 'What is your name?' })
+    await name.fill('Riya7')
+    await page.getByRole('button', { name: 'Start' }).click()
+    await expect(page.getByRole('alert')).toHaveText(
+      'Use letters only, with no numbers or symbols.',
+    )
+    await expect(name).toBeFocused()
+    await expect(page.getByTestId('doodle-game')).toHaveAttribute('data-phase', 'name')
+
+    await name.fill('Riya')
+    await name.press('Enter')
+    await expect(page.getByTestId('doodle-game')).toHaveAttribute('data-phase', 'playing')
+    await expect(page.getByText('Player: Riya')).toBeVisible()
+  })
+
   test('a full run by keyboard: catch, dodge, game over, play again', async ({ page }) => {
     await setUp(page)
     await page.getByRole('button', { name: 'Start' }).focus()
@@ -106,6 +126,10 @@ test.describe('doodle catcher', () => {
     await expect(over).toContainText(/You caught \d+ good habits?\./)
     await expect(over).toContainText('You touched: Scrolling')
     await expect(over).toContainText('Scrolling can go on and on')
+    // The tests build without Firebase settings.
+    await expect(page.getByTestId('doodle-board')).toContainText(
+      'The leaderboard is not set up yet.',
+    )
     const again = page.getByRole('button', { name: 'Play again' })
     await expect(again).toBeFocused()
     await expectNoHorizontalOverflow(page)

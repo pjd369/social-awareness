@@ -158,7 +158,7 @@ Every visitor-facing text field is an object with `en`, `gu` and `hi` keys. Ever
 
 **Prasangs** (`content/prasangs/<id>.<lang>.md`): front matter `id`, `audience`, `title`, `moral`, `images[]` (`src`, `source`), `placeholder`; then the body in markdown. Pictures are placed in the body with ordinary markdown image syntax, whose alt text is required. Each body image must have a matching `images[]` entry recording its source. The first entry is the cover. To translate a prasang, copy the file, change the language suffix and translate the text.
 
-**Doodle items** (`content/doodle-items.json`): `config` (`startSpeed`, `speedRamp`, `maxSpeed`, `spawnInterval`, `negativeShare`) and `items[]` with `label`, `kind` (`positive` or `negative`), `icon`, `explanation` (required for negatives).
+**Doodle items** (`content/doodle-items.json`): `config` (`startSpeed`, `speedPerPoint`, `maxSpeed`, `spawnInterval`, `negativeShare`) and `items[]` with `label`, `kind` (`positive` or `negative`), `icon`, `explanation` (required for negatives).
 
 **Pills** (`content/pills.json`): `greenPillUrl` (a URL, or `null` until the owner supplies it), and `cards[]` with `path` (`red` or `blue`), `text`, `source`, `placeholder`.
 
@@ -237,7 +237,7 @@ Canvas 2D game. The simulation is a pure `step(state, input, dt, rng)` function,
 - The doodle moves along the bottom; items fall from the top. Lists and tuning come from `doodle-items.json`.
 - Controls: drag (the doodle follows the finger), tap or hold the left or right half of the play area, arrow keys or A and D on desktop.
 - Catching a positive item adds one point and briefly shows its word. Touching a negative item ends the run. A missed item costs nothing.
-- Speed rises slowly from `startSpeed` by `speedRamp`, capped at `maxSpeed`.
+- Speed rises from `startSpeed` by `speedPerPoint` for each good habit caught, capped at `maxSpeed`.
 - Positive and negative items have different outline shapes (round against jagged) and different icons, as well as different colours.
 - `icon` names one of a small built-in icon set; an unknown name falls back to a generic icon and the validator warns.
 - Labels are drawn in the chosen language. Wait for `document.fonts.load()` for the active script before the first frame, or Gujarati and Hindi labels render in a fallback font.

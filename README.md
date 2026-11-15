@@ -51,10 +51,13 @@ Every game, story and prasang is at most three taps from the intro page.
   content remains. The strip disappears by itself once nothing is marked
   placeholder.
 - **Privacy and safety**: no analytics, no cookies, no requests to any other
-  website (fonts are bundled), no free-text input in Bhulkao. The browser's
-  local storage keeps only the language choice, today's word-game guesses and
-  the doodle best score. Every link that leaves the site first shows "You are
-  leaving this site".
+  website (fonts are bundled), except Firestore for the doodle leaderboard
+  once Firebase is set up. The only free-text input in Bhulkao is the doodle
+  player's name: a first name or nickname, letters only, up to 12 letters,
+  with a basic rude-word filter. It is shown on that day's leaderboard. The
+  browser's local storage keeps only the language choice, today's word-game
+  guesses, the doodle best score and the doodle player's name. Every link that
+  leaves the site first shows "You are leaving this site".
 - **Accessibility**: works by keyboard, skip link, visible focus, one main
   heading per page, colour is never the only signal (ticks, dots, dashes,
   shapes and text), reduced-motion support, and tap targets of 56px in
@@ -212,9 +215,37 @@ Items are in `content/doodle-items.json`, under `"items"`:
 - Keep labels short (one or two words): they are drawn under the falling item.
 
 The `"config"` block tunes the game: `startSpeed` and `maxSpeed` (how fast items
-fall, in play-area pixels per second; the play area is 360 wide), `speedRamp`
-(how much faster each second), `spawnInterval` (seconds between items) and
-`negativeShare` (share of distractions, from 0 to 1).
+fall, in play-area pixels per second; the play area is 360 wide),
+`speedPerPoint` (how much faster for each good habit caught), `spawnInterval`
+(seconds between items) and `negativeShare` (share of distractions, from 0 to
+1; currently 0.7).
+
+### Doodle leaderboard
+
+Before each game the player types a name. When the game ends, the score is
+saved and the game-over screen shows today's top three names and how many
+different names played today. Each name keeps only its best score for the
+day; "Riya" and "riya" count as the same player. "Today" is the player's local
+date.
+
+Scores are stored in Firebase Firestore, at
+`doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:
+
+1. In the Firebase console, create a Firestore database and a web app.
+2. Publish the rules in `firestore.rules` (Firestore → Rules, or
+   `firebase deploy --only firestore:rules`). They let visitors save only a
+   valid name and a higher score for it, and lock everything else.
+3. For your computer, copy `.env.example` to `.env.local` and fill in the web
+   app's settings.
+4. For the live site, add the same four values as repository variables
+   (Settings → Secrets and variables → Actions → Variables):
+   `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_PROJECT_ID`,
+   `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_APP_ID`.
+
+Without these settings, the dev server keeps scores in memory until the page
+is reloaded, and a production build shows "The leaderboard is not set up yet".
+Scores are reported by the browser, so a technically skilled visitor could
+submit a false one; preventing that fully would need a server.
 
 ### Change the pill game
 
@@ -403,7 +434,7 @@ tests/e2e/      Playwright tests
   content text from `content/`. ESLint enforces this.
 - Game logic is pure and unit-tested (`games/*/machine.ts`, `logic.ts`,
   `sim.ts`); components only render and wire up input.
-- localStorage holds only the three keys in `STORAGE_KEYS`.
+- localStorage holds only the keys in `STORAGE_KEYS`.
 
 ### Tests
 

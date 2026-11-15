@@ -156,9 +156,11 @@ test.describe('no accessibility violations in game and story states', () => {
     await page.addInitScript(() => {
       localStorage.setItem('outreach.lang', 'hi')
       let n = 0
-      // Kind (below 0.3 = distraction), which item, x (0.5 = middle).
+      // Kind (below 0.7 = distraction), which item, x (0.5 = middle).
       Math.random = () =>
-        (window as unknown as { __bad?: boolean }).__bad ? [0.1, 0.1, 0.5][n++ % 3]! : 0.5
+        [...((window as unknown as { __bad?: boolean }).__bad ? [0.1, 0.1, 0.5] : [0.9, 0.5, 0.5])][
+          n++ % 3
+        ]!
     })
     await page.goto('/yuvako/activity/words')
     await expectNoAxeViolations(page)
@@ -171,6 +173,8 @@ test.describe('no accessibility violations in game and story states', () => {
     await expectNoHorizontalOverflow(page)
 
     await page.goto('/bhulkao/activity/doodle')
+    await expectNoAxeViolations(page)
+    await page.getByRole('textbox').fill('आरव')
     await page.getByRole('button', { name: 'शुरू करें' }).click()
     await page.getByRole('button', { name: 'रोकें' }).click()
     await expectNoAxeViolations(page)

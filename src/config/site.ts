@@ -34,6 +34,7 @@ export const STORAGE_KEYS = {
   lang: 'outreach.lang',
   wordsDaily: 'outreach.words.daily',
   doodleBest: 'outreach.doodle.best',
+  doodleName: 'outreach.doodle.name',
 } as const
 
 /**

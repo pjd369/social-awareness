@@ -25,7 +25,8 @@ export type ItemKind = 'positive' | 'negative'
 
 export interface DoodleConfig {
   startSpeed: number
-  speedRamp: number
+  /** Speed added for each good habit caught. */
+  speedPerPoint: number
   maxSpeed: number
   spawnInterval: number
   negativeShare: number
@@ -137,7 +138,7 @@ export function step(state: SimState, input: SimInput, rawDt: number, rng: Rng):
   const dt = clamp(rawDt, 0, MAX_DT)
   const { config, kinds } = state
   const time = state.time + dt
-  const speed = Math.min(config.maxSpeed, config.startSpeed + config.speedRamp * time)
+  const speed = state.speed
 
   // Move the doodle: follow the finger when dragging, otherwise steer by direction.
   let doodleX = state.doodleX
@@ -193,5 +194,20 @@ export function step(state: SimState, input: SimInput, rawDt: number, rng: Rng):
     kept.push(it)
   }
 
-  return { ...state, time, speed, spawnIn, doodleX, items: kept, score, nextId, lastCatch }
+  return {
+    ...state,
+    time,
+    speed: speedForScore(config, score),
+    spawnIn,
+    doodleX,
+    items: kept,
+    score,
+    nextId,
+    lastCatch,
+  }
+}
+
+/** Falling speed for a score: faster with every catch, never above maxSpeed. */
+export function speedForScore(config: DoodleConfig, score: number): number {
+  return Math.min(config.maxSpeed, config.startSpeed + config.speedPerPoint * score)
 }

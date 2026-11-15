@@ -1,12 +1,15 @@
 import {
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
+  type FormEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { useI18n } from '../../i18n/context'
+import type { MessageKey } from '../../i18n/messages'
 import { localizedLang } from '../../i18n/localized'
 import { FONT_STACK, fontReady } from '../../i18n/fonts'
 import { readStored, writeStored } from '../../i18n/storage'
@@ -20,9 +23,23 @@ import { DOODLE } from '../../content/games'
 import type { DoodleContent } from '../../content/schemas'
 import { drawFrame } from './draw'
 import { NO_INPUT, WORLD, createState, step, type SimInput, type SimState } from './sim'
+import { MAX_NAME_LENGTH, checkName, type NameProblem } from './name'
+import { LeaderboardPanel } from './LeaderboardPanel'
 import styles from './DoodleGame.module.css'
 
-type Phase = 'ready' | 'playing' | 'paused' | 'over'
+type Phase = 'name' | 'playing' | 'paused' | 'over'
+
+const NAME_PROBLEMS: Record<NameProblem, MessageKey> = {
+  empty: 'doodle.name.error.empty',
+  tooLong: 'doodle.name.error.tooLong',
+  characters: 'doodle.name.error.characters',
+  blocked: 'doodle.name.error.blocked',
+}
+
+function readName(): string {
+  const check = checkName(readStored(STORAGE_KEYS.doodleName) ?? '')
+  return check.ok ? check.name : ''
+}
 
 interface PointerHold {
   id: number
@@ -71,7 +88,13 @@ export function DoodleGameView({ content }: { content: DoodleContent }) {
   const keysRef = useRef({ left: false, right: false })
   const pointerRef = useRef<PointerHold | null>(null)
 
-  const [phase, setPhase] = useState<Phase>('ready')
+  const nameInputRef = useRef<HTMLInputElement>(null)
+  const nameId = useId()
+  const [phase, setPhase] = useState<Phase>('name')
+  const [playerName, setPlayerName] = useState(readName)
+  const [nameDraft, setNameDraft] = useState(playerName)
+  const [nameProblem, setNameProblem] = useState<NameProblem | null>(null)
+  const [runId, setRunId] = useState(0)
   const [score, setScore] = useState(0)
   const [caught, setCaught] = useState<number | null>(null)
   const [hit, setHit] = useState<number | null>(null)
@@ -256,9 +279,29 @@ export function DoodleGameView({ content }: { content: DoodleContent }) {
     setCaught(null)
     setHit(null)
     setIsNewBest(false)
+    setRunId((n) => n + 1)
     setPhase('playing')
     areaRef.current?.scrollIntoView({ block: 'nearest' })
     focusElement(areaRef.current)
+  }
+  const submitName = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const check = checkName(nameDraft)
+    if (!check.ok) {
+      setNameProblem(check.problem)
+      nameInputRef.current?.focus()
+      return
+    }
+    setNameProblem(null)
+    setNameDraft(check.name)
+    setPlayerName(check.name)
+    writeStored(STORAGE_KEYS.doodleName, check.name)
+    start()
+  }
+  const changeName = () => {
+    setPhase('name')
+    // Wait for the name form to render before moving focus into it.
+    requestAnimationFrame(() => nameInputRef.current?.focus())
   }
   const resume = () => {
     setPhase('playing')
@@ -291,6 +334,9 @@ export function DoodleGameView({ content }: { content: DoodleContent }) {
           {t('doodle.score', { n: score })}
         </p>
         <p className={styles.best}>{t('doodle.best', { n: best })}</p>
+        {playerName && phase !== 'name' && (
+          <p className={styles.player}>{t('doodle.player', { name: playerName })}</p>
+        )}
         <p className={styles.caught} aria-live="polite">
           {caught !== null && phase === 'playing'
             ? t('doodle.caught', { label: labels[caught] ?? '' })
@@ -318,13 +364,47 @@ export function DoodleGameView({ content }: { content: DoodleContent }) {
           data-testid="doodle-canvas"
         />
 
-        {phase === 'ready' && (
-          <div className={styles.overlay}>
-            <button type="button" className={styles.primary} onClick={start} disabled={!fontsReady}>
+        {phase === 'name' && (
+          <form
+            className={`${styles.overlay} ${styles.nameForm}`}
+            onSubmit={submitName}
+            noValidate
+            data-testid="doodle-name"
+          >
+            <label htmlFor={nameId} className={styles.nameLabel}>
+              {t('doodle.name.label')}
+            </label>
+            <input
+              id={nameId}
+              ref={nameInputRef}
+              className={styles.nameInput}
+              type="text"
+              value={nameDraft}
+              onChange={(e) => {
+                setNameDraft(e.target.value)
+                setNameProblem(null)
+              }}
+              maxLength={MAX_NAME_LENGTH * 4}
+              autoComplete="off"
+              autoCapitalize="words"
+              spellCheck={false}
+              enterKeyHint="go"
+              aria-invalid={nameProblem !== null}
+              aria-describedby={`${nameId}-hint${nameProblem ? ` ${nameId}-error` : ''}`}
+            />
+            <p id={`${nameId}-hint`} className={styles.nameHint}>
+              {t('doodle.name.hint')}
+            </p>
+            {nameProblem && (
+              <p id={`${nameId}-error`} className={styles.nameError} role="alert">
+                {t(NAME_PROBLEMS[nameProblem])}
+              </p>
+            )}
+            <button type="submit" className={styles.primary} disabled={!fontsReady}>
               <Icon name="play" size={24} />
               {t('doodle.start')}
             </button>
-          </div>
+          </form>
         )}
 
         {phase === 'paused' && (
@@ -357,10 +437,16 @@ export function DoodleGameView({ content }: { content: DoodleContent }) {
                 </div>
               </div>
             )}
-            <button type="button" ref={playAgainRef} className={styles.primary} onClick={start}>
-              <Icon name="restart" size={24} />
-              {t('doodle.playAgain')}
-            </button>
+            <LeaderboardPanel key={runId} name={playerName} score={score} />
+            <div className={styles.actions}>
+              <button type="button" ref={playAgainRef} className={styles.primary} onClick={start}>
+                <Icon name="restart" size={24} />
+                {t('doodle.playAgain')}
+              </button>
+              <button type="button" className={styles.secondary} onClick={changeName}>
+                {t('doodle.changeName')}
+              </button>
+            </div>
           </div>
         )}
       </div>
