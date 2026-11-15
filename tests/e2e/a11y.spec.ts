@@ -158,9 +158,9 @@ test.describe('no accessibility violations in game and story states', () => {
       let n = 0
       // Kind (below 0.7 = distraction), which item, x (0.5 = middle).
       Math.random = () =>
-        [
-          ...((window as unknown as { __bad?: boolean }).__bad ? [0.1, 0.1, 0.5] : [0.9, 0.5, 0.5]),
-        ][n++ % 3]!
+        [...((window as unknown as { __bad?: boolean }).__bad ? [0.1, 0.1, 0.5] : [0.9, 0.5, 0.5])][
+          n++ % 3
+        ]!
     })
     await page.goto('/yuvako/activity/words')
     await expectNoAxeViolations(page)
