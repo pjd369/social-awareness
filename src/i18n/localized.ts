@@ -1,10 +1,9 @@
 import type { Lang } from './languages'
 
-/** A visitor-facing text field in content files: English required, Gujarati and Hindi expected. */
+/** A visitor-facing text field in content files: English required, Gujarati expected. */
 export interface LocalizedText {
   en: string
   gu?: string
-  hi?: string
 }
 
 /** Pick the text for a language, falling back to English when it is missing or empty. */

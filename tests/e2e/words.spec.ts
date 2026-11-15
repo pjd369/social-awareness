@@ -63,7 +63,6 @@ test.describe('word game', () => {
     await expect(page.getByRole('heading', { name: 'You found the word!' })).toBeFocused()
     await expect(result).toContainText('SEVA')
     await expect(result.locator('[lang=gu]')).toHaveText('સેવા')
-    await expect(result.locator('[lang=hi]')).toHaveText('सेवा')
     await expect(result).toContainText('Solved in 2 of 6 tries.')
     await expect(result).toContainText('Selfless service')
     await expect(result.getByTestId('placeholder-notice')).toBeVisible()
@@ -141,13 +140,13 @@ test.describe('word game', () => {
     await expect(page.getByText('This word has 4 letters')).toBeVisible()
   })
 
-  test('shows meaning and reflection in Hindi', async ({ page }) => {
-    await page.addInitScript(() => localStorage.setItem('outreach.lang', 'hi'))
+  test('shows meaning and reflection in Gujarati', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('outreach.lang', 'gu'))
     await open(page, 'prarthna')
     await typeWord(page, 'prarthna')
     const result = page.getByTestId('word-result')
     await expect(result).toContainText('PRARTHNA')
-    await expect(result.locator('[lang=hi]').first()).toHaveText('प्रार्थना')
-    await expect(result).toContainText('ईश्वर से मन से बात करना।')
+    await expect(result.locator('[lang=gu]').first()).toHaveText('પ્રાર્થના')
+    await expect(result).toContainText('ભગવાન સાથે મનથી વાત કરવી.')
   })
 })

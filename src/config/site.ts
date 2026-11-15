@@ -5,14 +5,25 @@ import type { Lang } from '../i18n/languages'
  * locales/*.json; this file holds only values that are not translated.
  */
 
+/** The organisation's name, used in the footer. Not translated; shown in capitals. */
+export const BRAND_NAME = 'Harisumiran SF'
+
+/**
+ * The header logo (src/assets/brand/harisumiran-sf-logo.webp) reads
+ * "HARISUMIRAN"; this suffix is set after it in matching type. The alt text
+ * is the logo's accessible name.
+ */
+export const BRAND_LOGO_SUFFIX = 'SF'
+export const BRAND_LOGO_ALT = 'Harisumiran SF — A Hariprabodham Parivar Event'
+
 /**
  * Organisation name and contact for the footer. Left empty until branding is
  * confirmed by the owner (open question 8). Each is a localized text object,
- * for example { "en": "...", "gu": "...", "hi": "..." }.
+ * for example { "en": "...", "gu": "..." }.
  */
 export const ORGANISATION: {
-  name: { en: string; gu?: string; hi?: string } | null
-  contact: { en: string; gu?: string; hi?: string } | null
+  name: { en: string; gu?: string } | null
+  contact: { en: string; gu?: string } | null
 } = {
   name: null,
   contact: null,
@@ -21,12 +32,11 @@ export const ORGANISATION: {
 /**
  * Whether a language's text has been reviewed by a fluent reviewer. While a
  * language is false, the footer shows a short "draft translation" note in it.
- * (Open question 4: Gujarati and Hindi are drafts written by the builder.)
+ * (Open question 4: Gujarati is a draft written by the builder.)
  */
 export const TRANSLATION_REVIEWED: Record<Lang, boolean> = {
   en: true,
   gu: false,
-  hi: false,
 }
 
 /** The only keys this site ever writes to localStorage. */
@@ -38,9 +48,8 @@ export const STORAGE_KEYS = {
 } as const
 
 /**
- * The intro page's welcome text (in locales/*.json, keys "site.tagline" and
- * "intro.*") is placeholder copy until the owner supplies the final wording.
- * Set this to false once it has been replaced; the placeholder banner on the
- * intro page then disappears.
+ * Whether the intro page's welcome text (in locales/*.json, keys "site.*" and
+ * "intro.*") is placeholder copy. While true, the intro page shows the
+ * placeholder banner.
  */
-export const INTRO_COPY_IS_PLACEHOLDER = true
+export const INTRO_COPY_IS_PLACEHOLDER = false

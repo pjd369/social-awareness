@@ -1,4 +1,4 @@
-export const LANGS = ['en', 'gu', 'hi'] as const
+export const LANGS = ['en', 'gu'] as const
 export type Lang = (typeof LANGS)[number]
 export const DEFAULT_LANG: Lang = 'en'
 
@@ -6,7 +6,12 @@ export const DEFAULT_LANG: Lang = 'en'
 export const NATIVE_NAMES: Record<Lang, string> = {
   en: 'English',
   gu: 'ગુજરાતી',
-  hi: 'हिन्दी',
+}
+
+/** Shorter labels for narrow screens. */
+export const SHORT_NAMES: Record<Lang, string> = {
+  en: 'EN',
+  gu: 'ગુજરાતી',
 }
 
 export function isLang(value: unknown): value is Lang {
@@ -15,7 +20,7 @@ export function isLang(value: unknown): value is Lang {
 
 /**
  * First visit: use the first supported language in the browser's preference
- * list (so Gujarati or Hindi if the browser asks for it), otherwise English.
+ * list (so Gujarati if the browser asks for it), otherwise English.
  */
 export function detectLang(preferences: readonly string[]): Lang {
   for (const pref of preferences) {

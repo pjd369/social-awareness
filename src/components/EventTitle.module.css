@@ -1,0 +1,40 @@
+.title {
+  margin: var(--space-3) 0;
+  color: var(--brand-cream);
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 15vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+
+.title em,
+.title .year {
+  font-family: inherit;
+}
+
+.title em {
+  display: block;
+  color: #f2c77d;
+  font-style: normal;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.year {
+  color: #f2c77d;
+  font-size: 0.4em;
+  letter-spacing: 0;
+}
+
+.title:lang(gu),
+:lang(gu) .title {
+  font-size: clamp(2.25rem, 10vw, 4rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+
+.title:lang(gu) {
+  font-family: 'Noto Sans Gujarati', var(--font-sans);
+}

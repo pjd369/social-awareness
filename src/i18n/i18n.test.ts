@@ -4,13 +4,13 @@ import { interpolate, translate } from './messages'
 import { localize, localizedLang } from './localized'
 
 describe('detectLang', () => {
-  it('picks Gujarati or Hindi when the browser asks for it', () => {
+  it('picks Gujarati when the browser asks for it', () => {
     expect(detectLang(['gu-IN', 'en'])).toBe('gu')
-    expect(detectLang(['hi'])).toBe('hi')
+    expect(detectLang(['gu'])).toBe('gu')
   })
   it('follows the order of the preference list', () => {
-    expect(detectLang(['en-GB', 'hi-IN'])).toBe('en')
-    expect(detectLang(['fr', 'hi-IN', 'gu'])).toBe('hi')
+    expect(detectLang(['en-GB', 'gu-IN'])).toBe('en')
+    expect(detectLang(['fr', 'gu-IN', 'en'])).toBe('gu')
   })
   it('falls back to English', () => {
     expect(detectLang(['fr-FR', 'de'])).toBe('en')
@@ -21,6 +21,7 @@ describe('detectLang', () => {
 describe('isLang', () => {
   it('accepts only supported codes', () => {
     expect(isLang('gu')).toBe(true)
+    expect(isLang('hi')).toBe(false)
     expect(isLang('GU')).toBe(false)
     expect(isLang(null)).toBe(false)
   })
@@ -38,7 +39,7 @@ describe('interpolate', () => {
 
 describe('translate', () => {
   it('uses the chosen language', () => {
-    expect(translate('hi', 'part.prasang.title')).toBe('प्रसंग')
+    expect(translate('gu', 'part.prasang.title')).toBe('પ્રસંગ')
   })
   it('interpolates in every language', () => {
     expect(translate('gu', 'nav.back', { page: 'X' })).toContain('X')
@@ -48,9 +49,9 @@ describe('translate', () => {
 describe('localize', () => {
   it('falls back to English when a translation is missing or empty', () => {
     expect(localize({ en: 'Hello', gu: '' }, 'gu')).toBe('Hello')
-    expect(localize({ en: 'Hello' }, 'hi')).toBe('Hello')
-    expect(localizedLang({ en: 'Hello' }, 'hi')).toBe('en')
-    expect(localize({ en: 'Hello', hi: 'नमस्ते' }, 'hi')).toBe('नमस्ते')
-    expect(localizedLang({ en: 'Hello', hi: 'नमस्ते' }, 'hi')).toBe('hi')
+    expect(localize({ en: 'Hello' }, 'gu')).toBe('Hello')
+    expect(localizedLang({ en: 'Hello' }, 'gu')).toBe('en')
+    expect(localize({ en: 'Hello', gu: 'નમસ્તે' }, 'gu')).toBe('નમસ્તે')
+    expect(localizedLang({ en: 'Hello', gu: 'નમસ્તે' }, 'gu')).toBe('gu')
   })
 })

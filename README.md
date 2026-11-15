@@ -2,15 +2,15 @@
 
 A static, mobile-first website with an intro page and two audience sections,
 **Bhulkao** (younger children) and **Yuvako** (youth). Each section has games,
-an interactive story (called a scenario in Yuvako) and a prasang, in English,
-Gujarati and Hindi.
+an interactive story (called a scenario in Yuvako) and a prasang, in English and
+Gujarati.
 
 - Live preview: <https://social-awareness-xu7k.vercel.app/>
 - Build plan: [`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) (the owner-amended version)
 
 > **Everything on the site is placeholder content.** It is marked as such on
 > every page and will be replaced with final content from the content owners.
-> Gujarati and Hindi text are unreviewed drafts.
+> Gujarati text is an unreviewed draft.
 
 ## Contents
 
@@ -96,9 +96,9 @@ On your own computer you can run the same check with `npm run validate`.
 
 ### Rules that apply everywhere
 
-- **Every visitor-facing text has three languages**, written like this:
-  `{ "en": "Hello", "gu": "નમસ્તે", "hi": "नमस्ते" }`. English is required. If
-  Gujarati or Hindi is missing, English is shown instead and the check lists
+- **Every visitor-facing text has two languages**, written like this:
+  `{ "en": "Hello", "gu": "નમસ્તે" }`. English is required. If
+  Gujarati is missing, English is shown instead and the check lists
   what is missing.
 - **`"placeholder": true`** marks an item as placeholder. Change it to
   `false` when the final, approved content is in place; its placeholder
@@ -137,8 +137,8 @@ section has more than one story, a list page appears automatically.
 ### Add or change a prasang
 
 Prasangs are in `content/prasangs/`, **one file per language**, named
-`<id>.<language>.md`, for example `honest-shopkeeper.en.md`,
-`honest-shopkeeper.gu.md`, `honest-shopkeeper.hi.md`.
+`<id>.<language>.md`, for example `honest-shopkeeper.en.md` and
+`honest-shopkeeper.gu.md`.
 
 1. Copy an existing English file and rename it. Each file starts with a block
    between two `---` lines:
@@ -170,7 +170,7 @@ Prasangs are in `content/prasangs/`, **one file per language**, named
    `![what the picture shows](market.svg)`. Every picture used in the text
    must also be listed under `images` with its source.
 3. **To translate**, copy the English file, change only the language part of
-   the name (`.gu.md` or `.hi.md`) and translate the title, moral, alt text
+   the name (`.gu.md`) and translate the title, moral, alt text
    and story. Keep `id`, `audience`, `placeholder` and the picture files and
    sources the same in every language (the check fails if they differ). If a
    language file is missing, the English one is shown with a short note.
@@ -182,15 +182,15 @@ Words are in `content/words.json`:
 ```json
 {
   "word": "seva",
-  "native": { "gu": "સેવા", "hi": "सेवा" },
-  "meaning": { "en": "…", "gu": "…", "hi": "…" },
-  "reflection": { "en": "…", "gu": "…", "hi": "…" },
+  "native": { "gu": "સેવા" },
+  "meaning": { "en": "…", "gu": "…" },
+  "reflection": { "en": "…", "gu": "…" },
   "placeholder": false
 }
 ```
 
 - `word` is played in English letters: lowercase a–z only, 3 to 10 letters.
-- `native` is the word in Gujarati and Devanagari script, shown on the result
+- `native` is the word in Gujarati script, shown on the result
   screen.
 - The word of the day is chosen from the list by date (day number modulo the
   number of words), so adding or removing words changes which word falls on
@@ -262,8 +262,8 @@ Cards and the green pill's destination are in `content/pills.json`.
 
 ### Change interface text (buttons, headings, labels)
 
-Interface text is in `locales/en.json`, `locales/gu.json` and
-`locales/hi.json`. Each line is `"key": "text"`. Change the text, never the
+Interface text is in `locales/en.json` and `locales/gu.json`.
+Each line is `"key": "text"`. Change the text, never the
 key. Words in curly brackets such as `{n}` or `{page}` are filled in by the
 site and must stay exactly as they are in every language. A key must exist in
 `en.json` before it can be translated.
@@ -281,7 +281,7 @@ These live in `src/config/site.ts`:
 
 - `ORGANISATION`: the organisation's name and contact for the footer (empty
   until branding is confirmed).
-- `TRANSLATION_REVIEWED`: set `gu` or `hi` to `true` once a fluent reviewer
+- `TRANSLATION_REVIEWED`: set `gu` to `true` once a fluent reviewer
   has checked that language; the "draft translation" note in the footer then
   disappears.
 - `INTRO_COPY_IS_PLACEHOLDER`: set to `false` once the intro text in
@@ -300,7 +300,7 @@ From section 2 of the build plan, with their status after this build.
 | 1   | Commit to the default branch, or a branch with a PR? | **Answered.** Work happens on `claude/webapp-build-plan-initial-0ecfpc`. When the owner asked for the site to go live, they approved fast-forwarding `main` to it, so `main` matches the build branch. No pull request has been opened.                                                                                                                        |
 | 2   | What does the green pill open?                       | Not Harvard; destination still to be supplied. `greenPillUrl` in `content/pills.json` is `null`, so the green pill opens an on-site placeholder screen until a destination is set.                                                                                                                                                                             |
 | 3   | Word list spellings and length rule                  | **Partly answered.** Owner-confirmed words: `seva`, `swadharma`, `prarthna` (native forms included); their meanings and reflections are placeholders. The other nine words (daya, satya, shanti, dhyan, bhakti, kshama, santosh, vinay, sanyam) are placeholders. The length rule (a–z, 3 to 10 letters) is the plan's default and **still needs confirming**. |
-| 4   | Who translates and reviews Gujarati and Hindi?       | **Open.** All Gujarati and Hindi text is a draft written by the builder, flagged unreviewed, with a note in the footer.                                                                                                                                                                                                                                        |
+| 4   | Who translates and reviews Gujarati?                 | **Open.** All Gujarati text is a draft written by the builder, flagged unreviewed, with a note in the footer. Hindi was dropped.                                                                                                                                                                                                                               |
 | 5   | Native-script play in the word game?                 | **Open (default applied).** Played in Latin transliteration in all languages; meaning, reflection and native-script forms are shown in the chosen language.                                                                                                                                                                                                    |
 | 6   | Who supplies and approves real content?              | **Open.** The owner asked for the placeholders to stay until real content arrives. All content is marked placeholder.                                                                                                                                                                                                                                          |
 | 7   | Bhulkao age range                                    | **Open (default applied).** Primary-school age assumed: short sentences, slow starting speed in the doodle game.                                                                                                                                                                                                                                               |
@@ -311,7 +311,7 @@ From section 2 of the build plan, with their status after this build.
 
 Before this site is presented as final:
 
-1. **Translation review**: a fluent reviewer for Gujarati and for Hindi checks
+1. **Translation review**: a fluent reviewer for Gujarati checks
    every interface string and content file, then `TRANSLATION_REVIEWED` is set.
    Two wording choices to confirm: "Placeholder" is translated as "કામચલાઉ"
    and "अस्थायी" (both mean "temporary"), and the section names are written
@@ -346,9 +346,9 @@ Before this site is presented as final:
    local lint rule fails the build if visible text is written directly in a
    component.
 5. **Language-switch labels use two tiny fonts** (about 2 KB each, cut from
-   the Noto fonts by `scripts/subset-switch-fonts.sh`), so "ગુજરાતી" and
-   "हिन्दी" display correctly on devices without those scripts, while the full
-   Gujarati and Devanagari fonts still load only when that language is chosen.
+   the Noto fonts by `scripts/subset-switch-fonts.sh`), so "ગુજરાતી"
+   displays correctly on devices without a Gujarati font, while the full
+   Gujarati font still loads only when Gujarati is chosen.
 6. **Prasang cover alt text.** The plan's `images` entries have only `src` and
    `source`; the cover is not placed in the text, so it had no alt text. The
    first `images` entry therefore takes an `alt` line.
@@ -415,7 +415,7 @@ Set `PLAYWRIGHT_CHROMIUM_PATH` to use a Chromium other than Playwright's own.
 
 ```
 content/        stories, prasangs, images, doodle-items.json, pills.json, words.json
-locales/        en.json, gu.json, hi.json
+locales/        en.json, gu.json
 scripts/        validate-content.ts (+ tests), postbuild.mjs, subset-switch-fonts.sh
 src/config/     sections.ts (slugs, games), site.ts (organisation, review flags, storage keys)
 src/i18n/       provider, t(), localized fields, fonts, storage

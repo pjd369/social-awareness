@@ -5,7 +5,7 @@ test('language choice survives reload and navigation', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   await page.getByRole('button', { name: 'ગુજરાતી' }).click()
   await expect(page.locator('html')).toHaveAttribute('lang', 'gu')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('ડિજિટલ આઉટરીચ')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('અન્નકૂટ મહોત્સવ 2026')
 
   await page.reload()
   await expect(page.locator('html')).toHaveAttribute('lang', 'gu')
@@ -13,10 +13,10 @@ test('language choice survives reload and navigation', async ({ page }) => {
 
   await page.getByRole('link', { name: /યુવકો/ }).click()
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('યુવકો')
-  await page.getByRole('button', { name: 'हिन्दी' }).click()
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('युवको')
+  await page.getByRole('button', { name: 'English' }).click()
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Yuvako')
   await page.goto('/bhulkao')
-  await expect(page.locator('html')).toHaveAttribute('lang', 'hi')
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
 })
 
 test('each language option is marked with its own lang attribute', async ({ page }) => {
@@ -24,14 +24,14 @@ test('each language option is marked with its own lang attribute', async ({ page
   const group = page.getByRole('group', { name: 'Language' })
   await expect(group.getByRole('button', { name: 'English' })).toHaveAttribute('lang', 'en')
   await expect(group.getByRole('button', { name: 'ગુજરાતી' })).toHaveAttribute('lang', 'gu')
-  await expect(group.getByRole('button', { name: 'हिन्दी' })).toHaveAttribute('lang', 'hi')
+  await expect(group.getByRole('button', { name: 'हिन्दी' })).toHaveCount(0)
 })
 
-test.describe('first visit follows the browser language', () => {
+test.describe('first visit in Hindi', () => {
   test.use({ locale: 'hi-IN' })
-  test('a Hindi browser gets Hindi', async ({ page }) => {
+  test('a Hindi browser gets English, as Hindi is not offered', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('html')).toHaveAttribute('lang', 'hi')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   })
 })
 
@@ -54,6 +54,6 @@ test.describe('first visit in another language', () => {
 test('the draft-translation note shows only for unreviewed languages', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByTestId('translation-note')).toHaveCount(0)
-  await page.getByRole('button', { name: 'हिन्दी' }).click()
+  await page.getByRole('button', { name: 'ગુજરાતી' }).click()
   await expect(page.getByTestId('translation-note')).toBeVisible()
 })

@@ -1,6 +1,5 @@
 import en from '../../locales/en.json'
 import gu from '../../locales/gu.json'
-import hi from '../../locales/hi.json'
 import type { Lang } from './languages'
 
 /** Every interface string key. Typed from en.json, so a missing key fails type-checking. */
@@ -11,7 +10,6 @@ export type Vars = Record<string, string | number>
 const MESSAGES: Record<Lang, Messages> = {
   en,
   gu: gu as Messages,
-  hi: hi as Messages,
 }
 
 /** Replace {name} placeholders with values from vars. Unknown names are left as they are. */
