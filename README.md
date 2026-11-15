@@ -5,7 +5,7 @@ A static, mobile-first website with an intro page and two audience sections,
 an interactive story (called a scenario in Yuvako) and a prasang, in English and
 Gujarati.
 
-- Live preview: <https://social-awareness-xu7k.vercel.app/>
+- Live preview: <https://social-awareness-hp.vercel.app/>
 - Build plan: [`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) (the owner-amended version)
 
 > **Everything on the site is placeholder content.** It is marked as such on
