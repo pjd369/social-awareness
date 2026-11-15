@@ -26,7 +26,6 @@ export interface SectionConfig {
   storySegment: string
   nameKey: MessageKey
   leadKey: MessageKey
-  introDescKey: MessageKey
   /** Locale keys for the story part, which is called a story or a scenario. */
   storyTitleKey: MessageKey
   storyDescKey: MessageKey
@@ -55,7 +54,6 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
     storySegment: 'story',
     nameKey: 'section.bhulkao.name',
     leadKey: 'section.bhulkao.lead',
-    introDescKey: 'intro.bhulkao.desc',
     storyTitleKey: 'part.story.title',
     storyDescKey: 'part.story.desc',
     storyListTitleKey: 'list.story.title',
@@ -69,7 +67,6 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
     storySegment: 'scenario',
     nameKey: 'section.yuvako.name',
     leadKey: 'section.yuvako.lead',
-    introDescKey: 'intro.yuvako.desc',
     storyTitleKey: 'part.scenario.title',
     storyDescKey: 'part.scenario.desc',
     storyListTitleKey: 'list.scenario.title',

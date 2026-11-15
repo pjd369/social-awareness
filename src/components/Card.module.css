@@ -1,6 +1,6 @@
 .list {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,20 +22,22 @@
   align-items: center;
   gap: var(--space-4);
   min-height: calc(var(--tap) * 1.5);
-  padding: var(--space-4);
-  border: 2px solid var(--color-border);
+  padding: var(--space-3);
+  border: 1px solid rgb(189 145 87 / 33%);
   border-radius: var(--radius);
   background: var(--color-surface);
   color: var(--color-text);
   text-decoration: none;
-  box-shadow: var(--shadow);
   transition:
+    background var(--transition),
     border-color var(--transition),
     transform var(--transition);
 }
 
 .card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--brand-gold);
+  background: #4d2a33;
+  transform: translateY(-2px);
 }
 
 .card:active {
@@ -64,7 +66,7 @@
   width: 100%;
   height: 7rem;
   border-radius: var(--radius-small);
-  background: var(--color-surface-alt);
+  background: radial-gradient(at 50% 40%, #6a3a35, #3a1d26 80%);
 }
 
 .art svg {
@@ -80,11 +82,21 @@
 }
 
 .title {
-  color: var(--color-primary-strong);
+  color: #f5d49b;
   font-size: var(--font-size-h2);
-  font-weight: 700;
-  line-height: 1.3;
+  font-weight: 500;
+  line-height: 1.2;
   overflow-wrap: anywhere;
+}
+
+.title:lang(en),
+:lang(en) .title {
+  font-family: var(--font-serif);
+  font-size: calc(var(--font-size-h2) * 1.15);
+}
+
+:lang(gu) .title {
+  font-weight: 700;
 }
 
 .desc {

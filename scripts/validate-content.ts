@@ -1,6 +1,6 @@
 /**
  * Content validation. Runs before every build (`npm run build`) and on its own
- * with `npm run validate`. Add `--strict` to treat missing Gujarati or Hindi
+ * with `npm run validate`. Add `--strict` to treat missing Gujarati
  * text as an error (CI does this).
  *
  * It reuses the app's own schemas and story rules, so what passes here is
@@ -26,8 +26,8 @@ import {
 import { validateStory } from '../src/features/story/validate.ts'
 import { DOODLE_ICON_NAMES } from '../src/games/doodle/icon-names.ts'
 
-const LANGS = ['en', 'gu', 'hi'] as const
-const OTHER_LANGS = ['gu', 'hi'] as const
+const LANGS = ['en', 'gu'] as const
+const OTHER_LANGS = ['gu'] as const
 
 export type Severity = 'error' | 'warning' | 'translation'
 export interface Problem {
@@ -79,8 +79,8 @@ function listFiles(dir: string, pattern: RegExp): string[] {
 }
 
 /**
- * Walk any value and report every localized text object ({ en, gu?, hi? })
- * that lacks Gujarati or Hindi.
+ * Walk any value and report every localized text object ({ en, gu? })
+ * that lacks Gujarati.
  */
 function checkTranslations(c: Collector, file: string, value: unknown, path = ''): void {
   if (Array.isArray(value)) {
@@ -96,10 +96,7 @@ function checkTranslations(c: Collector, file: string, value: unknown, path = ''
     for (const lang of OTHER_LANGS) {
       const text = obj[lang]
       if (typeof text !== 'string' || text.trim() === '') {
-        c.translation(
-          file,
-          `${path || '(text)'}: missing ${lang === 'gu' ? 'Gujarati' : 'Hindi'} (${lang})`,
-        )
+        c.translation(file, `${path || '(text)'}: missing Gujarati (${lang})`)
       }
     }
     return
@@ -201,7 +198,7 @@ function checkPrasangs(c: Collector, root: string, images: Set<string>, used: Se
     const rel = `content/prasangs/${name}`
     const fileName = prasangFileName(name)
     if (!fileName || !(LANGS as readonly string[]).includes(fileName.lang)) {
-      c.error(rel, 'name must be <id>.<lang>.md, where <lang> is en, gu or hi')
+      c.error(rel, 'name must be <id>.<lang>.md, where <lang> is en or gu')
       continue
     }
     c.checked++
@@ -311,11 +308,8 @@ function checkWords(c: Collector, root: string) {
   parsed.data.words.forEach((w, i) => {
     if (seen.has(w.word)) c.error(rel, `words[${i}]: "${w.word}" is listed twice`)
     seen.add(w.word)
-    if (!w.native?.gu || !w.native?.hi) {
-      c.warn(
-        rel,
-        `words[${i}]: "${w.word}" has no native-script form for ${!w.native?.gu ? 'Gujarati' : 'Hindi'}`,
-      )
+    if (!w.native?.gu) {
+      c.warn(rel, `words[${i}]: "${w.word}" has no native-script form for Gujarati`)
     }
   })
   checkTranslations(c, rel, raw)

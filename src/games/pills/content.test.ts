@@ -38,15 +38,15 @@ describe('pill content', () => {
     }
   })
 
-  it('has English, Gujarati and Hindi for every text on every card', () => {
+  it('has English and Gujarati for every text on every card', () => {
     const missing = texts(raw).flatMap(([path, t]) =>
-      (['en', 'gu', 'hi'] as const).filter((l) => !t[l]?.trim()).map((l) => `${path}: ${l}`),
+      (['en', 'gu'] as const).filter((l) => !t[l]?.trim()).map((l) => `${path}: ${l}`),
     )
     expect(missing).toEqual([])
   })
 
-  it('does not just copy English into Gujarati or Hindi', () => {
-    const copies = texts(raw).filter(([, t]) => t.gu === t.en || t.hi === t.en)
+  it('does not just copy English into Gujarati', () => {
+    const copies = texts(raw).filter(([, t]) => t.gu === t.en)
     expect(copies.map(([p]) => p)).toEqual([])
   })
 
@@ -69,7 +69,7 @@ describe('pill content', () => {
   })
 
   /** The [n] markers in some texts, in one language. */
-  const markers = (value: unknown, lang: 'en' | 'gu' | 'hi') =>
+  const markers = (value: unknown, lang: 'en' | 'gu') =>
     texts(value).flatMap(([, t]) =>
       [...(t[lang] ?? '').matchAll(/\[(\d+)\]/g)].map((m) => Number(m[1])),
     )
@@ -77,7 +77,7 @@ describe('pill content', () => {
   it('cites every reference at least once, and only references that exist, in every language', () => {
     for (const c of reds) {
       const count = 1 + c.moreSources.length
-      for (const lang of ['en', 'gu', 'hi'] as const) {
+      for (const lang of ['en', 'gu'] as const) {
         const used = new Set(
           markers([c.text, c.audienceImpacts, c.recommendation, c.takeaway], lang),
         )
@@ -96,7 +96,7 @@ describe('pill content', () => {
         expect(s.citation, g.title.en).toMatch(/\b((19|20)\d\d|n\.d\.)/)
         expect(s.citation, g.title.en).toMatch(/\.$/)
       }
-      for (const lang of ['en', 'gu', 'hi'] as const) {
+      for (const lang of ['en', 'gu'] as const) {
         const used = new Set(markers([g.text, g.action, g.why], lang))
         for (const n of used)
           expect(n, `${g.title.en} [${n}] ${lang}`).toBeLessThanOrEqual(sources.length)
@@ -126,14 +126,12 @@ describe('pill content', () => {
     const m = PILLS.data?.blue.blackout.message
     expect(m?.en).toMatch(/cannot escape a harsh reality by choosing ignorance/)
     expect(m?.gu?.length).toBeGreaterThan(10)
-    expect(m?.hi?.length).toBeGreaterThan(10)
   })
 
   it('gives every visual a text alternative in all three languages', () => {
     for (const c of [...reds, ...greens]) {
       expect(c.visual?.alt.en.length, c.title?.en).toBeGreaterThan(20)
       expect(c.visual?.alt.gu?.length, c.title?.en).toBeGreaterThan(20)
-      expect(c.visual?.alt.hi?.length, c.title?.en).toBeGreaterThan(20)
     }
   })
 

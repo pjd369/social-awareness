@@ -3,9 +3,44 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--color-bg);
+  background: var(--page-bg) var(--color-bg) fixed;
   color: var(--color-text);
   font-size: var(--font-size);
+}
+
+/* Opening fade-in, played once when the site loads (see intro-motion.ts). */
+.app[data-intro='play'] > :not(main, footer, canvas) {
+  animation: intro-fade 700ms ease-out both;
+}
+
+.app[data-intro='play'] > main {
+  animation: intro-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both;
+}
+
+.app[data-intro='play'] > footer {
+  animation: intro-fade 700ms ease-out 700ms both;
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .main {

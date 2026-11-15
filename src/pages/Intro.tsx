@@ -1,7 +1,9 @@
 import { useI18n } from '../i18n/context'
 import { usePage } from '../components/page-context'
-import { Card, CardItem, CardList } from '../components/Card'
-import { KiteArt, LampArt } from '../components/Art'
+import { FamilyArt, YouthArt } from '../components/Art'
+import { DiyaLamp } from '../components/DiyaLamp'
+import { EventTitle } from '../components/EventTitle'
+import { SectionCard } from '../components/SectionCard'
 import { SECTIONS, paths } from '../config/sections'
 import { INTRO_COPY_IS_PLACEHOLDER } from '../config/site'
 import { PlaceholderNotice } from '../components/Placeholder'
@@ -9,33 +11,44 @@ import styles from './pages.module.css'
 
 export default function Intro() {
   const { t } = useI18n()
-  usePage(t('site.title'))
+  usePage(t('site.event'))
   return (
     <>
-      <h1>{t('site.title')}</h1>
+      <div className={styles.hero}>
+        <DiyaLamp className={styles.heroLamp} />
+        <EventTitle />
+        <p className={styles.heroLine}>{t('site.title')}</p>
+        <p className={styles.heroValue}>{t('site.value')}</p>
+        <p className={styles.heroTheme}>{t('site.theme')}</p>
+      </div>
       {INTRO_COPY_IS_PLACEHOLDER && <PlaceholderNotice />}
-      <p className={styles.lead}>{t('site.tagline')}</p>
-      <p>{t('intro.lead')}</p>
-      <CardList>
-        <CardItem>
-          <Card
+      <div className={styles.divider}>
+        <span aria-hidden="true" />
+        <p>{t('intro.lead')}</p>
+        <span aria-hidden="true" />
+      </div>
+      <ul className={styles.sections}>
+        <li>
+          <SectionCard
             to={paths.section('bhulkao')}
+            index={1}
+            audience={t('intro.bhulkao.audience')}
             title={t(SECTIONS.bhulkao.nameKey)}
-            description={t(SECTIONS.bhulkao.introDescKey)}
-            art={<KiteArt />}
-            stack
+            action={t('intro.explore')}
+            art={<FamilyArt />}
           />
-        </CardItem>
-        <CardItem>
-          <Card
+        </li>
+        <li>
+          <SectionCard
             to={paths.section('yuvako')}
+            index={2}
+            audience={t('intro.yuvako.audience')}
             title={t(SECTIONS.yuvako.nameKey)}
-            description={t(SECTIONS.yuvako.introDescKey)}
-            art={<LampArt />}
-            stack
+            action={t('intro.explore')}
+            art={<YouthArt />}
           />
-        </CardItem>
-      </CardList>
+        </li>
+      </ul>
     </>
   )
 }

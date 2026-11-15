@@ -19,8 +19,9 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
     "@fontsource/noto-sans": "^5.3.0",
-    "@fontsource/noto-sans-devanagari": "^5.3.0",
     "@fontsource/noto-sans-gujarati": "^5.3.0",
     "firebase": "^13.3.0",
     "react": "^19.3.1",

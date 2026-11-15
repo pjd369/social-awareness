@@ -163,7 +163,6 @@ function prasangTitle(entry: PrasangEntry): LocalizedText {
   return {
     en: entry.docs.en?.front.title ?? entry.id,
     gu: entry.docs.gu?.front.title,
-    hi: entry.docs.hi?.front.title,
   }
 }
 

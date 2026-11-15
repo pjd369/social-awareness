@@ -1,9 +1,9 @@
 import type { Lang } from './languages'
 
 /**
- * The Latin font is bundled with the main stylesheet. The Gujarati and
- * Devanagari fonts are separate chunks, fetched only when that language is
- * active, so English visitors never download them.
+ * The Latin font is bundled with the main stylesheet. The Gujarati font is a
+ * separate chunk, fetched only when Gujarati is active, so English visitors
+ * never download it.
  */
 const loaders: Partial<Record<Lang, () => Promise<unknown>>> = {
   gu: () =>
@@ -11,22 +11,16 @@ const loaders: Partial<Record<Lang, () => Promise<unknown>>> = {
       import('@fontsource/noto-sans-gujarati/gujarati-400.css'),
       import('@fontsource/noto-sans-gujarati/gujarati-700.css'),
     ]),
-  hi: () =>
-    Promise.all([
-      import('@fontsource/noto-sans-devanagari/devanagari-400.css'),
-      import('@fontsource/noto-sans-devanagari/devanagari-700.css'),
-    ]),
 }
 
 /** CSS font-family for each language, as used by canvas drawing. */
 export const FONT_STACK: Record<Lang, string> = {
-  en: "'Noto Sans', system-ui, sans-serif",
+  en: "'DM Sans', 'Noto Sans', system-ui, sans-serif",
   gu: "'Noto Sans Gujarati', 'Noto Sans', system-ui, sans-serif",
-  hi: "'Noto Sans Devanagari', 'Noto Sans', system-ui, sans-serif",
 }
 
 /** A short sample in each script, used to ask the browser to load the right font file. */
-const SAMPLE: Record<Lang, string> = { en: 'Aa', gu: 'ગુજ', hi: 'हिन' }
+const SAMPLE: Record<Lang, string> = { en: 'Aa', gu: 'ગુજ' }
 
 const pending = new Map<Lang, Promise<void>>()
 

@@ -1,9 +1,15 @@
+@import '@fontsource/cormorant-garamond/latin-400.css';
+@import '@fontsource/cormorant-garamond/latin-500.css';
+@import '@fontsource/cormorant-garamond/latin-400-italic.css';
+@import '@fontsource/dm-sans/latin-400.css';
+@import '@fontsource/dm-sans/latin-500.css';
+@import '@fontsource/dm-sans/latin-600.css';
 @import '@fontsource/noto-sans/latin-400.css';
 @import '@fontsource/noto-sans/latin-700.css';
 
 /*
  * Tiny fonts holding only the glyphs of the language-switch labels, so
- * "ગુજરાતી" and "हिन्दी" render even before (or without) the full script fonts.
+ * "ગુજરાતી" renders even before (or without) the full script fonts.
  * Built by scripts/subset-switch-fonts.sh from the Noto fonts (SIL OFL 1.1).
  */
 @font-face {
@@ -11,13 +17,6 @@
   src: url('../assets/fonts/switch-gujarati.woff2') format('woff2');
   font-display: swap;
   unicode-range: U+0A80-0AFF;
-}
-
-@font-face {
-  font-family: 'Switch Devanagari';
-  src: url('../assets/fonts/switch-devanagari.woff2') format('woff2');
-  font-display: swap;
-  unicode-range: U+0900-097F;
 }
 
 *,
@@ -36,38 +35,46 @@ body {
   min-width: 320px;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
   font-size: var(--font-size);
   line-height: var(--line-height);
 }
 
-/* Gujarati and Hindi need more line height for vowel signs above and below. */
+/* Gujarati needs more line height for vowel signs above and below. */
 :lang(gu) {
   font-family: 'Noto Sans Gujarati', 'Noto Sans', system-ui, sans-serif;
   line-height: var(--line-height-indic);
 }
 
-:lang(hi) {
-  font-family: 'Noto Sans Devanagari', 'Noto Sans', system-ui, sans-serif;
-  line-height: var(--line-height-indic);
-}
-
 :lang(en) {
-  font-family: 'Noto Sans', system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: var(--line-height);
 }
 
 h1,
 h2,
 h3 {
-  line-height: 1.25;
   margin: 0 0 var(--space-3);
+  color: var(--color-heading);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+/* English headings use the festival serif; Gujarati keeps its Noto font. */
+:is(h1, h2, h3):lang(en) {
+  font-family: var(--font-serif);
+  letter-spacing: -0.015em;
+}
+
+/* The Gujarati font ships regular and bold only. */
+:lang(gu) :is(h1, h2, h3),
+:is(h1, h2, h3):lang(gu) {
+  font-weight: 700;
 }
 
 :lang(gu) :is(h1, h2, h3),
-:is(h1, h2, h3):lang(gu),
-:lang(hi) :is(h1, h2, h3),
-:is(h1, h2, h3):lang(hi) {
+:is(h1, h2, h3):lang(gu) {
   line-height: 1.5;
 }
 

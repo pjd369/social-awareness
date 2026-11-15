@@ -69,14 +69,13 @@ describe('validateContent', () => {
 
   it('fails prasang language files that disagree', () => {
     const dir = fixture()
-    edit(dir, 'content/prasangs/patient-seed.hi.md', (s) =>
-      s.replace('audience: bhulkao', 'audience: yuvako'),
-    )
     edit(dir, 'content/prasangs/patient-seed.gu.md', (s) =>
-      s.replace('placeholder: true', 'placeholder: false'),
+      s
+        .replace('audience: bhulkao', 'audience: yuvako')
+        .replace('placeholder: true', 'placeholder: false'),
     )
     const errors = errorsOf(dir).join('\n')
-    expect(errors).toMatch(/patient-seed\.hi\.md: audience differs/)
+    expect(errors).toMatch(/patient-seed\.gu\.md: audience differs/)
     expect(errors).toMatch(/patient-seed\.gu\.md: placeholder differs/)
   })
 
@@ -92,7 +91,7 @@ describe('validateContent', () => {
 
   it('fails an interface string whose {placeholders} differ from English', () => {
     const dir = fixture()
-    edit(dir, 'locales/hi.json', (s) => s.replace('{page} पर वापस जाएँ', '{pg} पर वापस जाएँ'))
+    edit(dir, 'locales/gu.json', (s) => s.replace('{page} પર પાછા જાઓ', '{pg} પર પાછા જાઓ'))
     expect(errorsOf(dir).join('\n')).toMatch(/nav\.back.*same \{placeholders\}/)
   })
 

@@ -5,11 +5,10 @@ import { z } from 'zod'
  * (before every build). See the README for how to edit each file.
  */
 
-/** A visitor-facing text: English is required; Gujarati and Hindi are expected. */
+/** A visitor-facing text: English is required; Gujarati is expected. */
 export const localizedText = z.strictObject({
   en: z.string().trim().min(1, 'English text is required'),
   gu: z.string().optional(),
-  hi: z.string().optional(),
 })
 export type LocalizedTextData = z.infer<typeof localizedText>
 
@@ -228,7 +227,7 @@ export type GreenPage = z.infer<typeof greenPage>
 
 export const wordEntry = z.strictObject({
   word: z.string().regex(/^[a-z]{3,10}$/, 'lowercase a-z only, 3 to 10 letters'),
-  native: z.strictObject({ gu: z.string().optional(), hi: z.string().optional() }).optional(),
+  native: z.strictObject({ gu: z.string().optional() }).optional(),
   meaning: localizedText,
   reflection: localizedText,
   placeholder: z.boolean().default(false),

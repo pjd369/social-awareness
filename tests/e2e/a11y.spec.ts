@@ -162,10 +162,10 @@ test.describe('no accessibility violations in game and story states', () => {
     await expectNoAxeViolations(page)
   })
 
-  test('word game result and doodle game over, in Hindi', async ({ page }) => {
+  test('word game result and doodle game over, in Gujarati', async ({ page }) => {
     test.setTimeout(60_000)
     await page.addInitScript(() => {
-      localStorage.setItem('outreach.lang', 'hi')
+      localStorage.setItem('outreach.lang', 'gu')
       let n = 0
       // Kind (below 0.7 = distraction), which item, x (0.5 = middle).
       Math.random = () =>
@@ -185,11 +185,11 @@ test.describe('no accessibility violations in game and story states', () => {
 
     await page.goto('/bhulkao/activity/doodle')
     await expectNoAxeViolations(page)
-    await page.getByRole('textbox').fill('आरव')
-    await page.getByRole('button', { name: 'शुरू करें' }).click()
-    await page.getByRole('button', { name: 'रोकें' }).click()
+    await page.getByRole('textbox').fill('આરવ')
+    await page.getByRole('button', { name: 'શરૂ કરો' }).click()
+    await page.getByRole('button', { name: 'થોભો' }).click()
     await expectNoAxeViolations(page)
-    await page.getByRole('button', { name: 'फिर से चलाएँ' }).click()
+    await page.getByRole('button', { name: 'ફરી ચાલુ કરો' }).click()
     await page.evaluate(() => {
       ;(window as unknown as { __bad: boolean }).__bad = true
     })

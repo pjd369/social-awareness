@@ -379,46 +379,25 @@ test.describe('pill game: green pill', () => {
     await expect(page.getByRole('heading', { name: LANDING })).toBeFocused()
   })
 
-  for (const [lang, blackout, reality, solution, exit] of [
-    [
-      'gu',
+  test('blue and green pills work in Gujarati', async ({ page }) => {
+    await useLanguage(page, 'gu')
+    await page.goto('/yuvako/activity/pills')
+    await page.getByRole('button', { name: /વાદળી ગોળી/ }).click()
+    await expect(page.getByRole('status')).toContainText(
       'અજ્ઞાનતા પસંદ કરવાથી કઠોર વાસ્તવિકતામાંથી બચી શકાતું નથી.',
-      'વાસ્તવિકતા માટે કોઈ વાદળી ગોળી નથી',
-      'ઉકેલ 1 / 3',
-      'બહાર નીકળો',
-    ],
-    [
-      'hi',
-      'अनजान बने रहने से कठोर सच्चाई से बचा नहीं जा सकता।',
-      'सच्चाई के लिए कोई नीली गोली नहीं है',
-      'समाधान 1 / 3',
-      'बाहर निकलें',
-    ],
-  ] as const) {
-    test(`blue and green pills work in ${lang === 'gu' ? 'Gujarati' : 'Hindi'}`, async ({
-      page,
-    }) => {
-      await useLanguage(page, lang)
-      await page.goto('/yuvako/activity/pills')
-      await page.getByRole('button', { name: lang === 'gu' ? /વાદળી ગોળી/ : /नीली गोली/ }).click()
-      await expect(page.getByRole('status')).toContainText(blackout)
-      await blackoutContinue(page, lang === 'gu' ? 'આગળ વધો' : 'आगे बढ़ें').click()
-      await expect(page.getByRole('heading', { name: reality })).toBeVisible()
-      await page.getByRole('button', { name: lang === 'gu' ? /લીલી ગોળી/ : /हरी गोली/ }).click()
-      await expect(page.getByRole('heading', { name: solution })).toBeFocused()
-      await expectNoHorizontalOverflow(page)
-      await page
-        .getByRole('button', { name: lang === 'gu' ? 'આગળ' : 'आगे' })
-        .first()
-        .click()
-      await page
-        .getByRole('button', { name: lang === 'gu' ? 'આગળ' : 'आगे' })
-        .first()
-        .click()
-      await expect(page.getByRole('button', { name: exit }).first()).toBeVisible()
-      await expectNoHorizontalOverflow(page)
-    })
-  }
+    )
+    await blackoutContinue(page, 'આગળ વધો').click()
+    await expect(
+      page.getByRole('heading', { name: 'વાસ્તવિકતા માટે કોઈ વાદળી ગોળી નથી' }),
+    ).toBeVisible()
+    await page.getByRole('button', { name: /લીલી ગોળી/ }).click()
+    await expect(page.getByRole('heading', { name: 'ઉકેલ 1 / 3' })).toBeFocused()
+    await expectNoHorizontalOverflow(page)
+    await page.getByRole('button', { name: 'આગળ' }).first().click()
+    await page.getByRole('button', { name: 'આગળ' }).first().click()
+    await expect(page.getByRole('button', { name: 'બહાર નીકળો' }).first()).toBeVisible()
+    await expectNoHorizontalOverflow(page)
+  })
 
   test('360px wide: every green page, the reality screen and the blackout fit', async ({
     page,

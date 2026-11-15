@@ -33,7 +33,7 @@ async function setUp(page: Page, lang = 'en') {
   await page.goto('/bhulkao/activity/doodle')
   expect(replaced, 'doodle settings found in the bundle').toBe(true)
   await page.getByRole('textbox').fill('Riya')
-  await expect(page.getByRole('button', { name: /^(Start|શરૂ કરો|शुरू करें)$/ })).toBeEnabled()
+  await expect(page.getByRole('button', { name: /^(Start|શરૂ કરો)$/ })).toBeEnabled()
 }
 
 const score = (page: Page) => page.getByTestId('doodle-score')
@@ -162,13 +162,10 @@ test.describe('doodle catcher', () => {
     await expect(page.getByTestId('doodle-game')).toHaveAttribute('data-phase', 'paused')
   })
 
-  test('draws labels in Gujarati and Hindi with the right font', async ({ page }) => {
-    for (const [lang, family, sample] of [
-      ['gu', 'Noto Sans Gujarati', 'પ્રાર્થના'],
-      ['hi', 'Noto Sans Devanagari', 'प्रार्थना'],
-    ] as const) {
+  test('draws labels in Gujarati with the right font', async ({ page }) => {
+    for (const [lang, family, sample] of [['gu', 'Noto Sans Gujarati', 'પ્રાર્થના']] as const) {
       await setUp(page, lang)
-      await page.getByRole('button', { name: lang === 'gu' ? 'શરૂ કરો' : 'शुरू करें' }).click()
+      await page.getByRole('button', { name: 'શરૂ કરો' }).click()
       // The script's font face must actually be loaded (check() alone is also true for unknown fonts).
       const loaded = await page.evaluate(
         ([f, s]) =>
@@ -178,7 +175,7 @@ test.describe('doodle catcher', () => {
         [family, sample],
       )
       expect(loaded, `${family} is loaded before drawing`).toBe(true)
-      await expect(score(page)).toHaveText(lang === 'gu' ? 'ગુણ: 1' : 'अंक: 1', { timeout: 5000 })
+      await expect(score(page)).toHaveText('ગુણ: 1', { timeout: 5000 })
     }
   })
 })
