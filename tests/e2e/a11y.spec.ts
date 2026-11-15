@@ -174,6 +174,8 @@ test.describe('no accessibility violations in game and story states', () => {
         ]!
     })
     await page.goto('/yuvako/activity/words')
+    // The game loads after the page shell; keys typed before it mounts are lost.
+    await expect(page.getByTestId('word-board')).toBeVisible()
     await expectNoAxeViolations(page)
     for (let i = 0; i < 6; i++) {
       await page.keyboard.type('zzzzzzzzzz')
