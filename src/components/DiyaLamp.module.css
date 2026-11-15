@@ -1,0 +1,76 @@
+.lamp {
+  display: block;
+  overflow: visible;
+}
+
+.glow {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.4);
+  transition:
+    opacity 1.2s ease,
+    transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lit .glow {
+  opacity: 1;
+  transform: scale(1);
+  animation: breathe 3.6s ease-in-out 1.6s infinite;
+}
+
+.mandala {
+  opacity: 0.22;
+  transition: opacity 1.4s ease;
+}
+
+.lit .mandala {
+  opacity: 0.45;
+}
+
+.ember {
+  opacity: 0;
+  transform-box: fill-box;
+}
+
+.lit .ember {
+  animation: embers 3.2s ease-in-out var(--delay, 0ms) infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+@keyframes embers {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  35%,
+  65% {
+    opacity: 0.8;
+  }
+
+  80% {
+    opacity: 0;
+    transform: translateY(-17px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lit .glow,
+  .lit .ember {
+    animation: none;
+  }
+}

@@ -146,14 +146,14 @@
   justify-content: center;
   gap: var(--space-3);
   padding: var(--space-4);
-  background: rgb(255 255 255 / 70%);
+  background: rgb(46 21 33 / 72%);
   text-align: center;
 }
 
 .overPanel {
   justify-content: flex-start;
   overflow-y: auto;
-  background: rgb(255 255 255 / 94%);
+  background: rgb(46 21 33 / 94%);
 }
 
 .overlayTitle {
@@ -234,7 +234,7 @@
 }
 
 .nameForm {
-  background: rgb(255 255 255 / 94%);
+  background: rgb(46 21 33 / 94%);
 }
 
 .nameLabel {
@@ -309,7 +309,7 @@
 }
 
 .boardMe {
-  background: rgb(47 143 91 / 14%);
+  background: rgb(92 197 138 / 16%);
   font-weight: 700;
 }
 
@@ -321,7 +321,7 @@
   height: 1.75rem;
   border-radius: 50%;
   background: var(--doodle-good);
-  color: #fff;
+  color: var(--brand-wine-deep);
   font-weight: 700;
 }
 

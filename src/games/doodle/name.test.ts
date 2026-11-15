@@ -22,7 +22,7 @@ describe('checkName()', () => {
     }
   })
 
-  it('allows 12 letters, counting a Gujarati or Hindi letter with its marks as one', () => {
+  it('allows 12 letters, counting a Gujarati letter with its marks as one', () => {
     expect(checkName('Abcdefghijkl').ok).toBe(true)
     expect(checkName('Abcdefghijklm')).toEqual({ ok: false, problem: 'tooLong' })
     expect(checkName('પ્રાર્થના').ok).toBe(true)

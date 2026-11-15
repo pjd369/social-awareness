@@ -1,6 +1,12 @@
-.header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+/* Thin woven thread across the very top of the page. */
+.thread {
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    #d99742 0 18px,
+    #f1c777 18px 21px,
+    #8e382b 21px 28px
+  );
 }
 
 .bar {
@@ -9,29 +15,50 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2) var(--space-4);
-  max-width: var(--content-width);
+  max-width: var(--header-width);
+  min-height: 73px;
   margin: 0 auto;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) 6%;
 }
 
-.title {
+.brand {
   display: inline-flex;
   align-items: center;
+  min-width: 0;
   min-height: var(--tap);
-  color: var(--color-text);
-  font-size: 1.125rem;
-  font-weight: 700;
+  color: #ffe1a2;
   text-decoration: none;
 }
 
-.title:hover {
-  text-decoration: underline;
+.brand:hover {
+  color: var(--brand-cream);
+}
+
+.logo {
+  --logo-h: 50px;
+}
+
+@media (max-width: 30rem) {
+  .bar {
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+  }
+
+  .logo {
+    --logo-h: 34px;
+  }
+}
+
+@media (max-width: 22rem) {
+  .logo {
+    --logo-h: 30px;
+  }
 }
 
 .backNav {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 0 var(--space-4) var(--space-2);
+  padding: var(--space-3) var(--space-4) 0;
 }
 
 .back {
@@ -39,5 +66,6 @@
   align-items: center;
   gap: var(--space-1);
   min-height: var(--tap);
-  font-weight: 700;
+  color: var(--brand-gold);
+  font-weight: 500;
 }

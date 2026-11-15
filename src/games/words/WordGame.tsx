@@ -50,7 +50,7 @@ function useMarkText() {
 function NativeForms({ entry }: { entry: WordEntry }) {
   const { lang } = useI18n()
   const native = entry.native ?? {}
-  const shown = lang === 'en' ? (['gu', 'hi'] as const) : ([lang] as const)
+  const shown = lang === 'en' ? (['gu'] as const) : ([lang] as const)
   return (
     <>
       {shown.map((code) =>

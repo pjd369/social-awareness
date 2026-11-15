@@ -49,14 +49,14 @@ test.describe('story player', () => {
     await expect(page.getByRole('complementary', { name: 'Think about it' })).toBeVisible()
   })
 
-  test('shows the scenario in Hindi', async ({ page }) => {
+  test('shows the scenario in Gujarati', async ({ page }) => {
     await page.goto('/')
-    await page.getByRole('button', { name: 'हिन्दी' }).click()
+    await page.getByRole('button', { name: 'ગુજરાતી' }).click()
     await page.goto('/yuvako/scenario/one-am-exam')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'अस्थायी: रात का एक बजा, कल परीक्षा',
+      'કામચલાઉ: રાતનો એક વાગ્યો, કાલે પરીક્ષા',
     )
-    await expect(page.getByRole('button', { name: 'अभी फ़ोन रख दें' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'હમણાં જ ફોન બાજુ પર મૂકો' })).toBeVisible()
   })
 })
 
@@ -87,7 +87,7 @@ test.describe('prasang reader', () => {
 test('placeholder content is marked unmistakably', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByTestId('preview-strip')).toBeVisible()
-  await expect(page.getByTestId('placeholder-notice')).toBeVisible()
+  await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
   await page.goto('/yuvako')
   await expect(page.getByRole('link', { name: /Scenario.*Placeholder/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toBeVisible()

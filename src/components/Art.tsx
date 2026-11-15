@@ -9,25 +9,63 @@ const common = {
   focusable: false,
 } as const
 
-export function KiteArt() {
+/** A parent and a small child holding hands, with a ball to play with. */
+export function FamilyArt() {
   return (
     <svg {...common}>
-      <circle cx="96" cy="18" r="10" fill="#f4c552" />
-      <path d="M50 8 L72 34 L50 62 L28 34 Z" fill="#e4572e" />
-      <path d="M50 8 L50 62 M28 34 L72 34" stroke="#fff6e5" strokeWidth="3" />
-      <path d="M50 62 C46 68 56 70 52 76" stroke="#5b3a9b" strokeWidth="3" fill="none" />
-      <path d="M47 68 l-6 3 6 3z M55 72 l6 3-6 3z" fill="#2f8f5b" />
+      <path d="M58 24 C49 18 51 9 58 13 C65 9 67 18 58 24 Z" fill="#e88aa8" />
+      <path d="M16 74 H108" stroke="#f5d49b" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+      <circle cx="38" cy="18" r="8" fill="#f5d49b" />
+      <path d="M30 30 Q38 26 46 30 L53 73 H23 Z" fill="#b5651d" />
+      <path
+        d="M45 34 C52 41 58 48 63 55"
+        stroke="#b5651d"
+        strokeWidth="4.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <circle cx="77" cy="41" r="6" fill="#f5d49b" />
+      <path d="M71 50 Q77 48 83 50 L86 73 H68 Z" fill="#e4572e" />
+      <path d="M72 53 L64 56" stroke="#e4572e" strokeWidth="3.5" strokeLinecap="round" />
+      <circle cx="63.5" cy="55.5" r="2.8" fill="#f5d49b" />
+      <circle cx="100" cy="66" r="7" fill="#f4c552" />
+      <path
+        d="M93.5 64 Q100 69 106.5 64 M100 59 Q97 66 100 73"
+        stroke="#e4572e"
+        strokeWidth="1.8"
+        fill="none"
+      />
     </svg>
   )
 }
 
-export function LampArt() {
+/** Two young adults talking over chai, a phone left face down on the table. */
+export function YouthArt() {
   return (
     <svg {...common}>
-      <path d="M60 10 C68 22 68 30 60 36 C52 30 52 22 60 10 Z" fill="#f4c552" />
-      <path d="M60 18 C63 24 63 28 60 31 C57 28 57 24 60 18 Z" fill="#e4572e" />
-      <path d="M32 44 H88 C86 60 74 68 60 68 C46 68 34 60 32 44 Z" fill="#b5651d" />
-      <path d="M40 72 H80" stroke="#1d4f78" strokeWidth="4" strokeLinecap="round" />
+      <rect x="40" y="6" width="20" height="13" rx="6.5" fill="#fff6e5" />
+      <path d="M45 18 l-5 6 9-4z" fill="#fff6e5" />
+      <path d="M45 12.5 h10" stroke="#b5651d" strokeWidth="2" strokeLinecap="round" />
+      <rect x="60" y="20" width="20" height="13" rx="6.5" fill="#f4c552" />
+      <path d="M75 32 l5 6-9-4z" fill="#f4c552" />
+      <path d="M65 26.5 h10" stroke="#b5651d" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="28" cy="30" r="8.5" fill="#f5d49b" />
+      <path d="M12 62 Q12 44 28 42 Q44 44 44 62 Z" fill="#e4572e" />
+      <circle cx="92" cy="30" r="8.5" fill="#f5d49b" />
+      <path d="M76 62 Q76 44 92 42 Q108 44 108 62 Z" fill="#b5651d" />
+      <path d="M43 53 h8 l-1.2 9 h-5.6 Z M69 53 h8 l-1.2 9 h-5.6 Z" fill="#fff6e5" />
+      <rect
+        x="53"
+        y="57.5"
+        width="14"
+        height="4.5"
+        rx="1.5"
+        fill="#3b1f2b"
+        stroke="#fff6e5"
+        strokeWidth="1"
+      />
+      <rect x="8" y="62" width="104" height="6" rx="2" fill="#f4c552" />
+      <path d="M20 68 v8 M100 68 v8" stroke="#f4c552" strokeWidth="3" strokeLinecap="round" />
     </svg>
   )
 }

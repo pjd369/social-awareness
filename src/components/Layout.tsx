@@ -4,8 +4,10 @@ import { useI18n } from '../i18n/context'
 import { sectionFromPath } from '../config/sections'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { Fireworks } from './Fireworks'
 import { PageContext, type PageInfo } from './page-context'
 import { focusMainHeading } from './focus'
+import { introMotionAllowed } from './intro-motion'
 import { PreviewStrip } from './Placeholder'
 import { siteHasPlaceholders } from '../content'
 import styles from './Layout.module.css'
@@ -18,6 +20,7 @@ export function Layout() {
   const isFirstRender = useRef(true)
   const section = sectionFromPath(location.pathname)
   const siteTitle = t('site.title')
+  const [intro] = useState(introMotionAllowed)
 
   useEffect(() => {
     document.title =
@@ -35,7 +38,11 @@ export function Layout() {
   }, [location.pathname])
 
   return (
-    <div className={styles.app} data-section={section ?? 'home'}>
+    <div
+      className={styles.app}
+      data-section={section ?? 'home'}
+      data-intro={intro ? 'play' : undefined}
+    >
       <a href="#main" className={styles.skip}>
         {t('nav.skip')}
       </a>
@@ -47,6 +54,7 @@ export function Layout() {
         </PageContext.Provider>
       </main>
       <Footer />
+      {intro && <Fireworks />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { expect, type Page } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-export const LANGS = ['en', 'gu', 'hi'] as const
+export const LANGS = ['en', 'gu'] as const
 export type Lang = (typeof LANGS)[number]
 
 /** Set the stored language before any page script runs. */
