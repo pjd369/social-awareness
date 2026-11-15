@@ -54,7 +54,7 @@ Every game, story and prasang is at most three taps from the intro page.
   website (fonts are bundled), except Firestore for the doodle leaderboard
   once Firebase is set up. The only free-text input in Bhulkao is the doodle
   player's name: a first name or nickname, letters only, up to 12 letters,
-  with a basic rude-word filter. It is shown on that day's leaderboard. The
+  with a basic rude-word filter. It is shown on the leaderboard. The
   browser's local storage keeps only the language choice, today's word-game
   guesses, the doodle best score and the doodle player's name. Every link that
   leaves the site first shows "You are leaving this site".
@@ -223,13 +223,12 @@ fall, in play-area pixels per second; the play area is 360 wide),
 ### Doodle leaderboard
 
 Before each game the player types a name. When the game ends, the score is
-saved and the game-over screen shows today's top three names and how many
-different names played today. Each name keeps only its best score for the
-day; "Riya" and "riya" count as the same player. "Today" is the player's local
-date.
+saved and the game-over screen shows the top three names of all time and how
+many different names have ever played. Each name keeps only its best score
+ever; "Riya" and "riya" count as the same player. The board never resets.
 
-Scores are stored in Firebase Firestore, at
-`doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:
+Scores are stored in Firebase Firestore, one document per player at
+`doodlePlayers/<name>`. To connect a Firebase project:
 
 1. In the Firebase console, create a Firestore database and a web app.
 2. Publish the rules in `firestore.rules` (Firestore → Rules, or
@@ -465,4 +464,22 @@ The site is a static build and can be hosted anywhere. The owner chose
   is not a file (for example Netlify `/* /index.html 200`, or nginx
   `try_files $uri /index.html`).
 - Production builds include a Content-Security-Policy meta tag that limits
-  every request to the site's own origin.
+  every request to the site's own origin (plus Firestore when Firebase is set
+  up).
+
+### Vercel
+
+`.github/workflows/vercel.yml` builds the site on GitHub and deploys it to
+Vercel (production) on every push to `main`, or by hand from the Actions tab
+("Deploy to Vercel" → "Run workflow"). It does not wait for CI. `vercel.json`
+serves `index.html` for deep links and turns off Vercel's own Git builds, so
+each push is deployed once.
+
+One-time setup by a repository admin:
+
+1. Create a project in Vercel (it can be empty; the workflow uploads the build).
+2. In GitHub, **Settings → Secrets and variables → Actions**, add the names
+   listed in `.env.vercel.example`: the four `VITE_FIREBASE_*` values on the
+   **Variables** tab, and `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+   on the **Secrets** tab.
+3. Run the workflow once by hand to check it.

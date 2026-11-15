@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { dayKey, firebaseConfig, memoryLeaderboard } from './leaderboard'
-
-describe('dayKey()', () => {
-  it('uses the local calendar date', () => {
-    expect(dayKey(new Date(2026, 0, 5, 23, 59))).toBe('2026-01-05')
-  })
-})
+import { firebaseConfig, memoryLeaderboard } from './leaderboard'
 
 describe('firebaseConfig()', () => {
   it('needs an API key and a project id', () => {
@@ -21,16 +15,15 @@ describe('firebaseConfig()', () => {
 })
 
 describe('leaderboard', () => {
-  it("keeps each name's best score for the day and shows the top three", async () => {
+  it("keeps each name's best score and shows the top three of all time", async () => {
     const board = memoryLeaderboard()
-    await board.submit('2026-01-05', 'Riya', 4)
-    await board.submit('2026-01-05', 'riya', 2)
-    await board.submit('2026-01-05', 'Aarav', 9)
-    await board.submit('2026-01-05', 'Meera', 6)
-    await board.submit('2026-01-05', 'Dev', 1)
-    await board.submit('2026-01-04', 'Old', 50)
+    await board.submit('Riya', 4)
+    await board.submit('riya', 2)
+    await board.submit('Aarav', 9)
+    await board.submit('Meera', 6)
+    await board.submit('Dev', 1)
 
-    expect(await board.read('2026-01-05')).toEqual({
+    expect(await board.read()).toEqual({
       top: [
         { name: 'Aarav', score: 9 },
         { name: 'Meera', score: 6 },
@@ -40,9 +33,16 @@ describe('leaderboard', () => {
     })
   })
 
+  it('raises a name to its new best score', async () => {
+    const board = memoryLeaderboard()
+    await board.submit('Riya', 4)
+    await board.submit('Riya', 12)
+    expect((await board.read()).top).toEqual([{ name: 'Riya', score: 12 }])
+  })
+
   it('counts a player who scored zero', async () => {
     const board = memoryLeaderboard()
-    await board.submit('2026-01-05', 'Riya', 0)
-    expect((await board.read('2026-01-05')).players).toBe(1)
+    await board.submit('Riya', 0)
+    expect((await board.read()).players).toBe(1)
   })
 })
