@@ -1,10 +1,10 @@
 {
   "config": {
-    "startSpeed": 90,
-    "speedRamp": 3,
-    "maxSpeed": 260,
+    "startSpeed": 150,
+    "speedPerPoint": 6,
+    "maxSpeed": 340,
     "spawnInterval": 1.1,
-    "negativeShare": 0.3
+    "negativeShare": 0.7
   },
   "items": [
     {

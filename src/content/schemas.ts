@@ -141,8 +141,8 @@ export const doodleItem = z
 export const doodleConfig = z.strictObject({
   /** Falling speed at the start, in play-area pixels per second (the play area is 360 wide). */
   startSpeed: z.number().positive(),
-  /** How much the falling speed rises each second. */
-  speedRamp: z.number().min(0),
+  /** How much the falling speed rises for each good habit caught. */
+  speedPerPoint: z.number().min(0),
   /** The falling speed never goes above this. */
   maxSpeed: z.number().positive(),
   /** Seconds between new items. */

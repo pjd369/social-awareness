@@ -139,5 +139,22 @@
   "doodle.hit": "You touched: {label}",
   "doodle.newBest": "That is your best score!",
   "doodle.playAgain": "Play again",
-  "doodle.area": "Game area. The doodle at the bottom catches falling items."
+  "doodle.area": "Game area. The doodle at the bottom catches falling items.",
+  "doodle.name.label": "What is your name?",
+  "doodle.name.hint": "Your first name or a nickname, up to 12 letters. It is shown on today's leaderboard.",
+  "doodle.name.error.empty": "Please type your name.",
+  "doodle.name.error.tooLong": "That is too long. Use up to 12 letters.",
+  "doodle.name.error.characters": "Use letters only, with no numbers or symbols.",
+  "doodle.name.error.blocked": "Please choose a different name.",
+  "doodle.player": "Player: {name}",
+  "doodle.changeName": "Change name",
+  "doodle.board.title": "Today's top players",
+  "doodle.board.loading": "Loading the leaderboard…",
+  "doodle.board.empty": "No scores yet today.",
+  "doodle.board.error": "The leaderboard could not be loaded right now.",
+  "doodle.board.unavailable": "The leaderboard is not set up yet.",
+  "doodle.board.entry": "{name}: {n}",
+  "doodle.board.you": "(you)",
+  "doodle.board.players": "{n} players played today.",
+  "doodle.board.players.one": "1 player played today."
 }

@@ -139,5 +139,22 @@
   "doodle.hit": "आप इससे टकरा गए: {label}",
   "doodle.newBest": "यह आपका अब तक का सबसे अच्छा स्कोर है!",
   "doodle.playAgain": "फिर से खेलें",
-  "doodle.area": "खेल का क्षेत्र। नीचे का डूडल ऊपर से गिरती चीज़ें पकड़ता है।"
+  "doodle.area": "खेल का क्षेत्र। नीचे का डूडल ऊपर से गिरती चीज़ें पकड़ता है।",
+  "doodle.name.label": "आपका नाम क्या है?",
+  "doodle.name.hint": "आपका पहला नाम या उपनाम, ज़्यादा से ज़्यादा 12 अक्षर। यह आज के लीडरबोर्ड पर दिखेगा।",
+  "doodle.name.error.empty": "कृपया अपना नाम लिखें।",
+  "doodle.name.error.tooLong": "नाम बहुत लंबा है। ज़्यादा से ज़्यादा 12 अक्षर लिखें।",
+  "doodle.name.error.characters": "केवल अक्षर लिखें, अंक या चिह्न नहीं।",
+  "doodle.name.error.blocked": "कृपया कोई दूसरा नाम चुनें।",
+  "doodle.player": "खिलाड़ी: {name}",
+  "doodle.changeName": "नाम बदलें",
+  "doodle.board.title": "आज के शीर्ष खिलाड़ी",
+  "doodle.board.loading": "लीडरबोर्ड लोड हो रहा है…",
+  "doodle.board.empty": "आज अभी तक कोई स्कोर नहीं है।",
+  "doodle.board.error": "अभी लीडरबोर्ड लोड नहीं हो सका।",
+  "doodle.board.unavailable": "लीडरबोर्ड अभी तैयार नहीं है।",
+  "doodle.board.entry": "{name}: {n}",
+  "doodle.board.you": "(आप)",
+  "doodle.board.players": "आज {n} खिलाड़ियों ने खेला।",
+  "doodle.board.players.one": "आज 1 खिलाड़ी ने खेला।"
 }

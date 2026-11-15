@@ -9,6 +9,7 @@ import {
   createState,
   doodleBox,
   seededRng,
+  speedForScore,
   step,
   type DoodleConfig,
   type SimState,
@@ -16,7 +17,7 @@ import {
 
 const config: DoodleConfig = {
   startSpeed: 100,
-  speedRamp: 10,
+  speedPerPoint: 10,
   maxSpeed: 150,
   spawnInterval: 1,
   negativeShare: 0.3,
@@ -60,9 +61,16 @@ describe('doodle simulation step()', () => {
     expect(s.nextId - 1).toBe(3)
   })
 
-  it('raises the speed from startSpeed by speedRamp and caps it at maxSpeed', () => {
-    expect(run(fresh(), 2).speed).toBeCloseTo(120, 0)
-    expect(run(fresh(), 20, seededRng(3), { targetX: null, dir: 0 }).speed).toBeLessThanOrEqual(150)
+  it('keeps the start speed while nothing is caught', () => {
+    expect(run({ ...fresh(), spawnIn: 99 }, 5).speed).toBe(100)
+  })
+
+  it('raises the speed by speedPerPoint for each catch and caps it at maxSpeed', () => {
+    expect(speedForScore(config, 0)).toBe(100)
+    expect(speedForScore(config, 3)).toBe(130)
+    expect(speedForScore(config, 50)).toBe(150)
+    const s = step(withItemOnDoodle('positive'), NO_INPUT, 0.02, seededRng(1))
+    expect(s.speed).toBe(110)
   })
 
   it('adds a point and records the word when a positive item is caught', () => {
