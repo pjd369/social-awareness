@@ -225,8 +225,10 @@ fall, in play-area pixels per second; the play area is 360 wide),
 Before each game the player types a name. When the game ends, the score is
 saved and the game-over screen shows today's top three names and how many
 different names played today. Each name keeps only its best score for the
-day; "Riya" and "riya" count as the same player. "Today" is the player's local
-date.
+day; "Riya" and "riya" count as the same player. "Today" is the US Pacific
+calendar date for every player, so everyone shares the same board, which
+starts fresh at midnight Pacific time (`LEADERBOARD_TIME_ZONE` in
+`src/games/doodle/leaderboard.ts`).
 
 Scores are stored in Firebase Firestore, at
 `doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:

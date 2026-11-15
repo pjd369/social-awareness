@@ -2,8 +2,12 @@ import { describe, expect, it } from 'vitest'
 import { dayKey, firebaseConfig, memoryLeaderboard } from './leaderboard'
 
 describe('dayKey()', () => {
-  it('uses the local calendar date', () => {
-    expect(dayKey(new Date(2026, 0, 5, 23, 59))).toBe('2026-01-05')
+  it('uses the US Pacific calendar date for everyone', () => {
+    // 07:59 UTC on 6 January is 23:59 on 5 January in Pacific Standard Time.
+    expect(dayKey(new Date(Date.UTC(2026, 0, 6, 7, 59)))).toBe('2026-01-05')
+    expect(dayKey(new Date(Date.UTC(2026, 0, 6, 8, 0)))).toBe('2026-01-06')
+    // Daylight saving time: 06:59 UTC on 2 July is 23:59 on 1 July in PDT.
+    expect(dayKey(new Date(Date.UTC(2026, 6, 2, 6, 59)))).toBe('2026-07-01')
   })
 })
 

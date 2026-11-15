@@ -25,10 +25,21 @@ export interface Leaderboard {
   read(day: string): Promise<LeaderboardSnapshot>
 }
 
-/** The local calendar date as YYYY-MM-DD, used as the leaderboard's day. */
+/** Everyone shares one leaderboard day, so it follows one time zone rather than each visitor's. */
+export const LEADERBOARD_TIME_ZONE = 'America/Los_Angeles'
+
+const dayFormat = new Intl.DateTimeFormat('en-CA', {
+  timeZone: LEADERBOARD_TIME_ZONE,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
+
+/** The leaderboard's day for a moment in time, as YYYY-MM-DD in LEADERBOARD_TIME_ZONE. */
 export function dayKey(date: Date): string {
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    dayFormat.formatToParts(date).find((p) => p.type === type)?.value ?? ''
+  return `${part('year')}-${part('month')}-${part('day')}`
 }
 
 export function firebaseConfig(env: Record<string, string | undefined>) {
