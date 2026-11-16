@@ -298,18 +298,24 @@ function checkPills(c: Collector, root: string) {
   c.checked++
   const parsed = pillsSchema.safeParse(raw)
   if (!parsed.success) return reportZod(c, rel, parsed.error)
-  const { cards, greenPillUrl } = parsed.data
-  if (cards.filter((card) => card.path === 'red').length < 1)
-    c.error(rel, 'add at least one red card')
-  if (cards.filter((card) => card.path === 'blue').length < 2) {
-    c.error(rel, 'add at least two blue cards (the "look away" screen and the message after it)')
-  }
+  const { cards, green } = parsed.data
+  if (cards.length < 1) c.error(rel, 'add at least one red card')
   cards.forEach((card, i) => {
-    if (card.path === 'red' && card.source === null)
-      c.warn(rel, `cards[${i}]: red card has no source yet`)
+    if (card.source === null) c.warn(rel, `cards[${i}]: red card has no source yet`)
+    for (const [j, src] of [card.source, ...card.moreSources].entries()) {
+      if (src && !src.url)
+        c.warn(rel, `cards[${i}]: source ${j + 1} has no link (url), so readers cannot check it`)
+    }
   })
-  if (greenPillUrl === null)
-    c.warn(rel, 'greenPillUrl is not set yet: the green pill shows a placeholder screen')
+  green.pages.forEach((page, i) => {
+    for (const [j, src] of [page.source, ...page.moreSources].entries()) {
+      if (!src.url)
+        c.warn(
+          rel,
+          `green.pages[${i}]: source ${j + 1} has no link (url), so readers cannot check it`,
+        )
+    }
+  })
   checkTranslations(c, rel, raw)
 }
 

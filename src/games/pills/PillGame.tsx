@@ -1,14 +1,17 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import { useI18n } from '../../i18n/context'
 import { localizedLang } from '../../i18n/localized'
 import { Icon } from '../../components/Icon'
 import { ExternalLink } from '../../components/ExternalLink'
 import { ContentError } from '../../components/ContentError'
-import { PlaceholderNotice, PlaceholderTag } from '../../components/Placeholder'
+import { PlaceholderNotice } from '../../components/Placeholder'
 import { focusElement } from '../../components/focus'
-import { usePrefersReducedMotion } from '../../components/motion'
 import { PILLS, pillsArePlaceholder } from '../../content/games'
 import type { PillCard, Pills } from '../../content/schemas'
+import { BlackoutScreen } from './BlackoutScreen'
+import { GreenPillPage } from './GreenPillPage'
+import { Loc } from './Loc'
+import { RedPillInsight } from './RedPillInsight'
 import { START, pillReducer, type PillPath } from './machine'
 import styles from './PillGame.module.css'
 
@@ -45,82 +48,17 @@ function PillLabel({ colour }: { colour: PillColour }) {
   )
 }
 
-/** The green pill opens its URL in a new tab, or the on-site placeholder screen while none is set. */
-export function GreenPill({
-  url,
-  onPlaceholder,
-}: {
-  url: string | null
-  onPlaceholder: () => void
-}) {
-  const { t } = useI18n()
-  if (url) {
-    return (
-      <a
-        className={`${styles.pill} ${styles.green}`}
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <PillLabel colour="green" />
-        <Icon name="external" size={20} />
-        <span className="visually-hidden">{t('pills.green.newTab')}</span>
-      </a>
-    )
-  }
+/** The green pill: an on-site button that opens the green pill pages. */
+export function GreenPill({ onChoose }: { onChoose: () => void }) {
   return (
-    <button type="button" className={`${styles.pill} ${styles.green}`} onClick={onPlaceholder}>
+    <button type="button" className={`${styles.pill} ${styles.green}`} onClick={onChoose}>
       <PillLabel colour="green" />
     </button>
   )
 }
 
-/** The "look away" screen. Dissolves after about three seconds or on tap; reduced motion gets a Continue button instead. */
-function BlueScreen({ card, onDone }: { card: PillCard | undefined; onDone: () => void }) {
-  const { t, l, lang } = useI18n()
-  const reduced = usePrefersReducedMotion()
-  const [fading, setFading] = useState(false)
-
-  useEffect(() => {
-    if (reduced || fading) return
-    const id = window.setTimeout(() => setFading(true), 3000)
-    return () => window.clearTimeout(id)
-  }, [reduced, fading])
-
-  useEffect(() => {
-    if (!fading) return
-    const id = window.setTimeout(onDone, 900)
-    return () => window.clearTimeout(id)
-  }, [fading, onDone])
-
-  const text = card ? <span lang={localizedLang(card.text, lang)}>{l(card.text)}</span> : null
-
-  if (reduced) {
-    return (
-      <div className={styles.bliss}>
-        <p className={styles.blissText}>{text}</p>
-        <button type="button" className={styles.primary} onClick={onDone}>
-          {t('pills.continue')}
-          <Icon name="arrow-right" size={20} />
-        </button>
-      </div>
-    )
-  }
-  return (
-    <button
-      type="button"
-      className={`${styles.bliss} ${styles.blissButton} ${fading ? styles.fading : ''}`}
-      onClick={() => setFading(true)}
-      data-testid="blue-screen"
-    >
-      <span className={styles.blissText}>{text}</span>
-      <span className={styles.blissHint}>{t('pills.blue.tap')}</span>
-    </button>
-  )
-}
-
 function CardSource({ card }: { card: PillCard }) {
-  const { t, l } = useI18n()
+  const { t } = useI18n()
   if (!card.source) {
     return (
       <p className={styles.sourceNeeded}>
@@ -133,24 +71,56 @@ function CardSource({ card }: { card: PillCard }) {
     <p className={styles.source}>
       {t('pills.sourceLabel')}{' '}
       {card.source.url ? (
-        <ExternalLink href={card.source.url}>{l(card.source.text)}</ExternalLink>
+        <ExternalLink href={card.source.url}>{card.source.citation}</ExternalLink>
       ) : (
-        l(card.source.text)
+        card.source.citation
       )}
     </p>
   )
 }
 
+/** Back and a Next-or-finish button. Shown at the top and again at the bottom of each red card and green page. */
+function PageNav({
+  className,
+  nextLabel,
+  nextIcon,
+  onBack,
+  onNext,
+}: {
+  className: string | undefined
+  nextLabel: string
+  nextIcon: 'arrow-right' | 'check'
+  onBack: () => void
+  onNext: () => void
+}) {
+  const { t } = useI18n()
+  return (
+    <div className={className}>
+      <button type="button" className={styles.navButton} onClick={onBack}>
+        <Icon name="arrow-left" size={20} />
+        {t('pills.back')}
+      </button>
+      <button type="button" className={`${styles.navButton} ${styles.navNext}`} onClick={onNext}>
+        {nextLabel}
+        <Icon name={nextIcon} size={20} />
+      </button>
+    </div>
+  )
+}
+
 export function PillGameView({ data }: { data: Pills }) {
   const { t, l, lang } = useI18n()
-  const reds = useMemo(() => data.cards.filter((c) => c.path === 'red'), [data])
-  const blues = useMemo(() => data.cards.filter((c) => c.path === 'blue'), [data])
-  const reducer = useMemo(() => pillReducer(reds.length), [reds.length])
+  const reds = data.cards
+  const greens = data.green.pages
+  const reducer = useMemo(
+    () => pillReducer(reds.length, greens.length),
+    [reds.length, greens.length],
+  )
   const [state, dispatch] = useReducer(reducer, START)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const isFirst = useRef(true)
 
-  // Move focus to each new screen's heading (a new card, the blue screen, the green pill...).
+  // Move focus to each new screen's heading (a new card, the blackout, a green page...).
   useEffect(() => {
     if (isFirst.current) {
       isFirst.current = false
@@ -160,16 +130,11 @@ export function PillGameView({ data }: { data: Pills }) {
   }, [state])
 
   const redCard = state.screen === 'red' ? reds[state.index] : undefined
-  const dissolve = useCallback(() => dispatch({ type: 'dissolve' }), [])
+  const greenPage = state.screen === 'green' ? greens[state.index] : undefined
+  const blackoutDone = useCallback(() => dispatch({ type: 'blackoutDone' }), [])
   const choose = (path: PillPath) => dispatch({ type: 'choose', path })
-  const other: PillPath | null =
-    state.screen === 'green' || state.screen === 'destination'
-      ? state.from === 'red'
-        ? 'blue'
-        : 'red'
-      : null
-
-  const endActions = other && (
+  const back = () => dispatch({ type: 'back' })
+  const startOver = (
     <div className={styles.actions}>
       <button
         type="button"
@@ -178,9 +143,6 @@ export function PillGameView({ data }: { data: Pills }) {
       >
         <Icon name="restart" size={20} />
         {t('pills.startOver')}
-      </button>
-      <button type="button" className={styles.secondary} onClick={() => choose(other)}>
-        {t(other === 'red' ? 'pills.tryRed' : 'pills.tryBlue')}
       </button>
     </div>
   )
@@ -213,88 +175,106 @@ export function PillGameView({ data }: { data: Pills }) {
 
       {state.screen === 'red' && redCard && (
         <section className={styles.screen}>
-          <p className={styles.eyebrow}>{t('pills.red.title')}</p>
-          <h2 ref={headingRef}>
-            {t('pills.progress', { n: state.index + 1, total: reds.length })}
-          </h2>
+          <div className={styles.cardHead}>
+            <div>
+              <p className={styles.eyebrow}>{t('pills.red.title')}</p>
+              <h2 ref={headingRef}>
+                {t('pills.progress', { n: state.index + 1, total: reds.length })}
+              </h2>
+            </div>
+            <PageNav
+              className={styles.cardNav}
+              nextLabel={state.index + 1 >= reds.length ? t('pills.exit') : t('pills.next')}
+              nextIcon={state.index + 1 >= reds.length ? 'check' : 'arrow-right'}
+              onBack={back}
+              onNext={() => dispatch({ type: 'next' })}
+            />
+          </div>
           <ol className={styles.dots} aria-hidden="true">
             {reds.map((_, i) => (
               <li key={i} className={i <= state.index ? styles.dotDone : undefined} />
             ))}
           </ol>
-          <article className={styles.card}>
-            <p className={styles.cardText} lang={localizedLang(redCard.text, lang)}>
-              {l(redCard.text)}
-            </p>
-            <CardSource card={redCard} />
-          </article>
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className={styles.secondary}
-              onClick={() => dispatch({ type: 'back' })}
-            >
-              <Icon name="arrow-left" size={20} />
-              {t('pills.back')}
-            </button>
-            <button
-              type="button"
-              className={styles.primary}
-              onClick={() => dispatch({ type: 'next' })}
-            >
-              {state.index + 1 < reds.length ? t('pills.next') : t('pills.continue')}
-              <Icon name="arrow-right" size={20} />
-            </button>
-          </div>
-        </section>
-      )}
-
-      {state.screen === 'blue' && (
-        <section className={styles.screen}>
-          <h2 ref={headingRef}>{t('pills.blue.title')}</h2>
-          <BlueScreen card={blues[0]} onDone={dissolve} />
-        </section>
-      )}
-
-      {state.screen === 'green' && (
-        <section className={styles.screen}>
-          <h2 ref={headingRef}>{t('pills.green.title')}</h2>
-          {state.from === 'blue' ? (
-            blues.slice(1).map((card, i) => (
-              <p key={i} className={styles.message} lang={localizedLang(card.text, lang)}>
-                {l(card.text)}
-              </p>
-            ))
+          {redCard.visual ? (
+            <RedPillInsight key={state.index} data={redCard} />
           ) : (
-            <p>{t('pills.green.fromRed')}</p>
+            <article className={styles.card}>
+              <p className={styles.cardText} lang={localizedLang(redCard.text, lang)}>
+                {l(redCard.text)}
+              </p>
+              <CardSource card={redCard} />
+            </article>
           )}
-          <p>{t('pills.green.prompt')}</p>
-          <div className={styles.greenRow}>
-            <GreenPill
-              url={data.greenPillUrl}
-              onPlaceholder={() => dispatch({ type: 'openDestination' })}
-            />
-            {data.greenPillUrl === null && <PlaceholderTag />}
-          </div>
-          {endActions}
+          <PageNav
+            className={`${styles.cardNav} ${styles.cardNavBottom}`}
+            nextLabel={state.index + 1 >= reds.length ? t('pills.exit') : t('pills.next')}
+            nextIcon={state.index + 1 >= reds.length ? 'check' : 'arrow-right'}
+            onBack={back}
+            onNext={() => dispatch({ type: 'next' })}
+          />
         </section>
       )}
 
-      {state.screen === 'destination' && (
+      {state.screen === 'blueBlackout' && (
+        <BlackoutScreen
+          content={data.blue.blackout}
+          headingRef={headingRef}
+          onDone={blackoutDone}
+        />
+      )}
+
+      {state.screen === 'blueReality' && (
         <section className={styles.screen}>
-          <h2 ref={headingRef}>{t('pills.destination.title')}</h2>
-          <p>{t('pills.destination.body')}</p>
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className={styles.secondary}
-              onClick={() => dispatch({ type: 'closeDestination' })}
-            >
-              <Icon name="arrow-left" size={20} />
-              {t('pills.backToGreen')}
-            </button>
+          <p className={styles.eyebrow}>{t('pills.blue.title')}</p>
+          <h2 ref={headingRef} lang={localizedLang(data.blue.reality.title, lang)}>
+            {l(data.blue.reality.title)}
+          </h2>
+          <Loc field={data.blue.reality.text} as="p" />
+          <ul className={styles.points}>
+            {data.blue.reality.points.map((point, i) => (
+              <li key={i}>
+                <Icon name="check" size={20} />
+                <Loc field={point} />
+              </li>
+            ))}
+          </ul>
+          <div className={styles.greenRow}>
+            <GreenPill onChoose={() => dispatch({ type: 'takeGreen' })} />
           </div>
-          {endActions}
+        </section>
+      )}
+
+      {state.screen === 'green' && greenPage && (
+        <section className={styles.screen}>
+          <div className={styles.cardHead}>
+            <div>
+              <p className={styles.eyebrow}>{t('pills.green.title')}</p>
+              <h2 ref={headingRef}>
+                {t('pills.green.progress', { n: state.index + 1, total: greens.length })}
+              </h2>
+            </div>
+            <PageNav
+              className={styles.cardNav}
+              nextLabel={state.index + 1 >= greens.length ? t('pills.exit') : t('pills.next')}
+              nextIcon={state.index + 1 >= greens.length ? 'check' : 'arrow-right'}
+              onBack={back}
+              onNext={() => dispatch({ type: state.index + 1 >= greens.length ? 'exit' : 'next' })}
+            />
+          </div>
+          <ol className={`${styles.dots} ${styles.greenDots}`} aria-hidden="true">
+            {greens.map((_, i) => (
+              <li key={i} className={i <= state.index ? styles.dotDone : undefined} />
+            ))}
+          </ol>
+          <GreenPillPage key={state.index} data={greenPage} />
+          <PageNav
+            className={`${styles.cardNav} ${styles.cardNavBottom}`}
+            nextLabel={state.index + 1 >= greens.length ? t('pills.exit') : t('pills.next')}
+            nextIcon={state.index + 1 >= greens.length ? 'check' : 'arrow-right'}
+            onBack={back}
+            onNext={() => dispatch({ type: state.index + 1 >= greens.length ? 'exit' : 'next' })}
+          />
+          {startOver}
         </section>
       )}
     </div>
