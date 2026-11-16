@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { useI18n } from '../i18n/context'
-import { sectionFromPath } from '../config/sections'
+import { GAMES, sectionFromPath } from '../config/sections'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { Fireworks } from './Fireworks'
@@ -20,6 +20,8 @@ export function Layout() {
   const isFirstRender = useRef(true)
   const section = sectionFromPath(location.pathname)
   const siteTitle = t('site.title')
+  // The pill game page does not show the "This site is a preview" strip.
+  const onPillGame = location.pathname.replace(/\/+$/, '').endsWith(`/activity/${GAMES.pills.slug}`)
   const [intro] = useState(introMotionAllowed)
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export function Layout() {
         {t('nav.skip')}
       </a>
       <Header back={page.back} />
-      {siteHasPlaceholders() && <PreviewStrip />}
+      {siteHasPlaceholders() && !onPillGame && <PreviewStrip />}
       <main id="main" ref={mainRef} tabIndex={-1} className={styles.main}>
         <PageContext.Provider value={setPage}>
           <Outlet />

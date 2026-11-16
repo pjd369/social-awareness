@@ -36,9 +36,14 @@ function load<T>(
 
 export const PILLS: Loaded<Pills> = load(pillsSchema, pillsRaw)
 
-/** The pill game shows placeholder content while any card is a placeholder or the green pill has no destination. */
+/** The pill game shows placeholder content while any red card, the blue section or any green page is a placeholder. */
 export function pillsArePlaceholder(data: Pills | null = PILLS.data): boolean {
-  return !data || data.greenPillUrl === null || data.cards.some((c) => c.placeholder)
+  return (
+    !data ||
+    data.blue.placeholder ||
+    data.cards.some((c) => c.placeholder) ||
+    data.green.pages.some((p) => p.placeholder)
+  )
 }
 
 export const WORDS: Loaded<{ words: WordEntry[] }> = load(wordsSchema, wordsRaw)

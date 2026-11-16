@@ -142,12 +142,23 @@ test.describe('no accessibility violations in game and story states', () => {
     await page.goto('/yuvako/activity/pills')
     await page.getByRole('button', { name: /Red pill/ }).click()
     await expectNoAxeViolations(page)
-    for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Next' }).click()
-    await page.getByRole('button', { name: 'Continue' }).click()
+    for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Next' }).first().click()
+    await page.getByRole('button', { name: 'Exit' }).first().click()
+    await expectNoAxeViolations(page)
+    await page.getByRole('button', { name: /Blue pill/ }).click()
+    await expect(page.getByTestId('blackout')).toBeVisible()
+    await page.waitForTimeout(800) // past the fade in
+    await expectNoAxeViolations(page)
+    await page.getByTestId('blackout').getByRole('button', { name: 'Continue' }).click()
+    await expect(
+      page.getByRole('heading', { name: 'There is no Blue Pill for reality' }),
+    ).toBeVisible()
     await expectNoAxeViolations(page)
     await page.getByRole('button', { name: /Green pill/ }).click()
     await expectNoAxeViolations(page)
-    await page.getByRole('button', { name: 'Try the blue pill' }).click()
+    await page.getByRole('button', { name: 'Next' }).first().click()
+    await expectNoAxeViolations(page)
+    await page.getByRole('button', { name: 'Next' }).first().click()
     await expectNoAxeViolations(page)
   })
 
@@ -163,6 +174,8 @@ test.describe('no accessibility violations in game and story states', () => {
         ]!
     })
     await page.goto('/yuvako/activity/words')
+    // The game loads after the page shell; keys typed before it mounts are lost.
+    await expect(page.getByTestId('word-board')).toBeVisible()
     await expectNoAxeViolations(page)
     for (let i = 0; i < 6; i++) {
       await page.keyboard.type('zzzzzzzzzz')
