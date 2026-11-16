@@ -268,7 +268,11 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
               onClick={togglePlay}
               aria-pressed={playing}
               aria-label={
-                ended ? t('prasang.film.replay') : playing ? t('prasang.film.pause') : t('prasang.film.play')
+                ended
+                  ? t('prasang.film.replay')
+                  : playing
+                    ? t('prasang.film.pause')
+                    : t('prasang.film.play')
               }
             >
               <Icon name={ended ? 'restart' : playing ? 'pause' : 'play'} size={22} />

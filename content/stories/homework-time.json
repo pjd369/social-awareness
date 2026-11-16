@@ -225,12 +225,18 @@
       },
       "choices": [
         {
-          "label": { "en": "Ask Mira to do homework with you", "gu": "મીરાને સાથે હોમવર્ક કરવા બોલાવો" },
+          "label": {
+            "en": "Ask Mira to do homework with you",
+            "gu": "મીરાને સાથે હોમવર્ક કરવા બોલાવો"
+          },
           "next": "together",
           "expected": true
         },
         {
-          "label": { "en": "Work on your own while Mira plays", "gu": "મીરા રમે ત્યારે તમે એકલા કામ કરો" },
+          "label": {
+            "en": "Work on your own while Mira plays",
+            "gu": "મીરા રમે ત્યારે તમે એકલા કામ કરો"
+          },
           "next": "alone"
         }
       ]
@@ -256,7 +262,10 @@
           "expected": true
         },
         {
-          "label": { "en": "After homework, play the phone game", "gu": "હોમવર્ક પછી ફોનની રમત રમો" },
+          "label": {
+            "en": "After homework, play the phone game",
+            "gu": "હોમવર્ક પછી ફોનની રમત રમો"
+          },
           "next": "screen-after"
         }
       ]

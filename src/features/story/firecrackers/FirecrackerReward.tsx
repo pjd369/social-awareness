@@ -64,8 +64,14 @@ function FirecrackerIcon({ kind }: { kind: FirecrackerKind }) {
         <path fill="#fff6dc" d="M30 20.5a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" />
         <path fill="currentColor" opacity="0.75" d="M22 36 12 48c6-.2 10-2.4 12-7.2L22 36z" />
         <path fill="currentColor" opacity="0.75" d="M42 36 52 48c-6-.2-10-2.4-12-7.2L42 36z" />
-        <path fill="#ffc05b" d="M32 44c3.2 4.2 4.2 7.4 4.2 10.4 0 3.2-1.7 5.4-4.2 7.6-2.5-2.2-4.2-4.4-4.2-7.6C27.8 51.4 28.8 48.2 32 44z" />
-        <path fill="#fff6dc" d="M32 50c1.5 2.1 2 3.6 2 5 0 1.5-.8 2.6-2 3.6-1.2-1-2-2.1-2-3.6 0-1.4.5-2.9 2-5z" />
+        <path
+          fill="#ffc05b"
+          d="M32 44c3.2 4.2 4.2 7.4 4.2 10.4 0 3.2-1.7 5.4-4.2 7.6-2.5-2.2-4.2-4.4-4.2-7.6C27.8 51.4 28.8 48.2 32 44z"
+        />
+        <path
+          fill="#fff6dc"
+          d="M32 50c1.5 2.1 2 3.6 2 5 0 1.5-.8 2.6-2 3.6-1.2-1-2-2.1-2-3.6 0-1.4.5-2.9 2-5z"
+        />
       </svg>
     )
   }
@@ -74,11 +80,27 @@ function FirecrackerIcon({ kind }: { kind: FirecrackerKind }) {
       <svg viewBox="0 0 64 64" aria-hidden="true">
         <path fill="currentColor" d="M14 16c6 1 8 6 6 10-4-1-8-4-6-10z" />
         <path fill="#fff6dc" d="M30 8l3 8 8 2-8 3-2 8-3-8-8-2 8-3z" />
-        <rect fill="currentColor" x="46" y="14" width="6" height="10" rx="1" transform="rotate(24 49 19)" />
+        <rect
+          fill="currentColor"
+          x="46"
+          y="14"
+          width="6"
+          height="10"
+          rx="1"
+          transform="rotate(24 49 19)"
+        />
         <circle cx="18" cy="40" r="4" fill="#ffc05b" />
         <path fill="currentColor" opacity="0.8" d="M34 36c5 0 8 4 7 8-4 1-8-1-9-5 0-2.2.8-3 2-3z" />
         <path fill="#fff6dc" d="M48 40l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" />
-        <rect fill="#ffc05b" x="26" y="48" width="5" height="9" rx="1" transform="rotate(-18 28 52)" />
+        <rect
+          fill="#ffc05b"
+          x="26"
+          y="48"
+          width="5"
+          height="9"
+          rx="1"
+          transform="rotate(-18 28 52)"
+        />
       </svg>
     )
   }
