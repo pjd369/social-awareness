@@ -7,6 +7,7 @@ import { LessonBox } from '../../components/LessonBox'
 import { PlaceholderNotice } from '../../components/Placeholder'
 import { SECTIONS, type SectionId } from '../../config/sections'
 import type { PrasangDoc, PrasangEntry } from '../../content'
+import { ComicPager } from './ComicPager'
 import styles from './Prasang.module.css'
 
 function markdownComponents(placeholder: boolean): Components {
@@ -31,6 +32,20 @@ export function PrasangReader({ entry, section }: { entry: PrasangEntry; section
   const { t, lang } = useI18n()
   const doc = (entry.docs[lang] ?? entry.docs.en) as PrasangDoc
   const isFallback = doc.lang !== lang
+
+  if (doc.front.comic) {
+    return (
+      <>
+        {isFallback && (
+          <p className={styles.fallback} role="note">
+            {t('prasang.fallback', { language: NATIVE_NAMES[lang] })}
+          </p>
+        )}
+        <ComicPager doc={doc} section={section} />
+      </>
+    )
+  }
+
   const cover = doc.front.images[0]
 
   return (

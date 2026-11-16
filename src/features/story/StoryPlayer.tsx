@@ -9,6 +9,8 @@ import { focusElement } from '../../components/focus'
 import { usePrefersReducedMotion } from '../../components/motion'
 import type { Story, StoryNode } from '../../content/schemas'
 import type { SectionId } from '../../config/sections'
+import { followedExpectedPath } from './expected'
+import { FirecrackerReward } from './firecrackers/FirecrackerReward'
 import { storyReducer } from './state'
 import styles from './Story.module.css'
 
@@ -109,11 +111,12 @@ export function StoryPlayer({ story, section }: { story: Story; section: Section
             >
               <p lang={localizedLang(node.ending.lesson, lang)}>{l(node.ending.lesson)}</p>
             </LessonBox>
+            {section === 'bhulkao' && followedExpectedPath(story, history) && <FirecrackerReward />}
           </>
         )}
       </section>
 
-      <div className={styles.controls}>
+      <div className={styles.controls} data-story-controls="">
         {history.length > 1 && (
           <button
             type="button"

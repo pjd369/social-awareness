@@ -8,8 +8,6 @@ import { Fireworks } from './Fireworks'
 import { PageContext, type PageInfo } from './page-context'
 import { focusMainHeading } from './focus'
 import { introMotionAllowed } from './intro-motion'
-import { PreviewStrip } from './Placeholder'
-import { siteHasPlaceholders } from '../content'
 import styles from './Layout.module.css'
 
 export function Layout() {
@@ -47,7 +45,6 @@ export function Layout() {
         {t('nav.skip')}
       </a>
       <Header back={page.back} />
-      {siteHasPlaceholders() && <PreviewStrip />}
       <main id="main" ref={mainRef} tabIndex={-1} className={styles.main}>
         <PageContext.Provider value={setPage}>
           <Outlet />

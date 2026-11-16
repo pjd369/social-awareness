@@ -191,7 +191,13 @@ interface PrasangFile {
   front: PrasangFrontMatter
 }
 
-function checkPrasangs(c: Collector, root: string, images: Set<string>, used: Set<string>) {
+function checkPrasangs(
+  c: Collector,
+  root: string,
+  images: Set<string>,
+  used: Set<string>,
+  audio: Set<string>,
+) {
   const dir = join(root, 'content/prasangs')
   const groups = new Map<string, PrasangFile[]>()
   for (const name of listFiles(dir, /\.md$/)) {
@@ -217,13 +223,25 @@ function checkPrasangs(c: Collector, root: string, images: Set<string>, used: Se
     const front = parsed.data
     if (front.id !== fileName.id)
       c.error(rel, `id "${front.id}" does not match the file name "${fileName.id}"`)
-    if (front.images.length > 0 && !front.images[0]?.alt?.trim()) {
+    if (front.comic) {
+      if (front.images.length < 2)
+        c.error(rel, 'a comic prasang needs at least two images under images:')
+      for (const img of front.images) {
+        if (!img.alt?.trim())
+          c.error(rel, `comic page "${img.src}" needs alt text: add "alt:" under its src`)
+      }
+    } else if (front.images.length > 0 && !front.images[0]?.alt?.trim()) {
       c.error(rel, 'the cover (first image) needs alt text: add "alt:" under its src')
     }
     const listed = new Set(front.images.map((i) => i.src))
     for (const img of front.images) {
       used.add(img.src)
       if (!images.has(img.src)) c.error(rel, `image "${img.src}" is not in content/images/`)
+    }
+    if (front.soundtrack) {
+      if (!audio.has(front.soundtrack))
+        c.error(rel, `soundtrack "${front.soundtrack}" is not in content/audio/`)
+      if (!front.comic) c.error(rel, 'soundtrack requires comic: true')
     }
     for (const img of findMarkdownImages(doc.body)) {
       if (!img.alt)
@@ -251,6 +269,11 @@ function checkPrasangs(c: Collector, root: string, images: Set<string>, used: Se
       if (f.front.audience !== en.front.audience) c.error(f.rel, `audience differs from ${en.rel}`)
       if (f.front.placeholder !== en.front.placeholder)
         c.error(f.rel, `placeholder differs from ${en.rel}`)
+      if (f.front.comic !== en.front.comic) c.error(f.rel, `comic differs from ${en.rel}`)
+      if (f.front.soundtrack !== en.front.soundtrack)
+        c.error(f.rel, `soundtrack differs from ${en.rel}`)
+      if (f.front.pageSeconds !== en.front.pageSeconds)
+        c.error(f.rel, `pageSeconds differs from ${en.rel}`)
       if (imageKey(f) !== imageKey(en))
         c.error(f.rel, `images (src and source) differ from ${en.rel}`)
     }
@@ -341,10 +364,11 @@ export function validateContent(root: string): Report {
   const c = new Collector()
   const imageDir = join(root, 'content/images')
   const images = new Set(listFiles(imageDir, /\.(svg|png|jpe?g|webp|gif|avif)$/i))
+  const audio = new Set(listFiles(join(root, 'content/audio'), /\.(mp3|ogg|wav|m4a)$/i))
   const used = new Set<string>()
   checkLocales(c, root)
   checkStories(c, root, images, used)
-  checkPrasangs(c, root, images, used)
+  checkPrasangs(c, root, images, used, audio)
   checkPills(c, root)
   checkWords(c, root)
   checkDoodle(c, root)
