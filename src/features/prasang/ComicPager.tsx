@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useId,
   useRef,
@@ -55,12 +56,28 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
   const [needsGesture, setNeedsGesture] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const fadeTimer = useRef<number | null>(null)
-  indexRef.current = index
 
   const page = pages[index]
   const url = page ? imageUrl(page.src) : null
   const prevPage = prevIndex !== null ? pages[prevIndex] : null
   const prevUrl = prevPage ? imageUrl(prevPage.src) : null
+
+  const applyPageFromTime = useCallback(
+    (time: number, withFade: boolean) => {
+      const next = Math.min(total - 1, Math.floor(time / pageSeconds))
+      if (next === indexRef.current) return
+      if (withFade && !reducedMotion) {
+        setPrevIndex(indexRef.current)
+        if (fadeTimer.current) window.clearTimeout(fadeTimer.current)
+        fadeTimer.current = window.setTimeout(() => setPrevIndex(null), FADE_MS)
+      } else {
+        setPrevIndex(null)
+      }
+      indexRef.current = next
+      setIndex(next)
+    },
+    [total, pageSeconds, reducedMotion],
+  )
 
   useEffect(() => {
     for (const offset of [0, 1, 2]) {
@@ -111,19 +128,6 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundtrack])
 
-  function applyPageFromTime(time: number, withFade: boolean) {
-    const next = Math.min(total - 1, Math.floor(time / pageSeconds))
-    if (next === indexRef.current) return
-    if (withFade && !reducedMotion) {
-      setPrevIndex(indexRef.current)
-      if (fadeTimer.current) window.clearTimeout(fadeTimer.current)
-      fadeTimer.current = window.setTimeout(() => setPrevIndex(null), FADE_MS)
-    } else {
-      setPrevIndex(null)
-    }
-    setIndex(next)
-  }
-
   useEffect(() => {
     const audio = audioRef.current
     if (!audio || !soundtrack) return
@@ -133,6 +137,7 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
       const time = audio!.currentTime
       setCurrentTime(Math.min(time, duration))
       if (time >= duration - 0.05 || audio!.ended) {
+        indexRef.current = total - 1
         setIndex(total - 1)
         setPrevIndex(null)
         setPlaying(false)
@@ -151,7 +156,7 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
       audio.removeEventListener('ended', syncFromAudio)
       if (fadeTimer.current) window.clearTimeout(fadeTimer.current)
     }
-  }, [soundtrack, duration, total, pageSeconds, reducedMotion])
+  }, [soundtrack, duration, total, applyPageFromTime])
 
   async function togglePlay() {
     const audio = audioRef.current
@@ -159,6 +164,7 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
     if (ended) {
       audio.currentTime = 0
       setCurrentTime(0)
+      indexRef.current = 0
       setIndex(0)
       setPrevIndex(null)
       setEnded(false)
