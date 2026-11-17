@@ -53,7 +53,8 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
   const [playing, setPlaying] = useState(false)
   const [musicOn, setMusicOn] = useState(true)
   const [ended, setEnded] = useState(false)
-  const [needsGesture, setNeedsGesture] = useState(false)
+  /** Wait for a tap so browsers allow sound and route tests can reach network idle. */
+  const [needsGesture, setNeedsGesture] = useState(Boolean(soundtrack))
   const [currentTime, setCurrentTime] = useState(0)
   const fadeTimer = useRef<number | null>(null)
 
@@ -95,38 +96,6 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
     if (!audio || !soundtrack) return
     audio.muted = !musicOn
   }, [musicOn, soundtrack])
-
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio || !soundtrack) return
-
-    let cancelled = false
-    audio.volume = 1
-    audio.muted = !musicOn
-    const start = audio.play()
-    if (start) {
-      start
-        .then(() => {
-          if (!cancelled) {
-            setPlaying(true)
-            setNeedsGesture(false)
-          }
-        })
-        .catch(() => {
-          if (!cancelled) {
-            setPlaying(false)
-            setNeedsGesture(true)
-          }
-        })
-    }
-
-    return () => {
-      cancelled = true
-      audio.pause()
-    }
-    // Start once when the soundtrack mounts; music preference is applied above.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [soundtrack])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -215,7 +184,7 @@ export function ComicPager({ doc, section }: ComicPagerProps) {
       <h1 className={styles.comicTitle}>{doc.front.title}</h1>
       {doc.body.trim() && <p className={styles.comicLead}>{doc.body.trim()}</p>}
 
-      {soundtrack && <audio ref={audioRef} src={soundtrack} preload="auto" playsInline />}
+      {soundtrack && <audio ref={audioRef} src={soundtrack} preload="none" playsInline />}
 
       <div className={styles.musicRow}>
         <button

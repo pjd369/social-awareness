@@ -40,8 +40,8 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--tap);
+  height: var(--tap);
   border: 1px solid rgb(189 145 87 / 45%);
   border-radius: var(--radius-small);
   background: rgb(255 241 210 / 8%);
@@ -166,8 +166,8 @@
   display: grid;
   flex: none;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: var(--tap);
+  height: var(--tap);
   border: 1px solid rgb(237 189 116 / 55%);
   border-radius: var(--radius-small);
   background: rgb(237 189 116 / 18%);
@@ -239,11 +239,6 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
   white-space: nowrap;
-}
-
-[data-audience='bhulkao'] .barPlay {
-  width: 2.75rem;
-  height: 2.75rem;
 }
 
 [data-audience='bhulkao'] .time {

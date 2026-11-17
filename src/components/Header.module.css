@@ -54,9 +54,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  min-height: 2.25rem;
+  min-height: var(--tap);
   max-width: 100%;
-  padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  padding: 0.45rem 0.75rem 0.45rem 0.5rem;
   border: 1px solid rgb(189 145 87 / 40%);
   border-radius: var(--radius-small);
   background: rgb(255 241 210 / 6%);

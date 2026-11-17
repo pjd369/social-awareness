@@ -20,14 +20,10 @@ export function Header({ back }: { back?: BackLink }) {
       <Toran />
       {back && (
         <nav className={styles.backNav} aria-label={t('nav.backLabel')}>
-          <Link
-            to={back.to}
-            className={styles.back}
-            aria-label={t('nav.back', { page: back.label })}
-          >
+          <Link to={back.to} className={styles.back}>
             <Icon name="arrow-left" size={22} />
             <span className={styles.backCopy}>
-              <span className={styles.backEyebrow}>{t('nav.backTo')}</span>
+              <span className={styles.backEyebrow}>{t('nav.backTo')} </span>
               <span className={styles.backPage}>{back.label}</span>
             </span>
           </Link>

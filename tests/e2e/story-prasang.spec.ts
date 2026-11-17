@@ -18,7 +18,7 @@ test.describe('story player', () => {
     await expect(page.getByRole('heading', { name: 'How it ends' })).toBeFocused()
     await expect(page.getByText('Your homework is not finished.')).toBeVisible()
     await expect(page.getByRole('complementary', { name: 'What we learn' })).toContainText(
-      'a game can wait',
+      'A game can wait',
     )
 
     // Back undoes one choice.
@@ -33,7 +33,7 @@ test.describe('story player', () => {
     await page.getByRole('button', { name: 'After homework, play outside' }).click()
     await expect(page.getByText('You both finish early.')).toBeVisible()
     await expect(page.getByRole('complementary', { name: 'What we learn' })).toContainText(
-      'good friends help each other',
+      'Good friends help each other',
     )
   })
 
