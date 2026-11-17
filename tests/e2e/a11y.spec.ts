@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
-import { expectNoAxeViolations, expectNoHorizontalOverflow } from './helpers'
+import { expectNoAxeViolations, expectNoHorizontalOverflow, skipAudio } from './helpers'
 
 /** Every visible link and button on the page must be at least this tall (and 24px wide). */
 async function expectTapTargets(page: Page, minHeight: number) {
@@ -29,6 +29,7 @@ test.describe('tap targets', () => {
     '/bhulkao/activity/doodle',
   ]) {
     test(`Bhulkao ${path}: 56px or more`, async ({ page }) => {
+      await skipAudio(page)
       await page.goto(path)
       await page.waitForLoadState('networkidle')
       await expectTapTargets(page, 56)
