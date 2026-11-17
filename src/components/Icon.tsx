@@ -19,6 +19,8 @@ export type IconName =
   | 'enter'
   | 'backspace'
   | 'lightbulb'
+  | 'music'
+  | 'music-off'
 
 const PATHS: Record<IconName, string> = {
   back: 'M15 5l-7 7 7 7',
@@ -38,6 +40,9 @@ const PATHS: Record<IconName, string> = {
   backspace: 'M9 5h11v14H9l-6-7zM12 9l6 6M18 9l-6 6',
   lightbulb:
     'M9 18h6M10 21h4M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z',
+  music: 'M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z',
+  'music-off':
+    'M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0zM3 3l18 18',
 }
 
 export function Icon({

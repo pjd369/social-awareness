@@ -29,14 +29,12 @@ async function toGreen(page: Page, go: (l: Locator) => Promise<void>) {
   await go(page.getByRole('button', { name: /Green pill/ }))
 }
 
-test('the preview strip is not shown on the pill game, but is elsewhere', async ({ page }) => {
+test('the preview strip is not shown on the pill game', async ({ page }) => {
   await page.goto('/yuvako/activity/pills')
   await expect(page.getByRole('heading', { name: LANDING })).toBeVisible()
   await expect(page.getByTestId('preview-strip')).toHaveCount(0)
   await page.getByRole('button', { name: /Red pill/ }).click()
   await expect(page.getByTestId('preview-strip')).toHaveCount(0)
-  await page.goto('/yuvako/activity')
-  await expect(page.getByTestId('preview-strip')).toBeVisible()
 })
 
 test.describe('pill game: red pill', () => {

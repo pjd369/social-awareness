@@ -11,7 +11,6 @@ export function Header({ back }: { back?: BackLink }) {
   const { t } = useI18n()
   return (
     <header className={styles.header}>
-      <div className={styles.thread} aria-hidden="true" />
       <div className={styles.bar}>
         <Link to="/" className={styles.brand}>
           <BrandLogo className={styles.logo} />
@@ -22,8 +21,11 @@ export function Header({ back }: { back?: BackLink }) {
       {back && (
         <nav className={styles.backNav} aria-label={t('nav.backLabel')}>
           <Link to={back.to} className={styles.back}>
-            <Icon name="back" size={18} />
-            {t('nav.back', { page: back.label })}
+            <Icon name="arrow-left" size={22} />
+            <span className={styles.backCopy}>
+              <span className={styles.backEyebrow}>{t('nav.backTo')} </span>
+              <span className={styles.backPage}>{back.label}</span>
+            </span>
           </Link>
         </nav>
       )}

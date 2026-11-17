@@ -31,6 +31,11 @@ const imageFiles = import.meta.glob<string>('/content/images/*', {
   query: '?url',
   import: 'default',
 })
+const audioFiles = import.meta.glob<string>('/content/audio/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
 
 /** Short description of a story or prasang, for list pages. */
 export interface ItemSummary {
@@ -46,6 +51,11 @@ function zodProblems(error: { issues: { path: PropertyKey[]; message: string }[]
 /** Resolve an image named in content (a file in content/images/) to its URL in the build. */
 export function imageUrl(name: string): string | undefined {
   return imageFiles[`/content/images/${name}`]
+}
+
+/** Resolve an audio file named in content (a file in content/audio/) to its URL. */
+export function audioUrl(name: string): string | undefined {
+  return audioFiles[`/content/audio/${name}`]
 }
 
 // ---------- Stories ----------
