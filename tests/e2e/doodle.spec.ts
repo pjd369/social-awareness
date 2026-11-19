@@ -25,9 +25,10 @@ async function setUp(page: Page, lang = 'en') {
     localStorage.setItem('outreach.lang', l)
     let n = 0
     // Each new item asks for: kind (below 0.3 = distraction), which item, x position (0.5 = middle).
+    // Item 0 is the first of that kind, so a distraction is still "Scrolling" as the list grows.
     Math.random = () =>
       (window as unknown as { __distraction?: boolean }).__distraction
-        ? [0.1, 0.1, 0.5][n++ % 3]!
+        ? [0.1, 0, 0.5][n++ % 3]!
         : 0.5
   }, lang)
   await page.goto('/bhulkao/activity/doodle')

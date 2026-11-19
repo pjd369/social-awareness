@@ -25,6 +25,11 @@ export const imageFile = z
   .string()
   .regex(/^[\w.-]+\.(svg|png|jpe?g|webp|gif|avif)$/i, 'must be a file name in content/images/')
 
+/** A file name inside content/audio/. */
+export const audioFile = z
+  .string()
+  .regex(/^[\w.-]+\.(mp3|ogg|wav|m4a)$/i, 'must be a file name in content/audio/')
+
 const sourceNote = z.string().trim().min(1, 'record where the picture comes from (source)')
 
 export const storyImage = z.strictObject({
@@ -44,6 +49,11 @@ export const storyVideo = z.strictObject({
 export const storyChoice = z.strictObject({
   label: localizedText,
   next: z.string().min(1),
+  /**
+   * The decision we hope a child makes at this step. A Bhulkao story that
+   * follows every expected choice ends with the firecracker celebration.
+   */
+  expected: z.boolean().optional(),
 })
 
 export const storyEnding = z.strictObject({
@@ -87,6 +97,15 @@ export const prasangFrontMatter = z.strictObject({
       }),
     )
     .default([]),
+  /**
+   * When true, images are shown as a comic / short film instead of a scrolling
+   * markdown article. With `soundtrack`, pages advance on a timer with audio.
+   */
+  comic: z.boolean().default(false),
+  /** Optional continuous soundtrack in content/audio/ (comic film mode). */
+  soundtrack: audioFile.optional(),
+  /** Seconds each comic page stays on screen when a soundtrack is set. */
+  pageSeconds: z.number().positive().default(10),
   placeholder: z.boolean().default(false),
 })
 export type PrasangFrontMatter = z.infer<typeof prasangFrontMatter>

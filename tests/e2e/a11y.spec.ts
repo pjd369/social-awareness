@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
-import { expectNoAxeViolations, expectNoHorizontalOverflow } from './helpers'
+import { expectNoAxeViolations, expectNoHorizontalOverflow, skipAudio } from './helpers'
 
 /** Every visible link and button on the page must be at least this tall (and 24px wide). */
 async function expectTapTargets(page: Page, minHeight: number) {
@@ -25,10 +25,11 @@ test.describe('tap targets', () => {
     '/bhulkao',
     '/bhulkao/activity',
     '/bhulkao/story/homework-time',
-    '/bhulkao/prasang/patient-seed',
+    '/bhulkao/prasang/sparrows-and-the-sea',
     '/bhulkao/activity/doodle',
   ]) {
     test(`Bhulkao ${path}: 56px or more`, async ({ page }) => {
+      await skipAudio(page)
       await page.goto(path)
       await page.waitForLoadState('networkidle')
       await expectTapTargets(page, 56)
@@ -55,7 +56,7 @@ test('every game, story and prasang is within three taps of the intro page', asy
   const journeys: [string, string, string | null, RegExp][] = [
     ['Bhulkao', 'Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
     ['Bhulkao', 'Story', null, /\/bhulkao\/story\/homework-time$/],
-    ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/patient-seed$/],
+    ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],
     ['Yuvako', 'Scenario', null, /\/yuvako\/scenario\/one-am-exam$/],
@@ -137,6 +138,7 @@ test.describe('no accessibility violations in game and story states', () => {
     await page.goto('/bhulkao/story/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()
     await page.getByRole('button', { name: 'Keep playing' }).click()
+    await page.getByRole('button', { name: 'Play until bedtime' }).click()
     await expectNoAxeViolations(page)
 
     await page.goto('/yuvako/activity/pills')

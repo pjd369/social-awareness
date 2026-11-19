@@ -3,6 +3,7 @@ import {
   LANGS,
   expectNoAxeViolations,
   expectNoHorizontalOverflow,
+  skipAudio,
   trackExternalRequests,
   useLanguage,
 } from './helpers'
@@ -22,7 +23,7 @@ const ROUTES = [
   '/yuvako/prasang',
   '/bhulkao/story/homework-time',
   '/yuvako/scenario/one-am-exam',
-  '/bhulkao/prasang/patient-seed',
+  '/bhulkao/prasang/sparrows-and-the-sea',
   '/yuvako/prasang/lamp-by-the-window',
   '/bhulkao/story/no-such-story',
   '/yuvako/prasang/no-such-prasang',
@@ -35,6 +36,7 @@ for (const lang of LANGS) {
       test(route, async ({ page, baseURL }) => {
         const external = trackExternalRequests(page, baseURL!)
         await useLanguage(page, lang)
+        await skipAudio(page)
         await page.goto(route)
         await expect(page.locator('h1')).toHaveCount(1)
         await expect(page.locator('h1')).toBeVisible()

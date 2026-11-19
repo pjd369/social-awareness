@@ -61,22 +61,25 @@ describe('validateContent', () => {
 
   it('fails a prasang picture with no alt text', () => {
     const dir = fixture()
-    edit(dir, 'content/prasangs/patient-seed.en.md', (s) =>
-      s.replace('![A tall green plant with a pink flower growing in the pot.]', '![]'),
+    edit(dir, 'content/prasangs/lamp-by-the-window.en.md', (s) =>
+      s.replace(
+        '![The same lamp burning steadily beside a half-closed window, with an open notebook nearby.]',
+        '![]',
+      ),
     )
-    expect(errorsOf(dir).join('\n')).toMatch(/patient-seed\.en\.md: .*no alt text/)
+    expect(errorsOf(dir).join('\n')).toMatch(/lamp-by-the-window\.en\.md: .*no alt text/)
   })
 
   it('fails prasang language files that disagree', () => {
     const dir = fixture()
-    edit(dir, 'content/prasangs/patient-seed.gu.md', (s) =>
+    edit(dir, 'content/prasangs/sparrows-and-the-sea.gu.md', (s) =>
       s
         .replace('audience: bhulkao', 'audience: yuvako')
-        .replace('placeholder: true', 'placeholder: false'),
+        .replace('placeholder: false', 'placeholder: true'),
     )
     const errors = errorsOf(dir).join('\n')
-    expect(errors).toMatch(/patient-seed\.gu\.md: audience differs/)
-    expect(errors).toMatch(/patient-seed\.gu\.md: placeholder differs/)
+    expect(errors).toMatch(/sparrows-and-the-sea\.gu\.md: audience differs/)
+    expect(errors).toMatch(/sparrows-and-the-sea\.gu\.md: placeholder differs/)
   })
 
   it('reports a missing translation without failing, unless strict', () => {
