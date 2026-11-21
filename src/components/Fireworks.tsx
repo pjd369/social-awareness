@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Fireworks.module.css'
 
-/** First launch: after the page has faded in. */
-const START_MS = 900
+/** First launch: right after the diya is lit. */
+const START_MS = 120
 /** Last regular launch; a short finale follows. */
-const END_MS = 2400
-/** Hard stop, so the canvas never outlives the welcome. */
-const MAX_MS = 7500
-const FINALE = 4
+const END_MS = 7800
+/** Hard stop — full celebration is about 10 seconds. */
+const MAX_MS = 10_000
+const FINALE = 5
 const GRAVITY = 70
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
@@ -37,10 +37,10 @@ interface Spark {
 const easeOut = (t: number) => 1 - (1 - t) ** 3
 
 /**
- * Fireworks rising from the bottom of the screen and bursting, once per page
- * load: they start after the page has faded in and drift for about 5 seconds,
- * ending with a small finale. The canvas never takes pointer events. The
- * layout renders this only when intro motion is allowed.
+ * Fireworks rising from the bottom of the screen and bursting for about
+ * 10 seconds after the intro diya is lit. The canvas never takes pointer
+ * events. The intro page mounts this only for a fresh lighting (not on
+ * reload when the diya is already lit).
  */
 export function Fireworks() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -64,24 +64,24 @@ export function Fireworks() {
 
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
-    const rocketCount = small ? 10 : 14
+    const rocketCount = small ? 18 : 26
     const sparksPerBurst = small ? 28 : 40
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
       const finale = i >= regular
-      // 3 is coprime with 10 and 14, so this visits every slot once in a scattered order.
-      const slot = (i * 3) % rocketCount
+      // 5 is coprime with 18 and 26, so this visits every slot once in a scattered order.
+      const slot = (i * 5) % rocketCount
       return {
         x: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
         startY: height + 8,
         targetY: height * (0.14 + Math.random() * 0.32),
         launchAt: finale
-          ? END_MS + 300 + (i - regular) * 220
-          : START_MS + (i / regular) * (END_MS - START_MS) + Math.random() * 220,
-        riseMs: 1200 + Math.random() * 400,
+          ? END_MS + 200 + (i - regular) * 280
+          : START_MS + (i / regular) * (END_MS - START_MS) + Math.random() * 280,
+        riseMs: 1100 + Math.random() * 450,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
-        scale: finale ? 1.3 : 0.75 + Math.random() * 0.5,
+        scale: finale ? 1.35 : 0.75 + Math.random() * 0.5,
         burst: false,
       }
     })

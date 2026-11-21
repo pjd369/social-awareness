@@ -3,6 +3,8 @@ import { useI18n } from '../i18n/context'
 import { usePage } from '../components/page-context'
 import { FamilyArt, YouthArt } from '../components/Art'
 import { DiyaLighting, isDiyaLit } from '../components/DiyaLighting'
+import { Fireworks } from '../components/Fireworks'
+import { introMotionAllowed } from '../components/intro-motion'
 import { EventTitle } from '../components/EventTitle'
 import { SectionCard } from '../components/SectionCard'
 import { SECTIONS, paths } from '../config/sections'
@@ -14,11 +16,19 @@ export default function Intro() {
   const { t } = useI18n()
   usePage(t('site.event'))
   const [unveiled, setUnveiled] = useState(isDiyaLit)
+  /** Fresh lighting only — not when the tab already had the diya lit. */
+  const [fireworks, setFireworks] = useState(false)
+
+  function onDiyaLit() {
+    setUnveiled(true)
+    if (introMotionAllowed()) setFireworks(true)
+  }
 
   return (
     <>
+      {fireworks && <Fireworks />}
       <div className={styles.hero}>
-        <DiyaLighting onLit={() => setUnveiled(true)} />
+        <DiyaLighting onLit={onDiyaLit} />
         <EventTitle />
         <p className={styles.heroLine}>{t('site.title')}</p>
         <p className={styles.heroValue}>{t('site.value')}</p>
