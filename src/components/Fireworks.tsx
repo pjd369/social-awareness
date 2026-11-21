@@ -59,7 +59,7 @@ function visibleScreen() {
 
 /**
  * Fireworks when the intro diya is lit: rockets rise straight up for about
- * 10 seconds, bursting between 50–80% of the visual screen height, then ease
+ * 10 seconds, bursting between 60–90% of the visual screen height, then ease
  * out. The canvas never takes pointer events.
  */
 export function Fireworks() {
@@ -98,8 +98,8 @@ export function Fireworks() {
       const finale = i >= regular
       // Scatter columns across the width without clustering.
       const slot = (i * 11) % rocketCount
-      // Burst altitude: 50–80% of the *visual* screen height from the bottom.
-      const altitude = 0.5 + Math.random() * 0.3
+      // Burst altitude: 60–90% of the *visual* screen height from the bottom.
+      const altitude = 0.6 + Math.random() * 0.3
       const regularIndex = i
       return {
         x: width * (0.06 + (0.88 * (slot + 0.25 + Math.random() * 0.5)) / rocketCount),
