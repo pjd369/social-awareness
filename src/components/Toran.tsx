@@ -4,47 +4,100 @@ const LIGHT = 'var(--brand-marigold)'
 const DEEP = 'var(--brand-marigold-deep)'
 const LEAF = 'var(--brand-leaf)'
 const LEAF_DEEP = 'var(--brand-leaf-deep)'
+/** Thin cord the marigolds hang from. */
+const STRING = '#e0983a'
+/** Same centre-to-centre gap for every flower on the toran. */
+const SPACING = 14
+const FLOWER_R = 4.6
 
-/** Points along a quadratic swag from left to right. */
-function swagPoints(
+type Pt = { x: number; y: number }
+
+function dist(a: Pt, b: Pt) {
+  return Math.hypot(a.x - b.x, a.y - b.y)
+}
+
+/** Sample a quadratic Bézier densely, then pick points at equal arc length. */
+function pointsOnQuad(
   x1: number,
   y1: number,
   cx: number,
   cy: number,
   x2: number,
   y2: number,
-  count: number,
-): Array<{ x: number; y: number }> {
-  const out: Array<{ x: number; y: number }> = []
-  for (let i = 0; i < count; i++) {
-    const t = i / (count - 1)
+  spacing: number,
+): Pt[] {
+  const samples: Pt[] = []
+  const steps = 64
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps
     const u = 1 - t
-    out.push({
+    samples.push({
       x: u * u * x1 + 2 * u * t * cx + t * t * x2,
       y: u * u * y1 + 2 * u * t * cy + t * t * y2,
     })
   }
+
+  const out: Pt[] = [samples[0]!]
+  let carry = 0
+  for (let i = 1; i < samples.length; i++) {
+    const seg = dist(samples[i - 1]!, samples[i]!)
+    carry += seg
+    while (carry >= spacing) {
+      const overshoot = carry - spacing
+      const ratio = 1 - overshoot / seg
+      const prev = samples[i - 1]!
+      const next = samples[i]!
+      out.push({
+        x: prev.x + (next.x - prev.x) * ratio,
+        y: prev.y + (next.y - prev.y) * ratio,
+      })
+      carry -= spacing
+    }
+  }
+
+  // Always include the end joint so swags meet cleanly.
+  const last = samples[samples.length - 1]!
+  if (dist(out[out.length - 1]!, last) > spacing * 0.35) out.push(last)
+  else out[out.length - 1] = last
   return out
 }
 
-function Marigold({
-  x,
-  y,
-  r,
-  deep,
-}: {
-  x: number
-  y: number
-  r: number
-  deep?: boolean
-}) {
+/** Evenly spaced points on a straight segment (inclusive). */
+function pointsOnLine(x1: number, y1: number, x2: number, y2: number, spacing: number): Pt[] {
+  const len = Math.hypot(x2 - x1, y2 - y1)
+  const n = Math.max(1, Math.round(len / spacing))
+  const out: Pt[] = []
+  for (let i = 0; i <= n; i++) {
+    const t = i / n
+    out.push({ x: x1 + (x2 - x1) * t, y: y1 + (y2 - y1) * t })
+  }
+  return out
+}
+
+function StringPath({ points }: { points: Pt[] }) {
+  if (points.length < 2) return null
+  const d = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(' ')
+  return (
+    <path
+      d={d}
+      fill="none"
+      stroke={STRING}
+      strokeWidth="1.15"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      opacity="0.9"
+    />
+  )
+}
+
+function Marigold({ x, y, deep }: { x: number; y: number; deep?: boolean }) {
   const fill = deep ? DEEP : LIGHT
   const rim = deep ? LIGHT : DEEP
   return (
     <g transform={`translate(${x} ${y})`}>
-      <circle r={r} fill={fill} opacity="0.92" />
-      <circle r={r * 0.58} fill={rim} opacity="0.45" />
-      <circle r={r * 0.26} fill={LIGHT} opacity="0.85" />
+      <circle r={FLOWER_R} fill={fill} opacity="0.94" />
+      <circle r={FLOWER_R * 0.58} fill={rim} opacity="0.45" />
+      <circle r={FLOWER_R * 0.26} fill={LIGHT} opacity="0.85" />
     </g>
   )
 }
@@ -59,57 +112,60 @@ function MangoLeaves({ x, y }: { x: number; y: number }) {
   )
 }
 
-/** Strand of marigolds hanging straight down. */
-function Drop({
-  x,
-  y0,
-  count,
-  r,
+function Strand({
+  points,
   leaf,
+  deepStart = 0,
 }: {
-  x: number
-  y0: number
-  count: number
-  r: number
+  points: Pt[]
   leaf?: boolean
+  deepStart?: number
 }) {
+  const tip = points[points.length - 1]!
   return (
     <g>
-      {Array.from({ length: count }, (_, i) => (
-        <Marigold key={i} x={x} y={y0 + i * r * 1.55} r={r} deep={i % 2 === 1} />
+      <StringPath points={points} />
+      {points.map((p, i) => (
+        <Marigold key={i} x={p.x} y={p.y} deep={(i + deepStart) % 2 === 1} />
       ))}
-      {leaf && <MangoLeaves x={x} y={y0 + count * r * 1.55 + 1} />}
+      {leaf && <MangoLeaves x={tip.x} y={tip.y + FLOWER_R + 2} />}
     </g>
   )
 }
 
 /**
- * Festive marigold toran under the Harisumiran header — swags and tassels in
- * brand golds/greens so it sits quietly on the wine page (inspired by a
- * classic marigold doorway garland, not a pasted photo).
+ * Festive marigold toran under the Harisumiran header — flowers hang on a thin
+ * orange string with one shared spacing so the garland reads evenly.
  */
 export function Toran({ className }: { className?: string }) {
   const W = 640
-  const H = 112
+  const H = 118
   const topY = 12
-  const railCount = 34
-  const bloom = 12
 
-  // Four scallops across the doorway, matching the familiar toran rhythm.
-  const joints = [70, 190, 320, 450, 570]
-  const swags = [
-    swagPoints(joints[0]!, topY, 130, 52, joints[1]!, topY, bloom),
-    swagPoints(joints[1]!, topY, 255, 52, joints[2]!, topY, bloom),
-    swagPoints(joints[2]!, topY, 385, 52, joints[3]!, topY, bloom),
-    swagPoints(joints[3]!, topY, 510, 52, joints[4]!, topY, bloom),
+  // Four scallops; joints land on the top rail.
+  const joints = [70, 190, 320, 450, 570] as const
+  const rail = pointsOnLine(18, topY, W - 18, topY, SPACING)
+
+  const swagDefs: Array<[number, number, number, number, number, number]> = [
+    [joints[0], topY, 130, 54, joints[1], topY],
+    [joints[1], topY, 255, 54, joints[2], topY],
+    [joints[2], topY, 385, 54, joints[3], topY],
+    [joints[3], topY, 510, 54, joints[4], topY],
   ]
 
-  const swagInner = swags.map((pts) =>
-    pts.map((p, i) => {
-      const t = i / (pts.length - 1)
-      const dip = Math.sin(t * Math.PI) * 8
-      return { x: p.x, y: p.y + 8 + dip * 0.12 }
-    }),
+  const swags = swagDefs.map(([x1, y1, cx, cy, x2, y2]) =>
+    pointsOnQuad(x1, y1, cx, cy, x2, y2, SPACING),
+  )
+
+  // Parallel inner cord under each swag (same spacing).
+  const swagInner = swagDefs.map(([x1, y1, cx, cy, x2, y2]) =>
+    pointsOnQuad(x1, y1 + 9, cx, cy + 10, x2, y2 + 9, SPACING),
+  )
+
+  const endLeft = pointsOnLine(28, topY, 28, topY + SPACING * 6, SPACING)
+  const endRight = pointsOnLine(W - 28, topY, W - 28, topY + SPACING * 6, SPACING)
+  const tassels = [joints[1], joints[2], joints[3]].map((x) =>
+    pointsOnLine(x, topY, x, topY + SPACING * 4, SPACING),
   )
 
   return (
@@ -120,34 +176,18 @@ export function Toran({ className }: { className?: string }) {
         xmlns="http://www.w3.org/2000/svg"
         focusable="false"
       >
-        {Array.from({ length: railCount }, (_, i) => {
-          const x = 18 + (i / (railCount - 1)) * (W - 36)
-          return <Marigold key={`rail-${i}`} x={x} y={topY} r={4.8} deep={i % 2 === 1} />
-        })}
-
-        <Drop x={28} y0={topY + 6} count={6} r={5} />
-        <Drop x={W - 28} y0={topY + 6} count={6} r={5} />
-
-        {swags.map((pts, s) =>
-          pts.map((p, i) => (
-            <Marigold key={`swag-${s}-${i}`} x={p.x} y={p.y} r={4.7} deep={(s + i) % 2 === 1} />
-          )),
-        )}
-        {swagInner.map((pts, s) =>
-          pts.slice(1, -1).map((p, i) => (
-            <Marigold
-              key={`inner-${s}-${i}`}
-              x={p.x}
-              y={p.y}
-              r={4.1}
-              deep={(s + i) % 2 === 0}
-            />
-          )),
-        )}
-
-        <Drop x={joints[1]!} y0={topY + 5} count={4} r={4.5} leaf />
-        <Drop x={joints[2]!} y0={topY + 5} count={4} r={4.5} leaf />
-        <Drop x={joints[3]!} y0={topY + 5} count={4} r={4.5} leaf />
+        <Strand points={rail} />
+        <Strand points={endLeft} deepStart={1} />
+        <Strand points={endRight} deepStart={1} />
+        {swags.map((pts, i) => (
+          <Strand key={`swag-${i}`} points={pts} deepStart={i} />
+        ))}
+        {swagInner.map((pts, i) => (
+          <Strand key={`inner-${i}`} points={pts} deepStart={i + 1} />
+        ))}
+        {tassels.map((pts, i) => (
+          <Strand key={`tassel-${i}`} points={pts} leaf deepStart={1} />
+        ))}
       </svg>
     </div>
   )
