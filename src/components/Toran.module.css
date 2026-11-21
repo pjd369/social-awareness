@@ -12,30 +12,11 @@
   filter: drop-shadow(0 4px 5px rgb(22 11 22 / 35%));
 }
 
-.ribbon {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  width: max-content;
-  min-width: 100%;
-  height: clamp(3.5rem, 11vw, 5rem);
-}
-
-.unit,
-.unitEnd {
-  flex: none;
+.art {
   display: block;
-  height: 100%;
-  width: auto;
-}
-
-.unit {
-  /* UNIT_W / UNIT_H — keep flowers unstretched. */
-  aspect-ratio: 156 / 112;
-}
-
-.unitEnd {
-  aspect-ratio: 13 / 112;
+  width: 100%;
+  height: clamp(4.25rem, 12vw, 6.25rem);
+  /* Uniform scale (slice) — fills the width without distorting flowers. */
 }
 
 @media (prefers-reduced-motion: reduce) {

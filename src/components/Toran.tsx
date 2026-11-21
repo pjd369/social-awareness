@@ -5,17 +5,12 @@ const DEEP = '#e98b32'
 const LEAF = '#6e8a53'
 const LEAF_DEEP = '#3d6345'
 const STRING = '#e0983a'
-/** Same centre-to-centre gap for every flower. */
-const SPACING = 13
-const FLOWER_R = 4.35
-/**
- * One cohesive cell: leaf-hanger → single U → (next cell’s hanger).
- * Width is a whole number of spacings so seams stay even.
- */
-const UNIT_W = SPACING * 12
-const UNIT_H = 112
-const TOP_Y = 11
-const TILES = 28
+const SPACING = 12.5
+const FLOWER_R = 4.2
+const TOP_Y = 12
+/** Wide canvas so one garland spans the screen as a single piece. */
+const W = 1800
+const H = 130
 
 type Pt = { x: number; y: number }
 
@@ -33,7 +28,7 @@ function pointsOnQuad(
   spacing: number,
 ): Pt[] {
   const samples: Pt[] = []
-  const steps = 80
+  const steps = 96
   for (let i = 0; i <= steps; i++) {
     const t = i / steps
     const u = 1 - t
@@ -61,7 +56,7 @@ function pointsOnQuad(
     }
   }
   const last = samples[samples.length - 1]!
-  if (dist(out[out.length - 1]!, last) > spacing * 0.28) out.push(last)
+  if (dist(out[out.length - 1]!, last) > spacing * 0.3) out.push(last)
   else out[out.length - 1] = last
   return out
 }
@@ -83,10 +78,10 @@ function StringPath({ points }: { points: Pt[] }) {
       d={d}
       fill="none"
       stroke={STRING}
-      strokeWidth="1.1"
+      strokeWidth="1.05"
       strokeLinecap="round"
       strokeLinejoin="round"
-      opacity="0.92"
+      opacity="0.9"
     />
   )
 }
@@ -97,7 +92,7 @@ function Marigold({ x, y, deep }: { x: number; y: number; deep?: boolean }) {
   return (
     <g transform={`translate(${x} ${y})`}>
       <circle r={FLOWER_R} fill={fill} opacity="0.94" />
-      <circle r={FLOWER_R * 0.58} fill={rim} opacity="0.45" />
+      <circle r={FLOWER_R * 0.58} fill={rim} opacity="0.42" />
       <circle r={FLOWER_R * 0.26} fill={LIGHT} opacity="0.85" />
     </g>
   )
@@ -117,19 +112,16 @@ function Strand({
   points,
   leaf,
   deepStart = 0,
-  skipLastFlower,
 }: {
   points: Pt[]
   leaf?: boolean
   deepStart?: number
-  skipLastFlower?: boolean
 }) {
-  const flowers = skipLastFlower ? points.slice(0, -1) : points
   const tip = points[points.length - 1]!
   return (
     <g>
       <StringPath points={points} />
-      {flowers.map((p, i) => (
+      {points.map((p, i) => (
         <Marigold key={i} x={p.x} y={p.y} deep={(i + deepStart) % 2 === 1} />
       ))}
       {leaf && <MangoLeaves x={tip.x} y={tip.y + FLOWER_R + 2} />}
@@ -138,64 +130,71 @@ function Strand({
 }
 
 /**
- * One repeat: green-leaf hanger on the left, then a single U swag that meets
- * the next tile’s hanger. Right-edge blooms are omitted so the join is seamless.
+ * Build hanger X positions across the full width. Slightly uneven spans keep
+ * the garland from reading as identical tiles; each gap gets one loose U.
  */
-function ToranUnit({ index }: { index: number }) {
-  const mid = UNIT_W / 2
-  const rail = pointsOnLine(0, TOP_Y, UNIT_W, TOP_Y, SPACING)
-  // One U between this hanger and the next.
-  const swag = pointsOnQuad(0, TOP_Y, mid, 54, UNIT_W, TOP_Y, SPACING)
-  const swagInner = pointsOnQuad(0, TOP_Y + 9, mid, 64, UNIT_W, TOP_Y + 9, SPACING)
-  // Hanger drops from the joint on the left of this cell.
-  const hanger = pointsOnLine(0, TOP_Y, 0, TOP_Y + SPACING * 4, SPACING)
-
-  return (
-    <svg
-      className={styles.unit}
-      viewBox={`0 0 ${UNIT_W} ${UNIT_H}`}
-      xmlns="http://www.w3.org/2000/svg"
-      focusable="false"
-      aria-hidden="true"
-    >
-      <Strand points={rail} skipLastFlower deepStart={index} />
-      <Strand points={swag} skipLastFlower deepStart={index} />
-      <Strand points={swagInner} skipLastFlower deepStart={index + 1} />
-      <Strand points={hanger} leaf deepStart={1} />
-    </svg>
-  )
-}
-
-/** Closing hanger so the last U also sits between two green-leaf drops. */
-function EndHanger() {
-  const hanger = pointsOnLine(0, TOP_Y, 0, TOP_Y + SPACING * 4, SPACING)
-  return (
-    <svg
-      className={styles.unitEnd}
-      viewBox={`0 0 ${SPACING} ${UNIT_H}`}
-      xmlns="http://www.w3.org/2000/svg"
-      focusable="false"
-      aria-hidden="true"
-    >
-      <Strand points={hanger} leaf deepStart={1} />
-      <Marigold x={0} y={TOP_Y} deep />
-    </svg>
-  )
+function buildJoints(width: number): number[] {
+  const joints: number[] = [0]
+  let x = 0
+  // Soft alternating span lengths → natural doorway rhythm, not a stamp.
+  const spans = [168, 186, 174, 192, 170, 188, 176, 190, 172, 184, 178, 186]
+  let i = 0
+  while (x < width - 140) {
+    x += spans[i % spans.length]!
+    if (x >= width - 8) break
+    joints.push(x)
+    i += 1
+  }
+  joints.push(width)
+  return joints
 }
 
 /**
- * Full-bleed marigold toran: repeating “hanger · U · hanger” cells, fixed size
- * so the garland stays smooth and cohesive across the screen.
+ * One continuous marigold toran — loose U drapes between green-leaf hangers,
+ * drawn as a single garland so it doesn’t look tiled or stretched.
  */
 export function Toran({ className }: { className?: string }) {
+  const joints = buildJoints(W)
+  const rail = pointsOnLine(0, TOP_Y, W, TOP_Y, SPACING)
+
+  const swags: Pt[][] = []
+  const swagInners: Pt[][] = []
+  for (let i = 0; i < joints.length - 1; i++) {
+    const x1 = joints[i]!
+    const x2 = joints[i + 1]!
+    const mid = (x1 + x2) / 2
+    // Loose hang: deep sag, control point a little off-centre so each U feels soft.
+    const bias = ((i % 3) - 1) * (x2 - x1) * 0.04
+    const dip = 72 + (i % 4) * 3
+    swags.push(pointsOnQuad(x1, TOP_Y, mid + bias, dip, x2, TOP_Y, SPACING))
+    swagInners.push(pointsOnQuad(x1, TOP_Y + 8, mid + bias, dip + 10, x2, TOP_Y + 8, SPACING))
+  }
+
+  const hangers = joints.map((x, i) => {
+    const drops = 3 + (i % 3 === 0 ? 1 : 0)
+    return pointsOnLine(x, TOP_Y, x, TOP_Y + SPACING * drops, SPACING)
+  })
+
   return (
     <div className={[styles.toran, className].filter(Boolean).join(' ')} aria-hidden="true">
-      <div className={styles.ribbon}>
-        {Array.from({ length: TILES }, (_, i) => (
-          <ToranUnit key={i} index={i} />
+      <svg
+        className={styles.art}
+        viewBox={`0 0 ${W} ${H}`}
+        xmlns="http://www.w3.org/2000/svg"
+        focusable="false"
+        preserveAspectRatio="xMidYMin slice"
+      >
+        <Strand points={rail} />
+        {swags.map((pts, i) => (
+          <Strand key={`swag-${i}`} points={pts} deepStart={i} />
         ))}
-        <EndHanger />
-      </div>
+        {swagInners.map((pts, i) => (
+          <Strand key={`inner-${i}`} points={pts} deepStart={i + 1} />
+        ))}
+        {hangers.map((pts, i) => (
+          <Strand key={`hang-${i}`} points={pts} leaf deepStart={1} />
+        ))}
+      </svg>
     </div>
   )
 }
