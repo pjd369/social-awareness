@@ -10,22 +10,7 @@ const MAX_MS = 10_000
 const FINALE = 8
 /** Soft gravity so round bursts don’t collapse into a tall column. */
 const GRAVITY = 28
-const COLOURS = [
-  '#ff4d6d',
-  '#ff8fab',
-  '#ffd60a',
-  '#ff9f1c',
-  '#80ffdb',
-  '#56cfe1',
-  '#4cc9f0',
-  '#7b2cbf',
-  '#c77dff',
-  '#f72585',
-  '#06d6a0',
-  '#ff6b35',
-  '#fff1d2',
-  '#90e0ef',
-]
+const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
 interface Rocket {
   x: number
@@ -53,13 +38,13 @@ interface Spark {
 const easeOut = (t: number) => 1 - (1 - t) ** 3
 
 function pickColour(i: number): string {
-  return COLOURS[i % COLOURS.length] ?? '#ffd60a'
+  return COLOURS[i % COLOURS.length] ?? '#edbd74'
 }
 
 /**
  * Fireworks rising from the bottom of the screen and bursting for about
- * 10 seconds after the intro diya is lit. Bursts expand in a round halo with
- * mixed festival colours. The canvas never takes pointer events.
+ * 10 seconds after the intro diya is lit. Bursts expand in a round halo in
+ * the warm Annakut gold palette. The canvas never takes pointer events.
  */
 export function Fireworks() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -117,15 +102,11 @@ export function Fireworks() {
         { count: Math.round(sparksPerRing * 0.7 * scale), speed: 62 * size * scale, life: 1.9 },
         { count: Math.round(sparksPerRing * 0.35 * scale), speed: 34 * size * scale, life: 2.1 },
       ]
-      const accents = [colour, pickColour(Math.floor(Math.random() * COLOURS.length)), '#ffffff']
-
       for (const ring of rings) {
         for (let i = 0; i < ring.count; i++) {
           // Even spacing around the circle; tiny jitter only so it stays round.
           const angle = (Math.PI * 2 * i) / ring.count + (Math.random() - 0.5) * 0.06
           const speed = ring.speed * (0.94 + Math.random() * 0.12)
-          const tint =
-            Math.random() < 0.18 ? accents[2]! : Math.random() < 0.35 ? accents[1]! : accents[0]!
           sparks.push({
             x,
             y,
@@ -133,7 +114,7 @@ export function Fireworks() {
             vy: Math.sin(angle) * speed,
             age: 0,
             life: ring.life + Math.random() * 0.35,
-            colour: tint,
+            colour: Math.random() < 0.3 ? '#fff6dc' : colour,
             size: (1.6 + Math.random() * 1.5) * size * (0.85 + scale * 0.2),
           })
         }
