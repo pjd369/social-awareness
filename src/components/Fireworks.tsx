@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Fireworks.module.css'
 
-/** Delay before the first rocket after the diya is lit. */
+/** Delay before the first rocket. */
 const START_MS = 120
 /** Gap between regular launches — show length follows launch count, not a clock. */
 const LAUNCH_GAP_MS = 175
@@ -58,11 +58,12 @@ function visibleScreen() {
 }
 
 /**
- * Fireworks, as when the intro diya is lit. A fixed number of rockets rise
- * straight up and burst between 60–90% of the visual screen height; the show
- * ends when those launches (and their sparks) are done — not on a wall-clock
- * timer. `rockets` sets a smaller number for a shorter show; the last few
- * always fire together as the closing volley.
+ * Fireworks: a short show when the site opens (see Layout) and at the pill
+ * game's ending. A fixed number of rockets rise straight up and burst between
+ * 60–90% of the visual screen height; the show ends when those launches (and
+ * their sparks) are done — not on a wall-clock timer. `rockets` sets a smaller
+ * number for a shorter show; the last few always fire together as the closing
+ * volley.
  */
 export function Fireworks({ rockets: rocketLimit }: { rockets?: number } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
