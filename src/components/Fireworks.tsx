@@ -13,7 +13,8 @@ const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
 interface Rocket {
-  x: number
+  /** Launch column — path spirals around this while spinning up. */
+  baseX: number
   startY: number
   targetY: number
   launchAt: number
@@ -21,6 +22,10 @@ interface Rocket {
   colour: string
   /** Relative size of the burst. */
   scale: number
+  /** Radians spun over the full rise (sign = spin direction). */
+  spin: number
+  /** How wide the spiral wanders while rising. */
+  spiral: number
   burst: boolean
 }
 
@@ -38,8 +43,9 @@ interface Spark {
 const easeOut = (t: number) => 1 - (1 - t) ** 3
 
 /**
- * Fireworks when the intro diya is lit: rockets rise and burst for about
- * 15 seconds, ending with a short finale. The canvas never takes pointer events.
+ * Fireworks when the intro diya is lit: rockets spin upward and burst between
+ * 50–80% of the viewer’s screen height (from the bottom) for about 15 seconds.
+ * The canvas never takes pointer events.
  */
 export function Fireworks() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -71,16 +77,21 @@ export function Fireworks() {
       const finale = i >= regular
       // 5 is coprime with 22 and 32 — scattered launch slots across the width.
       const slot = (i * 5) % rocketCount
+      // Burst altitude: 50–80% of screen height measured from the bottom.
+      const altitude = 0.5 + Math.random() * 0.3
+      const turns = 1.6 + Math.random() * 1.8
       return {
-        x: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
+        baseX: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
         startY: height + 8,
-        targetY: height * (0.14 + Math.random() * 0.32),
+        targetY: height * (1 - altitude),
         launchAt: finale
           ? END_MS + 200 + (i - regular) * 280
           : START_MS + (i / regular) * (END_MS - START_MS) + Math.random() * 280,
         riseMs: 1100 + Math.random() * 450,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
         scale: finale ? 1.35 : 0.75 + Math.random() * 0.5,
+        spin: turns * Math.PI * 2 * (Math.random() < 0.5 ? 1 : -1),
+        spiral: (10 + Math.random() * 16) * size,
         burst: false,
       }
     })
@@ -129,23 +140,30 @@ export function Fireworks() {
         if (rocket.burst || elapsed < rocket.launchAt) continue
         const t = Math.min((elapsed - rocket.launchAt) / rocket.riseMs, 1)
         const y = rocket.startY + (rocket.targetY - rocket.startY) * easeOut(t)
+        // Spiral out a little as it climbs, then settle toward the column.
+        const spinAngle = rocket.spin * easeOut(t)
+        const spiralR = rocket.spiral * Math.sin(t * Math.PI)
+        const x = rocket.baseX + Math.cos(spinAngle) * spiralR
         if (t >= 1) {
           rocket.burst = true
-          burst(rocket.x, y, rocket.colour, rocket.scale)
+          burst(x, y, rocket.colour, rocket.scale)
           continue
         }
-        const trail = ctx.createLinearGradient(rocket.x, y, rocket.x, y + 34 * size)
+        // Trail follows the spin tangent so the rise reads as spinning up.
+        const trailLen = 34 * size
+        const tx = Math.cos(spinAngle + Math.PI / 2) * spiralR * 0.35
+        const trail = ctx.createLinearGradient(x, y, x - tx, y + trailLen)
         trail.addColorStop(0, rocket.colour)
         trail.addColorStop(1, 'rgba(255, 220, 158, 0)')
         ctx.strokeStyle = trail
         ctx.lineWidth = 2.5 * size
         ctx.beginPath()
-        ctx.moveTo(rocket.x, y)
-        ctx.lineTo(rocket.x, y + 34 * size)
+        ctx.moveTo(x, y)
+        ctx.lineTo(x - tx, y + trailLen)
         ctx.stroke()
         ctx.fillStyle = '#fff6dc'
         ctx.beginPath()
-        ctx.arc(rocket.x, y, 2.6 * size, 0, Math.PI * 2)
+        ctx.arc(x, y, 2.6 * size, 0, Math.PI * 2)
         ctx.fill()
       }
 
