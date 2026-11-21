@@ -1,0 +1,101 @@
+.fuljadi {
+  position: absolute;
+  z-index: 5;
+  width: 3.25rem;
+  height: 9.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transform: translate(-50%, -90%);
+}
+
+.fuljadi:active,
+.dragging {
+  cursor: grabbing;
+}
+
+.fuljadi:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.tipGlow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tipPulse 0.55s ease-in-out infinite alternate;
+}
+
+.spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sparkFly var(--dur, 0.7s) linear var(--delay, 0s) infinite;
+}
+
+.leaving {
+  animation: fuljadiOut 420ms ease forwards;
+  pointer-events: none;
+}
+
+@keyframes tipPulse {
+  from {
+    opacity: 0.75;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes sparkFly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 0px), var(--dy, -28px)) scale(0.1);
+  }
+}
+
+@keyframes fuljadiOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tipGlow,
+  .spark {
+    animation: none;
+  }
+
+  .tipGlow {
+    opacity: 1;
+  }
+
+  .spark {
+    opacity: 0.85;
+  }
+}

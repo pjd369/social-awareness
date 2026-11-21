@@ -56,6 +56,38 @@
   margin: 0 auto;
 }
 
+/* Section cards stay veiled until the intro diya is lit. */
+.unveil {
+  transition:
+    opacity 900ms ease,
+    filter 900ms ease,
+    transform 900ms ease;
+}
+
+.unveil[data-unveiled='false'] {
+  opacity: 0.28;
+  filter: blur(2px);
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.unveil[data-unveiled='true'] {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .unveil {
+    transition: opacity 200ms ease;
+  }
+
+  .unveil[data-unveiled='false'] {
+    filter: none;
+    transform: none;
+  }
+}
+
 .heroLine {
   margin: 0 auto var(--space-3);
   color: #f0d7b2;
