@@ -31,10 +31,15 @@ export default function Intro() {
         <DiyaLighting onLit={onDiyaLit} />
         <EventTitle />
         <p className={styles.heroLine}>{t('site.title')}</p>
-        <p className={styles.heroValue} data-atmiyata data-testid="atmiyata">
+        <p className={styles.heroValue} data-testid="atmiyata">
           {t('site.value')}
         </p>
-        <p className={styles.heroTheme}>{t('site.theme')}</p>
+        <p className={styles.heroTheme}>
+          {t('site.theme.lead')}
+          <span data-harmony data-testid="harmony">
+            {t('site.theme.focus')}
+          </span>
+        </p>
       </div>
 
       <div

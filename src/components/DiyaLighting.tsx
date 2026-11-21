@@ -63,7 +63,7 @@ function tipNearWick(tipX: number, tipY: number, wick: DOMRect, play: DOMRect): 
 
 /**
  * Annakut unveiling: unlit diya, a button that brings out a burning fuljadi
- * to the right of “Atmiyata” to play with, then drag it onto the wick.
+ * above “harmony” to play with, then drag it onto the wick.
  */
 export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const { t } = useI18n()
@@ -111,11 +111,11 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   }, [lit])
 
   /**
-   * Tip rests just to the right of the “Atmiyata” word (hero value), clamped
-   * to the visible playfield so it never sits off-screen.
+   * Tip rests just above the “harmony” word in the theme line, clamped to the
+   * visible playfield so it never sits off-screen.
    */
-  function restFuljadiBesideAtmiyata() {
-    const mark = document.querySelector<HTMLElement>('[data-atmiyata]')
+  function restFuljadiAboveHarmony() {
+    const mark = document.querySelector<HTMLElement>('[data-harmony]')
     const play = playRef.current
     const playRect = play?.getBoundingClientRect()
     const originX = playRect?.left ?? 0
@@ -125,28 +125,28 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
 
     if (mark) {
       const r = mark.getBoundingClientRect()
-      const gap = Math.min(28, Math.max(14, r.width * 0.05))
+      const gap = Math.min(36, Math.max(22, r.height * 0.9))
       return {
-        x: Math.min(Math.max(r.right + gap - originX, 28), maxX),
-        y: Math.min(Math.max(r.top + r.height / 2 - originY, 28), maxY),
+        x: Math.min(Math.max(r.left + r.width / 2 - originX, 28), maxX),
+        y: Math.min(Math.max(r.top - gap - originY, 28), maxY),
       }
     }
 
     // Fallback if the word isn’t in the DOM yet.
     const screen = visibleScreen()
     return {
-      x: screen.left + screen.width * 0.72,
-      y: screen.top + screen.height * 0.42,
+      x: screen.left + screen.width * 0.62,
+      y: screen.top + screen.height * 0.38,
     }
   }
 
-  // Keep the resting tip beside Atmiyata if the layout or chrome resizes.
+  // Keep the resting tip above harmony if the layout or chrome resizes.
   useEffect(() => {
     if (!fuljadiOut || lit || leaving) return
     const vv = window.visualViewport
     function syncRest() {
       if (draggingRef.current) return
-      const next = restFuljadiBesideAtmiyata()
+      const next = restFuljadiAboveHarmony()
       posRef.current = next
       setPos(next)
     }
@@ -181,14 +181,14 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
       lightDiya()
       return
     }
-    const next = restFuljadiBesideAtmiyata()
+    const next = restFuljadiAboveHarmony()
     posRef.current = next
     setPos(next)
     setPopping(true)
     setFuljadiOut(true)
     // Refine once the playfield is mounted (same spot if play is viewport-fixed).
     requestAnimationFrame(() => {
-      const refined = restFuljadiBesideAtmiyata()
+      const refined = restFuljadiAboveHarmony()
       posRef.current = refined
       setPos(refined)
     })
