@@ -1,15 +1,26 @@
-import { useEffect, useMemo, useReducer, useRef, useState, type HTMLAttributes } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type TouchEvent,
+} from 'react'
 import { useI18n } from '../../i18n/context'
 import { localizedLang } from '../../i18n/localized'
 import { Icon } from '../../components/Icon'
 import { ExternalLink } from '../../components/ExternalLink'
 import { ContentError } from '../../components/ContentError'
 import { PlaceholderNotice } from '../../components/Placeholder'
+import { Fireworks } from '../../components/Fireworks'
 import { focusElement } from '../../components/focus'
+import { usePrefersReducedMotion } from '../../components/motion'
 import { useGameHeading } from '../../components/game-heading'
 import { PILLS, pillsArePlaceholder } from '../../content/games'
 import type { PillCard, Pills } from '../../content/schemas'
 import { GreenPillPage } from './GreenPillPage'
+import { Loc } from './Loc'
 import { PillGuide, type GuidePill } from './PillGuide'
 import { RedPillInsight } from './RedPillInsight'
 import { START, pillReducer } from './machine'
@@ -84,30 +95,82 @@ function CardSource({ card }: { card: PillCard }) {
   )
 }
 
-/** Back and a Next-or-finish button. Shown at the top and again at the bottom of each red card and green page. */
-function PageNav({
-  className,
-  nextLabel,
-  nextIcon,
+/** How far a finger must travel sideways, in pixels, to count as a swipe. */
+const SWIPE_PX = 64
+
+/**
+ * Swipe left for the next card and right for the one before, on touch
+ * screens. Back and Next do the same, so nothing depends on the gesture. A
+ * swipe that is mostly up or down is a scroll and is left alone, as is one
+ * that selects text or starts inside a dialog.
+ */
+function useSwipe(onNext: () => void, onBack: () => void) {
+  const from = useRef<{ x: number; y: number } | null>(null)
+  return {
+    onTouchStart: (e: TouchEvent) => {
+      const touch = e.touches.length === 1 ? e.touches[0] : undefined
+      const inDialog = e.target instanceof Element && e.target.closest('dialog') !== null
+      from.current = touch && !inDialog ? { x: touch.clientX, y: touch.clientY } : null
+    },
+    onTouchEnd: (e: TouchEvent) => {
+      const start = from.current
+      const touch = e.changedTouches[0]
+      from.current = null
+      if (!start || !touch) return
+      const dx = touch.clientX - start.x
+      const dy = touch.clientY - start.y
+      if (Math.abs(dx) < SWIPE_PX || Math.abs(dx) < Math.abs(dy) * 2) return
+      if (window.getSelection()?.isCollapsed === false) return
+      if (dx < 0) onNext()
+      else onBack()
+    },
+    onTouchCancel: () => {
+      from.current = null
+    },
+  }
+}
+
+/**
+ * Back, the progress dots and Next, in one bar that stays at the bottom of the
+ * screen while its card is on screen. The dots repeat the "Card 2 of 5"
+ * heading, so they are hidden from assistive technology.
+ */
+function DeckNav({
+  colour,
+  count,
+  index,
   onBack,
   onNext,
 }: {
-  className: string | undefined
-  nextLabel: string
-  nextIcon: 'arrow-right' | 'check'
+  colour: 'red' | 'green'
+  count: number
+  index: number
   onBack: () => void
   onNext: () => void
 }) {
   const { t } = useI18n()
   return (
-    <div className={className}>
+    <div className={styles.deckNav} data-testid="deck-nav">
       <button type="button" className={styles.navButton} onClick={onBack}>
         <Icon name="arrow-left" size={20} />
         {t('pills.back')}
       </button>
+      <ol
+        className={colour === 'green' ? `${styles.dots} ${styles.greenDots}` : styles.dots}
+        aria-hidden="true"
+      >
+        {Array.from({ length: count }, (_, i) => (
+          <li
+            key={i}
+            className={
+              i === index ? `${styles.dotDone} ${styles.dotNow}` : i < index ? styles.dotDone : ''
+            }
+          />
+        ))}
+      </ol>
       <button type="button" className={`${styles.navButton} ${styles.navNext}`} onClick={onNext}>
-        {nextLabel}
-        <Icon name={nextIcon} size={20} />
+        {t('pills.next')}
+        <Icon name="arrow-right" size={20} />
       </button>
     </div>
   )
@@ -122,6 +185,9 @@ export function PillGameView({ data }: { data: Pills }) {
     [reds.length, greens.length],
   )
   const [state, dispatch] = useReducer(reducer, START)
+  /** The green solutions the visitor said they will try, by page number. */
+  const [tried, setTried] = useState<number[]>([])
+  const reducedMotion = usePrefersReducedMotion()
   const headingRef = useRef<HTMLHeadingElement>(null)
   const isFirst = useRef(true)
 
@@ -139,9 +205,9 @@ export function PillGameView({ data }: { data: Pills }) {
   // The page's main heading names the chosen pill. The default title stays on the
   // landing screen, including after the blue pill is tossed, as there is still a choice to make.
   useGameHeading(
-    state.screen === 'red'
+    state.screen === 'red' || state.screen === 'redEnd'
       ? t('pills.red.name')
-      : state.screen === 'green'
+      : state.screen === 'green' || state.screen === 'greenEnd'
         ? t('pills.green.name')
         : undefined,
   )
@@ -164,13 +230,28 @@ export function PillGameView({ data }: { data: Pills }) {
     onBlur: () => setLean(null),
   })
   const back = () => dispatch({ type: 'back' })
-  const startOver = (
+  const next = () => dispatch({ type: 'next' })
+  const swipe = useSwipe(next, back)
+  const toggleTried = (page: number) =>
+    setTried((now) => (now.includes(page) ? now.filter((n) => n !== page) : [...now, page]))
+  const startOver = () => {
+    setTried([])
+    dispatch({ type: 'startOver' })
+  }
+  const startOverButton = (
+    <button type="button" className={styles.quiet} onClick={startOver}>
+      <Icon name="restart" size={18} />
+      {t('pills.startOver')}
+    </button>
+  )
+  /** Back and Start over, under the recap and the plan. */
+  const endActions = (
     <div className={styles.actions}>
-      <button
-        type="button"
-        className={styles.secondary}
-        onClick={() => dispatch({ type: 'startOver' })}
-      >
+      <button type="button" className={styles.secondary} onClick={back}>
+        <Icon name="arrow-left" size={20} />
+        {t('pills.back')}
+      </button>
+      <button type="button" className={styles.secondary} onClick={startOver}>
         <Icon name="restart" size={20} />
         {t('pills.startOver')}
       </button>
@@ -216,26 +297,13 @@ export function PillGameView({ data }: { data: Pills }) {
       )}
 
       {state.screen === 'red' && redCard && (
-        <section className={styles.screen}>
+        <section className={`${styles.screen} ${styles.deck}`} {...swipe}>
           <div className={styles.cardHead}>
-            <div>
-              <h2 ref={headingRef}>
-                {t('pills.progress', { n: state.index + 1, total: reds.length })}
-              </h2>
-            </div>
-            <PageNav
-              className={styles.cardNav}
-              nextLabel={state.index + 1 >= reds.length ? t('pills.exit') : t('pills.next')}
-              nextIcon={state.index + 1 >= reds.length ? 'check' : 'arrow-right'}
-              onBack={back}
-              onNext={() => dispatch({ type: 'next' })}
-            />
+            <h2 ref={headingRef} className={styles.progress}>
+              {t('pills.progress', { n: state.index + 1, total: reds.length })}
+            </h2>
+            {startOverButton}
           </div>
-          <ol className={styles.dots} aria-hidden="true">
-            {reds.map((_, i) => (
-              <li key={i} className={i <= state.index ? styles.dotDone : undefined} />
-            ))}
-          </ol>
           {redCard.visual ? (
             <RedPillInsight key={state.index} data={redCard} />
           ) : (
@@ -246,46 +314,111 @@ export function PillGameView({ data }: { data: Pills }) {
               <CardSource card={redCard} />
             </article>
           )}
-          <PageNav
-            className={`${styles.cardNav} ${styles.cardNavBottom}`}
-            nextLabel={state.index + 1 >= reds.length ? t('pills.exit') : t('pills.next')}
-            nextIcon={state.index + 1 >= reds.length ? 'check' : 'arrow-right'}
+          <DeckNav
+            colour="red"
+            count={reds.length}
+            index={state.index}
             onBack={back}
-            onNext={() => dispatch({ type: 'next' })}
+            onNext={next}
           />
         </section>
       )}
 
-      {state.screen === 'green' && greenPage && (
-        <section className={styles.screen}>
-          <div className={styles.cardHead}>
-            <div>
-              <h2 ref={headingRef}>
-                {t('pills.green.progress', { n: state.index + 1, total: greens.length })}
-              </h2>
-            </div>
-            <PageNav
-              className={styles.cardNav}
-              nextLabel={state.index + 1 >= greens.length ? t('pills.exit') : t('pills.next')}
-              nextIcon={state.index + 1 >= greens.length ? 'check' : 'arrow-right'}
-              onBack={back}
-              onNext={() => dispatch({ type: state.index + 1 >= greens.length ? 'exit' : 'next' })}
-            />
-          </div>
-          <ol className={`${styles.dots} ${styles.greenDots}`} aria-hidden="true">
-            {greens.map((_, i) => (
-              <li key={i} className={i <= state.index ? styles.dotDone : undefined} />
+      {/* After the last red card: every card in a line, and the green pill on offer. */}
+      {state.screen === 'redEnd' && (
+        <section className={styles.screen} data-testid="red-recap">
+          <h2 ref={headingRef}>{t('pills.recap.title')}</h2>
+          <ol className={styles.recap}>
+            {reds.map((c, i) => (
+              <li key={i}>
+                <button
+                  type="button"
+                  className={styles.recapRow}
+                  onClick={() => dispatch({ type: 'review', index: i })}
+                >
+                  <span className={styles.recapNo} aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span className={styles.rowText}>
+                    <Loc field={c.title ?? c.text} className={styles.rowTitle} plain />
+                    {c.title && c.takeaway && <Loc field={c.takeaway} plain />}
+                  </span>
+                  <Icon name="arrow-right" size={18} />
+                </button>
+              </li>
             ))}
           </ol>
-          <GreenPillPage key={state.index} data={greenPage} />
-          <PageNav
-            className={`${styles.cardNav} ${styles.cardNavBottom}`}
-            nextLabel={state.index + 1 >= greens.length ? t('pills.exit') : t('pills.next')}
-            nextIcon={state.index + 1 >= greens.length ? 'check' : 'arrow-right'}
-            onBack={back}
-            onNext={() => dispatch({ type: state.index + 1 >= greens.length ? 'exit' : 'next' })}
+          {greens.length > 0 && (
+            <div className={styles.handoff}>
+              <p>{t('pills.recap.lead')}</p>
+              <button
+                type="button"
+                className={styles.greenCta}
+                onClick={() => dispatch({ type: 'takeGreen' })}
+              >
+                <span className={styles.capsule} aria-hidden="true" />
+                {t('pills.recap.green')}
+                <Icon name="arrow-right" size={20} />
+              </button>
+            </div>
+          )}
+          {endActions}
+        </section>
+      )}
+
+      {state.screen === 'green' && greenPage && (
+        <section className={`${styles.screen} ${styles.deck}`} {...swipe}>
+          <div className={styles.cardHead}>
+            <h2 ref={headingRef} className={styles.progress}>
+              {t('pills.green.progress', { n: state.index + 1, total: greens.length })}
+            </h2>
+            {startOverButton}
+          </div>
+          <GreenPillPage
+            key={state.index}
+            data={greenPage}
+            tried={tried.includes(state.index)}
+            onToggleTry={() => toggleTried(state.index)}
           />
-          {startOver}
+          <DeckNav
+            colour="green"
+            count={greens.length}
+            index={state.index}
+            onBack={back}
+            onNext={next}
+          />
+        </section>
+      )}
+
+      {/* After the last green page: the visitor's plan. Each solution can still be put on it or taken off. */}
+      {state.screen === 'greenEnd' && (
+        <section className={styles.screen} data-testid="green-plan">
+          {!reducedMotion && <Fireworks rockets={14} />}
+          <h2 ref={headingRef}>{t('pills.plan.title')}</h2>
+          <p className={styles.lead}>
+            {tried.length > 0 ? t('pills.plan.lead') : t('pills.plan.empty')}
+          </p>
+          <ul className={styles.plan}>
+            {greens.map((g, i) => (
+              <li key={i}>
+                <button
+                  type="button"
+                  className={styles.planRow}
+                  aria-pressed={tried.includes(i)}
+                  onClick={() => toggleTried(i)}
+                >
+                  <span className={styles.planTick} aria-hidden="true">
+                    <Icon name="check" size={18} />
+                  </span>
+                  <span className={styles.rowText}>
+                    <Loc field={g.title} className={styles.rowTitle} />
+                    <Loc field={g.action} plain />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          {endActions}
         </section>
       )}
     </div>

@@ -17,7 +17,6 @@ export default function Intro() {
       <div className={styles.hero}>
         <DiyaLamp className={styles.heroLamp} />
         <EventTitle />
-        <p className={styles.heroLine}>{t('site.title')}</p>
         <p className={styles.heroValue}>{t('site.value')}</p>
         <p className={styles.heroTheme}>{t('site.theme')}</p>
       </div>

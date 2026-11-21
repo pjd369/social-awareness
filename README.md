@@ -28,19 +28,19 @@ Gujarati.
 
 ## What is built
 
-| Page                                                                      | Address                                         |
-| ------------------------------------------------------------------------- | ----------------------------------------------- |
-| Intro                                                                     | `/`                                             |
-| Section home (three cards)                                                | `/bhulkao`, `/yuvako`                           |
-| Games list                                                                | `/bhulkao/activity`, `/yuvako/activity`         |
-| Doodle catcher (Bhulkao)                                                  | `/bhulkao/activity/doodle`                      |
-| Pill game (Yuvako)                                                        | `/yuvako/activity/pills`                        |
-| Word game "Shabd Khoj" (Yuvako)                                           | `/yuvako/activity/words`                        |
-| Story / scenario list (goes straight to the item while there is only one) | `/bhulkao/story`, `/yuvako/scenario`            |
-| Story / scenario player                                                   | `/bhulkao/story/<id>`, `/yuvako/scenario/<id>`  |
-| Prasang list (same rule)                                                  | `/bhulkao/prasang`, `/yuvako/prasang`           |
-| Prasang reader                                                            | `/bhulkao/prasang/<id>`, `/yuvako/prasang/<id>` |
-| Not found                                                                 | any other address                               |
+| Page                                                              | Address                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------- |
+| Intro                                                             | `/`                                               |
+| Section home (three cards)                                        | `/bhulkao`, `/yuvako`                             |
+| Games list                                                        | `/bhulkao/activity`, `/yuvako/activity`           |
+| Doodle catcher (Bhulkao)                                          | `/bhulkao/activity/doodle`                        |
+| Pill game (Yuvako)                                                | `/yuvako/activity/pills`                          |
+| Word game "Shabd Khoj" (Yuvako)                                   | `/yuvako/activity/words`                          |
+| Scenario list (goes straight to the item while there is only one) | `/bhulkao/scenario`, `/yuvako/scenario`           |
+| Scenario player                                                   | `/bhulkao/scenario/<id>`, `/yuvako/scenario/<id>` |
+| Prasang list (same rule)                                          | `/bhulkao/prasang`, `/yuvako/prasang`             |
+| Prasang reader                                                    | `/bhulkao/prasang/<id>`, `/yuvako/prasang/<id>`   |
+| Not found                                                         | any other address                                 |
 
 Every game, story and prasang is at most three taps from the intro page.
 
@@ -146,8 +146,9 @@ Stories are in `content/stories/`, one file per story.
    from. Both are required. Give every step and every ending its own
    picture where you can, so no screen is text alone.
 
-The story appears at `/bhulkao/story/<id>` or `/yuvako/scenario/<id>`. When a
-section has more than one story, a list page appears automatically.
+The story appears at `/bhulkao/scenario/<id>` or `/yuvako/scenario/<id>`. When a
+section has more than one story, a list page appears automatically. (Bhulkao's
+earlier address, `/bhulkao/story/<id>`, redirects to the new one.)
 
 At the end of a Yuvako scenario, two things appear on their own, with no
 extra content needed:
@@ -349,13 +350,25 @@ are in `content/pills.json`.
 - The flow: on the landing screen a cartoon guide (an original drawing) holds
   out the red and blue pills, and asks which one you will take. The pills in
   his hands are the buttons; each shows its name and hint on hover or keyboard
-  focus, and always on touch screens. After the last red card it returns to
-  the landing screen. Choosing the blue pill keeps you on the same screen: the
-  guide grins, tosses the blue pill away, and a green pill comes down into his
-  hand, so the choice becomes **Red pill** or **Green pill**. The green pill opens two or three solution pages, ending
-  with **Exit**, which returns to the landing screen. Start over works from
-  every red card and green page; there is no way back to the blue pill once
-  it is tossed.
+  focus, and always on touch screens. After the last red card comes a recap:
+  every card's title and takeaway in a line (each opens its card again), and
+  a **Take the green pill** button that leads straight to the solutions.
+  Choosing the blue pill keeps you on the same screen: the guide grins, tosses
+  the blue pill away, and a green pill comes down into his hand, so the choice
+  becomes **Red pill** or **Green pill**. The green pill opens two or three
+  solution pages, each with an **I'll try this** button, ending with **Your
+  plan**: the solutions as a tick list, with the chosen ones ticked (the
+  choices are kept only until Start over or the page is left). Start over
+  works from every red card, green page and ending, and returns to the
+  landing screen; there is no way back to the blue pill once it is tossed.
+- Each card fits about one phone screen. It shows its title, its diagram and
+  one highlighted line (the takeaway, or "What you can do"); the rest opens
+  when tapped: "What can help?", "Read more" (the main text and the impact by
+  age) and "References" on a red card, "Why it helps" (the main text and the
+  reason) and "References" on a green page. Back, the progress dots and Next
+  sit in one bar that stays at the bottom of the screen, and a sideways swipe
+  turns the card too. A `timeline` shows one step at a time ("Then what?"),
+  and a `before-after` switches between "Often" and "Try instead".
 - `"blue"`: `message`, the guide's speech bubble as he tosses the blue pill.
   Keep it short (it must fit a phone screen) and light-hearted.
 - `"green"`: `pages` (two or three). Each page has `title`, `text`, `action`
@@ -364,8 +377,9 @@ are in `content/pills.json`.
 - Red cards (`"path": "red"`) are shown one at a time. A finished red card
   (`"placeholder": false`) needs: `title`, `text` (the main point),
   `visual`, `takeaway`, `audienceImpacts` (`children` and `adults`),
-  `recommendation` ("What can help?") and a `source`. The takeaway and the
-  recommendation are shown together in one box.
+  `recommendation` ("What can help?") and a `source`. Keep the `title` and
+  the `takeaway` short and able to stand alone: they are what is seen first,
+  and they are all the recap shows.
 - Red cards and green pages cite their references in the same way.
 - **References are IEEE style.** A source is
   `{ "citation": "…", "url": "https://…" }`. Write the citation as IEEE

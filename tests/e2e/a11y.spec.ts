@@ -24,7 +24,7 @@ test.describe('tap targets', () => {
   for (const path of [
     '/bhulkao',
     '/bhulkao/activity',
-    '/bhulkao/story/homework-time',
+    '/bhulkao/scenario/homework-time',
     '/bhulkao/prasang/sparrows-and-the-sea',
     '/bhulkao/activity/doodle',
   ]) {
@@ -41,7 +41,7 @@ test.describe('tap targets', () => {
     '/yuvako/activity',
     '/yuvako/scenario',
     '/yuvako/scenario/one-am-exam',
-    '/yuvako/prasang/lamp-by-the-window',
+    '/yuvako/prasang/einstein-prayer',
     '/yuvako/activity/pills',
     '/yuvako/activity/words',
   ]) {
@@ -56,14 +56,14 @@ test.describe('tap targets', () => {
 test('every game, story and prasang is within three taps of the intro page', async ({ page }) => {
   const journeys: [string, string, string | null, RegExp][] = [
     ['Bhulkao', 'Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
-    ['Bhulkao', 'Story', null, /\/bhulkao\/story\/homework-time$/],
+    ['Bhulkao', 'Scenario', null, /\/bhulkao\/scenario\/homework-time$/],
     ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],
     ['Yuvako', 'Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
     ['Yuvako', 'Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
     ['Yuvako', 'Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
-    ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/lamp-by-the-window$/],
+    ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/einstein-prayer$/],
   ]
   for (const [section, part, item, target] of journeys) {
     await page.goto('/')
@@ -104,8 +104,8 @@ test('links that leave the site ask first ("You are leaving this site")', async 
   await page.route(/\/assets\/index-[\w-]+\.js$/, async (route) => {
     const response = await route.fetch()
     const body = (await response.text()).replace(
-      'written only to test the site.',
-      'written only to test the site. [An example link](https://example.org/reading)',
+      'he gave the honor of his success first to God',
+      'he gave the honor of his success first to God. [An example link](https://example.org/reading)',
     )
     await route.fulfill({ response, body })
   })
@@ -116,7 +116,7 @@ test('links that leave the site ask first ("You are leaving this site")', async 
   await context.route('https://example.org/**', (route) =>
     route.fulfill({ status: 200, contentType: 'text/html', body: '<title>Elsewhere</title>' }),
   )
-  await page.goto('/yuvako/prasang/lamp-by-the-window')
+  await page.goto('/yuvako/prasang/einstein-prayer')
   const link = page.getByRole('button', { name: /An example link/ })
   await link.click()
   const dialog = page.getByRole('dialog', { name: 'You are leaving this site' })
@@ -138,7 +138,7 @@ test('links that leave the site ask first ("You are leaving this site")', async 
 
 test.describe('no accessibility violations in game and story states', () => {
   test('story ending and pill game screens', async ({ page }) => {
-    await page.goto('/bhulkao/story/homework-time')
+    await page.goto('/bhulkao/scenario/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()
     await page.getByRole('button', { name: 'Keep playing' }).click()
     await page.getByRole('button', { name: 'Play until bedtime' }).click()
@@ -147,18 +147,37 @@ test.describe('no accessibility violations in game and story states', () => {
     await page.goto('/yuvako/activity/pills')
     await page.getByRole('button', { name: /Red pill/ }).click()
     await expectNoAxeViolations(page)
-    for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Next' }).first().click()
-    await page.getByRole('button', { name: 'Exit' }).first().click()
+    // The first card with its timeline played and every row open.
+    for (let i = 0; i < 3; i++) await page.getByRole('button', { name: 'Then what?' }).click()
+    for (const summary of await page.getByTestId('pill-game').locator('summary').all())
+      await summary.click()
+    await expectNoAxeViolations(page)
+    // The second card, on "Try instead".
+    await page.getByRole('button', { name: 'Next' }).click()
+    await page.getByRole('button', { name: 'Try instead' }).click()
+    await expectNoAxeViolations(page)
+    for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Next' }).click()
+    // The recap after the last card, then the landing screen again.
+    await expect(page.getByRole('heading', { name: 'The red pill, in brief' })).toBeFocused()
+    await expectNoAxeViolations(page)
+    await page.getByRole('button', { name: 'Start over' }).click()
     await expectNoAxeViolations(page)
     await page.getByRole('button', { name: /Blue pill/ }).click()
     await expect(page.getByRole('heading', { name: /^Nice try!/ })).toBeVisible()
     await page.waitForTimeout(2600) // past the toss and the green pill's landing
     await expectNoAxeViolations(page)
     await page.getByRole('button', { name: /Green pill/ }).click()
+    await page.getByRole('button', { name: 'I’ll try this' }).click()
+    for (const summary of await page.getByTestId('pill-game').locator('summary').all())
+      await summary.click()
     await expectNoAxeViolations(page)
-    await page.getByRole('button', { name: 'Next' }).first().click()
+    await page.getByRole('button', { name: 'Next' }).click()
     await expectNoAxeViolations(page)
-    await page.getByRole('button', { name: 'Next' }).first().click()
+    await page.getByRole('button', { name: 'Next' }).click()
+    await expectNoAxeViolations(page)
+    // The plan after the last page, with one solution chosen.
+    await page.getByRole('button', { name: 'Next' }).click()
+    await expect(page.getByRole('heading', { name: 'Your plan' })).toBeFocused()
     await expectNoAxeViolations(page)
   })
 

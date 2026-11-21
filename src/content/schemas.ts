@@ -30,6 +30,16 @@ export const audioFile = z
   .string()
   .regex(/^[\w.-]+\.(mp3|ogg|wav|m4a)$/i, 'must be a file name in content/audio/')
 
+/** A file name inside content/video/. */
+export const videoFile = z
+  .string()
+  .regex(/^[\w.-]+\.(mp4|webm|ogg)$/i, 'must be a file name in content/video/')
+
+/** A file name inside content/captions/. */
+export const captionsFile = z
+  .string()
+  .regex(/^[\w.-]+\.vtt$/i, 'must be a file name in content/captions/')
+
 const sourceNote = z.string().trim().min(1, 'record where the picture comes from (source)')
 
 export const storyImage = z.strictObject({
@@ -105,6 +115,17 @@ export const scenarioMoral = z.strictObject({
 })
 export type ScenarioMoral = z.infer<typeof scenarioMoral>
 
+/** Optional video for a prasang (shown above the body, with captions when set). */
+export const prasangVideo = z.strictObject({
+  src: videoFile,
+  /** Optional WebVTT file in content/captions/; visitors can turn it on or off. */
+  captions: captionsFile.optional(),
+  alt: z.string().trim().min(1),
+  source: sourceNote,
+  poster: imageFile.optional(),
+})
+export type PrasangVideo = z.infer<typeof prasangVideo>
+
 /** Front matter of a prasang file (one file per language). */
 export const prasangFrontMatter = z.strictObject({
   id: contentId,
@@ -130,6 +151,8 @@ export const prasangFrontMatter = z.strictObject({
   soundtrack: audioFile.optional(),
   /** Seconds each comic page stays on screen when a soundtrack is set. */
   pageSeconds: z.number().positive().default(10),
+  /** Optional video in content/video/ (article prasangs; not used with comic: true). */
+  video: prasangVideo.optional(),
   placeholder: z.boolean().default(false),
 })
 export type PrasangFrontMatter = z.infer<typeof prasangFrontMatter>

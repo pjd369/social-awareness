@@ -11,8 +11,8 @@
     {
       "id": "start",
       "text": {
-        "en": "You are doing your homework at the table. Your friend Mira holds out her phone. \"Look, a new game! Want to play?\"",
-        "gu": "તમે ટેબલ પર હોમવર્ક કરી રહ્યાં છો. તમારી મિત્ર મીરા પોતાનો ફોન આગળ ધરે છે. \"જો, નવી રમત! રમવી છે?\""
+        "en": "You are doing your homework at the table. Your friend holds out a phone. \"Look, a new game! Want to play?\"",
+        "gu": "તમે ટેબલ પર હોમવર્ક કરી રહ્યાં છો. તમારો મિત્ર પોતાનો ફોન આગળ ધરે છે. \"જો, નવી રમત! રમવી છે?\""
       },
       "image": {
         "src": "homework-invite.svg",
@@ -37,8 +37,8 @@
     {
       "id": "play",
       "text": {
-        "en": "You play one round. Then another. The notebook sits closed. Mira laughs, \"One more?\"",
-        "gu": "તમે એક રાઉન્ડ રમો છો. પછી બીજો. નોટબુક બંધ પડી છે. મીરા હસે છે, \"એક વધુ?\""
+        "en": "You play one round. Then another. The notebook sits closed. Your friend laughs, \"One more?\"",
+        "gu": "તમે એક રાઉન્ડ રમો છો. પછી બીજો. નોટબુક બંધ પડી છે. તમારો મિત્ર હસે છે, \"એક વધુ?\""
       },
       "image": {
         "src": "homework-playing.svg",
@@ -162,8 +162,8 @@
     {
       "id": "caught-up",
       "text": {
-        "en": "You work through the last sums. Mira waits, a little impatient.",
-        "gu": "તમે છેલ્લા દાખલા પૂરા કરો છો. મીરા થોડી અધીરાઈથી રાહ જુએ છે."
+        "en": "You work through the last sums. Your friend waits, a little impatient.",
+        "gu": "તમે છેલ્લા દાખલા પૂરા કરો છો. તમારો મિત્ર થોડી અધીરાઈથી રાહ જુએ છે."
       },
       "image": {
         "src": "homework-together.svg",
@@ -175,8 +175,8 @@
       },
       "ending": {
         "outcome": {
-          "en": "The homework is done. You and Mira still have time for one short game.",
-          "gu": "હોમવર્ક પૂરું થાય છે. તમારી અને મીરાની પાસે એક નાની રમત માટે સમય રહે છે."
+          "en": "The homework is done. You and your friend still have time for one short game.",
+          "gu": "હોમવર્ક પૂરું થાય છે. તમારી અને તમારા મિત્રની પાસે એક નાની રમત માટે સમય રહે છે."
         },
         "lesson": {
           "en": "Stopping in the middle is still stopping. The work gets finished.",
@@ -212,8 +212,8 @@
     {
       "id": "finish",
       "text": {
-        "en": "\"Not now, Mira. I want to finish my homework first,\" you say. Mira looks a little bored.",
-        "gu": "\"અત્યારે નહીં, મીરા. મારે પહેલાં હોમવર્ક પૂરું કરવું છે,\" તમે કહો છો. મીરા થોડી કંટાળેલી લાગે છે."
+        "en": "\"Not now. I want to finish my homework first,\" you say. Your friend looks a little bored.",
+        "gu": "\"અત્યારે નહીં. મારે પહેલાં હોમવર્ક પૂરું કરવું છે,\" તમે કહો છો. તમારો મિત્ર થોડો કંટાળેલો લાગે છે."
       },
       "image": {
         "src": "homework-choice.svg",
@@ -226,16 +226,16 @@
       "choices": [
         {
           "label": {
-            "en": "Ask Mira to do homework with you",
-            "gu": "મીરાને સાથે હોમવર્ક કરવા બોલાવો"
+            "en": "Ask your friend to do homework with you",
+            "gu": "મિત્રને સાથે હોમવર્ક કરવા બોલાવો"
           },
           "next": "together",
           "expected": true
         },
         {
           "label": {
-            "en": "Work on your own while Mira plays",
-            "gu": "મીરા રમે ત્યારે તમે એકલા કામ કરો"
+            "en": "Work on your own while your friend plays",
+            "gu": "મિત્ર રમે ત્યારે તમે એકલા કામ કરો"
           },
           "next": "alone"
         }
@@ -244,8 +244,8 @@
     {
       "id": "together",
       "text": {
-        "en": "Mira puts her phone face down and opens her own books. You help each other through the hard sum.",
-        "gu": "મીરા ફોન ઊંધો મૂકીને પોતાની ચોપડી ખોલે છે. અઘરા દાખલામાં તમે એકબીજાને મદદ કરો છો."
+        "en": "Your friend puts the phone face down and opens their own books. You help each other through the hard sum.",
+        "gu": "તમારો મિત્ર ફોન ઊંધો મૂકીને પોતાની ચોપડી ખોલે છે. અઘરા દાખલામાં તમે એકબીજાને મદદ કરો છો."
       },
       "image": {
         "src": "homework-together.svg",
@@ -273,8 +273,8 @@
     {
       "id": "outside",
       "text": {
-        "en": "The books are closed. You and Mira run out to the courtyard with a ball.",
-        "gu": "ચોપડીઓ બંધ થાય છે. તમે અને મીરા દડો લઈને આંગણામાં દોડો છો."
+        "en": "The books are closed. You and your friend run out to the courtyard with a ball.",
+        "gu": "ચોપડીઓ બંધ થાય છે. તમે અને તમારો મિત્ર દડો લઈને આંગણામાં દોડો છો."
       },
       "image": {
         "src": "homework-outside.svg",
@@ -298,8 +298,8 @@
     {
       "id": "screen-after",
       "text": {
-        "en": "The homework is finished. You and Mira pick up the phone and start the new game.",
-        "gu": "હોમવર્ક પૂરું થાય છે. તમે અને મીરા ફોન ઉપાડીને નવી રમત શરૂ કરો છો."
+        "en": "The homework is finished. You and your friend pick up the phone and start the new game.",
+        "gu": "હોમવર્ક પૂરું થાય છે. તમે અને તમારો મિત્ર ફોન ઉપાડીને નવી રમત શરૂ કરો છો."
       },
       "image": {
         "src": "homework-playing.svg",
@@ -323,8 +323,8 @@
     {
       "id": "alone",
       "text": {
-        "en": "Mira plays on her own. The sounds of the game are right beside you.",
-        "gu": "મીરા એકલી રમે છે. રમતના અવાજો તમારી બરાબર બાજુમાં છે."
+        "en": "Your friend plays on their own. The sounds of the game are right beside you.",
+        "gu": "તમારો મિત્ર એકલા રમે છે. રમતના અવાજો તમારી બરાબર બાજુમાં છે."
       },
       "image": {
         "src": "homework-alone.svg",
@@ -340,7 +340,7 @@
           "next": "proud"
         },
         {
-          "label": { "en": "Glance at Mira's game", "gu": "મીરાની રમત તરફ નજર કરો" },
+          "label": { "en": "Glance at your friend's game", "gu": "મિત્રની રમત તરફ નજર કરો" },
           "next": "glance"
         }
       ]

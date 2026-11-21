@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router'
 import { Analytics } from '@vercel/analytics/react'
 import { I18nProvider } from './i18n/I18nProvider'
 import { Layout } from './components/Layout'
-import { GAMES, SECTION_LIST } from './config/sections'
+import { GAMES, SECTION_LIST, paths, type SectionId } from './config/sections'
 import Intro from './pages/Intro'
 import SectionHome from './pages/SectionHome'
 import GamesList from './pages/GamesList'
@@ -19,6 +19,12 @@ const PrasangPage = lazy(() => import('./pages/PrasangPage'))
 function Loading() {
   const { t } = useI18n()
   return <p role="status">{t('common.loading')}</p>
+}
+
+/** Send a link that uses a section's former story address to the current one. */
+function FormerStoryRedirect({ section }: { section: SectionId }) {
+  const { id } = useParams()
+  return <Navigate to={id ? paths.story(section, id) : paths.storyList(section)} replace />
 }
 
 /** React Router wants the base path without a trailing slash. */
@@ -51,6 +57,14 @@ export default function App() {
                     </Suspense>
                   }
                 />
+                {s.formerStorySegment &&
+                  [s.formerStorySegment, `${s.formerStorySegment}/:id`].map((path) => (
+                    <Route
+                      key={path}
+                      path={path}
+                      element={<FormerStoryRedirect section={s.id} />}
+                    />
+                  ))}
                 <Route path="prasang" element={<ItemList section={s.id} kind="prasang" />} />
                 <Route
                   path="prasang/:id"

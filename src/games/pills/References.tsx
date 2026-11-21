@@ -1,6 +1,7 @@
 import { useI18n } from '../../i18n/context'
 import { ExternalLink } from '../../components/ExternalLink'
 import type { PillCard } from '../../content/schemas'
+import { Disclosure } from './Disclosure'
 import styles from './Insight.module.css'
 
 type Source = NonNullable<PillCard['source']>
@@ -22,17 +23,16 @@ function Reference({ n, source }: { n: number; source: Source }) {
   )
 }
 
-/** The numbered reference list at the end of a red card or green page. */
+/** The numbered reference list of a red card or green page, closed until asked for. */
 export function References({ sources }: { sources: Source[] }) {
   const { t } = useI18n()
   return (
-    <section className={styles.sources}>
-      <h3 className={styles.subheading}>{t('pills.sourcesLabel')}</h3>
-      <ol className={styles.refList}>
+    <Disclosure label={`${t('pills.sourcesLabel')} (${sources.length})`} testId="references">
+      <ol className={`${styles.refList} ${styles.sources}`}>
         {sources.map((s, i) => (
           <Reference key={i} n={i + 1} source={s} />
         ))}
       </ol>
-    </section>
+    </Disclosure>
   )
 }

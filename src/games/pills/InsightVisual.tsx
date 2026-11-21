@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useI18n } from '../../i18n/context'
 import { localizedLang } from '../../i18n/localized'
+import { Icon } from '../../components/Icon'
 import { IMPACT_GROUPS, type ImpactGroup, type InsightVisualData } from '../../content/schemas'
 import { Loc } from './Loc'
 import styles from './Insight.module.css'
@@ -62,45 +64,89 @@ function ImpactBars({ data }: { data: Extract<InsightVisualData, { type: 'impact
   )
 }
 
+/**
+ * Numbered steps, shown one at a time: "Then what?" brings in the next one.
+ * Every step keeps its place from the start, so the button does not move as
+ * the steps appear. Each new step is also read out.
+ */
 function Timeline({ data }: { data: Extract<InsightVisualData, { type: 'timeline' }> }) {
-  const { t } = useI18n()
+  const { t, l } = useI18n()
+  const [shown, setShown] = useState(1)
+  const total = data.steps.length
+  const done = shown >= total
+  const latest = data.steps[shown - 1]
   return (
-    <ol className={styles.steps}>
-      {data.steps.map((step, i) => (
-        <li key={i} className={styles.step}>
-          <span className={styles.stepNo}>{i + 1}</span>
-          <span className="visually-hidden">{t('pills.visual.step', { n: i + 1 })}: </span>
-          <Loc field={step} />
-        </li>
-      ))}
-    </ol>
+    <>
+      <ol className={styles.steps}>
+        {data.steps.map((step, i) => {
+          const visible = i < shown
+          return (
+            <li
+              key={i}
+              className={visible ? styles.step : `${styles.step} ${styles.stepWaiting}`}
+              aria-hidden={visible ? undefined : true}
+            >
+              <span className={styles.stepNo}>{i + 1}</span>
+              <span className="visually-hidden">{t('pills.visual.step', { n: i + 1 })}: </span>
+              <Loc field={step} className={styles.stepText} />
+            </li>
+          )
+        })}
+      </ol>
+      <button
+        type="button"
+        className={styles.reveal}
+        onClick={() => setShown(done ? 1 : shown + 1)}
+        data-testid="timeline-next"
+      >
+        <Icon name={done ? 'restart' : 'arrow-right'} size={18} />
+        {done ? t('pills.visual.again') : t('pills.visual.then')}
+      </button>
+      <p className="visually-hidden" aria-live="polite">
+        {shown > 1 && latest ? `${t('pills.visual.step', { n: shown })}: ${l(latest)}` : ''}
+      </p>
+    </>
   )
 }
 
+type SwapSide = 'before' | 'after'
+
+/** A habit and a swap, one at a time: "Often" and "Try instead" switch between them. */
 function BeforeAfter({ data }: { data: Extract<InsightVisualData, { type: 'before-after' }> }) {
   const { t } = useI18n()
+  const [side, setSide] = useState<SwapSide>('before')
   return (
     <div className={styles.swap}>
-      <div className={`${styles.swapBox} ${styles.swapBefore}`}>
-        <p className={styles.swapTag}>{t('pills.visual.before')}</p>
-        <p className={styles.swapTitle}>
-          <Loc field={data.before.title} />
-        </p>
-        <p>
-          <Loc field={data.before.text} />
-        </p>
+      <div className={styles.swapToggle}>
+        {(['before', 'after'] as const).map((s) => (
+          <button
+            key={s}
+            type="button"
+            className={styles.swapButton}
+            aria-pressed={side === s}
+            onClick={() => setSide(s)}
+          >
+            {t(`pills.visual.${s}`)}
+          </button>
+        ))}
       </div>
-      <span className={styles.swapArrow} aria-hidden="true">
-        →
-      </span>
-      <div className={`${styles.swapBox} ${styles.swapAfter}`}>
-        <p className={styles.swapTag}>{t('pills.visual.after')}</p>
-        <p className={styles.swapTitle}>
-          <Loc field={data.after.title} />
-        </p>
-        <p>
-          <Loc field={data.after.text} />
-        </p>
+      {/* Both boxes share one space, so the card keeps its height when they switch. */}
+      <div className={styles.swapStack}>
+        {(['before', 'after'] as const).map((s) => (
+          <div
+            key={s}
+            className={`${styles.swapBox} ${s === 'before' ? styles.swapBefore : styles.swapAfter}`}
+            data-active={side === s}
+            aria-hidden={side === s ? undefined : true}
+          >
+            <p className={styles.swapTitle}>
+              <Loc field={data[s].title} />
+            </p>
+            <p>
+              <Loc field={data[s].text} />
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -121,20 +167,32 @@ function GroupCompare({ data }: { data: Extract<InsightVisualData, { type: 'grou
   )
 }
 
+/** The diagrams with buttons in them. The others are a single picture. */
+const INTERACTIVE: InsightVisualData['type'][] = ['timeline', 'before-after']
+
 /**
- * One of a few simple diagrams, chosen by the card's visual.type. The figure
- * is announced as one image with the card's own alt text; everything visible
- * in it is also text, so colour is never the only signal.
+ * One of a few simple diagrams, chosen by the card's visual.type. A diagram
+ * without buttons is announced as one image with the card's own alt text. One
+ * with buttons is a group named by that text, so its buttons can be reached.
+ * Everything visible in a diagram is also text, so colour is never the only
+ * signal. `tone` matches the diagram's accent to the pill.
  */
-export function InsightVisual({ data }: { data: InsightVisualData }) {
+export function InsightVisual({
+  data,
+  tone = 'red',
+}: {
+  data: InsightVisualData
+  tone?: 'red' | 'green'
+}) {
   const { l, lang } = useI18n()
   return (
     <figure
       className={styles.visual}
-      role="img"
+      role={INTERACTIVE.includes(data.type) ? 'group' : 'img'}
       aria-label={l(data.alt)}
       lang={localizedLang(data.alt, lang)}
       data-visual={data.type}
+      data-tone={tone}
     >
       <div lang={lang}>
         {data.type === 'impact-bars' && <ImpactBars data={data} />}

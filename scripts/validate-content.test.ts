@@ -83,13 +83,13 @@ describe('validateContent', () => {
 
   it('fails a prasang picture with no alt text', () => {
     const dir = fixture()
-    edit(dir, 'content/prasangs/lamp-by-the-window.en.md', (s) =>
+    edit(dir, 'content/prasangs/sparrows-and-the-sea.en.md', (s) =>
       s.replace(
-        '![The same lamp burning steadily beside a half-closed window, with an open notebook nearby.]',
-        '![]',
+        "alt: 'A mother sparrow shelters three chicks in a nest beside the sea.'",
+        "alt: ''",
       ),
     )
-    expect(errorsOf(dir).join('\n')).toMatch(/lamp-by-the-window\.en\.md: .*no alt text/)
+    expect(errorsOf(dir).join('\n')).toMatch(/sparrows-and-the-sea\.en\.md: .*needs alt text/)
   })
 
   it('fails prasang language files that disagree', () => {

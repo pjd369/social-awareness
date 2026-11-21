@@ -33,9 +33,9 @@ export function ImpactByAge({ impacts }: { impacts: NonNullable<PillCard['audien
 
   return (
     <section className={styles.age} aria-labelledby={`${base}-title`}>
-      <h3 id={`${base}-title`} className={styles.subheading}>
+      <h4 id={`${base}-title`} className={styles.subheading}>
         {t('pills.ageTitle')}
-      </h3>
+      </h4>
       <div role="tablist" className={styles.tabs} aria-labelledby={`${base}-title`}>
         {IMPACT_GROUPS.map((g, i) => (
           <button

@@ -216,6 +216,8 @@ function checkPrasangs(
   images: Set<string>,
   used: Set<string>,
   audio: Set<string>,
+  videos: Set<string>,
+  captions: Set<string>,
 ) {
   const dir = join(root, 'content/prasangs')
   const groups = new Map<string, PrasangFile[]>()
@@ -242,6 +244,9 @@ function checkPrasangs(
     const front = parsed.data
     if (front.id !== fileName.id)
       c.error(rel, `id "${front.id}" does not match the file name "${fileName.id}"`)
+    if (front.comic && front.video) {
+      c.error(rel, 'a prasang cannot be both comic: true and have a video')
+    }
     if (front.comic) {
       if (front.images.length < 2)
         c.error(rel, 'a comic prasang needs at least two images under images:')
@@ -262,6 +267,19 @@ function checkPrasangs(
         c.error(rel, `soundtrack "${front.soundtrack}" is not in content/audio/`)
       if (!front.comic) c.error(rel, 'soundtrack requires comic: true')
     }
+    if (front.video) {
+      if (!videos.has(front.video.src))
+        c.error(rel, `video "${front.video.src}" is not in content/video/`)
+      if (front.video.captions && !captions.has(front.video.captions)) {
+        c.error(rel, `captions "${front.video.captions}" are not in content/captions/`)
+      }
+      if (front.video.poster) {
+        used.add(front.video.poster)
+        if (!images.has(front.video.poster))
+          c.error(rel, `video poster "${front.video.poster}" is not in content/images/`)
+      }
+      if (!front.video.captions) c.warn(rel, 'video has no captions file')
+    }
     for (const img of findMarkdownImages(doc.body)) {
       if (!img.alt)
         c.error(rel, `picture "${img.src}" in the text has no alt text: write it inside ![...]`)
@@ -269,7 +287,7 @@ function checkPrasangs(
         c.error(rel, `picture "${img.src}" in the text is not listed under images: with its source`)
       }
     }
-    if (!doc.body.trim()) c.error(rel, 'the prasang has no text')
+    if (!doc.body.trim() && !front.video) c.error(rel, 'the prasang has no text')
     const group = groups.get(fileName.id) ?? []
     group.push({ rel, lang: fileName.lang, front })
     groups.set(fileName.id, group)
@@ -283,6 +301,15 @@ function checkPrasangs(
     }
     const imageKey = (f: PrasangFile) =>
       JSON.stringify(f.front.images.map((i) => [i.src, i.source]))
+    const videoKey = (f: PrasangFile) =>
+      f.front.video
+        ? JSON.stringify([
+            f.front.video.src,
+            f.front.video.captions ?? null,
+            f.front.video.source,
+            f.front.video.poster ?? null,
+          ])
+        : null
     for (const f of files) {
       if (f === en) continue
       if (f.front.audience !== en.front.audience) c.error(f.rel, `audience differs from ${en.rel}`)
@@ -295,6 +322,7 @@ function checkPrasangs(
         c.error(f.rel, `pageSeconds differs from ${en.rel}`)
       if (imageKey(f) !== imageKey(en))
         c.error(f.rel, `images (src and source) differ from ${en.rel}`)
+      if (videoKey(f) !== videoKey(en)) c.error(f.rel, `video differs from ${en.rel}`)
     }
     for (const lang of OTHER_LANGS) {
       if (!files.some((f) => f.lang === lang)) {
@@ -390,11 +418,13 @@ export function validateContent(root: string): Report {
   const imageDir = join(root, 'content/images')
   const images = new Set(listFiles(imageDir, /\.(svg|png|jpe?g|webp|gif|avif)$/i))
   const audio = new Set(listFiles(join(root, 'content/audio'), /\.(mp3|ogg|wav|m4a)$/i))
+  const videos = new Set(listFiles(join(root, 'content/video'), /\.(mp4|webm|ogg)$/i))
+  const captions = new Set(listFiles(join(root, 'content/captions'), /\.vtt$/i))
   const used = new Set<string>()
   checkLocales(c, root)
   checkStories(c, root, images, used)
   checkScenarioMoral(c, root, images, used)
-  checkPrasangs(c, root, images, used, audio)
+  checkPrasangs(c, root, images, used, audio, videos, captions)
   checkPills(c, root)
   checkWords(c, root)
   checkDoodle(c, root)

@@ -51,7 +51,8 @@ export function Layout() {
         </PageContext.Provider>
       </main>
       <Footer />
-      {intro && <Fireworks />}
+      {/* A short welcome show, once per page load. */}
+      {intro && <Fireworks rockets={14} />}
     </div>
   )
 }

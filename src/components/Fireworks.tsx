@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './Fireworks.module.css'
 
-/** First launch: after the page has faded in. */
-const START_MS = 900
-/** Last regular launch; a short finale follows. */
-const END_MS = 2400
-/** Hard stop, so the canvas never outlives the welcome. */
-const MAX_MS = 7500
-const FINALE = 4
-const GRAVITY = 70
+/** Delay before the first rocket. */
+const START_MS = 120
+/** Gap between regular launches — show length follows launch count, not a clock. */
+const LAUNCH_GAP_MS = 175
+/** Extra rockets that fire in a quick closing volley. */
+const FINALE = 8
+/** Soft fade after the last burst so the sky eases out. */
+const FADE_MS = 1_600
+/** Soft gravity — heavy pull turns round bursts into a tall column. */
+const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
 interface Rocket {
@@ -36,13 +38,34 @@ interface Spark {
 
 const easeOut = (t: number) => 1 - (1 - t) ** 3
 
+/** Visible browser screen — not layout/page height (mobile chrome safe). */
+function visibleScreen() {
+  const vv = window.visualViewport
+  if (vv) {
+    return {
+      left: vv.offsetLeft,
+      top: vv.offsetTop,
+      width: vv.width,
+      height: vv.height,
+    }
+  }
+  return {
+    left: 0,
+    top: 0,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }
+}
+
 /**
- * Fireworks rising from the bottom of the screen and bursting, once per page
- * load: they start after the page has faded in and drift for about 5 seconds,
- * ending with a small finale. The canvas never takes pointer events. The
- * layout renders this only when intro motion is allowed.
+ * Fireworks: a short show when the site opens (see Layout) and at the pill
+ * game's ending. A fixed number of rockets rise straight up and burst between
+ * 60–90% of the visual screen height; the show ends when those launches (and
+ * their sparks) are done — not on a wall-clock timer. `rockets` sets a smaller
+ * number for a shorter show; the last few always fire together as the closing
+ * volley.
  */
-export function Fireworks() {
+export function Fireworks({ rockets: rocketLimit }: { rockets?: number } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [done, setDone] = useState(false)
 
@@ -55,33 +78,41 @@ export function Fireworks() {
       return
     }
 
-    const width = window.innerWidth
-    const height = window.innerHeight
+    const screen = visibleScreen()
+    const width = screen.width
+    const height = screen.height
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     canvas.width = Math.round(width * dpr)
     canvas.height = Math.round(height * dpr)
-    ctx.scale(dpr, dpr)
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    canvas.style.left = `${screen.left}px`
+    canvas.style.top = `${screen.top}px`
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
 
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
-    const rocketCount = small ? 10 : 14
-    const sparksPerBurst = small ? 28 : 40
+    // Fixed launch budget (dense sky). Duration = launches × gap + rise/fade.
+    const rocketCount = Math.max(FINALE, rocketLimit ?? (small ? 48 : 68))
+    const sparksPerBurst = small ? 36 : 48
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
       const finale = i >= regular
-      // 3 is coprime with 10 and 14, so this visits every slot once in a scattered order.
-      const slot = (i * 3) % rocketCount
+      // Scatter columns across the width without clustering.
+      const slot = (i * 11) % rocketCount
+      // Burst altitude: 60–90% of the *visual* screen height from the bottom.
+      const altitude = 0.6 + Math.random() * 0.3
       return {
-        x: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
+        x: width * (0.06 + (0.88 * (slot + 0.25 + Math.random() * 0.5)) / rocketCount),
         startY: height + 8,
-        targetY: height * (0.14 + Math.random() * 0.32),
+        targetY: height * (1 - altitude),
         launchAt: finale
-          ? END_MS + 300 + (i - regular) * 220
-          : START_MS + (i / regular) * (END_MS - START_MS) + Math.random() * 220,
-        riseMs: 1200 + Math.random() * 400,
+          ? START_MS + regular * LAUNCH_GAP_MS + (i - regular) * 150
+          : START_MS + i * LAUNCH_GAP_MS + (Math.random() - 0.5) * 80,
+        riseMs: 900 + Math.random() * 350,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
-        scale: finale ? 1.3 : 0.75 + Math.random() * 0.5,
+        scale: finale ? 1.4 : 0.8 + Math.random() * 0.45,
         burst: false,
       }
     })
@@ -90,21 +121,30 @@ export function Fireworks() {
     let start = 0
     let last = 0
     let frame = 0
+    /** When every rocket has burst — fade starts from this moment. */
+    let allBurstAt = 0
 
+    /**
+     * All sparks launch together; speeds vary so some travel far and some stay
+     * close — a filled round bloom, not equal-length spokes.
+     */
     const burst = (x: number, y: number, colour: string, scale: number) => {
       const count = Math.round(sparksPerBurst * scale)
+      const minSpeed = 28 * size * scale
+      const maxSpeed = 110 * size * scale
       for (let i = 0; i < count; i++) {
-        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.2
-        const speed = (60 + Math.random() * 70) * size * scale
+        const angle = Math.random() * Math.PI * 2
+        const t = Math.random() ** 0.65
+        const speed = minSpeed + (maxSpeed - minSpeed) * t
         sparks.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           age: 0,
-          life: 1.5 + Math.random() * 0.7,
+          life: 1.15 + Math.random() * 0.9,
           colour: Math.random() < 0.3 ? '#fff6dc' : colour,
-          size: (1.4 + Math.random() * 1.2) * size,
+          size: (1.3 + Math.random() * 1.4) * size,
         })
       }
     }
@@ -142,7 +182,14 @@ export function Fireworks() {
         ctx.fill()
       }
 
-      const drag = Math.pow(0.4, dt)
+      if (!allBurstAt && rockets.every((r) => r.burst)) {
+        allBurstAt = elapsed
+      }
+
+      const fade = allBurstAt === 0 ? 1 : Math.max(0, 1 - (elapsed - allBurstAt) / FADE_MS)
+
+      // Mild drag + late gravity so the halo stays circular while it expands.
+      const drag = Math.pow(0.78, dt)
       for (let i = sparks.length - 1; i >= 0; i--) {
         const spark = sparks[i]
         if (!spark) continue
@@ -151,11 +198,12 @@ export function Fireworks() {
           sparks.splice(i, 1)
           continue
         }
+        const lifeT = spark.age / spark.life
         spark.vx *= drag
-        spark.vy = spark.vy * drag + GRAVITY * dt
+        spark.vy = spark.vy * drag + GRAVITY * dt * Math.min(1, lifeT * 1.8)
         spark.x += spark.vx * dt
         spark.y += spark.vy * dt
-        ctx.globalAlpha = 1 - spark.age / spark.life
+        ctx.globalAlpha = fade * (1 - lifeT)
         ctx.fillStyle = spark.colour
         ctx.beginPath()
         ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2)
@@ -163,8 +211,9 @@ export function Fireworks() {
       }
       ctx.globalAlpha = 1
 
-      const finished = rockets.every((r) => r.burst) && sparks.length === 0
-      if (finished || elapsed > MAX_MS) {
+      // Done when the launch budget is spent and the sky has cleared / faded.
+      const launchesDone = allBurstAt > 0
+      if (launchesDone && (sparks.length === 0 || fade <= 0)) {
         setDone(true)
         return
       }
@@ -173,7 +222,7 @@ export function Fireworks() {
 
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [done])
+  }, [done, rocketLimit])
 
   if (done) return null
   return <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />

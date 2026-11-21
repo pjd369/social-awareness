@@ -4,8 +4,8 @@ test.describe('story player', () => {
   test('plays a Bhulkao story to two different endings, with Back and restart', async ({
     page,
   }) => {
-    await page.goto('/bhulkao/story')
-    await expect(page).toHaveURL(/\/bhulkao\/story\/homework-time$/)
+    await page.goto('/bhulkao/scenario')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
@@ -29,7 +29,7 @@ test.describe('story player', () => {
     await page.getByRole('button', { name: 'Try a different choice' }).click()
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
     await page.getByRole('button', { name: 'Finish homework first' }).click()
-    await page.getByRole('button', { name: 'Ask Mira to do homework with you' }).click()
+    await page.getByRole('button', { name: 'Ask your friend to do homework with you' }).click()
     await page.getByRole('button', { name: 'After homework, play outside' }).click()
     await expect(page.getByText('You both finish early')).toBeVisible()
     await expect(page.getByRole('complementary', { name: 'What we learn' })).toContainText(
@@ -114,8 +114,16 @@ test.describe('story player', () => {
     await expect(endings).toContainText('You have found every ending.')
   })
 
-  test('a Bhulkao story ending has no choice recap or endings count', async ({ page }) => {
+  test("links to Bhulkao's earlier story address still open the scenario", async ({ page }) => {
     await page.goto('/bhulkao/story/homework-time')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
+    await page.goto('/bhulkao/story')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+  })
+
+  test('a Bhulkao story ending has no choice recap or endings count', async ({ page }) => {
+    await page.goto('/bhulkao/scenario/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()
     await page.getByRole('button', { name: 'Keep playing' }).click()
     await page.getByRole('button', { name: 'Play until bedtime' }).click()
@@ -254,16 +262,20 @@ test.describe('story player', () => {
 test.describe('prasang reader', () => {
   test('reads a Yuvako prasang to its lesson box', async ({ page }) => {
     await page.goto('/yuvako/prasang')
-    await expect(page).toHaveURL(/\/yuvako\/prasang\/lamp-by-the-window$/)
-    await expect(page.getByTestId('placeholder-notice')).toBeVisible()
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'Placeholder: The Lamp by the Window',
-    )
-    await expect(page.getByRole('img', { name: /oil lamp flickering/ })).toBeVisible()
+    await expect(page).toHaveURL(/\/yuvako\/prasang\/einstein-prayer$/)
+    await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText("Einstein's Prayer")
+    await expect(page.getByTestId('prasang-video')).toBeVisible()
+    const subs = page.getByTestId('prasang-subs-toggle')
+    await expect(subs).toHaveAttribute('aria-pressed', 'false')
+    await expect(subs).toHaveAccessibleName('CC subtitles off')
+    await subs.click()
+    await expect(subs).toHaveAttribute('aria-pressed', 'true')
+    await expect(subs).toHaveAccessibleName('CC subtitles on')
     const lesson = page.getByRole('complementary', { name: 'Reflect' })
     await lesson.scrollIntoViewIfNeeded()
     await expect(lesson).toBeVisible()
-    await expect(lesson).toContainText('which open windows')
+    await expect(lesson).toContainText('Atmiyata')
   })
 
   test('a Bhulkao film prasang has play and music controls', async ({ page }) => {
@@ -294,8 +306,9 @@ test('placeholder content is marked unmistakably', async ({ page }) => {
   await expect(page.getByTestId('preview-strip')).toHaveCount(0)
   await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
   await page.goto('/yuvako')
-  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toBeVisible()
-  // Both Yuvako games and the scenarios are final, so Activity and Scenario carry no badge.
+  // The Yuvako games, scenarios and prasang are all final, so no part carries a badge.
+  await expect(page.getByRole('link', { name: /Prasang/ })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Activity/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Activity.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Scenario/ })).toBeVisible()
