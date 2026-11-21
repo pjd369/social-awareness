@@ -1,6 +1,38 @@
+/*
+ * Square wrapper centered on the tip — sparks are never clipped by the
+ * thin stem, so the halo stays round in 2D.
+ */
 .fuljadi {
   position: absolute;
   z-index: 5;
+  width: 17.5rem;
+  height: 17.5rem;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+
+.dragging .handle {
+  cursor: grabbing;
+}
+
+.sparks {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
   width: 2.35rem;
   height: 9.5rem;
   margin: 0;
@@ -11,46 +43,23 @@
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  transform: translate(-50%, -90%);
-  overflow: visible;
+  pointer-events: auto;
+  /* Tip of the stick sits at the wrapper center (spark origin). */
+  transform: translate(-50%, -12%);
 }
 
-.fuljadi:active,
-.dragging {
-  cursor: grabbing;
-}
-
-.fuljadi:focus-visible {
+.handle:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 4px;
   border-radius: 0.5rem;
 }
 
 .art {
-  position: relative;
-  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
   pointer-events: none;
-}
-
-/*
- * Spark canvas is centered on the burning tip so streaks spray freely
- * in every direction (like a real fuljhadi fountain).
- */
-.sparks {
-  position: absolute;
-  left: 50%;
-  /* Align with the stick tip in the 152-tall SVG (tip ~ y 30). */
-  top: 18%;
-  z-index: 2;
-  /* Square canvas → round sparkle perimeter */
-  width: 15rem;
-  height: 15rem;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
 }
 
 .leaving {
@@ -61,7 +70,7 @@
 @keyframes fuljadiOut {
   to {
     opacity: 0;
-    transform: translate(-50%, -90%) scale(0.6);
+    transform: translate(-50%, -50%) scale(0.65);
   }
 }
 
