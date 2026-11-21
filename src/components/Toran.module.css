@@ -21,13 +21,21 @@
   height: clamp(3.5rem, 11vw, 5rem);
 }
 
-.unit {
+.unit,
+.unitEnd {
   flex: none;
   display: block;
   height: 100%;
-  /* Keep the designed aspect — never stretch flowers wider. */
   width: auto;
-  aspect-ratio: 130 / 108;
+}
+
+.unit {
+  /* UNIT_W / UNIT_H — keep flowers unstretched. */
+  aspect-ratio: 156 / 112;
+}
+
+.unitEnd {
+  aspect-ratio: 13 / 112;
 }
 
 @media (prefers-reduced-motion: reduce) {

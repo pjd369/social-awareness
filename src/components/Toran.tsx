@@ -8,11 +8,13 @@ const STRING = '#e0983a'
 /** Same centre-to-centre gap for every flower. */
 const SPACING = 13
 const FLOWER_R = 4.35
-/** One U-shaped cell — tiled across the screen without stretching. */
-const UNIT_W = SPACING * 10
-const UNIT_H = 108
+/**
+ * One cohesive cell: leaf-hanger → single U → (next cell’s hanger).
+ * Width is a whole number of spacings so seams stay even.
+ */
+const UNIT_W = SPACING * 12
+const UNIT_H = 112
 const TOP_Y = 11
-/** Enough tiles to cover ultra-wide screens at the fixed unit size. */
 const TILES = 28
 
 type Pt = { x: number; y: number }
@@ -21,7 +23,6 @@ function dist(a: Pt, b: Pt) {
   return Math.hypot(a.x - b.x, a.y - b.y)
 }
 
-/** Equal arc-length samples on a quadratic Bézier (includes both ends). */
 function pointsOnQuad(
   x1: number,
   y1: number,
@@ -32,7 +33,7 @@ function pointsOnQuad(
   spacing: number,
 ): Pt[] {
   const samples: Pt[] = []
-  const steps = 72
+  const steps = 80
   for (let i = 0; i <= steps; i++) {
     const t = i / steps
     const u = 1 - t
@@ -60,7 +61,7 @@ function pointsOnQuad(
     }
   }
   const last = samples[samples.length - 1]!
-  if (dist(out[out.length - 1]!, last) > spacing * 0.3) out.push(last)
+  if (dist(out[out.length - 1]!, last) > spacing * 0.28) out.push(last)
   else out[out.length - 1] = last
   return out
 }
@@ -121,7 +122,6 @@ function Strand({
   points: Pt[]
   leaf?: boolean
   deepStart?: number
-  /** Omit the last bloom so tiled units don’t double up on the seam. */
   skipLastFlower?: boolean
 }) {
   const flowers = skipLastFlower ? points.slice(0, -1) : points
@@ -137,14 +137,18 @@ function Strand({
   )
 }
 
-/** One seamless U-cell (left edge inclusive, right edge shared with the next tile). */
+/**
+ * One repeat: green-leaf hanger on the left, then a single U swag that meets
+ * the next tile’s hanger. Right-edge blooms are omitted so the join is seamless.
+ */
 function ToranUnit({ index }: { index: number }) {
   const mid = UNIT_W / 2
-  // Rail stops one spacing before the right edge so the next tile’s first flower continues the rhythm.
   const rail = pointsOnLine(0, TOP_Y, UNIT_W, TOP_Y, SPACING)
-  const swag = pointsOnQuad(0, TOP_Y, mid, 52, UNIT_W, TOP_Y, SPACING)
-  const swagInner = pointsOnQuad(0, TOP_Y + 9, mid, 62, UNIT_W, TOP_Y + 9, SPACING)
-  const tassel = pointsOnLine(mid, TOP_Y, mid, TOP_Y + SPACING * 4, SPACING)
+  // One U between this hanger and the next.
+  const swag = pointsOnQuad(0, TOP_Y, mid, 54, UNIT_W, TOP_Y, SPACING)
+  const swagInner = pointsOnQuad(0, TOP_Y + 9, mid, 64, UNIT_W, TOP_Y + 9, SPACING)
+  // Hanger drops from the joint on the left of this cell.
+  const hanger = pointsOnLine(0, TOP_Y, 0, TOP_Y + SPACING * 4, SPACING)
 
   return (
     <svg
@@ -157,14 +161,31 @@ function ToranUnit({ index }: { index: number }) {
       <Strand points={rail} skipLastFlower deepStart={index} />
       <Strand points={swag} skipLastFlower deepStart={index} />
       <Strand points={swagInner} skipLastFlower deepStart={index + 1} />
-      <Strand points={tassel} leaf deepStart={1} />
+      <Strand points={hanger} leaf deepStart={1} />
+    </svg>
+  )
+}
+
+/** Closing hanger so the last U also sits between two green-leaf drops. */
+function EndHanger() {
+  const hanger = pointsOnLine(0, TOP_Y, 0, TOP_Y + SPACING * 4, SPACING)
+  return (
+    <svg
+      className={styles.unitEnd}
+      viewBox={`0 0 ${SPACING} ${UNIT_H}`}
+      xmlns="http://www.w3.org/2000/svg"
+      focusable="false"
+      aria-hidden="true"
+    >
+      <Strand points={hanger} leaf deepStart={1} />
+      <Marigold x={0} y={TOP_Y} deep />
     </svg>
   )
 }
 
 /**
- * Full-bleed marigold toran: fixed-size U cells tiled horizontally so the
- * garland spans the screen without stretching flowers or leaving side gaps.
+ * Full-bleed marigold toran: repeating “hanger · U · hanger” cells, fixed size
+ * so the garland stays smooth and cohesive across the screen.
  */
 export function Toran({ className }: { className?: string }) {
   return (
@@ -173,6 +194,7 @@ export function Toran({ className }: { className?: string }) {
         {Array.from({ length: TILES }, (_, i) => (
           <ToranUnit key={i} index={i} />
         ))}
+        <EndHanger />
       </div>
     </div>
   )
