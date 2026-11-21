@@ -29,14 +29,13 @@ function writeLit() {
   }
 }
 
-/** Generous hit: tip near the wick / oil bowl counts as lighting. */
+/** Tip must reach the black vaat (wick); small pad so touch still feels fair. */
 function tipNearWick(tipX: number, tipY: number, wick: DOMRect, stage: DOMRect): boolean {
   const absX = stage.left + tipX
   const absY = stage.top + tipY
   const cx = wick.left + wick.width / 2
   const cy = wick.top + wick.height / 2
-  // Radius scales with the diya so phones and large screens both feel fair.
-  const radius = Math.max(wick.width, wick.height) * 0.75 + 36
+  const radius = Math.max(wick.width, wick.height) * 0.9 + 22
   const dx = absX - cx
   const dy = absY - cy
   return dx * dx + dy * dy <= radius * radius

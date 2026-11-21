@@ -27,14 +27,12 @@ interface Spark {
   hue: number
 }
 
-const CANVAS_W = 220
-const CANVAS_H = 260
-/** Emission point — canvas is CSS-centered on the stick tip. */
-const TIP_X = CANVAS_W / 2
-const TIP_Y = CANVAS_H / 2
+/** Square canvas so the sparkle perimeter reads as a round halo. */
+const CANVAS = 240
+const TIP = CANVAS / 2
 
 /**
- * A burning fuljadi: wooden stick plus a live sparkler spray
+ * A burning fuljadi: thin stick plus a round sparkler spray
  * (dense gold/white streaks, like a real Indian fuljhadi).
  */
 export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: FuljadiProps) {
@@ -54,49 +52,48 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
     let raf = 0
     let running = true
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    canvas.width = CANVAS_W * dpr
-    canvas.height = CANVAS_H * dpr
+    canvas.width = CANVAS * dpr
+    canvas.height = CANVAS * dpr
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
     function emit(burst: number) {
       for (let i = 0; i < burst; i++) {
-        const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.55
-        const speed = 1.6 + Math.random() * 4.8
+        // Full 360° so the sparkle cloud stays round, not oblong.
+        const angle = Math.random() * Math.PI * 2
+        const speed = 2.2 + Math.random() * 5.2
         sparksRef.current.push({
-          x: TIP_X + (Math.random() - 0.5) * 4,
-          y: TIP_Y + (Math.random() - 0.5) * 4,
+          x: TIP + (Math.random() - 0.5) * 3,
+          y: TIP + (Math.random() - 0.5) * 3,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 0,
-          maxLife: 18 + Math.random() * 28,
-          width: 0.7 + Math.random() * 1.4,
+          maxLife: 16 + Math.random() * 22,
+          width: 0.65 + Math.random() * 1.35,
           hue: Math.random() < 0.55 ? 42 + Math.random() * 18 : 28 + Math.random() * 12,
         })
       }
-      // Cap so a long hold never grows without bound.
-      if (sparksRef.current.length > 220) {
-        sparksRef.current.splice(0, sparksRef.current.length - 220)
+      if (sparksRef.current.length > 280) {
+        sparksRef.current.splice(0, sparksRef.current.length - 280)
       }
     }
 
     function tick() {
       if (!running || !ctx) return
       frame += 1
-      // Continuous dense spray, with a small extra burst every few frames.
-      emit(frame % 2 === 0 ? 7 : 4)
-      if (frame % 5 === 0) emit(6)
+      emit(frame % 2 === 0 ? 10 : 7)
+      if (frame % 4 === 0) emit(8)
 
-      ctx.clearRect(0, 0, CANVAS_W, CANVAS_H)
+      ctx.clearRect(0, 0, CANVAS, CANVAS)
 
-      // Soft bloom around the burning tip.
-      const bloom = ctx.createRadialGradient(TIP_X, TIP_Y, 0, TIP_X, TIP_Y, 42)
-      bloom.addColorStop(0, 'rgba(255, 248, 210, 0.95)')
-      bloom.addColorStop(0.25, 'rgba(255, 196, 80, 0.55)')
-      bloom.addColorStop(0.55, 'rgba(255, 120, 40, 0.18)')
+      // Round bloom around the burning tip.
+      const bloom = ctx.createRadialGradient(TIP, TIP, 0, TIP, TIP, 48)
+      bloom.addColorStop(0, 'rgba(255, 248, 210, 0.98)')
+      bloom.addColorStop(0.22, 'rgba(255, 196, 80, 0.6)')
+      bloom.addColorStop(0.5, 'rgba(255, 120, 40, 0.2)')
       bloom.addColorStop(1, 'rgba(255, 120, 40, 0)')
       ctx.fillStyle = bloom
       ctx.beginPath()
-      ctx.arc(TIP_X, TIP_Y, 42, 0, Math.PI * 2)
+      ctx.arc(TIP, TIP, 48, 0, Math.PI * 2)
       ctx.fill()
 
       const next: Spark[] = []
@@ -104,44 +101,43 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
         spark.life += 1
         spark.x += spark.vx
         spark.y += spark.vy
-        spark.vy += 0.09 // slight drop, like real sparks
-        spark.vx *= 0.985
+        // Very light drag only — keep the perimeter round.
+        spark.vx *= 0.978
+        spark.vy *= 0.978
         if (spark.life >= spark.maxLife) continue
         next.push(spark)
 
         const t = spark.life / spark.maxLife
-        const alpha = t < 0.15 ? t / 0.15 : 1 - (t - 0.15) / 0.85
-        const len = 4 + (1 - t) * 9
+        const alpha = t < 0.12 ? t / 0.12 : 1 - (t - 0.12) / 0.88
+        const len = 5 + (1 - t) * 10
         const speed = Math.hypot(spark.vx, spark.vy) || 1
         const nx = spark.vx / speed
         const ny = spark.vy / speed
 
-        ctx.strokeStyle = `hsla(${spark.hue}, 100%, ${68 + (1 - t) * 22}%, ${alpha})`
-        ctx.lineWidth = spark.width * (1.15 - t * 0.5)
+        ctx.strokeStyle = `hsla(${spark.hue}, 100%, ${70 + (1 - t) * 22}%, ${alpha})`
+        ctx.lineWidth = spark.width * (1.2 - t * 0.45)
         ctx.lineCap = 'round'
         ctx.beginPath()
         ctx.moveTo(spark.x, spark.y)
         ctx.lineTo(spark.x - nx * len, spark.y - ny * len)
         ctx.stroke()
 
-        // Hot white core near the tip of each streak.
-        if (t < 0.45) {
-          ctx.fillStyle = `rgba(255, 255, 245, ${alpha * 0.9})`
+        if (t < 0.5) {
+          ctx.fillStyle = `rgba(255, 255, 245, ${alpha * 0.95})`
           ctx.beginPath()
-          ctx.arc(spark.x, spark.y, spark.width * 0.55, 0, Math.PI * 2)
+          ctx.arc(spark.x, spark.y, spark.width * 0.6, 0, Math.PI * 2)
           ctx.fill()
         }
       }
       sparksRef.current = next
 
-      // Bright burning head.
       ctx.fillStyle = '#fff8e8'
       ctx.beginPath()
-      ctx.arc(TIP_X, TIP_Y, 3.2 + Math.sin(frame / 4) * 0.6, 0, Math.PI * 2)
+      ctx.arc(TIP, TIP, 3.4 + Math.sin(frame / 4) * 0.7, 0, Math.PI * 2)
       ctx.fill()
-      ctx.fillStyle = 'rgba(255, 200, 90, 0.85)'
+      ctx.fillStyle = 'rgba(255, 200, 90, 0.9)'
       ctx.beginPath()
-      ctx.arc(TIP_X, TIP_Y, 5.5 + Math.sin(frame / 5) * 0.8, 0, Math.PI * 2)
+      ctx.arc(TIP, TIP, 5.8 + Math.sin(frame / 5) * 0.9, 0, Math.PI * 2)
       ctx.fill()
 
       raf = requestAnimationFrame(tick)
@@ -168,8 +164,8 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
       <canvas
         ref={canvasRef}
         className={styles.sparks}
-        width={CANVAS_W}
-        height={CANVAS_H}
+        width={CANVAS}
+        height={CANVAS}
         aria-hidden="true"
       />
       <svg className={styles.art} viewBox="0 0 52 152" aria-hidden="true" focusable="false">
@@ -186,17 +182,17 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
           </linearGradient>
         </defs>
 
+        {/* Thin stem */}
         <rect
-          x="22"
-          y="36"
-          width="8"
-          height="108"
-          rx="3"
+          x="24.5"
+          y="34"
+          width="3"
+          height="112"
+          rx="1.5"
           fill={`url(#fuljadi-stick-${tipGradId})`}
         />
-        <rect x="23.5" y="38" width="2.2" height="100" rx="1" fill="rgb(255 220 170 / 28%)" />
+        <rect x="25" y="36" width="1" height="106" rx="0.5" fill="rgb(255 220 170 / 30%)" />
 
-        {/* Static tip for reduced-motion / canvas loading. */}
         {reducedMotion && (
           <>
             <circle cx="26" cy="30" r="16" fill={`url(#fuljadi-tip-${tipGradId})`} />
