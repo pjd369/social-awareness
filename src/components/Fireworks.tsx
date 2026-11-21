@@ -58,11 +58,13 @@ function visibleScreen() {
 }
 
 /**
- * Fireworks when the intro diya is lit. A fixed number of rockets rise straight
- * up and burst between 60–90% of the visual screen height; the show ends when
- * those launches (and their sparks) are done — not on a wall-clock timer.
+ * Fireworks, as when the intro diya is lit. A fixed number of rockets rise
+ * straight up and burst between 60–90% of the visual screen height; the show
+ * ends when those launches (and their sparks) are done — not on a wall-clock
+ * timer. `rockets` sets a smaller number for a shorter show; the last few
+ * always fire together as the closing volley.
  */
-export function Fireworks() {
+export function Fireworks({ rockets: rocketLimit }: { rockets?: number } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [done, setDone] = useState(false)
 
@@ -90,7 +92,7 @@ export function Fireworks() {
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
     // Fixed launch budget (dense sky). Duration = launches × gap + rise/fade.
-    const rocketCount = small ? 48 : 68
+    const rocketCount = Math.max(FINALE, rocketLimit ?? (small ? 48 : 68))
     const sparksPerBurst = small ? 36 : 48
     const regular = rocketCount - FINALE
 
@@ -219,7 +221,7 @@ export function Fireworks() {
 
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [done])
+  }, [done, rocketLimit])
 
   if (done) return null
   return <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />

@@ -108,7 +108,6 @@
   "prasang.film.seek": "ફિલ્મની સ્થિતિ",
   "prasang.film.musicOn": "સંગીત ચાલુ",
   "prasang.film.musicOff": "સંગીત બંધ",
-
   "content.error.body": "આ સામગ્રીની ફાઇલમાં કંઈક ખોટું છે, તેથી તે બતાવી નથી. સામગ્રી ટીમ માટે સમસ્યાઓ નીચે આપી છે.",
   "content.error.details": "મળેલી સમસ્યાઓ",
   "common.loading": "લોડ થઈ રહ્યું છે…",
@@ -239,5 +238,14 @@
   "pills.green.progress": "ઉકેલ {n} / {total}",
   "pills.green.action": "તમે શું કરી શકો",
   "pills.green.why": "તે કેમ મદદ કરે છે",
-  "pills.exit": "બહાર નીકળો"
+  "pills.more": "વધુ વાંચો",
+  "pills.visual.then": "પછી શું?",
+  "pills.visual.again": "ફરી બતાવો",
+  "pills.green.try": "હું આ અજમાવીશ",
+  "pills.recap.title": "લાલ ગોળી, ટૂંકમાં",
+  "pills.recap.lead": "આ હકીકતો છે. હવે જુઓ શું મદદ કરે છે.",
+  "pills.recap.green": "લીલી ગોળી લો",
+  "pills.plan.title": "તમારી યોજના",
+  "pills.plan.lead": "તમે અજમાવવા માટે આ પસંદ કર્યું છે. આજે એકથી શરૂઆત કરો.",
+  "pills.plan.empty": "આ અઠવાડિયે અજમાવવા માટે એક પસંદ કરો."
 }

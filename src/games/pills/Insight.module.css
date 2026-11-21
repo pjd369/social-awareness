@@ -1,18 +1,40 @@
 /* Rich red-pill card. Extends the pill game's card using the site tokens only. */
+
+/* The card's own title: the largest thing on it. */
+.headline {
+  margin: 0 0 var(--space-4);
+  font-size: 1.875rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.headline:lang(gu) {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
 .subheading {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   margin: var(--space-4) 0 var(--space-2);
+  color: var(--color-heading);
   font-size: 1.0625rem;
+  font-weight: 500;
 }
 
 .visual {
+  --accent: var(--pill-red);
+
   margin: var(--space-4) 0;
   padding: var(--space-3);
   border: 2px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-surface-alt);
+}
+
+.visual[data-tone='green'] {
+  --accent: var(--pill-green);
 }
 
 .glyph {
@@ -73,7 +95,8 @@
   grid-column: 1 / -1;
 }
 
-/* timeline */
+/* timeline: steps come in one at a time. A waiting step keeps its place and
+   shows only its number, so the diagram does not grow as the steps appear. */
 .step {
   display: flex;
   align-items: center;
@@ -89,7 +112,7 @@
   inset-inline-start: 13px;
   top: calc(100% - 4px);
   height: 12px;
-  border-inline-start: 3px dotted var(--pill-red);
+  border-inline-start: 3px dotted var(--color-muted);
 }
 
 .stepNo {
@@ -98,30 +121,107 @@
   place-items: center;
   width: 28px;
   height: 28px;
+  border: 2px solid var(--accent);
   border-radius: 50%;
-  background: var(--pill-red);
+  background: var(--accent);
   color: var(--pill-on);
   font-size: 0.9375rem;
 }
 
-/* before-after */
-.swap {
-  display: grid;
-  gap: var(--space-2);
-  align-items: stretch;
+.stepText {
+  transform-origin: 0 50%;
+  animation: step-in 260ms ease-out both;
 }
 
-@media (min-width: 36rem) {
-  .swap {
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+.stepWaiting .stepNo {
+  border: 2px solid var(--color-muted);
+  background: transparent;
+  color: var(--color-muted);
+}
+
+.stepWaiting .stepText {
+  visibility: hidden;
+  animation: none;
+}
+
+/* Moves in, at full contrast throughout. */
+@keyframes step-in {
+  from {
+    transform: translateX(-10px);
+  }
+
+  to {
+    transform: none;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .stepText {
+    animation: none;
+  }
+}
+
+.reveal,
+.swapButton,
+.tryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-primary-strong);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reveal {
+  width: 100%;
+  margin-top: var(--space-3);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* before-after: one box at a time, switched by the two buttons above it. */
+.swap {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.swapToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.swapButton {
+  padding: 0 var(--space-2);
+}
+
+.swapButton[aria-pressed='true'] {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.swapStack {
+  display: grid;
+}
+
 .swapBox {
+  grid-area: 1 / 1;
   padding: var(--space-3);
   border-radius: var(--radius-small);
   background: var(--color-surface);
+}
+
+.swapBox[data-active='false'] {
+  visibility: hidden;
 }
 
 .swapBox p {
@@ -129,34 +229,16 @@
 }
 
 .swapBefore {
-  border: 2px dashed var(--pill-red);
+  border: 2px dashed var(--color-danger);
 }
 
 .swapAfter {
   border: 2px solid var(--color-success);
 }
 
-.swapTag {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-muted);
-}
-
 .swapTitle {
+  font-size: var(--font-size-lead);
   font-weight: 700;
-}
-
-.swapArrow {
-  justify-self: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  transform: rotate(90deg);
-}
-
-@media (min-width: 36rem) {
-  .swapArrow {
-    transform: none;
-  }
 }
 
 /* group-compare */
@@ -186,10 +268,10 @@
   font-weight: 700;
 }
 
-/* takeaway and what can help, together in one box */
-.takeHelp {
+/* The one thing to take from the card: the key takeaway, or what to do. */
+.keyBox {
   margin: var(--space-4) 0;
-  padding: var(--space-3) var(--space-3) var(--space-1);
+  padding: var(--space-3);
   border: 2px solid var(--color-lesson-border);
   border-inline-start-width: 8px;
   border-radius: var(--radius);
@@ -201,10 +283,90 @@
   align-items: center;
   gap: var(--space-2);
   margin: 0 0 var(--space-1);
-  font-size: 1.0625rem;
+  color: var(--color-muted);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
 }
 
-.takeHelp p {
+.keyBox p {
+  margin: 0;
+  font-size: var(--font-size-lead);
+}
+
+/* "I'll try this": an empty box until pressed, then a tick. */
+.tryButton {
+  margin-top: var(--space-3);
+}
+
+.tick {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-small);
+}
+
+.tick svg {
+  visibility: hidden;
+}
+
+.tryButton[aria-pressed='true'] {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: var(--brand-wine-deep);
+}
+
+.tryButton[aria-pressed='true'] .tick svg {
+  visibility: visible;
+}
+
+/* A closed row that opens: what can help, read more, references. */
+.more {
+  border-top: 2px solid var(--color-border);
+}
+
+.more:last-child {
+  margin-bottom: calc(-1 * var(--space-2));
+}
+
+.moreSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: calc(var(--tap) + var(--space-2));
+  color: var(--color-primary-strong);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.moreSummary::-webkit-details-marker {
+  display: none;
+}
+
+.chevron {
+  flex: none;
+  transition: transform var(--transition);
+}
+
+.more[open] > .moreSummary .chevron {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}
+
+.moreBody {
+  padding-bottom: var(--space-3);
+}
+
+.moreBody > p {
   margin: 0 0 var(--space-3);
 }
 
@@ -250,6 +412,10 @@
 .sources {
   color: var(--color-muted);
   font-size: 0.9375rem;
+}
+
+.age {
+  margin-bottom: var(--space-2);
 }
 
 /* IEEE reference list: the number is part of each line, so list markers are off. */

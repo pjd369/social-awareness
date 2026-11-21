@@ -108,7 +108,6 @@
   "prasang.film.seek": "Film position",
   "prasang.film.musicOn": "Music on",
   "prasang.film.musicOff": "Music off",
-
   "content.error.body": "Something is wrong in this item's content file, so it is not shown. The problems are listed below for the content team.",
   "content.error.details": "Problems found",
   "common.loading": "Loading…",
@@ -239,5 +238,14 @@
   "pills.green.progress": "Solution {n} of {total}",
   "pills.green.action": "What you can do",
   "pills.green.why": "Why it helps",
-  "pills.exit": "Exit"
+  "pills.more": "Read more",
+  "pills.visual.then": "Then what?",
+  "pills.visual.again": "Show again",
+  "pills.green.try": "I’ll try this",
+  "pills.recap.title": "The red pill, in brief",
+  "pills.recap.lead": "Those are the facts. Now see what helps.",
+  "pills.recap.green": "Take the green pill",
+  "pills.plan.title": "Your plan",
+  "pills.plan.lead": "Here is what you chose to try. Start with one today.",
+  "pills.plan.empty": "Pick one to try this week."
 }

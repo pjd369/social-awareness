@@ -171,33 +171,41 @@
   font-size: 0.875rem;
 }
 
-.eyebrow {
-  margin: 0 0 var(--space-1);
-  color: var(--color-muted);
-  font-weight: 700;
+/* A card or a page with its bar. Controls scrolled into view stop above the bar. */
+.deck :is(button, summary, a) {
+  scroll-margin-bottom: 5.5rem;
 }
 
 .dots {
+  --dot: var(--color-danger);
+
   display: flex;
+  align-items: center;
   gap: var(--space-2);
-  margin: 0 0 var(--space-4);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .dots li {
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--pill-red);
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--dot);
   border-radius: 50%;
 }
 
 .dots .dotDone {
-  background: var(--pill-red);
+  background: var(--dot);
+}
+
+/* The card being read: a longer dot. */
+.dots .dotNow {
+  width: 22px;
+  border-radius: 5px;
 }
 
 .card {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
   padding: var(--space-5) var(--space-4) var(--space-3);
   border: 2px solid var(--color-border);
   border-inline-start: 8px solid var(--pill-red);
@@ -231,11 +239,11 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: var(--space-3);
   margin-top: var(--space-2);
 }
 
-.primary,
 .secondary {
   display: inline-flex;
   align-items: center;
@@ -248,34 +256,59 @@
   cursor: pointer;
 }
 
-.primary {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-}
-
 .secondary {
   background: var(--color-surface);
   color: var(--color-primary-strong);
 }
 
-/* Card number on the left, Back and Next at the top right. */
+/* Card number on the left, Start over on the right. */
 .cardHead {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: var(--space-2) var(--space-3);
+  gap: var(--space-3);
   margin-bottom: var(--space-2);
 }
 
-.cardHead h2 {
+/* "Card 2 of 5": a small label. The card's own title is the big one. */
+.screen .progress {
   margin: 0;
+  color: var(--color-muted);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
-.cardNav {
+.quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--color-primary-strong);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Back, the dots and Next: one bar that stays at the bottom of the screen
+   while the card is on screen, and rests under the card at its end. */
+.deckNav {
+  position: sticky;
+  bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
+  z-index: 5;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-2);
-  margin-inline-start: auto;
+  padding: var(--space-2);
+  border: 2px solid var(--color-border);
+  border-radius: calc(var(--radius) + var(--space-2));
+  background: var(--color-footer-bg);
+  box-shadow: var(--shadow-raised);
 }
 
 .navButton {
@@ -298,18 +331,160 @@
   color: var(--color-on-primary);
 }
 
-.cardNavBottom {
-  justify-content: space-between;
-  margin-top: var(--space-2);
+/* The recap after the red cards and the plan after the green pages: rows that are buttons. */
+.lead {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-lead);
+}
+
+.recap,
+.plan {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.recapRow,
+.planRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--space-3);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.recapRow {
+  border-inline-start: 8px solid var(--pill-red);
+}
+
+.planRow {
+  align-items: flex-start;
+  border-inline-start: 8px solid var(--pill-green);
+}
+
+.recapNo {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--pill-red);
+  color: var(--pill-on);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.rowText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.rowTitle {
+  color: var(--color-heading);
+  font-size: var(--font-size-lead);
+  font-weight: 700;
+}
+
+.recapRow svg {
+  flex: none;
+  color: var(--color-primary-strong);
+}
+
+/* The plan's tick box: empty until the solution is chosen. */
+.planTick {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  border: 2px solid var(--color-primary-strong);
+  border-radius: var(--radius-small);
+}
+
+.planTick svg {
+  visibility: hidden;
+}
+
+.planRow[aria-pressed='true'] {
+  border-color: var(--color-success);
+  background: var(--color-lesson-bg);
+}
+
+.planRow[aria-pressed='true'] .planTick {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: var(--brand-wine-deep);
+}
+
+.planRow[aria-pressed='true'] .planTick svg {
+  visibility: visible;
+}
+
+/* The hand-off from the red recap to the green pill. */
+.handoff {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  border: 2px solid var(--color-success);
+  border-radius: var(--radius);
+  background: var(--color-surface-alt);
+}
+
+.handoff p {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: var(--font-size-lead);
+  font-weight: 700;
+}
+
+.greenCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: calc(var(--tap) + var(--space-2));
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-success);
+  border-radius: var(--radius);
+  background: var(--pill-green);
+  color: var(--pill-on);
+  font: inherit;
+  font-size: var(--font-size-lead);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* A small two-tone capsule, as in the guide's hand. Decorative. */
+.capsule {
+  flex: none;
+  width: 30px;
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, var(--brand-leaf-deep) 0 45%, var(--color-success) 45%);
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 55%);
+  transform: rotate(-14deg);
 }
 
 /* Green pill pages share the red card layout with a green accent. */
-.greenDots li {
-  border-color: var(--pill-green);
-}
-
-.greenDots .dotDone {
-  background: var(--pill-green);
+.greenDots {
+  --dot: var(--color-success);
 }
 
 .greenCard {
