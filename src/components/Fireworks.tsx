@@ -8,7 +8,8 @@ const END_MS = 2400
 /** Hard stop, so the canvas never outlives the welcome. */
 const MAX_MS = 7500
 const FINALE = 4
-const GRAVITY = 70
+/** Soft gravity — heavy pull turns round bursts into a tall column. */
+const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
 interface Rocket {
@@ -64,7 +65,7 @@ export function Fireworks() {
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
     const rocketCount = small ? 10 : 14
-    const sparksPerBurst = small ? 28 : 40
+    const sparksPerRing = small ? 32 : 44
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
@@ -90,21 +91,27 @@ export function Fireworks() {
     let last = 0
     let frame = 0
 
+    /** Even radial speeds on nested rings → reads as a round bloom, not a column. */
     const burst = (x: number, y: number, colour: string, scale: number) => {
-      const count = Math.round(sparksPerBurst * scale)
-      for (let i = 0; i < count; i++) {
-        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.2
-        const speed = (60 + Math.random() * 70) * size * scale
-        sparks.push({
-          x,
-          y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          age: 0,
-          life: 1.5 + Math.random() * 0.7,
-          colour: Math.random() < 0.3 ? '#fff6dc' : colour,
-          size: (1.4 + Math.random() * 1.2) * size,
-        })
+      const rings = [
+        { count: Math.round(sparksPerRing * scale), speed: 88 * size * scale },
+        { count: Math.round(sparksPerRing * 0.55 * scale), speed: 52 * size * scale },
+      ]
+      for (const ring of rings) {
+        for (let i = 0; i < ring.count; i++) {
+          const angle = (Math.PI * 2 * i) / ring.count + (Math.random() - 0.5) * 0.05
+          const speed = ring.speed * (0.96 + Math.random() * 0.08)
+          sparks.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            age: 0,
+            life: 1.55 + Math.random() * 0.45,
+            colour: Math.random() < 0.3 ? '#fff6dc' : colour,
+            size: (1.4 + Math.random() * 1.2) * size,
+          })
+        }
       }
     }
 
@@ -141,7 +148,8 @@ export function Fireworks() {
         ctx.fill()
       }
 
-      const drag = Math.pow(0.4, dt)
+      // Mild drag + late gravity so the halo stays circular while it expands.
+      const drag = Math.pow(0.78, dt)
       for (let i = sparks.length - 1; i >= 0; i--) {
         const spark = sparks[i]
         if (!spark) continue
@@ -150,11 +158,12 @@ export function Fireworks() {
           sparks.splice(i, 1)
           continue
         }
+        const lifeT = spark.age / spark.life
         spark.vx *= drag
-        spark.vy = spark.vy * drag + GRAVITY * dt
+        spark.vy = spark.vy * drag + GRAVITY * dt * Math.min(1, lifeT * 1.8)
         spark.x += spark.vx * dt
         spark.y += spark.vy * dt
-        ctx.globalAlpha = 1 - spark.age / spark.life
+        ctx.globalAlpha = 1 - lifeT
         ctx.fillStyle = spark.colour
         ctx.beginPath()
         ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2)
