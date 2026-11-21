@@ -30,7 +30,6 @@ export default function Intro() {
       <div className={styles.hero}>
         <DiyaLighting onLit={onDiyaLit} />
         <EventTitle />
-        <p className={styles.heroLine}>{t('site.title')}</p>
         <p className={styles.heroValue} data-testid="atmiyata">
           {t('site.value')}
         </p>

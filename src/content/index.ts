@@ -42,6 +42,16 @@ const audioFiles = import.meta.glob<string>('/content/audio/*', {
   query: '?url',
   import: 'default',
 })
+const videoFiles = import.meta.glob<string>('/content/video/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+const captionFiles = import.meta.glob<string>('/content/captions/*', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
 
 /** Short description of a story or prasang, for list pages. */
 export interface ItemSummary {
@@ -62,6 +72,16 @@ export function imageUrl(name: string): string | undefined {
 /** Resolve an audio file named in content (a file in content/audio/) to its URL. */
 export function audioUrl(name: string): string | undefined {
   return audioFiles[`/content/audio/${name}`]
+}
+
+/** Resolve a video named in content (a file in content/video/) to its URL. */
+export function videoUrl(name: string): string | undefined {
+  return videoFiles[`/content/video/${name}`]
+}
+
+/** Resolve a captions file named in content (a file in content/captions/) to its URL. */
+export function captionsUrl(name: string): string | undefined {
+  return captionFiles[`/content/captions/${name}`]
 }
 
 // ---------- Stories ----------

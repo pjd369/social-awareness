@@ -97,31 +97,3 @@
   font-size: 0.875rem;
   text-align: center;
 }
-
-.litNote {
-  margin: 0;
-  color: var(--brand-gold-light);
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  font-style: italic;
-  text-align: center;
-  animation: noteIn 700ms ease both;
-}
-
-@keyframes noteIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .litNote {
-    animation: none;
-  }
-}

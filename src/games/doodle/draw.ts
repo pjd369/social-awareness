@@ -82,7 +82,7 @@ function drawItem(ctx: CanvasRenderingContext2D, it: FallingItem, input: DrawInp
   }
   ctx.fill()
   ctx.lineWidth = 3
-  ctx.strokeStyle = it.kind === 'positive' ? '#ffffff' : '#3b1306'
+  ctx.strokeStyle = '#ffffff'
   ctx.stroke()
   ctx.restore()
   drawIcon(ctx, input.icons[it.item] ?? 'generic', it.x, it.y, 26)

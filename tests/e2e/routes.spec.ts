@@ -26,7 +26,7 @@ const ROUTES = [
   '/yuvako/scenario/group-chat-joke',
   '/yuvako/scenario/extra-change',
   '/bhulkao/prasang/sparrows-and-the-sea',
-  '/yuvako/prasang/lamp-by-the-window',
+  '/yuvako/prasang/einstein-prayer',
   '/bhulkao/scenario/no-such-story',
   '/yuvako/prasang/no-such-prasang',
   '/no-such-page',

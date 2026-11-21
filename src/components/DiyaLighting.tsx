@@ -277,8 +277,6 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
         {!lit && fuljadiOut && !leaving && (
           <p className={styles.dragHint}>{t('intro.diya.drag')}</p>
         )}
-
-        {lit && <p className={styles.litNote}>{t('intro.diya.lit')}</p>}
       </div>
 
       {fuljadiOut &&

@@ -8,6 +8,7 @@ import { PlaceholderNotice } from '../../components/Placeholder'
 import { SECTIONS, type SectionId } from '../../config/sections'
 import type { PrasangDoc, PrasangEntry } from '../../content'
 import { ComicPager } from './ComicPager'
+import { PrasangVideo } from './PrasangVideo'
 import styles from './Prasang.module.css'
 
 function markdownComponents(placeholder: boolean): Components {
@@ -46,7 +47,7 @@ export function PrasangReader({ entry, section }: { entry: PrasangEntry; section
     )
   }
 
-  const cover = doc.front.images[0]
+  const cover = doc.front.video ? undefined : doc.front.images[0]
 
   return (
     <>
@@ -56,21 +57,37 @@ export function PrasangReader({ entry, section }: { entry: PrasangEntry; section
           {t('prasang.fallback', { language: NATIVE_NAMES[lang] })}
         </p>
       )}
-      <article className={styles.article} lang={doc.lang} data-audience={section}>
-        <h1>{doc.front.title}</h1>
-        {cover && (
-          <ContentImage
-            src={cover.src}
-            alt={cover.alt ?? ''}
-            placeholder={entry.placeholder}
-            eager
-          />
+      <article
+        className={styles.article}
+        lang={doc.lang}
+        data-audience={section}
+        data-video={doc.front.video ? 'true' : undefined}
+      >
+        {doc.front.video ? (
+          <div className={styles.videoColumn}>
+            <h1>{doc.front.title}</h1>
+            <PrasangVideo video={doc.front.video} />
+          </div>
+        ) : (
+          <>
+            <h1>{doc.front.title}</h1>
+            {cover && (
+              <ContentImage
+                src={cover.src}
+                alt={cover.alt ?? ''}
+                placeholder={entry.placeholder}
+                eager
+              />
+            )}
+          </>
         )}
-        <div className={styles.body}>
-          <Markdown skipHtml components={markdownComponents(entry.placeholder)}>
-            {doc.body}
-          </Markdown>
-        </div>
+        {doc.body.trim() ? (
+          <div className={styles.body}>
+            <Markdown skipHtml components={markdownComponents(entry.placeholder)}>
+              {doc.body}
+            </Markdown>
+          </div>
+        ) : null}
         <LessonBox heading={t(SECTIONS[section].prasangLessonKey)}>
           <p>{doc.front.moral}</p>
         </LessonBox>
