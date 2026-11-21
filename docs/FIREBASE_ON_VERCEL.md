@@ -57,12 +57,12 @@ This publishes two things:
 Open **Vercel → social-awareness-hp → Settings → Environment Variables** and
 add these four, ticking the **Production** environment:
 
-| Name                        | Value from `firebaseConfig` |
-| --------------------------- | --------------------------- |
-| `VITE_FIREBASE_API_KEY`     | `apiKey`                    |
-| `VITE_FIREBASE_PROJECT_ID`  | `projectId`                 |
-| `VITE_FIREBASE_AUTH_DOMAIN` | `authDomain`                |
-| `VITE_FIREBASE_APP_ID`      | `appId`                     |
+| Name          | Value from `firebaseConfig` |
+| ------------- | --------------------------- |
+| `API_KEY`     | `apiKey`                    |
+| `PROJECT_ID`  | `projectId`                 |
+| `AUTH_DOMAIN` | `authDomain`                |
+| `APP_ID`      | `appId`                     |
 
 - **Not secret:** these values end up in the site's code, and the rules are
   what protect the data.
@@ -94,7 +94,8 @@ If a board says:
 
 ## Also worth doing
 
-- **GitHub Pages copy:** it reads the same four values from GitHub, under
+- **GitHub Pages copy:** it reads the same four values (`API_KEY`,
+  `PROJECT_ID`, `AUTH_DOMAIN`, `APP_ID`) from GitHub, under
   **Settings → Secrets and variables → Actions → Variables**. Add them there
   too if that copy should work.
 - **Restrict the API key (optional):** in Google Cloud console, go to **APIs &

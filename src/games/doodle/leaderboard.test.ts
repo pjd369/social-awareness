@@ -13,6 +13,22 @@ describe('firebaseConfig()', () => {
       appId: undefined,
     })
   })
+
+  it('also accepts the short Vercel / Actions names', () => {
+    expect(
+      firebaseConfig({
+        API_KEY: 'k',
+        PROJECT_ID: 'p',
+        AUTH_DOMAIN: 'p.example.com',
+        APP_ID: '1:2:web:3',
+      }),
+    ).toEqual({
+      apiKey: 'k',
+      projectId: 'p',
+      authDomain: 'p.example.com',
+      appId: '1:2:web:3',
+    })
+  })
 })
 
 describe('leaderboard', () => {
