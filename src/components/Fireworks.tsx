@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Fireworks.module.css'
 
 /** First launch after the diya is lit. */
-const START_MS = 200
-/** Last regular launch; a short finale follows. */
-const END_MS = 12_500
-/** Hard stop — celebration lasts about 15 seconds. */
-const MAX_MS = 15_000
-const FINALE = 5
+const START_MS = 150
+/** Last regular launch; finale rockets follow. */
+const END_MS = 12_200
+/** Soft fade so the show eases out instead of cutting off. */
+const FADE_START_MS = 13_400
+const FADE_END_MS = 15_800
+const FINALE = 6
 /** Soft gravity — heavy pull turns round bursts into a tall column. */
 const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
@@ -57,9 +58,9 @@ function visibleScreen() {
 }
 
 /**
- * Fireworks when the intro diya is lit: rockets rise straight up and burst
- * between 50–80% of the *visual* screen height (from the bottom) for about
- * 15 seconds. The canvas never takes pointer events.
+ * Fireworks when the intro diya is lit: rockets rise straight up for about
+ * 15 seconds, bursting between 50–80% of the visual screen height, then ease
+ * out. The canvas never takes pointer events.
  */
 export function Fireworks() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -88,26 +89,30 @@ export function Fireworks() {
 
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
-    const rocketCount = small ? 22 : 32
+    // ~1 launch every ~400ms across the 15s window (plus a short finale).
+    const rocketCount = small ? 30 : 42
     const sparksPerBurst = small ? 36 : 48
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
       const finale = i >= regular
-      // 5 is coprime with 22 and 32 — scattered launch slots across the width.
-      const slot = (i * 5) % rocketCount
+      // Scatter columns across the width without clustering.
+      const slot = (i * 7) % rocketCount
       // Burst altitude: 50–80% of the *visual* screen height from the bottom.
       const altitude = 0.5 + Math.random() * 0.3
+      const regularIndex = i
       return {
-        x: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
+        x: width * (0.06 + (0.88 * (slot + 0.25 + Math.random() * 0.5)) / rocketCount),
         startY: height + 8,
         targetY: height * (1 - altitude),
         launchAt: finale
-          ? END_MS + 200 + (i - regular) * 280
-          : START_MS + (i / regular) * (END_MS - START_MS) + Math.random() * 280,
-        riseMs: 1100 + Math.random() * 450,
+          ? END_MS + 180 + (i - regular) * 240
+          : START_MS +
+            (regular <= 1 ? 0 : regularIndex / (regular - 1)) * (END_MS - START_MS) +
+            (Math.random() - 0.5) * 160,
+        riseMs: 1000 + Math.random() * 400,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
-        scale: finale ? 1.35 : 0.75 + Math.random() * 0.5,
+        scale: finale ? 1.4 : 0.8 + Math.random() * 0.45,
         burst: false,
       }
     })
@@ -127,7 +132,6 @@ export function Fireworks() {
       const maxSpeed = 110 * size * scale
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2
-        // Bias a bit toward mid/far so the bloom still reads, but keep shorts.
         const t = Math.random() ** 0.65
         const speed = minSpeed + (maxSpeed - minSpeed) * t
         sparks.push({
@@ -149,8 +153,14 @@ export function Fireworks() {
       const dt = Math.min((now - last) / 1000, 0.05)
       last = now
 
+      const fade =
+        elapsed <= FADE_START_MS
+          ? 1
+          : Math.max(0, 1 - (elapsed - FADE_START_MS) / (FADE_END_MS - FADE_START_MS))
+
       ctx.clearRect(0, 0, width, height)
       ctx.globalCompositeOperation = 'lighter'
+      ctx.globalAlpha = fade
 
       for (const rocket of rockets) {
         if (rocket.burst || elapsed < rocket.launchAt) continue
@@ -191,7 +201,7 @@ export function Fireworks() {
         spark.vy = spark.vy * drag + GRAVITY * dt * Math.min(1, lifeT * 1.8)
         spark.x += spark.vx * dt
         spark.y += spark.vy * dt
-        ctx.globalAlpha = 1 - lifeT
+        ctx.globalAlpha = fade * (1 - lifeT)
         ctx.fillStyle = spark.colour
         ctx.beginPath()
         ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2)
@@ -200,7 +210,8 @@ export function Fireworks() {
       ctx.globalAlpha = 1
 
       const finished = rockets.every((r) => r.burst) && sparks.length === 0
-      if (finished || elapsed > MAX_MS) {
+      // Never hard-cut mid-burst: wait for a soft fade, or a natural empty sky.
+      if (elapsed >= FADE_END_MS || (finished && elapsed >= FADE_START_MS)) {
         setDone(true)
         return
       }
