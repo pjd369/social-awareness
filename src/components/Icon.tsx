@@ -21,6 +21,10 @@ export type IconName =
   | 'lightbulb'
   | 'music'
   | 'music-off'
+  | 'captions'
+  | 'captions-off'
+  | 'volume'
+  | 'volume-off'
 
 const PATHS: Record<IconName, string> = {
   back: 'M15 5l-7 7 7 7',
@@ -43,6 +47,13 @@ const PATHS: Record<IconName, string> = {
   music: 'M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z',
   'music-off':
     'M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0zM3 3l18 18',
+  captions: 'M3 6h18a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1zM6 12h4M14 12h4',
+  'captions-off':
+    'M3 6h18a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1zM6 12h4M14 12h4M3 3l18 18',
+  volume:
+    'M4 10v4h4l5 4V6l-5 4H4zM16.5 12a2.5 2.5 0 00-1.5-2.3v4.6a2.5 2.5 0 001.5-2.3zM15 6.2a5 5 0 010 11.6',
+  'volume-off':
+    'M4 10v4h4l5 4V6l-5 4H4zM16.5 12a2.5 2.5 0 00-1.5-2.3v4.6a2.5 2.5 0 001.5-2.3zM3 3l18 18',
 }
 
 export function Icon({

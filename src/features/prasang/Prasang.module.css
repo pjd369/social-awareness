@@ -1,10 +1,139 @@
 .article {
   display: flex;
   flex-direction: column;
+  gap: var(--space-4);
 }
 
 .body {
   font-size: var(--font-size-lead);
+}
+
+/* Title + vertical film share one column so the heading starts on the frame’s left edge. */
+.videoColumn {
+  --prasang-video-w: min(100%, calc(min(70vh, 36rem) * 9 / 16));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-self: center;
+  width: var(--prasang-video-w);
+}
+
+.videoColumn h1 {
+  margin: 0;
+  text-align: start;
+}
+
+.videoShell {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #000;
+}
+
+/* Vertical 16:9 (9:16) frame — matches the Einstein film and phone-first layout. */
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  height: auto;
+  max-height: min(70vh, 36rem);
+  object-fit: contain;
+  background: #000;
+  cursor: pointer;
+}
+
+/* Custom bar — fades out while playing; tap the video to bring it back. */
+.videoBar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  padding: 0.55rem 0.55rem 0.6rem;
+  background: linear-gradient(180deg, transparent, rgb(0 0 0 / 78%));
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 280ms ease,
+    transform 280ms ease;
+  pointer-events: auto;
+}
+
+.videoShell[data-controls='hide'] .videoBar {
+  opacity: 0;
+  transform: translateY(0.35rem);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videoBar {
+    transition: none;
+  }
+
+  .videoShell[data-controls='hide'] .videoBar {
+    transform: none;
+  }
+}
+
+.videoBarBtn {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: none;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.videoBarBtn:hover {
+  background: rgb(255 255 255 / 14%);
+}
+
+.videoBarBtn[aria-pressed='true'] {
+  color: var(--brand-gold-light);
+}
+
+.videoCcBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: var(--tap);
+  height: auto;
+  min-height: var(--tap);
+  padding: 0.15rem 0.2rem;
+}
+
+.videoCcLabel {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.videoTime {
+  flex: none;
+  color: #fff;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.videoBar .seekWrap {
+  flex: 1;
+  min-width: 0;
 }
 
 [data-audience='bhulkao'] .body {

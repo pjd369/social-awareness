@@ -41,7 +41,7 @@ test.describe('tap targets', () => {
     '/yuvako/activity',
     '/yuvako/scenario',
     '/yuvako/scenario/one-am-exam',
-    '/yuvako/prasang/lamp-by-the-window',
+    '/yuvako/prasang/einstein-prayer',
     '/yuvako/activity/pills',
     '/yuvako/activity/words',
   ]) {
@@ -63,7 +63,7 @@ test('every game, story and prasang is within three taps of the intro page', asy
     ['Yuvako', 'Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
     ['Yuvako', 'Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
     ['Yuvako', 'Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
-    ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/lamp-by-the-window$/],
+    ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/einstein-prayer$/],
   ]
   for (const [section, part, item, target] of journeys) {
     await page.goto('/')
@@ -104,8 +104,8 @@ test('links that leave the site ask first ("You are leaving this site")', async 
   await page.route(/\/assets\/index-[\w-]+\.js$/, async (route) => {
     const response = await route.fetch()
     const body = (await response.text()).replace(
-      'written only to test the site.',
-      'written only to test the site. [An example link](https://example.org/reading)',
+      'he gave the honor of his success first to God',
+      'he gave the honor of his success first to God. [An example link](https://example.org/reading)',
     )
     await route.fulfill({ response, body })
   })
@@ -116,7 +116,7 @@ test('links that leave the site ask first ("You are leaving this site")', async 
   await context.route('https://example.org/**', (route) =>
     route.fulfill({ status: 200, contentType: 'text/html', body: '<title>Elsewhere</title>' }),
   )
-  await page.goto('/yuvako/prasang/lamp-by-the-window')
+  await page.goto('/yuvako/prasang/einstein-prayer')
   const link = page.getByRole('button', { name: /An example link/ })
   await link.click()
   const dialog = page.getByRole('dialog', { name: 'You are leaving this site' })

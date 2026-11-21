@@ -58,8 +58,8 @@
   --tile-present-text: #1c2230;
   --tile-absent-bg: #d5d9e0;
   --tile-absent-text: #1c2230;
-  --doodle-good: #5cc58a;
-  --doodle-bad: #ff8a5c;
+  --doodle-good: #ff8a3d;
+  --doodle-bad: #1a1a1a;
 
   /* Shape, size and type. Sections override some of these. */
   --radius: 6px;

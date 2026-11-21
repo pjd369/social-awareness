@@ -262,16 +262,20 @@ test.describe('story player', () => {
 test.describe('prasang reader', () => {
   test('reads a Yuvako prasang to its lesson box', async ({ page }) => {
     await page.goto('/yuvako/prasang')
-    await expect(page).toHaveURL(/\/yuvako\/prasang\/lamp-by-the-window$/)
-    await expect(page.getByTestId('placeholder-notice')).toBeVisible()
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'Placeholder: The Lamp by the Window',
-    )
-    await expect(page.getByRole('img', { name: /oil lamp flickering/ })).toBeVisible()
+    await expect(page).toHaveURL(/\/yuvako\/prasang\/einstein-prayer$/)
+    await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText("Einstein's Prayer")
+    await expect(page.getByTestId('prasang-video')).toBeVisible()
+    const subs = page.getByTestId('prasang-subs-toggle')
+    await expect(subs).toHaveAttribute('aria-pressed', 'false')
+    await expect(subs).toHaveAccessibleName('CC subtitles off')
+    await subs.click()
+    await expect(subs).toHaveAttribute('aria-pressed', 'true')
+    await expect(subs).toHaveAccessibleName('CC subtitles on')
     const lesson = page.getByRole('complementary', { name: 'Reflect' })
     await lesson.scrollIntoViewIfNeeded()
     await expect(lesson).toBeVisible()
-    await expect(lesson).toContainText('which open windows')
+    await expect(lesson).toContainText('Atmiyata')
   })
 
   test('a Bhulkao film prasang has play and music controls', async ({ page }) => {
@@ -302,8 +306,9 @@ test('placeholder content is marked unmistakably', async ({ page }) => {
   await expect(page.getByTestId('preview-strip')).toHaveCount(0)
   await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
   await page.goto('/yuvako')
-  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toBeVisible()
-  // Both Yuvako games and the scenarios are final, so Activity and Scenario carry no badge.
+  // The Yuvako games, scenarios and prasang are all final, so no part carries a badge.
+  await expect(page.getByRole('link', { name: /Prasang/ })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Activity/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Activity.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Scenario/ })).toBeVisible()
