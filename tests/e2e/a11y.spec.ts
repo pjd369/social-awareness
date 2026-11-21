@@ -37,6 +37,9 @@ test.describe('tap targets', () => {
   }
   for (const path of [
     '/',
+    '/activity',
+    '/scenario',
+    '/prasang',
     '/yuvako',
     '/yuvako/activity',
     '/yuvako/scenario',
@@ -54,22 +57,21 @@ test.describe('tap targets', () => {
 })
 
 test('every game, story and prasang is within three taps of the intro page', async ({ page }) => {
-  const journeys: [string, string, string | null, RegExp][] = [
-    ['Bhulkao', 'Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
-    ['Bhulkao', 'Scenario', null, /\/bhulkao\/scenario\/homework-time$/],
-    ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
-    ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
-    ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],
-    ['Yuvako', 'Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
-    ['Yuvako', 'Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
-    ['Yuvako', 'Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
-    ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/einstein-prayer$/],
+  const journeys: [string, string, RegExp][] = [
+    ['Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
+    ['Scenario', 'Homework Time', /\/bhulkao\/scenario\/homework-time$/],
+    ['Prasang', 'The Sparrows', /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
+    ['Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
+    ['Activity', 'Wordle', /\/yuvako\/activity\/words$/],
+    ['Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
+    ['Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
+    ['Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
+    ['Prasang', "Einstein's Prayer", /\/yuvako\/prasang\/einstein-prayer$/],
   ]
-  for (const [section, part, item, target] of journeys) {
+  for (const [hub, item, target] of journeys) {
     await page.goto('/')
-    await page.getByRole('link', { name: new RegExp(`^${section}`) }).click()
-    await page.getByRole('link', { name: new RegExp(`^${part}`) }).click()
-    if (item) await page.getByRole('link', { name: new RegExp(`^${item}`) }).click()
+    await page.getByRole('link', { name: new RegExp(`^${hub}`) }).click()
+    await page.getByRole('link', { name: new RegExp(`^${item}`) }).click()
     await expect(page).toHaveURL(target)
   }
 })
@@ -222,7 +224,7 @@ test.describe('no accessibility violations in game and story states', () => {
     await expectNoAxeViolations(page)
     await expectNoHorizontalOverflow(page)
 
-    await page.goto('/yuvako/scenario')
+    await page.goto('/scenario')
     await expect(shared.getByRole('heading', { level: 3 })).toBeVisible()
     await expectNoAxeViolations(page)
     await expectNoHorizontalOverflow(page)

@@ -84,6 +84,11 @@
   letter-spacing: 0;
 }
 
+.tag {
+  display: flex;
+  justify-content: center;
+}
+
 .title {
   color: var(--brand-cream);
   font-family: var(--font-serif);

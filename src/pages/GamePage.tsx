@@ -5,9 +5,9 @@ import { GameHeadingContext } from '../components/game-heading'
 import { GAMES, paths, type GameId, type SectionId } from '../config/sections'
 import { GAME_COMPONENTS } from '../games/registry'
 
-export default function GamePage({ section, game }: { section: SectionId; game: GameId }) {
+export default function GamePage({ game }: { section: SectionId; game: GameId }) {
   const { t } = useI18n()
-  usePage(t(GAMES[game].titleKey), { to: paths.activity(section), label: t('games.title') })
+  usePage(t(GAMES[game].titleKey), { to: paths.activityHub(), label: t('part.activity.title') })
   const [heading, setHeading] = useState<string>()
   const Game = GAME_COMPONENTS[game]
   return (

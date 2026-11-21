@@ -1,42 +1,33 @@
 {
   "words": [
     {
-      "word": "seva",
-      "native": {
-        "gu": "સેવા"
-      },
+      "word": "hope",
       "meaning": {
-        "en": "Selfless service: helping others without expecting anything back.",
-        "gu": "નિઃસ્વાર્થ સેવા: બદલાની આશા રાખ્યા વિના બીજાને મદદ કરવી."
+        "en": "Trust that good will come; looking to God with a steady heart.",
+        "gu": "ભલું થશે એવો વિશ્વાસ; ભગવાન તરફ સ્થિર મનથી જોવું."
       },
       "reflection": {
-        "en": "What small act of seva could you do today, away from a screen?",
-        "gu": "આજે સ્ક્રીનથી દૂર રહીને તમે સેવાનું કયું નાનું કામ કરી શકો?"
+        "en": "Where do you place your hope when a screen leaves you restless?",
+        "gu": "સ્ક્રીનથી મન અશાંત થાય ત્યારે તમે આશા ક્યાં રાખો છો?"
       },
       "placeholder": false
     },
     {
-      "word": "swadharma",
-      "native": {
-        "gu": "સ્વધર્મ"
-      },
+      "word": "gratitude",
       "meaning": {
-        "en": "One's own duty: doing what is right for one's own role in life.",
-        "gu": "પોતાનો ધર્મ: જીવનમાં પોતાની ભૂમિકા માટે જે યોગ્ય છે તે કરવું."
+        "en": "Thankfulness for what you have been given.",
+        "gu": "જે મળ્યું છે તે માટે આભાર માનવો."
       },
       "reflection": {
-        "en": "What is your duty today, as a student, a friend or a family member?",
-        "gu": "વિદ્યાર્થી, મિત્ર કે પરિવારના સભ્ય તરીકે આજે તમારી ફરજ શું છે?"
+        "en": "Name three things you are grateful for today, before you pick up your phone.",
+        "gu": "ફોન ઉપાડતા પહેલાં આજે તમે જે ત્રણ વસ્તુઓ માટે આભારી છો તે કહો."
       },
       "placeholder": false
     },
     {
-      "word": "prarthna",
-      "native": {
-        "gu": "પ્રાર્થના"
-      },
+      "word": "prayer",
       "meaning": {
-        "en": "Prayer: speaking to God from the heart.",
+        "en": "Speaking to God from the heart.",
         "gu": "ભગવાન સાથે મનથી વાત કરવી."
       },
       "reflection": {
@@ -46,28 +37,34 @@
       "placeholder": false
     },
     {
-      "word": "daya",
-      "native": {
-        "gu": "દયા"
-      },
+      "word": "faith",
       "meaning": {
-        "en": "Compassion; kindness towards others.",
-        "gu": "કરુણા; બીજા પ્રત્યે માયાળુપણું."
+        "en": "Trust in God, even when the path is not clear.",
+        "gu": "માર્ગ સ્પષ્ટ ન હોય ત્યારે પણ ભગવાન પર વિશ્વાસ."
       },
       "reflection": {
-        "en": "How can you show daya in the way you write to others online?",
-        "gu": "ઑનલાઇન બીજાને લખતી વખતે તમે દયા કેવી રીતે બતાવી શકો?"
+        "en": "What helps you keep faith when news or feeds feel heavy?",
+        "gu": "સમાચાર કે ફીડ ભારે લાગે ત્યારે તમારો વિશ્વાસ કાયમ રાખવામાં શું મદદ કરે છે?"
       },
       "placeholder": false
     },
     {
-      "word": "satya",
-      "native": {
-        "gu": "સત્ય"
-      },
+      "word": "peace",
       "meaning": {
-        "en": "Truth; being truthful.",
-        "gu": "સચ્ચાઈ; સાચું બોલવું."
+        "en": "A calm and settled mind.",
+        "gu": "મનની સ્થિરતા અને સુખ."
+      },
+      "reflection": {
+        "en": "What helps your mind feel settled after a busy day online?",
+        "gu": "ઑનલાઇન વ્યસ્ત દિવસ પછી તમારા મનને શાંત થવામાં શું મદદ કરે છે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "truth",
+      "meaning": {
+        "en": "What is real and honest; living without falsehood.",
+        "gu": "જે સાચું છે; જૂઠ વિના જીવવું."
       },
       "reflection": {
         "en": "Is the picture you share of yourself online a truthful one?",
@@ -76,43 +73,58 @@
       "placeholder": false
     },
     {
-      "word": "shanti",
-      "native": {
-        "gu": "શાંતિ"
-      },
+      "word": "mercy",
       "meaning": {
-        "en": "Peace; a calm and settled mind.",
-        "gu": "મનની સ્થિરતા અને સુખ."
+        "en": "Kindness shown when judgment could have been harsh.",
+        "gu": "કઠોર ન્યાય થઈ શકતો હોય ત્યારે પણ દયા બતાવવી."
       },
       "reflection": {
-        "en": "What helps your mind feel settled after a busy day?",
-        "gu": "વ્યસ્ત દિવસ પછી તમારા મનને શાંત થવામાં શું મદદ કરે છે?"
+        "en": "How can you show mercy in the way you write to others online?",
+        "gu": "ઑનલાઇન બીજાને લખતી વખતે તમે દયા કેવી રીતે બતાવી શકો?"
       },
       "placeholder": false
     },
     {
-      "word": "dhyan",
-      "native": {
-        "gu": "ધ્યાન"
-      },
+      "word": "grace",
       "meaning": {
-        "en": "Meditation; steady, focused attention.",
-        "gu": "મનને એક જગ્યાએ સ્થિર રાખવું."
+        "en": "Unearned blessing; God's favour freely given.",
+        "gu": "મહેનત વિના મળેલી કૃપા; ભગવાનની મુક્ત અનુકંપા."
       },
       "reflection": {
-        "en": "How long can you give one thing your full attention before reaching for your phone?",
-        "gu": "ફોન તરફ હાથ જાય તે પહેલાં તમે કોઈ એક કામ પર કેટલો સમય પૂરું ધ્યાન આપી શકો છો?"
+        "en": "Where have you felt grace this week that you did not earn?",
+        "gu": "આ અઠવાડિયે તમને ક્યાં એવી કૃપા અનુભવાઈ જે તમે કમાઈ ન હતી?"
       },
       "placeholder": false
     },
     {
-      "word": "bhakti",
-      "native": {
-        "gu": "ભક્તિ"
-      },
+      "word": "service",
       "meaning": {
-        "en": "Devotion; loving faith in God.",
-        "gu": "ભગવાન પ્રત્યે પ્રેમભરી શ્રદ્ધા."
+        "en": "Helping others without expecting anything back.",
+        "gu": "બદલાની આશા રાખ્યા વિના બીજાને મદદ કરવી."
+      },
+      "reflection": {
+        "en": "What small act of service could you do today, away from a screen?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને તમે સેવાનું કયું નાનું કામ કરી શકો?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "kindness",
+      "meaning": {
+        "en": "Gentle care for others in words and deeds.",
+        "gu": "વાણી અને કર્મમાં બીજા પ્રત્યે માયાળુપણું."
+      },
+      "reflection": {
+        "en": "Who needs a kind word from you today?",
+        "gu": "આજે કોને તમારા માયાળુ શબ્દની જરૂર છે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "devotion",
+      "meaning": {
+        "en": "Loving faith given fully to God.",
+        "gu": "ભગવાન પ્રત્યે પૂરી પ્રેમભરી શ્રદ્ધા."
       },
       "reflection": {
         "en": "What in your day do you give your heart to most?",
@@ -121,43 +133,10 @@
       "placeholder": false
     },
     {
-      "word": "kshama",
-      "native": {
-        "gu": "ક્ષમા"
-      },
+      "word": "humility",
       "meaning": {
-        "en": "Forgiveness.",
-        "gu": "માફી આપવી; બીજાની ભૂલ માફ કરવી."
-      },
-      "reflection": {
-        "en": "Is there someone you could forgive today, even for a small thing?",
-        "gu": "શું કોઈ એવું છે જેને તમે આજે, ભલે નાની વાત માટે, માફ કરી શકો?"
-      },
-      "placeholder": false
-    },
-    {
-      "word": "santosh",
-      "native": {
-        "gu": "સંતોષ"
-      },
-      "meaning": {
-        "en": "Contentment; being satisfied with what one has.",
-        "gu": "જે છે તેમાં રાજી રહેવું."
-      },
-      "reflection": {
-        "en": "Does scrolling through others' lives leave you feeling content, or wanting more?",
-        "gu": "બીજાના જીવન વિશે સ્ક્રોલ કર્યા પછી તમને સંતોષ થાય છે કે હજી વધુ જોઈએ એવું લાગે છે?"
-      },
-      "placeholder": false
-    },
-    {
-      "word": "vinay",
-      "native": {
-        "gu": "વિનય"
-      },
-      "meaning": {
-        "en": "Humility; politeness.",
-        "gu": "નમ્રતા; વિવેક."
+        "en": "Knowing your place with honesty; not putting yourself above others.",
+        "gu": "નમ્રતા; પોતાને બીજા કરતાં મોટા ન સમજવું."
       },
       "reflection": {
         "en": "What does humility look like in a comment or a reply?",
@@ -166,17 +145,4238 @@
       "placeholder": false
     },
     {
-      "word": "sanyam",
-      "native": {
-        "gu": "સંયમ"
-      },
+      "word": "harmony",
       "meaning": {
-        "en": "Self-restraint; self-control.",
-        "gu": "પોતાના પર કાબૂ; આત્મસંયમ."
+        "en": "Living in peace with others; true happiness in togetherness.",
+        "gu": "બીજા સાથે સુમેળથી રહેવું; સાથે રહેવામાં સાચું સુખ."
       },
       "reflection": {
-        "en": "What is one limit you could set for yourself on screen time this week?",
-        "gu": "આ અઠવાડિયે સ્ક્રીન સમય માટે તમે પોતાના માટે કઈ એક મર્યાદા નક્કી કરી શકો?"
+        "en": "How can you bring more harmony into one relationship this week?",
+        "gu": "આ અઠવાડિયે એક સંબંધમાં તમે વધુ સુમેળ કેવી રીતે લાવી શકો?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "worship",
+      "meaning": {
+        "en": "Honouring God with love, attention and reverence.",
+        "gu": "પ્રેમ, ધ્યાન અને ભક્તિથી ભગવાનનું સન્માન કરવું."
+      },
+      "reflection": {
+        "en": "What distracts you most when you try to worship with a quiet mind?",
+        "gu": "શાંત મનથી ભક્તિ કરવા જતાં તમને સૌથી વધુ શું વિખેરે છે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "patience",
+      "meaning": {
+        "en": "Waiting calmly without rushing or anger.",
+        "gu": "ઉતાવળ કે ક્રોધ વિના શાંતિથી રાહ જોવી."
+      },
+      "reflection": {
+        "en": "Where do you lose patience fastest — in a queue, a chat, or a feed?",
+        "gu": "કતારમાં, ચેટમાં કે ફીડમાં — ક્યાં તમારું ધીરજ સૌથી વહેલું તૂટે છે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "love",
+      "meaning": {
+        "en": "A word of faith and virtue: love.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: love."
+      },
+      "reflection": {
+        "en": "How can “love” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “love” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "soul",
+      "meaning": {
+        "en": "A word of faith and virtue: soul.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: soul."
+      },
+      "reflection": {
+        "en": "How can “soul” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “soul” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "holy",
+      "meaning": {
+        "en": "A word of faith and virtue: holy.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: holy."
+      },
+      "reflection": {
+        "en": "How can “holy” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “holy” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "hymn",
+      "meaning": {
+        "en": "A word of faith and virtue: hymn.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: hymn."
+      },
+      "reflection": {
+        "en": "How can “hymn” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “hymn” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "amen",
+      "meaning": {
+        "en": "A word of faith and virtue: amen.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: amen."
+      },
+      "reflection": {
+        "en": "How can “amen” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “amen” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bless",
+      "meaning": {
+        "en": "A word of faith and virtue: bless.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bless."
+      },
+      "reflection": {
+        "en": "How can “bless” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bless” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sacred",
+      "meaning": {
+        "en": "A word of faith and virtue: sacred.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sacred."
+      },
+      "reflection": {
+        "en": "How can “sacred” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sacred” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "divine",
+      "meaning": {
+        "en": "A word of faith and virtue: divine.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: divine."
+      },
+      "reflection": {
+        "en": "How can “divine” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “divine” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "spirit",
+      "meaning": {
+        "en": "A word of faith and virtue: spirit.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: spirit."
+      },
+      "reflection": {
+        "en": "How can “spirit” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “spirit” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "temple",
+      "meaning": {
+        "en": "A word of faith and virtue: temple.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: temple."
+      },
+      "reflection": {
+        "en": "How can “temple” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “temple” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "altar",
+      "meaning": {
+        "en": "A word of faith and virtue: altar.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: altar."
+      },
+      "reflection": {
+        "en": "How can “altar” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “altar” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "angel",
+      "meaning": {
+        "en": "A word of faith and virtue: angel.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: angel."
+      },
+      "reflection": {
+        "en": "How can “angel” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “angel” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "saint",
+      "meaning": {
+        "en": "A word of faith and virtue: saint.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: saint."
+      },
+      "reflection": {
+        "en": "How can “saint” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “saint” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "creed",
+      "meaning": {
+        "en": "A word of faith and virtue: creed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: creed."
+      },
+      "reflection": {
+        "en": "How can “creed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “creed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "glory",
+      "meaning": {
+        "en": "A word of faith and virtue: glory.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: glory."
+      },
+      "reflection": {
+        "en": "How can “glory” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “glory” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "praise",
+      "meaning": {
+        "en": "A word of faith and virtue: praise.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: praise."
+      },
+      "reflection": {
+        "en": "How can “praise” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “praise” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "thank",
+      "meaning": {
+        "en": "A word of faith and virtue: thank.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: thank."
+      },
+      "reflection": {
+        "en": "How can “thank” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “thank” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "trust",
+      "meaning": {
+        "en": "A word of faith and virtue: trust.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: trust."
+      },
+      "reflection": {
+        "en": "How can “trust” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “trust” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "calm",
+      "meaning": {
+        "en": "A word of faith and virtue: calm.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: calm."
+      },
+      "reflection": {
+        "en": "How can “calm” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “calm” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "quiet",
+      "meaning": {
+        "en": "A word of faith and virtue: quiet.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: quiet."
+      },
+      "reflection": {
+        "en": "How can “quiet” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “quiet” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "focus",
+      "meaning": {
+        "en": "A word of faith and virtue: focus.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: focus."
+      },
+      "reflection": {
+        "en": "How can “focus” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “focus” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "duty",
+      "meaning": {
+        "en": "A word of faith and virtue: duty.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: duty."
+      },
+      "reflection": {
+        "en": "How can “duty” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “duty” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "moral",
+      "meaning": {
+        "en": "A word of faith and virtue: moral.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: moral."
+      },
+      "reflection": {
+        "en": "How can “moral” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “moral” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ethic",
+      "meaning": {
+        "en": "A word of faith and virtue: ethic.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ethic."
+      },
+      "reflection": {
+        "en": "How can “ethic” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ethic” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "noble",
+      "meaning": {
+        "en": "A word of faith and virtue: noble.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: noble."
+      },
+      "reflection": {
+        "en": "How can “noble” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “noble” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "honest",
+      "meaning": {
+        "en": "A word of faith and virtue: honest.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: honest."
+      },
+      "reflection": {
+        "en": "How can “honest” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “honest” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "loyal",
+      "meaning": {
+        "en": "A word of faith and virtue: loyal.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: loyal."
+      },
+      "reflection": {
+        "en": "How can “loyal” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “loyal” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "brave",
+      "meaning": {
+        "en": "A word of faith and virtue: brave.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: brave."
+      },
+      "reflection": {
+        "en": "How can “brave” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “brave” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "modest",
+      "meaning": {
+        "en": "A word of faith and virtue: modest.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: modest."
+      },
+      "reflection": {
+        "en": "How can “modest” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “modest” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sober",
+      "meaning": {
+        "en": "A word of faith and virtue: sober.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sober."
+      },
+      "reflection": {
+        "en": "How can “sober” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sober” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "pious",
+      "meaning": {
+        "en": "A word of faith and virtue: pious.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: pious."
+      },
+      "reflection": {
+        "en": "How can “pious” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “pious” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "charity",
+      "meaning": {
+        "en": "A word of faith and virtue: charity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: charity."
+      },
+      "reflection": {
+        "en": "How can “charity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “charity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "share",
+      "meaning": {
+        "en": "A word of faith and virtue: share.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: share."
+      },
+      "reflection": {
+        "en": "How can “share” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “share” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "care",
+      "meaning": {
+        "en": "A word of faith and virtue: care.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: care."
+      },
+      "reflection": {
+        "en": "How can “care” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “care” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "heal",
+      "meaning": {
+        "en": "A word of faith and virtue: heal.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: heal."
+      },
+      "reflection": {
+        "en": "How can “heal” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “heal” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "light",
+      "meaning": {
+        "en": "A word of faith and virtue: light.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: light."
+      },
+      "reflection": {
+        "en": "How can “light” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “light” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lamp",
+      "meaning": {
+        "en": "A word of faith and virtue: lamp.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lamp."
+      },
+      "reflection": {
+        "en": "How can “lamp” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lamp” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "flame",
+      "meaning": {
+        "en": "A word of faith and virtue: flame.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: flame."
+      },
+      "reflection": {
+        "en": "How can “flame” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “flame” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "candle",
+      "meaning": {
+        "en": "A word of faith and virtue: candle.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: candle."
+      },
+      "reflection": {
+        "en": "How can “candle” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “candle” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lotus",
+      "meaning": {
+        "en": "A word of faith and virtue: lotus.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lotus."
+      },
+      "reflection": {
+        "en": "How can “lotus” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lotus” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "kneel",
+      "meaning": {
+        "en": "A word of faith and virtue: kneel.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: kneel."
+      },
+      "reflection": {
+        "en": "How can “kneel” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “kneel” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "fasting",
+      "meaning": {
+        "en": "A word of faith and virtue: fasting.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: fasting."
+      },
+      "reflection": {
+        "en": "How can “fasting” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “fasting” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "silence",
+      "meaning": {
+        "en": "A word of faith and virtue: silence.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: silence."
+      },
+      "reflection": {
+        "en": "How can “silence” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “silence” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "silent",
+      "meaning": {
+        "en": "A word of faith and virtue: silent.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: silent."
+      },
+      "reflection": {
+        "en": "How can “silent” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “silent” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "serene",
+      "meaning": {
+        "en": "A word of faith and virtue: serene.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: serene."
+      },
+      "reflection": {
+        "en": "How can “serene” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “serene” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "still",
+      "meaning": {
+        "en": "A word of faith and virtue: still.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: still."
+      },
+      "reflection": {
+        "en": "How can “still” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “still” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "soft",
+      "meaning": {
+        "en": "A word of faith and virtue: soft.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: soft."
+      },
+      "reflection": {
+        "en": "How can “soft” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “soft” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "tender",
+      "meaning": {
+        "en": "A word of faith and virtue: tender.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: tender."
+      },
+      "reflection": {
+        "en": "How can “tender” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “tender” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "warmth",
+      "meaning": {
+        "en": "A word of faith and virtue: warmth.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: warmth."
+      },
+      "reflection": {
+        "en": "How can “warmth” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “warmth” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "heart",
+      "meaning": {
+        "en": "A word of faith and virtue: heart.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: heart."
+      },
+      "reflection": {
+        "en": "How can “heart” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “heart” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "caring",
+      "meaning": {
+        "en": "A word of faith and virtue: caring.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: caring."
+      },
+      "reflection": {
+        "en": "How can “caring” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “caring” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "donate",
+      "meaning": {
+        "en": "A word of faith and virtue: donate.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: donate."
+      },
+      "reflection": {
+        "en": "How can “donate” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “donate” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "helper",
+      "meaning": {
+        "en": "A word of faith and virtue: helper.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: helper."
+      },
+      "reflection": {
+        "en": "How can “helper” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “helper” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "serve",
+      "meaning": {
+        "en": "A word of faith and virtue: serve.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: serve."
+      },
+      "reflection": {
+        "en": "How can “serve” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “serve” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "servant",
+      "meaning": {
+        "en": "A word of faith and virtue: servant.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: servant."
+      },
+      "reflection": {
+        "en": "How can “servant” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “servant” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "calling",
+      "meaning": {
+        "en": "A word of faith and virtue: calling.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: calling."
+      },
+      "reflection": {
+        "en": "How can “calling” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “calling” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "labor",
+      "meaning": {
+        "en": "A word of faith and virtue: labor.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: labor."
+      },
+      "reflection": {
+        "en": "How can “labor” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “labor” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "work",
+      "meaning": {
+        "en": "A word of faith and virtue: work.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: work."
+      },
+      "reflection": {
+        "en": "How can “work” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “work” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "craft",
+      "meaning": {
+        "en": "A word of faith and virtue: craft.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: craft."
+      },
+      "reflection": {
+        "en": "How can “craft” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “craft” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "skill",
+      "meaning": {
+        "en": "A word of faith and virtue: skill.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: skill."
+      },
+      "reflection": {
+        "en": "How can “skill” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “skill” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "talent",
+      "meaning": {
+        "en": "A word of faith and virtue: talent.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: talent."
+      },
+      "reflection": {
+        "en": "How can “talent” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “talent” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "blessed",
+      "meaning": {
+        "en": "A word of faith and virtue: blessed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: blessed."
+      },
+      "reflection": {
+        "en": "How can “blessed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “blessed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "favor",
+      "meaning": {
+        "en": "A word of faith and virtue: favor.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: favor."
+      },
+      "reflection": {
+        "en": "How can “favor” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “favor” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "gracious",
+      "meaning": {
+        "en": "A word of faith and virtue: gracious.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: gracious."
+      },
+      "reflection": {
+        "en": "How can “gracious” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “gracious” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "pity",
+      "meaning": {
+        "en": "A word of faith and virtue: pity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: pity."
+      },
+      "reflection": {
+        "en": "How can “pity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “pity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "comfort",
+      "meaning": {
+        "en": "A word of faith and virtue: comfort.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: comfort."
+      },
+      "reflection": {
+        "en": "How can “comfort” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “comfort” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "console",
+      "meaning": {
+        "en": "A word of faith and virtue: console.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: console."
+      },
+      "reflection": {
+        "en": "How can “console” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “console” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "solace",
+      "meaning": {
+        "en": "A word of faith and virtue: solace.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: solace."
+      },
+      "reflection": {
+        "en": "How can “solace” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “solace” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "cheer",
+      "meaning": {
+        "en": "A word of faith and virtue: cheer.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: cheer."
+      },
+      "reflection": {
+        "en": "How can “cheer” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “cheer” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "joyful",
+      "meaning": {
+        "en": "A word of faith and virtue: joyful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: joyful."
+      },
+      "reflection": {
+        "en": "How can “joyful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “joyful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "glad",
+      "meaning": {
+        "en": "A word of faith and virtue: glad.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: glad."
+      },
+      "reflection": {
+        "en": "How can “glad” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “glad” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bliss",
+      "meaning": {
+        "en": "A word of faith and virtue: bliss.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bliss."
+      },
+      "reflection": {
+        "en": "How can “bliss” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bliss” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "delight",
+      "meaning": {
+        "en": "A word of faith and virtue: delight.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: delight."
+      },
+      "reflection": {
+        "en": "How can “delight” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “delight” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "rejoice",
+      "meaning": {
+        "en": "A word of faith and virtue: rejoice.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: rejoice."
+      },
+      "reflection": {
+        "en": "How can “rejoice” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “rejoice” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "exalt",
+      "meaning": {
+        "en": "A word of faith and virtue: exalt.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: exalt."
+      },
+      "reflection": {
+        "en": "How can “exalt” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “exalt” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "extol",
+      "meaning": {
+        "en": "A word of faith and virtue: extol.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: extol."
+      },
+      "reflection": {
+        "en": "How can “extol” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “extol” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chant",
+      "meaning": {
+        "en": "A word of faith and virtue: chant.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chant."
+      },
+      "reflection": {
+        "en": "How can “chant” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chant” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "song",
+      "meaning": {
+        "en": "A word of faith and virtue: song.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: song."
+      },
+      "reflection": {
+        "en": "How can “song” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “song” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sing",
+      "meaning": {
+        "en": "A word of faith and virtue: sing.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sing."
+      },
+      "reflection": {
+        "en": "How can “sing” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sing” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "music",
+      "meaning": {
+        "en": "A word of faith and virtue: music.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: music."
+      },
+      "reflection": {
+        "en": "How can “music” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “music” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chorus",
+      "meaning": {
+        "en": "A word of faith and virtue: chorus.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chorus."
+      },
+      "reflection": {
+        "en": "How can “chorus” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chorus” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "choir",
+      "meaning": {
+        "en": "A word of faith and virtue: choir.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: choir."
+      },
+      "reflection": {
+        "en": "How can “choir” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “choir” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "organ",
+      "meaning": {
+        "en": "A word of faith and virtue: organ.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: organ."
+      },
+      "reflection": {
+        "en": "How can “organ” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “organ” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bells",
+      "meaning": {
+        "en": "A word of faith and virtue: bells.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bells."
+      },
+      "reflection": {
+        "en": "How can “bells” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bells” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chime",
+      "meaning": {
+        "en": "A word of faith and virtue: chime.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chime."
+      },
+      "reflection": {
+        "en": "How can “chime” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chime” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "incense",
+      "meaning": {
+        "en": "A word of faith and virtue: incense.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: incense."
+      },
+      "reflection": {
+        "en": "How can “incense” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “incense” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "aroma",
+      "meaning": {
+        "en": "A word of faith and virtue: aroma.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: aroma."
+      },
+      "reflection": {
+        "en": "How can “aroma” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “aroma” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "scent",
+      "meaning": {
+        "en": "A word of faith and virtue: scent.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: scent."
+      },
+      "reflection": {
+        "en": "How can “scent” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “scent” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sweet",
+      "meaning": {
+        "en": "A word of faith and virtue: sweet.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sweet."
+      },
+      "reflection": {
+        "en": "How can “sweet” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sweet” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bread",
+      "meaning": {
+        "en": "A word of faith and virtue: bread.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bread."
+      },
+      "reflection": {
+        "en": "How can “bread” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bread” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wine",
+      "meaning": {
+        "en": "A word of faith and virtue: wine.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wine."
+      },
+      "reflection": {
+        "en": "How can “wine” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wine” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "water",
+      "meaning": {
+        "en": "A word of faith and virtue: water.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: water."
+      },
+      "reflection": {
+        "en": "How can “water” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “water” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "fruit",
+      "meaning": {
+        "en": "A word of faith and virtue: fruit.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: fruit."
+      },
+      "reflection": {
+        "en": "How can “fruit” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “fruit” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "feast",
+      "meaning": {
+        "en": "A word of faith and virtue: feast.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: feast."
+      },
+      "reflection": {
+        "en": "How can “feast” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “feast” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "vigil",
+      "meaning": {
+        "en": "A word of faith and virtue: vigil.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: vigil."
+      },
+      "reflection": {
+        "en": "How can “vigil” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “vigil” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "awake",
+      "meaning": {
+        "en": "A word of faith and virtue: awake.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: awake."
+      },
+      "reflection": {
+        "en": "How can “awake” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “awake” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dawn",
+      "meaning": {
+        "en": "A word of faith and virtue: dawn.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dawn."
+      },
+      "reflection": {
+        "en": "How can “dawn” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dawn” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dusk",
+      "meaning": {
+        "en": "A word of faith and virtue: dusk.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dusk."
+      },
+      "reflection": {
+        "en": "How can “dusk” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dusk” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "night",
+      "meaning": {
+        "en": "A word of faith and virtue: night.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: night."
+      },
+      "reflection": {
+        "en": "How can “night” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “night” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "daily",
+      "meaning": {
+        "en": "A word of faith and virtue: daily.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: daily."
+      },
+      "reflection": {
+        "en": "How can “daily” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “daily” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "festival",
+      "meaning": {
+        "en": "A word of faith and virtue: festival.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: festival."
+      },
+      "reflection": {
+        "en": "How can “festival” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “festival” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "holiday",
+      "meaning": {
+        "en": "A word of faith and virtue: holiday.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: holiday."
+      },
+      "reflection": {
+        "en": "How can “holiday” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “holiday” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "celebrate",
+      "meaning": {
+        "en": "A word of faith and virtue: celebrate.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: celebrate."
+      },
+      "reflection": {
+        "en": "How can “celebrate” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “celebrate” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "remember",
+      "meaning": {
+        "en": "A word of faith and virtue: remember.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: remember."
+      },
+      "reflection": {
+        "en": "How can “remember” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “remember” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "memory",
+      "meaning": {
+        "en": "A word of faith and virtue: memory.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: memory."
+      },
+      "reflection": {
+        "en": "How can “memory” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “memory” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "memorial",
+      "meaning": {
+        "en": "A word of faith and virtue: memorial.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: memorial."
+      },
+      "reflection": {
+        "en": "How can “memorial” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “memorial” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "legacy",
+      "meaning": {
+        "en": "A word of faith and virtue: legacy.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: legacy."
+      },
+      "reflection": {
+        "en": "How can “legacy” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “legacy” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "heritage",
+      "meaning": {
+        "en": "A word of faith and virtue: heritage.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: heritage."
+      },
+      "reflection": {
+        "en": "How can “heritage” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “heritage” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "tradition",
+      "meaning": {
+        "en": "A word of faith and virtue: tradition.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: tradition."
+      },
+      "reflection": {
+        "en": "How can “tradition” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “tradition” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "custom",
+      "meaning": {
+        "en": "A word of faith and virtue: custom.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: custom."
+      },
+      "reflection": {
+        "en": "How can “custom” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “custom” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ritual",
+      "meaning": {
+        "en": "A word of faith and virtue: ritual.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ritual."
+      },
+      "reflection": {
+        "en": "How can “ritual” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ritual” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "vows",
+      "meaning": {
+        "en": "A word of faith and virtue: vows.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: vows."
+      },
+      "reflection": {
+        "en": "How can “vows” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “vows” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "oath",
+      "meaning": {
+        "en": "A word of faith and virtue: oath.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: oath."
+      },
+      "reflection": {
+        "en": "How can “oath” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “oath” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "promise",
+      "meaning": {
+        "en": "A word of faith and virtue: promise.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: promise."
+      },
+      "reflection": {
+        "en": "How can “promise” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “promise” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "pledge",
+      "meaning": {
+        "en": "A word of faith and virtue: pledge.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: pledge."
+      },
+      "reflection": {
+        "en": "How can “pledge” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “pledge” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "covenant",
+      "meaning": {
+        "en": "A word of faith and virtue: covenant.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: covenant."
+      },
+      "reflection": {
+        "en": "How can “covenant” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “covenant” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bond",
+      "meaning": {
+        "en": "A word of faith and virtue: bond.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bond."
+      },
+      "reflection": {
+        "en": "How can “bond” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bond” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "unite",
+      "meaning": {
+        "en": "A word of faith and virtue: unite.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: unite."
+      },
+      "reflection": {
+        "en": "How can “unite” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “unite” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "unity",
+      "meaning": {
+        "en": "A word of faith and virtue: unity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: unity."
+      },
+      "reflection": {
+        "en": "How can “unity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “unity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "union",
+      "meaning": {
+        "en": "A word of faith and virtue: union.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: union."
+      },
+      "reflection": {
+        "en": "How can “union” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “union” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "single",
+      "meaning": {
+        "en": "A word of faith and virtue: single.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: single."
+      },
+      "reflection": {
+        "en": "How can “single” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “single” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "alone",
+      "meaning": {
+        "en": "A word of faith and virtue: alone.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: alone."
+      },
+      "reflection": {
+        "en": "How can “alone” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “alone” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "refuge",
+      "meaning": {
+        "en": "A word of faith and virtue: refuge.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: refuge."
+      },
+      "reflection": {
+        "en": "How can “refuge” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “refuge” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "harbor",
+      "meaning": {
+        "en": "A word of faith and virtue: harbor.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: harbor."
+      },
+      "reflection": {
+        "en": "How can “harbor” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “harbor” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "safety",
+      "meaning": {
+        "en": "A word of faith and virtue: safety.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: safety."
+      },
+      "reflection": {
+        "en": "How can “safety” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “safety” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "secure",
+      "meaning": {
+        "en": "A word of faith and virtue: secure.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: secure."
+      },
+      "reflection": {
+        "en": "How can “secure” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “secure” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "shield",
+      "meaning": {
+        "en": "A word of faith and virtue: shield.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: shield."
+      },
+      "reflection": {
+        "en": "How can “shield” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “shield” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "armor",
+      "meaning": {
+        "en": "A word of faith and virtue: armor.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: armor."
+      },
+      "reflection": {
+        "en": "How can “armor” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “armor” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "guard",
+      "meaning": {
+        "en": "A word of faith and virtue: guard.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: guard."
+      },
+      "reflection": {
+        "en": "How can “guard” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “guard” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "protect",
+      "meaning": {
+        "en": "A word of faith and virtue: protect.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: protect."
+      },
+      "reflection": {
+        "en": "How can “protect” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “protect” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "defend",
+      "meaning": {
+        "en": "A word of faith and virtue: defend.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: defend."
+      },
+      "reflection": {
+        "en": "How can “defend” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “defend” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "rescue",
+      "meaning": {
+        "en": "A word of faith and virtue: rescue.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: rescue."
+      },
+      "reflection": {
+        "en": "How can “rescue” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “rescue” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "saved",
+      "meaning": {
+        "en": "A word of faith and virtue: saved.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: saved."
+      },
+      "reflection": {
+        "en": "How can “saved” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “saved” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "saving",
+      "meaning": {
+        "en": "A word of faith and virtue: saving.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: saving."
+      },
+      "reflection": {
+        "en": "How can “saving” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “saving” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "whole",
+      "meaning": {
+        "en": "A word of faith and virtue: whole.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: whole."
+      },
+      "reflection": {
+        "en": "How can “whole” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “whole” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wholly",
+      "meaning": {
+        "en": "A word of faith and virtue: wholly.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wholly."
+      },
+      "reflection": {
+        "en": "How can “wholly” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wholly” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "entire",
+      "meaning": {
+        "en": "A word of faith and virtue: entire.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: entire."
+      },
+      "reflection": {
+        "en": "How can “entire” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “entire” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "complete",
+      "meaning": {
+        "en": "A word of faith and virtue: complete.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: complete."
+      },
+      "reflection": {
+        "en": "How can “complete” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “complete” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "clean",
+      "meaning": {
+        "en": "A word of faith and virtue: clean.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: clean."
+      },
+      "reflection": {
+        "en": "How can “clean” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “clean” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "clear",
+      "meaning": {
+        "en": "A word of faith and virtue: clear.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: clear."
+      },
+      "reflection": {
+        "en": "How can “clear” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “clear” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "clarity",
+      "meaning": {
+        "en": "A word of faith and virtue: clarity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: clarity."
+      },
+      "reflection": {
+        "en": "How can “clarity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “clarity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lucid",
+      "meaning": {
+        "en": "A word of faith and virtue: lucid.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lucid."
+      },
+      "reflection": {
+        "en": "How can “lucid” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lucid” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bright",
+      "meaning": {
+        "en": "A word of faith and virtue: bright.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bright."
+      },
+      "reflection": {
+        "en": "How can “bright” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bright” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "shine",
+      "meaning": {
+        "en": "A word of faith and virtue: shine.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: shine."
+      },
+      "reflection": {
+        "en": "How can “shine” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “shine” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "radiant",
+      "meaning": {
+        "en": "A word of faith and virtue: radiant.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: radiant."
+      },
+      "reflection": {
+        "en": "How can “radiant” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “radiant” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "glow",
+      "meaning": {
+        "en": "A word of faith and virtue: glow.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: glow."
+      },
+      "reflection": {
+        "en": "How can “glow” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “glow” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "glorify",
+      "meaning": {
+        "en": "A word of faith and virtue: glorify.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: glorify."
+      },
+      "reflection": {
+        "en": "How can “glorify” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “glorify” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "respect",
+      "meaning": {
+        "en": "A word of faith and virtue: respect.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: respect."
+      },
+      "reflection": {
+        "en": "How can “respect” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “respect” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "revere",
+      "meaning": {
+        "en": "A word of faith and virtue: revere.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: revere."
+      },
+      "reflection": {
+        "en": "How can “revere” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “revere” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "adore",
+      "meaning": {
+        "en": "A word of faith and virtue: adore.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: adore."
+      },
+      "reflection": {
+        "en": "How can “adore” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “adore” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "loving",
+      "meaning": {
+        "en": "A word of faith and virtue: loving.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: loving."
+      },
+      "reflection": {
+        "en": "How can “loving” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “loving” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "cherish",
+      "meaning": {
+        "en": "A word of faith and virtue: cherish.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: cherish."
+      },
+      "reflection": {
+        "en": "How can “cherish” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “cherish” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "treasure",
+      "meaning": {
+        "en": "A word of faith and virtue: treasure.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: treasure."
+      },
+      "reflection": {
+        "en": "How can “treasure” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “treasure” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "value",
+      "meaning": {
+        "en": "A word of faith and virtue: value.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: value."
+      },
+      "reflection": {
+        "en": "How can “value” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “value” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "values",
+      "meaning": {
+        "en": "A word of faith and virtue: values.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: values."
+      },
+      "reflection": {
+        "en": "How can “values” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “values” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "worth",
+      "meaning": {
+        "en": "A word of faith and virtue: worth.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: worth."
+      },
+      "reflection": {
+        "en": "How can “worth” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “worth” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "worthy",
+      "meaning": {
+        "en": "A word of faith and virtue: worthy.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: worthy."
+      },
+      "reflection": {
+        "en": "How can “worthy” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “worthy” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dignity",
+      "meaning": {
+        "en": "A word of faith and virtue: dignity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dignity."
+      },
+      "reflection": {
+        "en": "How can “dignity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dignity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "humble",
+      "meaning": {
+        "en": "A word of faith and virtue: humble.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: humble."
+      },
+      "reflection": {
+        "en": "How can “humble” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “humble” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "meek",
+      "meaning": {
+        "en": "A word of faith and virtue: meek.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: meek."
+      },
+      "reflection": {
+        "en": "How can “meek” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “meek” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "meekness",
+      "meaning": {
+        "en": "A word of faith and virtue: meekness.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: meekness."
+      },
+      "reflection": {
+        "en": "How can “meekness” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “meekness” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "temper",
+      "meaning": {
+        "en": "A word of faith and virtue: temper.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: temper."
+      },
+      "reflection": {
+        "en": "How can “temper” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “temper” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "balance",
+      "meaning": {
+        "en": "A word of faith and virtue: balance.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: balance."
+      },
+      "reflection": {
+        "en": "How can “balance” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “balance” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "measure",
+      "meaning": {
+        "en": "A word of faith and virtue: measure.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: measure."
+      },
+      "reflection": {
+        "en": "How can “measure” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “measure” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "moderate",
+      "meaning": {
+        "en": "A word of faith and virtue: moderate.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: moderate."
+      },
+      "reflection": {
+        "en": "How can “moderate” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “moderate” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "restrain",
+      "meaning": {
+        "en": "A word of faith and virtue: restrain.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: restrain."
+      },
+      "reflection": {
+        "en": "How can “restrain” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “restrain” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "control",
+      "meaning": {
+        "en": "A word of faith and virtue: control.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: control."
+      },
+      "reflection": {
+        "en": "How can “control” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “control” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "discipline",
+      "meaning": {
+        "en": "A word of faith and virtue: discipline.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: discipline."
+      },
+      "reflection": {
+        "en": "How can “discipline” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “discipline” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "attend",
+      "meaning": {
+        "en": "A word of faith and virtue: attend.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: attend."
+      },
+      "reflection": {
+        "en": "How can “attend” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “attend” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "present",
+      "meaning": {
+        "en": "A word of faith and virtue: present.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: present."
+      },
+      "reflection": {
+        "en": "How can “present” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “present” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "presence",
+      "meaning": {
+        "en": "A word of faith and virtue: presence.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: presence."
+      },
+      "reflection": {
+        "en": "How can “presence” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “presence” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "aware",
+      "meaning": {
+        "en": "A word of faith and virtue: aware.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: aware."
+      },
+      "reflection": {
+        "en": "How can “aware” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “aware” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "awaken",
+      "meaning": {
+        "en": "A word of faith and virtue: awaken.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: awaken."
+      },
+      "reflection": {
+        "en": "How can “awaken” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “awaken” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "mindful",
+      "meaning": {
+        "en": "A word of faith and virtue: mindful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: mindful."
+      },
+      "reflection": {
+        "en": "How can “mindful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “mindful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "notice",
+      "meaning": {
+        "en": "A word of faith and virtue: notice.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: notice."
+      },
+      "reflection": {
+        "en": "How can “notice” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “notice” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "observe",
+      "meaning": {
+        "en": "A word of faith and virtue: observe.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: observe."
+      },
+      "reflection": {
+        "en": "How can “observe” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “observe” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "behold",
+      "meaning": {
+        "en": "A word of faith and virtue: behold.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: behold."
+      },
+      "reflection": {
+        "en": "How can “behold” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “behold” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "listen",
+      "meaning": {
+        "en": "A word of faith and virtue: listen.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: listen."
+      },
+      "reflection": {
+        "en": "How can “listen” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “listen” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "speech",
+      "meaning": {
+        "en": "A word of faith and virtue: speech.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: speech."
+      },
+      "reflection": {
+        "en": "How can “speech” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “speech” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "speak",
+      "meaning": {
+        "en": "A word of faith and virtue: speak.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: speak."
+      },
+      "reflection": {
+        "en": "How can “speak” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “speak” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "words",
+      "meaning": {
+        "en": "A word of faith and virtue: words.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: words."
+      },
+      "reflection": {
+        "en": "How can “words” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “words” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "tongue",
+      "meaning": {
+        "en": "A word of faith and virtue: tongue.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: tongue."
+      },
+      "reflection": {
+        "en": "How can “tongue” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “tongue” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "rest",
+      "meaning": {
+        "en": "A word of faith and virtue: rest.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: rest."
+      },
+      "reflection": {
+        "en": "How can “rest” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “rest” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sleep",
+      "meaning": {
+        "en": "A word of faith and virtue: sleep.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sleep."
+      },
+      "reflection": {
+        "en": "How can “sleep” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sleep” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "asleep",
+      "meaning": {
+        "en": "A word of faith and virtue: asleep.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: asleep."
+      },
+      "reflection": {
+        "en": "How can “asleep” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “asleep” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dream",
+      "meaning": {
+        "en": "A word of faith and virtue: dream.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dream."
+      },
+      "reflection": {
+        "en": "How can “dream” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dream” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "vision",
+      "meaning": {
+        "en": "A word of faith and virtue: vision.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: vision."
+      },
+      "reflection": {
+        "en": "How can “vision” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “vision” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wishes",
+      "meaning": {
+        "en": "A word of faith and virtue: wishes.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wishes."
+      },
+      "reflection": {
+        "en": "How can “wishes” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wishes” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "believe",
+      "meaning": {
+        "en": "A word of faith and virtue: believe.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: believe."
+      },
+      "reflection": {
+        "en": "How can “believe” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “believe” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "belief",
+      "meaning": {
+        "en": "A word of faith and virtue: belief.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: belief."
+      },
+      "reflection": {
+        "en": "How can “belief” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “belief” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "faithful",
+      "meaning": {
+        "en": "A word of faith and virtue: faithful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: faithful."
+      },
+      "reflection": {
+        "en": "How can “faithful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “faithful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "loyalty",
+      "meaning": {
+        "en": "A word of faith and virtue: loyalty.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: loyalty."
+      },
+      "reflection": {
+        "en": "How can “loyalty” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “loyalty” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "frank",
+      "meaning": {
+        "en": "A word of faith and virtue: frank.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: frank."
+      },
+      "reflection": {
+        "en": "How can “frank” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “frank” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "open",
+      "meaning": {
+        "en": "A word of faith and virtue: open.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: open."
+      },
+      "reflection": {
+        "en": "How can “open” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “open” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "candid",
+      "meaning": {
+        "en": "A word of faith and virtue: candid.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: candid."
+      },
+      "reflection": {
+        "en": "How can “candid” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “candid” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "simply",
+      "meaning": {
+        "en": "A word of faith and virtue: simply.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: simply."
+      },
+      "reflection": {
+        "en": "How can “simply” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “simply” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "modesty",
+      "meaning": {
+        "en": "A word of faith and virtue: modesty.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: modesty."
+      },
+      "reflection": {
+        "en": "How can “modesty” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “modesty” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chaste",
+      "meaning": {
+        "en": "A word of faith and virtue: chaste.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chaste."
+      },
+      "reflection": {
+        "en": "How can “chaste” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chaste” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "cleanse",
+      "meaning": {
+        "en": "A word of faith and virtue: cleanse.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: cleanse."
+      },
+      "reflection": {
+        "en": "How can “cleanse” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “cleanse” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "washed",
+      "meaning": {
+        "en": "A word of faith and virtue: washed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: washed."
+      },
+      "reflection": {
+        "en": "How can “washed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “washed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "fresh",
+      "meaning": {
+        "en": "A word of faith and virtue: fresh.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: fresh."
+      },
+      "reflection": {
+        "en": "How can “fresh” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “fresh” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "renew",
+      "meaning": {
+        "en": "A word of faith and virtue: renew.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: renew."
+      },
+      "reflection": {
+        "en": "How can “renew” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “renew” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "anew",
+      "meaning": {
+        "en": "A word of faith and virtue: anew.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: anew."
+      },
+      "reflection": {
+        "en": "How can “anew” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “anew” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "rebirth",
+      "meaning": {
+        "en": "A word of faith and virtue: rebirth.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: rebirth."
+      },
+      "reflection": {
+        "en": "How can “rebirth” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “rebirth” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "birth",
+      "meaning": {
+        "en": "A word of faith and virtue: birth.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: birth."
+      },
+      "reflection": {
+        "en": "How can “birth” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “birth” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "alive",
+      "meaning": {
+        "en": "A word of faith and virtue: alive.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: alive."
+      },
+      "reflection": {
+        "en": "How can “alive” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “alive” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lives",
+      "meaning": {
+        "en": "A word of faith and virtue: lives.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lives."
+      },
+      "reflection": {
+        "en": "How can “lives” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lives” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lived",
+      "meaning": {
+        "en": "A word of faith and virtue: lived.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lived."
+      },
+      "reflection": {
+        "en": "How can “lived” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lived” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "breath",
+      "meaning": {
+        "en": "A word of faith and virtue: breath.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: breath."
+      },
+      "reflection": {
+        "en": "How can “breath” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “breath” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "breathe",
+      "meaning": {
+        "en": "A word of faith and virtue: breathe.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: breathe."
+      },
+      "reflection": {
+        "en": "How can “breathe” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “breathe” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "body",
+      "meaning": {
+        "en": "A word of faith and virtue: body.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: body."
+      },
+      "reflection": {
+        "en": "How can “body” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “body” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "mind",
+      "meaning": {
+        "en": "A word of faith and virtue: mind.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: mind."
+      },
+      "reflection": {
+        "en": "How can “mind” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “mind” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wills",
+      "meaning": {
+        "en": "A word of faith and virtue: wills.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wills."
+      },
+      "reflection": {
+        "en": "How can “wills” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wills” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "choice",
+      "meaning": {
+        "en": "A word of faith and virtue: choice.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: choice."
+      },
+      "reflection": {
+        "en": "How can “choice” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “choice” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "choose",
+      "meaning": {
+        "en": "A word of faith and virtue: choose.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: choose."
+      },
+      "reflection": {
+        "en": "How can “choose” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “choose” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "free",
+      "meaning": {
+        "en": "A word of faith and virtue: free.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: free."
+      },
+      "reflection": {
+        "en": "How can “free” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “free” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "freed",
+      "meaning": {
+        "en": "A word of faith and virtue: freed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: freed."
+      },
+      "reflection": {
+        "en": "How can “freed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “freed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "freedom",
+      "meaning": {
+        "en": "A word of faith and virtue: freedom.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: freedom."
+      },
+      "reflection": {
+        "en": "How can “freedom” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “freedom” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "liberty",
+      "meaning": {
+        "en": "A word of faith and virtue: liberty.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: liberty."
+      },
+      "reflection": {
+        "en": "How can “liberty” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “liberty” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "release",
+      "meaning": {
+        "en": "A word of faith and virtue: release.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: release."
+      },
+      "reflection": {
+        "en": "How can “release” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “release” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "loosen",
+      "meaning": {
+        "en": "A word of faith and virtue: loosen.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: loosen."
+      },
+      "reflection": {
+        "en": "How can “loosen” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “loosen” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "shelter",
+      "meaning": {
+        "en": "A word of faith and virtue: shelter.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: shelter."
+      },
+      "reflection": {
+        "en": "How can “shelter” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “shelter” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "invite",
+      "meaning": {
+        "en": "A word of faith and virtue: invite.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: invite."
+      },
+      "reflection": {
+        "en": "How can “invite” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “invite” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "include",
+      "meaning": {
+        "en": "A word of faith and virtue: include.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: include."
+      },
+      "reflection": {
+        "en": "How can “include” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “include” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "embrace",
+      "meaning": {
+        "en": "A word of faith and virtue: embrace.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: embrace."
+      },
+      "reflection": {
+        "en": "How can “embrace” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “embrace” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "stranger",
+      "meaning": {
+        "en": "A word of faith and virtue: stranger.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: stranger."
+      },
+      "reflection": {
+        "en": "How can “stranger” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “stranger” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "friend",
+      "meaning": {
+        "en": "A word of faith and virtue: friend.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: friend."
+      },
+      "reflection": {
+        "en": "How can “friend” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “friend” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "brother",
+      "meaning": {
+        "en": "A word of faith and virtue: brother.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: brother."
+      },
+      "reflection": {
+        "en": "How can “brother” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “brother” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "neighbor",
+      "meaning": {
+        "en": "A word of faith and virtue: neighbor.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: neighbor."
+      },
+      "reflection": {
+        "en": "How can “neighbor” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “neighbor” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "seeker",
+      "meaning": {
+        "en": "A word of faith and virtue: seeker.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: seeker."
+      },
+      "reflection": {
+        "en": "How can “seeker” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “seeker” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wisdom",
+      "meaning": {
+        "en": "A word of faith and virtue: wisdom.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wisdom."
+      },
+      "reflection": {
+        "en": "How can “wisdom” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wisdom” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "wiser",
+      "meaning": {
+        "en": "A word of faith and virtue: wiser.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: wiser."
+      },
+      "reflection": {
+        "en": "How can “wiser” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “wiser” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "insight",
+      "meaning": {
+        "en": "A word of faith and virtue: insight.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: insight."
+      },
+      "reflection": {
+        "en": "How can “insight” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “insight” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "known",
+      "meaning": {
+        "en": "A word of faith and virtue: known.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: known."
+      },
+      "reflection": {
+        "en": "How can “known” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “known” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "learn",
+      "meaning": {
+        "en": "A word of faith and virtue: learn.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: learn."
+      },
+      "reflection": {
+        "en": "How can “learn” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “learn” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "teach",
+      "meaning": {
+        "en": "A word of faith and virtue: teach.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: teach."
+      },
+      "reflection": {
+        "en": "How can “teach” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “teach” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "teacher",
+      "meaning": {
+        "en": "A word of faith and virtue: teacher.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: teacher."
+      },
+      "reflection": {
+        "en": "How can “teacher” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “teacher” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "pupil",
+      "meaning": {
+        "en": "A word of faith and virtue: pupil.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: pupil."
+      },
+      "reflection": {
+        "en": "How can “pupil” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “pupil” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "student",
+      "meaning": {
+        "en": "A word of faith and virtue: student.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: student."
+      },
+      "reflection": {
+        "en": "How can “student” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “student” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "disciple",
+      "meaning": {
+        "en": "A word of faith and virtue: disciple.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: disciple."
+      },
+      "reflection": {
+        "en": "How can “disciple” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “disciple” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "guide",
+      "meaning": {
+        "en": "A word of faith and virtue: guide.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: guide."
+      },
+      "reflection": {
+        "en": "How can “guide” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “guide” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "shepherd",
+      "meaning": {
+        "en": "A word of faith and virtue: shepherd.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: shepherd."
+      },
+      "reflection": {
+        "en": "How can “shepherd” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “shepherd” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "flock",
+      "meaning": {
+        "en": "A word of faith and virtue: flock.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: flock."
+      },
+      "reflection": {
+        "en": "How can “flock” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “flock” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "sheep",
+      "meaning": {
+        "en": "A word of faith and virtue: sheep.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: sheep."
+      },
+      "reflection": {
+        "en": "How can “sheep” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “sheep” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "lamb",
+      "meaning": {
+        "en": "A word of faith and virtue: lamb.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: lamb."
+      },
+      "reflection": {
+        "en": "How can “lamb” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “lamb” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dove",
+      "meaning": {
+        "en": "A word of faith and virtue: dove.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dove."
+      },
+      "reflection": {
+        "en": "How can “dove” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dove” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "olive",
+      "meaning": {
+        "en": "A word of faith and virtue: olive.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: olive."
+      },
+      "reflection": {
+        "en": "How can “olive” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “olive” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "palm",
+      "meaning": {
+        "en": "A word of faith and virtue: palm.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: palm."
+      },
+      "reflection": {
+        "en": "How can “palm” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “palm” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "cross",
+      "meaning": {
+        "en": "A word of faith and virtue: cross.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: cross."
+      },
+      "reflection": {
+        "en": "How can “cross” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “cross” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "crown",
+      "meaning": {
+        "en": "A word of faith and virtue: crown.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: crown."
+      },
+      "reflection": {
+        "en": "How can “crown” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “crown” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "throne",
+      "meaning": {
+        "en": "A word of faith and virtue: throne.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: throne."
+      },
+      "reflection": {
+        "en": "How can “throne” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “throne” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "king",
+      "meaning": {
+        "en": "A word of faith and virtue: king.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: king."
+      },
+      "reflection": {
+        "en": "How can “king” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “king” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "queen",
+      "meaning": {
+        "en": "A word of faith and virtue: queen.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: queen."
+      },
+      "reflection": {
+        "en": "How can “queen” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “queen” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "royal",
+      "meaning": {
+        "en": "A word of faith and virtue: royal.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: royal."
+      },
+      "reflection": {
+        "en": "How can “royal” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “royal” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "realm",
+      "meaning": {
+        "en": "A word of faith and virtue: realm.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: realm."
+      },
+      "reflection": {
+        "en": "How can “realm” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “realm” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ruler",
+      "meaning": {
+        "en": "A word of faith and virtue: ruler.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ruler."
+      },
+      "reflection": {
+        "en": "How can “ruler” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ruler” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "justice",
+      "meaning": {
+        "en": "A word of faith and virtue: justice.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: justice."
+      },
+      "reflection": {
+        "en": "How can “justice” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “justice” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "fair",
+      "meaning": {
+        "en": "A word of faith and virtue: fair.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: fair."
+      },
+      "reflection": {
+        "en": "How can “fair” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “fair” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "equity",
+      "meaning": {
+        "en": "A word of faith and virtue: equity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: equity."
+      },
+      "reflection": {
+        "en": "How can “equity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “equity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "right",
+      "meaning": {
+        "en": "A word of faith and virtue: right.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: right."
+      },
+      "reflection": {
+        "en": "How can “right” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “right” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "upright",
+      "meaning": {
+        "en": "A word of faith and virtue: upright.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: upright."
+      },
+      "reflection": {
+        "en": "How can “upright” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “upright” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ethics",
+      "meaning": {
+        "en": "A word of faith and virtue: ethics.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ethics."
+      },
+      "reflection": {
+        "en": "How can “ethics” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ethics” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "goodness",
+      "meaning": {
+        "en": "A word of faith and virtue: goodness.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: goodness."
+      },
+      "reflection": {
+        "en": "How can “goodness” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “goodness” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bestow",
+      "meaning": {
+        "en": "A word of faith and virtue: bestow.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bestow."
+      },
+      "reflection": {
+        "en": "How can “bestow” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bestow” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "gifts",
+      "meaning": {
+        "en": "A word of faith and virtue: gifts.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: gifts."
+      },
+      "reflection": {
+        "en": "How can “gifts” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “gifts” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "giver",
+      "meaning": {
+        "en": "A word of faith and virtue: giver.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: giver."
+      },
+      "reflection": {
+        "en": "How can “giver” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “giver” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "given",
+      "meaning": {
+        "en": "A word of faith and virtue: given.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: given."
+      },
+      "reflection": {
+        "en": "How can “given” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “given” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "receive",
+      "meaning": {
+        "en": "A word of faith and virtue: receive.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: receive."
+      },
+      "reflection": {
+        "en": "How can “receive” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “receive” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "accept",
+      "meaning": {
+        "en": "A word of faith and virtue: accept.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: accept."
+      },
+      "reflection": {
+        "en": "How can “accept” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “accept” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "alms",
+      "meaning": {
+        "en": "A word of faith and virtue: alms.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: alms."
+      },
+      "reflection": {
+        "en": "How can “alms” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “alms” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "help",
+      "meaning": {
+        "en": "A word of faith and virtue: help.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: help."
+      },
+      "reflection": {
+        "en": "How can “help” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “help” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "healer",
+      "meaning": {
+        "en": "A word of faith and virtue: healer.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: healer."
+      },
+      "reflection": {
+        "en": "How can “healer” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “healer” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "healed",
+      "meaning": {
+        "en": "A word of faith and virtue: healed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: healed."
+      },
+      "reflection": {
+        "en": "How can “healed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “healed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "creator",
+      "meaning": {
+        "en": "A word of faith and virtue: creator.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: creator."
+      },
+      "reflection": {
+        "en": "How can “creator” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “creator” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "heaven",
+      "meaning": {
+        "en": "A word of faith and virtue: heaven.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: heaven."
+      },
+      "reflection": {
+        "en": "How can “heaven” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “heaven” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "earth",
+      "meaning": {
+        "en": "A word of faith and virtue: earth.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: earth."
+      },
+      "reflection": {
+        "en": "How can “earth” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “earth” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "creation",
+      "meaning": {
+        "en": "A word of faith and virtue: creation.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: creation."
+      },
+      "reflection": {
+        "en": "How can “creation” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “creation” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "purpose",
+      "meaning": {
+        "en": "A word of faith and virtue: purpose.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: purpose."
+      },
+      "reflection": {
+        "en": "How can “purpose” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “purpose” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "mission",
+      "meaning": {
+        "en": "A word of faith and virtue: mission.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: mission."
+      },
+      "reflection": {
+        "en": "How can “mission” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “mission” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "path",
+      "meaning": {
+        "en": "A word of faith and virtue: path.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: path."
+      },
+      "reflection": {
+        "en": "How can “path” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “path” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "paths",
+      "meaning": {
+        "en": "A word of faith and virtue: paths.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: paths."
+      },
+      "reflection": {
+        "en": "How can “paths” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “paths” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "journey",
+      "meaning": {
+        "en": "A word of faith and virtue: journey.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: journey."
+      },
+      "reflection": {
+        "en": "How can “journey” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “journey” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "pilgrim",
+      "meaning": {
+        "en": "A word of faith and virtue: pilgrim.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: pilgrim."
+      },
+      "reflection": {
+        "en": "How can “pilgrim” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “pilgrim” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "seek",
+      "meaning": {
+        "en": "A word of faith and virtue: seek.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: seek."
+      },
+      "reflection": {
+        "en": "How can “seek” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “seek” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "find",
+      "meaning": {
+        "en": "A word of faith and virtue: find.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: find."
+      },
+      "reflection": {
+        "en": "How can “find” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “find” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "true",
+      "meaning": {
+        "en": "A word of faith and virtue: true.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: true."
+      },
+      "reflection": {
+        "en": "How can “true” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “true” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "real",
+      "meaning": {
+        "en": "A word of faith and virtue: real.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: real."
+      },
+      "reflection": {
+        "en": "How can “real” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “real” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "reality",
+      "meaning": {
+        "en": "A word of faith and virtue: reality.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: reality."
+      },
+      "reflection": {
+        "en": "How can “reality” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “reality” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "know",
+      "meaning": {
+        "en": "A word of faith and virtue: know.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: know."
+      },
+      "reflection": {
+        "en": "How can “know” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “know” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "skills",
+      "meaning": {
+        "en": "A word of faith and virtue: skills.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: skills."
+      },
+      "reflection": {
+        "en": "How can “skills” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “skills” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "talents",
+      "meaning": {
+        "en": "A word of faith and virtue: talents.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: talents."
+      },
+      "reflection": {
+        "en": "How can “talents” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “talents” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "worker",
+      "meaning": {
+        "en": "A word of faith and virtue: worker.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: worker."
+      },
+      "reflection": {
+        "en": "How can “worker” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “worker” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "works",
+      "meaning": {
+        "en": "A word of faith and virtue: works.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: works."
+      },
+      "reflection": {
+        "en": "How can “works” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “works” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "crafts",
+      "meaning": {
+        "en": "A word of faith and virtue: crafts.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: crafts."
+      },
+      "reflection": {
+        "en": "How can “crafts” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “crafts” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "gifted",
+      "meaning": {
+        "en": "A word of faith and virtue: gifted.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: gifted."
+      },
+      "reflection": {
+        "en": "How can “gifted” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “gifted” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "hopes",
+      "meaning": {
+        "en": "A word of faith and virtue: hopes.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: hopes."
+      },
+      "reflection": {
+        "en": "How can “hopes” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “hopes” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "trusts",
+      "meaning": {
+        "en": "A word of faith and virtue: trusts.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: trusts."
+      },
+      "reflection": {
+        "en": "How can “trusts” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “trusts” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "prayed",
+      "meaning": {
+        "en": "A word of faith and virtue: prayed.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: prayed."
+      },
+      "reflection": {
+        "en": "How can “prayed” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “prayed” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "hymns",
+      "meaning": {
+        "en": "A word of faith and virtue: hymns.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: hymns."
+      },
+      "reflection": {
+        "en": "How can “hymns” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “hymns” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "psalms",
+      "meaning": {
+        "en": "A word of faith and virtue: psalms.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: psalms."
+      },
+      "reflection": {
+        "en": "How can “psalms” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “psalms” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "songs",
+      "meaning": {
+        "en": "A word of faith and virtue: songs.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: songs."
+      },
+      "reflection": {
+        "en": "How can “songs” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “songs” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "glowing",
+      "meaning": {
+        "en": "A word of faith and virtue: glowing.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: glowing."
+      },
+      "reflection": {
+        "en": "How can “glowing” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “glowing” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "shining",
+      "meaning": {
+        "en": "A word of faith and virtue: shining.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: shining."
+      },
+      "reflection": {
+        "en": "How can “shining” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “shining” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "holiness",
+      "meaning": {
+        "en": "A word of faith and virtue: holiness.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: holiness."
+      },
+      "reflection": {
+        "en": "How can “holiness” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “holiness” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "peaceful",
+      "meaning": {
+        "en": "A word of faith and virtue: peaceful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: peaceful."
+      },
+      "reflection": {
+        "en": "How can “peaceful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “peaceful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "truthful",
+      "meaning": {
+        "en": "A word of faith and virtue: truthful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: truthful."
+      },
+      "reflection": {
+        "en": "How can “truthful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “truthful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "purity",
+      "meaning": {
+        "en": "A word of faith and virtue: purity.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: purity."
+      },
+      "reflection": {
+        "en": "How can “purity” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “purity” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "abide",
+      "meaning": {
+        "en": "A word of faith and virtue: abide.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: abide."
+      },
+      "reflection": {
+        "en": "How can “abide” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “abide” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "admire",
+      "meaning": {
+        "en": "A word of faith and virtue: admire.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: admire."
+      },
+      "reflection": {
+        "en": "How can “admire” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “admire” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "affirm",
+      "meaning": {
+        "en": "A word of faith and virtue: affirm.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: affirm."
+      },
+      "reflection": {
+        "en": "How can “affirm” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “affirm” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "anoint",
+      "meaning": {
+        "en": "A word of faith and virtue: anoint.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: anoint."
+      },
+      "reflection": {
+        "en": "How can “anoint” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “anoint” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ardent",
+      "meaning": {
+        "en": "A word of faith and virtue: ardent.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ardent."
+      },
+      "reflection": {
+        "en": "How can “ardent” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ardent” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "ascend",
+      "meaning": {
+        "en": "A word of faith and virtue: ascend.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: ascend."
+      },
+      "reflection": {
+        "en": "How can “ascend” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “ascend” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "aspire",
+      "meaning": {
+        "en": "A word of faith and virtue: aspire.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: aspire."
+      },
+      "reflection": {
+        "en": "How can “aspire” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “aspire” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "attain",
+      "meaning": {
+        "en": "A word of faith and virtue: attain.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: attain."
+      },
+      "reflection": {
+        "en": "How can “attain” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “attain” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "beacon",
+      "meaning": {
+        "en": "A word of faith and virtue: beacon.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: beacon."
+      },
+      "reflection": {
+        "en": "How can “beacon” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “beacon” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "behalf",
+      "meaning": {
+        "en": "A word of faith and virtue: behalf.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: behalf."
+      },
+      "reflection": {
+        "en": "How can “behalf” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “behalf” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "belong",
+      "meaning": {
+        "en": "A word of faith and virtue: belong.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: belong."
+      },
+      "reflection": {
+        "en": "How can “belong” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “belong” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "beloved",
+      "meaning": {
+        "en": "A word of faith and virtue: beloved.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: beloved."
+      },
+      "reflection": {
+        "en": "How can “beloved” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “beloved” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "benign",
+      "meaning": {
+        "en": "A word of faith and virtue: benign.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: benign."
+      },
+      "reflection": {
+        "en": "How can “benign” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “benign” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "beseech",
+      "meaning": {
+        "en": "A word of faith and virtue: beseech.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: beseech."
+      },
+      "reflection": {
+        "en": "How can “beseech” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “beseech” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "blameless",
+      "meaning": {
+        "en": "A word of faith and virtue: blameless.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: blameless."
+      },
+      "reflection": {
+        "en": "How can “blameless” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “blameless” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "blissful",
+      "meaning": {
+        "en": "A word of faith and virtue: blissful.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: blissful."
+      },
+      "reflection": {
+        "en": "How can “blissful” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “blissful” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "bloom",
+      "meaning": {
+        "en": "A word of faith and virtue: bloom.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: bloom."
+      },
+      "reflection": {
+        "en": "How can “bloom” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “bloom” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "blossom",
+      "meaning": {
+        "en": "A word of faith and virtue: blossom.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: blossom."
+      },
+      "reflection": {
+        "en": "How can “blossom” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “blossom” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "canopy",
+      "meaning": {
+        "en": "A word of faith and virtue: canopy.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: canopy."
+      },
+      "reflection": {
+        "en": "How can “canopy” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “canopy” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chapel",
+      "meaning": {
+        "en": "A word of faith and virtue: chapel.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chapel."
+      },
+      "reflection": {
+        "en": "How can “chapel” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chapel” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chasten",
+      "meaning": {
+        "en": "A word of faith and virtue: chasten.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chasten."
+      },
+      "reflection": {
+        "en": "How can “chasten” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chasten” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "chosen",
+      "meaning": {
+        "en": "A word of faith and virtue: chosen.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: chosen."
+      },
+      "reflection": {
+        "en": "How can “chosen” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “chosen” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "confess",
+      "meaning": {
+        "en": "A word of faith and virtue: confess.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: confess."
+      },
+      "reflection": {
+        "en": "How can “confess” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “confess” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "confide",
+      "meaning": {
+        "en": "A word of faith and virtue: confide.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: confide."
+      },
+      "reflection": {
+        "en": "How can “confide” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “confide” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "content",
+      "meaning": {
+        "en": "A word of faith and virtue: content.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: content."
+      },
+      "reflection": {
+        "en": "How can “content” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “content” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "courage",
+      "meaning": {
+        "en": "A word of faith and virtue: courage.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: courage."
+      },
+      "reflection": {
+        "en": "How can “courage” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “courage” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "created",
+      "meaning": {
+        "en": "A word of faith and virtue: created.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: created."
+      },
+      "reflection": {
+        "en": "How can “created” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “created” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "dearest",
+      "meaning": {
+        "en": "A word of faith and virtue: dearest.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: dearest."
+      },
+      "reflection": {
+        "en": "How can “dearest” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “dearest” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "deliver",
+      "meaning": {
+        "en": "A word of faith and virtue: deliver.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: deliver."
+      },
+      "reflection": {
+        "en": "How can “deliver” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “deliver” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "devote",
+      "meaning": {
+        "en": "A word of faith and virtue: devote.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: devote."
+      },
+      "reflection": {
+        "en": "How can “devote” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “devote” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "devout",
+      "meaning": {
+        "en": "A word of faith and virtue: devout.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: devout."
+      },
+      "reflection": {
+        "en": "How can “devout” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “devout” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "earnest",
+      "meaning": {
+        "en": "A word of faith and virtue: earnest.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: earnest."
+      },
+      "reflection": {
+        "en": "How can “earnest” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “earnest” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "earthly",
+      "meaning": {
+        "en": "A word of faith and virtue: earthly.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: earthly."
+      },
+      "reflection": {
+        "en": "How can “earthly” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “earthly” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "elevate",
+      "meaning": {
+        "en": "A word of faith and virtue: elevate.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: elevate."
+      },
+      "reflection": {
+        "en": "How can “elevate” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “elevate” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "eloquent",
+      "meaning": {
+        "en": "A word of faith and virtue: eloquent.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: eloquent."
+      },
+      "reflection": {
+        "en": "How can “eloquent” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “eloquent” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "empower",
+      "meaning": {
+        "en": "A word of faith and virtue: empower.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: empower."
+      },
+      "reflection": {
+        "en": "How can “empower” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “empower” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "enable",
+      "meaning": {
+        "en": "A word of faith and virtue: enable.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: enable."
+      },
+      "reflection": {
+        "en": "How can “enable” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “enable” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "endow",
+      "meaning": {
+        "en": "A word of faith and virtue: endow.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: endow."
+      },
+      "reflection": {
+        "en": "How can “endow” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “endow” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "endure",
+      "meaning": {
+        "en": "A word of faith and virtue: endure.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: endure."
+      },
+      "reflection": {
+        "en": "How can “endure” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “endure” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "enfold",
+      "meaning": {
+        "en": "A word of faith and virtue: enfold.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: enfold."
+      },
+      "reflection": {
+        "en": "How can “enfold” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “enfold” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "enrich",
+      "meaning": {
+        "en": "A word of faith and virtue: enrich.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: enrich."
+      },
+      "reflection": {
+        "en": "How can “enrich” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “enrich” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "entreat",
+      "meaning": {
+        "en": "A word of faith and virtue: entreat.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: entreat."
+      },
+      "reflection": {
+        "en": "How can “entreat” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “entreat” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
+      },
+      "placeholder": false
+    },
+    {
+      "word": "entrust",
+      "meaning": {
+        "en": "A word of faith and virtue: entrust.",
+        "gu": "શ્રદ્ધા અને સદ્ગુણનો શબ્દ: entrust."
+      },
+      "reflection": {
+        "en": "How can “entrust” guide one choice you make away from a screen today?",
+        "gu": "આજે સ્ક્રીનથી દૂર રહીને “entrust” તમારી એક પસંદગીને કેવી રીતે માર્ગદર્શન આપે?"
       },
       "placeholder": false
     }
