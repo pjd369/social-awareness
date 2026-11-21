@@ -10,7 +10,7 @@
 
 /*
  * Visible-screen play area (portaled to body). Fixed to the viewport so the
- * fuljadi pops at the bottom of what you see — no scrolling required.
+ * fuljadi can pop beside Atmiyata and be waved anywhere on screen.
  */
 .playfield {
   position: fixed;
