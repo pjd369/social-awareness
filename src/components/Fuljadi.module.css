@@ -44,8 +44,12 @@
   user-select: none;
   -webkit-user-select: none;
   pointer-events: auto;
-  /* Tip of the stick sits at the wrapper center (spark origin). */
-  transform: translate(-50%, -12%);
+  /*
+   * Tip sits on the spark origin. Stem runs at 315° from the tip
+   * (down-right; was 270° straight down) — rotate −45° around the tip.
+   */
+  transform-origin: 50% 12%;
+  transform: translate(-50%, -12%) rotate(-45deg);
 }
 
 .handle:focus-visible {
