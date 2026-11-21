@@ -125,7 +125,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
 
     if (mark) {
       const r = mark.getBoundingClientRect()
-      const gap = Math.min(56, Math.max(36, r.width * 0.12))
+      const gap = Math.min(28, Math.max(14, r.width * 0.05))
       return {
         x: Math.min(Math.max(r.right + gap - originX, 28), maxX),
         y: Math.min(Math.max(r.top + r.height / 2 - originY, 28), maxY),
