@@ -29,7 +29,7 @@ test.describe('story player', () => {
     await page.getByRole('button', { name: 'Try a different choice' }).click()
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
     await page.getByRole('button', { name: 'Finish homework first' }).click()
-    await page.getByRole('button', { name: 'Ask Mira to do homework with you' }).click()
+    await page.getByRole('button', { name: 'Ask your friend to do homework with you' }).click()
     await page.getByRole('button', { name: 'After homework, play outside' }).click()
     await expect(page.getByText('You both finish early')).toBeVisible()
     await expect(page.getByRole('complementary', { name: 'What we learn' })).toContainText(
