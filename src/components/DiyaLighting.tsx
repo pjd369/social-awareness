@@ -5,12 +5,32 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
+import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/context'
 import { DIYA_LIT_SESSION_KEY } from '../config/site'
 import { usePrefersReducedMotion } from './motion'
 import { DiyaLamp } from './DiyaLamp'
 import { Fuljadi } from './Fuljadi'
 import styles from './DiyaLighting.module.css'
+
+/** Visible screen box — prefers visualViewport so mobile chrome doesn’t hide the tip. */
+function visibleScreen() {
+  const vv = typeof window !== 'undefined' ? window.visualViewport : null
+  if (vv) {
+    return {
+      left: vv.offsetLeft,
+      top: vv.offsetTop,
+      width: vv.width,
+      height: vv.height,
+    }
+  }
+  return {
+    left: 0,
+    top: 0,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }
+}
 
 function readLit(): boolean {
   try {
@@ -43,7 +63,7 @@ function tipNearWick(tipX: number, tipY: number, wick: DOMRect, play: DOMRect): 
 
 /**
  * Annakut unveiling: unlit diya, a button that brings out a burning fuljadi
- * at the bottom of the page to play with, then drag it onto the wick to light.
+ * at the bottom of the visible screen to play with, then drag it onto the wick.
  */
 export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const { t } = useI18n()
@@ -53,6 +73,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const [lit, setLit] = useState(readLit)
   const [fuljadiOut, setFuljadiOut] = useState(false)
   const [leaving, setLeaving] = useState(false)
+  const [popping, setPopping] = useState(false)
   const [dragging, setDragging] = useState(false)
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const dragOffset = useRef({ x: 0, y: 0 })
@@ -76,6 +97,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     window.setTimeout(() => {
       setFuljadiOut(false)
       setLeaving(false)
+      setPopping(false)
     }, 420)
   }, [])
 
@@ -88,16 +110,53 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     }
   }, [lit])
 
-  /** Bottom-center of the viewport playfield — room to wave the fuljadi. */
+  /**
+   * Bottom-center of the *visible* screen (not the page). Uses visualViewport
+   * so the tip sits above the browser chrome — no scrolling to find it.
+   */
   function restFuljadiAtBottom() {
-    const play = playRef.current
-    const width = play?.clientWidth || window.innerWidth
-    const height = play?.clientHeight || window.innerHeight
+    const screen = visibleScreen()
+    const margin = Math.min(110, Math.max(72, screen.height * 0.12))
     return {
-      x: width / 2,
-      y: Math.max(height - 100, height * 0.82),
+      x: screen.left + screen.width / 2,
+      y: screen.top + screen.height - margin,
     }
   }
+
+  // Keep the resting tip glued to the visible bottom if the chrome resizes.
+  useEffect(() => {
+    if (!fuljadiOut || lit || leaving) return
+    const vv = window.visualViewport
+    function syncRest() {
+      if (draggingRef.current) return
+      const next = restFuljadiAtBottom()
+      posRef.current = next
+      setPos(next)
+    }
+    vv?.addEventListener('resize', syncRest)
+    vv?.addEventListener('scroll', syncRest)
+    window.addEventListener('resize', syncRest)
+    return () => {
+      vv?.removeEventListener('resize', syncRest)
+      vv?.removeEventListener('scroll', syncRest)
+      window.removeEventListener('resize', syncRest)
+    }
+  }, [fuljadiOut, lit, leaving])
+
+  // Lock page scroll while waving so the fuljadi stays in the visual frame.
+  useEffect(() => {
+    if (!fuljadiOut || lit) return
+    const html = document.documentElement
+    const body = document.body
+    const prevHtml = html.style.overflow
+    const prevBody = body.style.overflow
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = prevHtml
+      body.style.overflow = prevBody
+    }
+  }, [fuljadiOut, lit])
 
   function summonFuljadi() {
     if (lit) return
@@ -105,13 +164,12 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
       lightDiya()
       return
     }
+    const next = restFuljadiAtBottom()
+    posRef.current = next
+    setPos(next)
+    setPopping(true)
     setFuljadiOut(true)
-    // Wait a frame so the playfield is mounted and measurable.
-    requestAnimationFrame(() => {
-      const next = restFuljadiAtBottom()
-      posRef.current = next
-      setPos(next)
-    })
+    window.setTimeout(() => setPopping(false), 560)
   }
 
   function moveTipTo(clientX: number, clientY: number) {
@@ -135,6 +193,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     event.preventDefault()
     const play = playRef.current
     if (!play) return
+    setPopping(false)
     const rect = play.getBoundingClientRect()
     dragOffset.current = {
       x: event.clientX - rect.left - posRef.current.x,
@@ -199,19 +258,26 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
         {lit && <p className={styles.litNote}>{t('intro.diya.lit')}</p>}
       </div>
 
-      {fuljadiOut && (
-        <div ref={playRef} className={styles.playfield} data-testid="fuljadi-playfield" aria-hidden>
-          <Fuljadi
-            x={pos.x}
-            y={pos.y}
-            label={t('intro.diya.fuljadi')}
-            dragging={dragging}
-            leaving={leaving}
-            popping
-            onPointerDown={onFuljadiPointerDown}
-          />
-        </div>
-      )}
+      {fuljadiOut &&
+        createPortal(
+          <div
+            ref={playRef}
+            className={styles.playfield}
+            data-testid="fuljadi-playfield"
+            aria-hidden
+          >
+            <Fuljadi
+              x={pos.x}
+              y={pos.y}
+              label={t('intro.diya.fuljadi')}
+              dragging={dragging}
+              leaving={leaving}
+              popping={popping}
+              onPointerDown={onFuljadiPointerDown}
+            />
+          </div>,
+          document.body,
+        )}
     </>
   )
 }

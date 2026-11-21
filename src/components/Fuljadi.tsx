@@ -13,7 +13,7 @@ interface FuljadiProps {
   label: string
   dragging: boolean
   leaving?: boolean
-  /** Short pop-in when the fuljadi first appears at the bottom. */
+  /** Short pop-in when the fuljadi first appears at the bottom of the screen. */
   popping?: boolean
   onPointerDown: (event: ReactPointerEvent<HTMLButtonElement>) => void
 }
