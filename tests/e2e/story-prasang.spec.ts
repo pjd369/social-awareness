@@ -5,7 +5,7 @@ test.describe('story player', () => {
     page,
   }) => {
     await page.goto('/bhulkao/scenario')
-    await expect(page).toHaveURL(/\/bhulkao\/story\/homework-time$/)
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
@@ -260,10 +260,10 @@ test.describe('prasang reader', () => {
     await expect(page.getByTestId('prasang-video')).toBeVisible()
     const subs = page.getByTestId('prasang-subs-toggle')
     await expect(subs).toHaveAttribute('aria-pressed', 'false')
-    await expect(subs).toHaveAccessibleName('Subtitles off')
+    await expect(subs).toHaveAccessibleName('CC subtitles off')
     await subs.click()
     await expect(subs).toHaveAttribute('aria-pressed', 'true')
-    await expect(subs).toHaveAccessibleName('Subtitles on')
+    await expect(subs).toHaveAccessibleName('CC subtitles on')
     const lesson = page.getByRole('complementary', { name: 'Reflect' })
     await lesson.scrollIntoViewIfNeeded()
     await expect(lesson).toBeVisible()
@@ -298,8 +298,9 @@ test('placeholder content is marked unmistakably', async ({ page }) => {
   await expect(page.getByTestId('preview-strip')).toHaveCount(0)
   await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
   await page.goto('/yuvako')
-  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toBeVisible()
-  // Both Yuvako games and the scenarios are final, so Activity and Scenario carry no badge.
+  // The Yuvako games, scenarios and prasang are all final, so no part carries a badge.
+  await expect(page.getByRole('link', { name: /Prasang/ })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Prasang.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Activity/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Activity.*Placeholder/ })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Scenario/ })).toBeVisible()

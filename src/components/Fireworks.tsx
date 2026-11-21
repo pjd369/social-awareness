@@ -183,10 +183,7 @@ export function Fireworks() {
         allBurstAt = elapsed
       }
 
-      const fade =
-        allBurstAt === 0
-          ? 1
-          : Math.max(0, 1 - (elapsed - allBurstAt) / FADE_MS)
+      const fade = allBurstAt === 0 ? 1 : Math.max(0, 1 - (elapsed - allBurstAt) / FADE_MS)
 
       // Mild drag + late gravity so the halo stays circular while it expands.
       const drag = Math.pow(0.78, dt)

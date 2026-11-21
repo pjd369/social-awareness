@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useId,
-  useRef,
-  type PointerEvent as ReactPointerEvent,
-} from 'react'
+import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent } from 'react'
 import { usePrefersReducedMotion } from './motion'
 import styles from './Fuljadi.module.css'
 
@@ -37,15 +32,7 @@ const TIP = CANVAS / 2
  * A burning fuljadi: thin stem with a round 2D sparkler halo.
  * The spark canvas sits in a square wrapper (not clipped by the stick button).
  */
-export function Fuljadi({
-  x,
-  y,
-  label,
-  dragging,
-  leaving,
-  popping,
-  onPointerDown,
-}: FuljadiProps) {
+export function Fuljadi({ x, y, label, dragging, leaving, popping, onPointerDown }: FuljadiProps) {
   const reducedMotion = usePrefersReducedMotion()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sparksRef = useRef<Spark[]>([])

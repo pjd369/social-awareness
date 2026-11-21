@@ -188,9 +188,7 @@ export function PrasangVideo({ video }: { video: PrasangVideoData }) {
         onClick={onVideoClick}
       >
         <source src={src} type="video/mp4" />
-        {captions && (
-          <track kind="captions" src={captions} srcLang="en" label="English" />
-        )}
+        {captions && <track kind="captions" src={captions} srcLang="en" label="English" />}
       </video>
 
       <div
@@ -274,7 +272,7 @@ export function PrasangVideo({ video }: { video: PrasangVideoData }) {
           >
             <Icon name={subsOn ? 'captions' : 'captions-off'} size={18} />
             <span className={styles.videoCcLabel} aria-hidden="true">
-              CC
+              {t('prasang.video.cc')}
             </span>
           </button>
         )}

@@ -56,7 +56,7 @@ test.describe('tap targets', () => {
 test('every game, story and prasang is within three taps of the intro page', async ({ page }) => {
   const journeys: [string, string, string | null, RegExp][] = [
     ['Bhulkao', 'Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
-    ['Bhulkao', 'Scenario', null, /\/bhulkao\/story\/homework-time$/],
+    ['Bhulkao', 'Scenario', null, /\/bhulkao\/scenario\/homework-time$/],
     ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],

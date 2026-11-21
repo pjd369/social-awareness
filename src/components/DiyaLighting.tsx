@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/context'
-import { DIYA_LIT_SESSION_KEY } from '../config/site'
+import { isDiyaLit, markDiyaLit } from './diya-lit'
 import { usePrefersReducedMotion } from './motion'
 import { DiyaLamp } from './DiyaLamp'
 import { Fuljadi } from './Fuljadi'
@@ -32,23 +32,6 @@ function visibleScreen() {
   }
 }
 
-function readLit(): boolean {
-  try {
-    if (typeof navigator !== 'undefined' && navigator.webdriver) return true
-    return window.sessionStorage.getItem(DIYA_LIT_SESSION_KEY) === '1'
-  } catch {
-    return false
-  }
-}
-
-function writeLit() {
-  try {
-    window.sessionStorage.setItem(DIYA_LIT_SESSION_KEY, '1')
-  } catch {
-    /* ignore quota / private mode */
-  }
-}
-
 /** Tip must reach the black vaat (wick); small pad so touch still feels fair. */
 function tipNearWick(tipX: number, tipY: number, wick: DOMRect, play: DOMRect): boolean {
   const absX = play.left + tipX
@@ -70,7 +53,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const reducedMotion = usePrefersReducedMotion()
   const playRef = useRef<HTMLDivElement>(null)
   const wickRef = useRef<HTMLSpanElement>(null)
-  const [lit, setLit] = useState(readLit)
+  const [lit, setLit] = useState(isDiyaLit)
   const [fuljadiOut, setFuljadiOut] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const [popping, setPopping] = useState(false)
@@ -81,13 +64,13 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const draggingRef = useRef(false)
   const litRef = useRef(lit)
   const onLitRef = useRef(onLit)
-  onLitRef.current = onLit
-  posRef.current = pos
-  litRef.current = lit
+  useEffect(() => {
+    onLitRef.current = onLit
+  })
 
   const lightDiya = useCallback(() => {
     if (litRef.current) return
-    writeLit()
+    markDiyaLit()
     litRef.current = true
     setLit(true)
     setLeaving(true)
@@ -100,15 +83,6 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
       setPopping(false)
     }, 420)
   }, [])
-
-  useEffect(() => {
-    // Automated browsers skip the ritual so e2e can reach Bhulkao / Yuvako.
-    if (navigator.webdriver && !lit) {
-      writeLit()
-      setLit(true)
-      onLitRef.current?.()
-    }
-  }, [lit])
 
   /**
    * Tip rests just above the “harmony” word in the theme line, clamped to the
@@ -301,9 +275,4 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
         )}
     </>
   )
-}
-
-/** True when this tab has already lit the intro diya (or e2e auto-lit). */
-export function isDiyaLit(): boolean {
-  return readLit()
 }
