@@ -11,15 +11,20 @@ export interface FirestoreConnection {
   fs: FirestoreLite
 }
 
+/**
+ * Reads Firebase web settings. Prefer the short names used on Vercel / GitHub
+ * Actions (`API_KEY`, …); fall back to the older `VITE_FIREBASE_*` names.
+ */
 export function firebaseConfig(env: Record<string, string | undefined>) {
-  const apiKey = env.VITE_FIREBASE_API_KEY?.trim()
-  const projectId = env.VITE_FIREBASE_PROJECT_ID?.trim()
+  const apiKey = (env.API_KEY || env.VITE_FIREBASE_API_KEY)?.trim()
+  const projectId = (env.PROJECT_ID || env.VITE_FIREBASE_PROJECT_ID)?.trim()
   if (!apiKey || !projectId) return null
   return {
     apiKey,
     projectId,
-    authDomain: env.VITE_FIREBASE_AUTH_DOMAIN?.trim() || `${projectId}.firebaseapp.com`,
-    appId: env.VITE_FIREBASE_APP_ID?.trim() || undefined,
+    authDomain:
+      (env.AUTH_DOMAIN || env.VITE_FIREBASE_AUTH_DOMAIN)?.trim() || `${projectId}.firebaseapp.com`,
+    appId: (env.APP_ID || env.VITE_FIREBASE_APP_ID)?.trim() || undefined,
   }
 }
 

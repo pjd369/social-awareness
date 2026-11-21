@@ -288,9 +288,8 @@ Scores are stored in Firebase Firestore, at
    environment variables and redeploy: step-by-step in
    [`docs/FIREBASE_ON_VERCEL.md`](docs/FIREBASE_ON_VERCEL.md). For the GitHub
    Pages copy, add them as repository variables (Settings → Secrets and
-   variables → Actions → Variables): `VITE_FIREBASE_API_KEY`,
-   `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_AUTH_DOMAIN`,
-   `VITE_FIREBASE_APP_ID`.
+   variables → Actions → Variables): `API_KEY`, `PROJECT_ID`, `AUTH_DOMAIN`,
+   `APP_ID`.
 
 Without these settings, the dev server keeps scores in memory until the page
 is reloaded, and a production build shows "The leaderboard is not set up yet".

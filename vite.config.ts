@@ -50,10 +50,15 @@ function cspMeta(firestore: boolean): Plugin {
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), 'VITE_')
-  const firestore = Boolean(env.VITE_FIREBASE_API_KEY && env.VITE_FIREBASE_PROJECT_ID)
+  // Load every env key so short names (API_KEY, …) from Vercel/GitHub work too.
+  const env = loadEnv(mode, process.cwd(), '')
+  const firestore = Boolean(
+    (env.API_KEY || env.VITE_FIREBASE_API_KEY) && (env.PROJECT_ID || env.VITE_FIREBASE_PROJECT_ID),
+  )
   return {
     base: basePath(),
+    // Expose short Firebase names to the client (plus the usual VITE_ prefix).
+    envPrefix: ['VITE_', 'API_', 'PROJECT_', 'AUTH_', 'APP_'],
     plugins: [react(), cspMeta(firestore)],
     define: {
       // Vercel Web Analytics is served by Vercel itself (/_vercel/insights), so
