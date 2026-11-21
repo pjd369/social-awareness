@@ -12,6 +12,7 @@
   user-select: none;
   -webkit-user-select: none;
   transform: translate(-50%, -90%);
+  overflow: visible;
 }
 
 .fuljadi:active,
@@ -26,6 +27,8 @@
 }
 
 .art {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
@@ -33,49 +36,25 @@
   pointer-events: none;
 }
 
-.tipGlow {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: tipPulse 0.55s ease-in-out infinite alternate;
-}
-
-.spark {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: sparkFly var(--dur, 0.7s) linear var(--delay, 0s) infinite;
+/*
+ * Spark canvas is centered on the burning tip so streaks spray freely
+ * in every direction (like a real fuljhadi fountain).
+ */
+.sparks {
+  position: absolute;
+  left: 50%;
+  /* Align with the stick tip in the 152-tall SVG (tip ~ y 30). */
+  top: 18%;
+  z-index: 2;
+  width: 13.75rem;
+  height: 16.25rem;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
 .leaving {
   animation: fuljadiOut 420ms ease forwards;
   pointer-events: none;
-}
-
-@keyframes tipPulse {
-  from {
-    opacity: 0.75;
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-}
-
-@keyframes sparkFly {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.4);
-  }
-
-  18% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx, 0px), var(--dy, -28px)) scale(0.1);
-  }
 }
 
 @keyframes fuljadiOut {
@@ -86,16 +65,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tipGlow,
-  .spark {
-    animation: none;
-  }
-
-  .tipGlow {
-    opacity: 1;
-  }
-
-  .spark {
-    opacity: 0.85;
+  .sparks {
+    display: none;
   }
 }
