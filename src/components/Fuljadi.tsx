@@ -13,6 +13,8 @@ interface FuljadiProps {
   label: string
   dragging: boolean
   leaving?: boolean
+  /** Short pop-in when the fuljadi first appears at the bottom. */
+  popping?: boolean
   onPointerDown: (event: ReactPointerEvent<HTMLButtonElement>) => void
 }
 
@@ -35,7 +37,15 @@ const TIP = CANVAS / 2
  * A burning fuljadi: thin stem with a round 2D sparkler halo.
  * The spark canvas sits in a square wrapper (not clipped by the stick button).
  */
-export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: FuljadiProps) {
+export function Fuljadi({
+  x,
+  y,
+  label,
+  dragging,
+  leaving,
+  popping,
+  onPointerDown,
+}: FuljadiProps) {
   const reducedMotion = usePrefersReducedMotion()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sparksRef = useRef<Spark[]>([])
@@ -150,7 +160,7 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
 
   return (
     <div
-      className={`${styles.fuljadi} ${dragging ? styles.dragging : ''} ${leaving ? styles.leaving : ''}`}
+      className={`${styles.fuljadi} ${dragging ? styles.dragging : ''} ${leaving ? styles.leaving : ''} ${popping ? styles.popping : ''}`}
       style={{ left: x, top: y }}
       data-testid="fuljadi"
     >

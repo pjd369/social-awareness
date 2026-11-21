@@ -8,6 +8,17 @@
   min-height: clamp(190px, 38vw, 280px);
 }
 
+/*
+ * Full-viewport play area while the fuljadi is out — pops at the bottom so
+ * people can wave it around before touching the diya.
+ */
+.playfield {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
 .diyaWrap {
   position: relative;
   z-index: 1;

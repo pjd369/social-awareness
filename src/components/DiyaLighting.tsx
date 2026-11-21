@@ -30,9 +30,9 @@ function writeLit() {
 }
 
 /** Tip must reach the black vaat (wick); small pad so touch still feels fair. */
-function tipNearWick(tipX: number, tipY: number, wick: DOMRect, stage: DOMRect): boolean {
-  const absX = stage.left + tipX
-  const absY = stage.top + tipY
+function tipNearWick(tipX: number, tipY: number, wick: DOMRect, play: DOMRect): boolean {
+  const absX = play.left + tipX
+  const absY = play.top + tipY
   const cx = wick.left + wick.width / 2
   const cy = wick.top + wick.height / 2
   const radius = Math.max(wick.width, wick.height) * 0.9 + 22
@@ -42,13 +42,13 @@ function tipNearWick(tipX: number, tipY: number, wick: DOMRect, stage: DOMRect):
 }
 
 /**
- * Annakut unveiling: unlit diya, a button that brings out a burning fuljadi,
- * then drag the fuljadi onto the diya to light it. The fuljadi leaves once lit.
+ * Annakut unveiling: unlit diya, a button that brings out a burning fuljadi
+ * at the bottom of the page to play with, then drag it onto the wick to light.
  */
 export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const { t } = useI18n()
   const reducedMotion = usePrefersReducedMotion()
-  const stageRef = useRef<HTMLDivElement>(null)
+  const playRef = useRef<HTMLDivElement>(null)
   const wickRef = useRef<HTMLSpanElement>(null)
   const [lit, setLit] = useState(readLit)
   const [fuljadiOut, setFuljadiOut] = useState(false)
@@ -88,32 +88,40 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     }
   }, [lit])
 
-  function restFuljadi() {
-    const stage = stageRef.current
-    if (!stage) return { x: 0, y: 0 }
-    const { width, height } = stage.getBoundingClientRect()
-    return { x: width * 0.86, y: height * 0.42 }
+  /** Bottom-center of the viewport playfield — room to wave the fuljadi. */
+  function restFuljadiAtBottom() {
+    const play = playRef.current
+    const width = play?.clientWidth || window.innerWidth
+    const height = play?.clientHeight || window.innerHeight
+    return {
+      x: width / 2,
+      y: Math.max(height - 100, height * 0.82),
+    }
   }
 
   function summonFuljadi() {
     if (lit) return
-    // Reduced motion: light immediately — no drag required.
     if (reducedMotion) {
       lightDiya()
       return
     }
-    setPos(restFuljadi())
     setFuljadiOut(true)
+    // Wait a frame so the playfield is mounted and measurable.
+    requestAnimationFrame(() => {
+      const next = restFuljadiAtBottom()
+      posRef.current = next
+      setPos(next)
+    })
   }
 
   function moveTipTo(clientX: number, clientY: number) {
-    const stage = stageRef.current
+    const play = playRef.current
     const wick = wickRef.current
-    if (!stage || !wick || litRef.current) return
-    const rect = stage.getBoundingClientRect()
+    if (!play || !wick || litRef.current) return
+    const rect = play.getBoundingClientRect()
     const next = {
-      x: Math.min(Math.max(clientX - rect.left - dragOffset.current.x, 8), rect.width - 8),
-      y: Math.min(Math.max(clientY - rect.top - dragOffset.current.y, 8), rect.height - 8),
+      x: Math.min(Math.max(clientX - rect.left - dragOffset.current.x, 24), rect.width - 24),
+      y: Math.min(Math.max(clientY - rect.top - dragOffset.current.y, 24), rect.height - 24),
     }
     posRef.current = next
     setPos(next)
@@ -125,9 +133,9 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   function onFuljadiPointerDown(event: ReactPointerEvent<HTMLButtonElement>) {
     if (lit || leaving) return
     event.preventDefault()
-    const stage = stageRef.current
-    if (!stage) return
-    const rect = stage.getBoundingClientRect()
+    const play = playRef.current
+    if (!play) return
+    const rect = play.getBoundingClientRect()
     dragOffset.current = {
       x: event.clientX - rect.left - posRef.current.x,
       y: event.clientY - rect.top - posRef.current.y,
@@ -163,49 +171,48 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   }
 
   return (
-    <div
-      ref={stageRef}
-      className={styles.stage}
-      data-testid="diya-lighting"
-      data-lit={lit ? 'true' : 'false'}
-    >
-      <div className={styles.diyaWrap}>
-        <DiyaLamp lit={lit} />
-        {/* Covers wick + oil bowl — the vaat area people aim for. */}
-        <span ref={wickRef} className={styles.wickHit} data-testid="diya-wick-hit" />
+    <>
+      <div className={styles.stage} data-testid="diya-lighting" data-lit={lit ? 'true' : 'false'}>
+        <div className={styles.diyaWrap}>
+          <DiyaLamp lit={lit} />
+          <span ref={wickRef} className={styles.wickHit} data-testid="diya-wick-hit" />
+        </div>
+
+        {!lit && !fuljadiOut && (
+          <>
+            <p className={styles.hint}>{t('intro.diya.hint')}</p>
+            <button
+              type="button"
+              className={styles.lightBtn}
+              onClick={summonFuljadi}
+              data-testid="light-diya"
+            >
+              {t('intro.diya.light')}
+            </button>
+          </>
+        )}
+
+        {!lit && fuljadiOut && !leaving && (
+          <p className={styles.dragHint}>{t('intro.diya.drag')}</p>
+        )}
+
+        {lit && <p className={styles.litNote}>{t('intro.diya.lit')}</p>}
       </div>
 
-      {!lit && !fuljadiOut && (
-        <>
-          <p className={styles.hint}>{t('intro.diya.hint')}</p>
-          <button
-            type="button"
-            className={styles.lightBtn}
-            onClick={summonFuljadi}
-            data-testid="light-diya"
-          >
-            {t('intro.diya.light')}
-          </button>
-        </>
-      )}
-
-      {!lit && fuljadiOut && !leaving && (
-        <p className={styles.dragHint}>{t('intro.diya.drag')}</p>
-      )}
-
-      {lit && <p className={styles.litNote}>{t('intro.diya.lit')}</p>}
-
       {fuljadiOut && (
-        <Fuljadi
-          x={pos.x}
-          y={pos.y}
-          label={t('intro.diya.fuljadi')}
-          dragging={dragging}
-          leaving={leaving}
-          onPointerDown={onFuljadiPointerDown}
-        />
+        <div ref={playRef} className={styles.playfield} data-testid="fuljadi-playfield" aria-hidden>
+          <Fuljadi
+            x={pos.x}
+            y={pos.y}
+            label={t('intro.diya.fuljadi')}
+            dragging={dragging}
+            leaving={leaving}
+            popping
+            onPointerDown={onFuljadiPointerDown}
+          />
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
