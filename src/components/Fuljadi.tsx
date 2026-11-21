@@ -169,7 +169,7 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
         aria-grabbed={dragging}
         onPointerDown={onPointerDown}
       >
-        <svg className={styles.art} viewBox="0 0 52 152" aria-hidden="true" focusable="false">
+        <svg className={styles.art} viewBox="0 0 52 200" aria-hidden="true" focusable="false">
           <defs>
             <radialGradient id={`fuljadi-tip-${tipGradId}`} cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#fff8d6" />
@@ -186,11 +186,11 @@ export function Fuljadi({ x, y, label, dragging, leaving, onPointerDown }: Fulja
             x="24.5"
             y="34"
             width="3"
-            height="112"
+            height="158"
             rx="1.5"
             fill={`url(#fuljadi-stick-${tipGradId})`}
           />
-          <rect x="25" y="36" width="1" height="106" rx="0.5" fill="rgb(255 220 170 / 30%)" />
+          <rect x="25" y="36" width="1" height="150" rx="0.5" fill="rgb(255 220 170 / 30%)" />
           {reducedMotion && (
             <>
               <circle cx="26" cy="30" r="16" fill={`url(#fuljadi-tip-${tipGradId})`} />
