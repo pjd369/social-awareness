@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Fireworks.module.css'
 
 /** First launch after the diya is lit. */
-const START_MS = 150
+const START_MS = 120
 /** Last regular launch; finale rockets follow. */
-const END_MS = 12_200
+const END_MS = 7_800
 /** Soft fade so the show eases out instead of cutting off. */
-const FADE_START_MS = 13_400
-const FADE_END_MS = 15_800
-const FINALE = 6
+const FADE_START_MS = 8_600
+const FADE_END_MS = 10_400
+const FINALE = 8
 /** Soft gravity — heavy pull turns round bursts into a tall column. */
 const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
@@ -59,7 +59,7 @@ function visibleScreen() {
 
 /**
  * Fireworks when the intro diya is lit: rockets rise straight up for about
- * 15 seconds, bursting between 50–80% of the visual screen height, then ease
+ * 10 seconds, bursting between 50–80% of the visual screen height, then ease
  * out. The canvas never takes pointer events.
  */
 export function Fireworks() {
@@ -89,15 +89,15 @@ export function Fireworks() {
 
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
-    // ~1 launch every ~400ms across the 15s window (plus a short finale).
-    const rocketCount = small ? 30 : 42
+    // Dense pacing across the 10s window (~1 launch every ~160–200ms) + finale.
+    const rocketCount = small ? 48 : 68
     const sparksPerBurst = small ? 36 : 48
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
       const finale = i >= regular
       // Scatter columns across the width without clustering.
-      const slot = (i * 7) % rocketCount
+      const slot = (i * 11) % rocketCount
       // Burst altitude: 50–80% of the *visual* screen height from the bottom.
       const altitude = 0.5 + Math.random() * 0.3
       const regularIndex = i
@@ -106,11 +106,11 @@ export function Fireworks() {
         startY: height + 8,
         targetY: height * (1 - altitude),
         launchAt: finale
-          ? END_MS + 180 + (i - regular) * 240
+          ? END_MS + 120 + (i - regular) * 160
           : START_MS +
             (regular <= 1 ? 0 : regularIndex / (regular - 1)) * (END_MS - START_MS) +
-            (Math.random() - 0.5) * 160,
-        riseMs: 1000 + Math.random() * 400,
+            (Math.random() - 0.5) * 120,
+        riseMs: 900 + Math.random() * 350,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
         scale: finale ? 1.4 : 0.8 + Math.random() * 0.45,
         burst: false,
