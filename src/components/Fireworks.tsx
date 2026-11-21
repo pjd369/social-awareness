@@ -65,7 +65,7 @@ export function Fireworks() {
     const small = width < 600
     const size = Math.min(1, Math.max(0.6, width / 520))
     const rocketCount = small ? 10 : 14
-    const sparksPerRing = small ? 32 : 44
+    const sparksPerBurst = small ? 36 : 48
     const regular = rocketCount - FINALE
 
     const rockets: Rocket[] = Array.from({ length: rocketCount }, (_, i) => {
@@ -91,27 +91,23 @@ export function Fireworks() {
     let last = 0
     let frame = 0
 
-    /** Even radial speeds on nested rings → reads as a round bloom, not a column. */
+    /** One burst of sparks in every direction at similar speed → round bloom. */
     const burst = (x: number, y: number, colour: string, scale: number) => {
-      const rings = [
-        { count: Math.round(sparksPerRing * scale), speed: 88 * size * scale },
-        { count: Math.round(sparksPerRing * 0.55 * scale), speed: 52 * size * scale },
-      ]
-      for (const ring of rings) {
-        for (let i = 0; i < ring.count; i++) {
-          const angle = (Math.PI * 2 * i) / ring.count + (Math.random() - 0.5) * 0.05
-          const speed = ring.speed * (0.96 + Math.random() * 0.08)
-          sparks.push({
-            x,
-            y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            age: 0,
-            life: 1.55 + Math.random() * 0.45,
-            colour: Math.random() < 0.3 ? '#fff6dc' : colour,
-            size: (1.4 + Math.random() * 1.2) * size,
-          })
-        }
+      const count = Math.round(sparksPerBurst * scale)
+      const baseSpeed = 80 * size * scale
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.08
+        const speed = baseSpeed * (0.92 + Math.random() * 0.16)
+        sparks.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          age: 0,
+          life: 1.5 + Math.random() * 0.55,
+          colour: Math.random() < 0.3 ? '#fff6dc' : colour,
+          size: (1.4 + Math.random() * 1.2) * size,
+        })
       }
     }
 
