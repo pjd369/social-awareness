@@ -23,7 +23,6 @@ async function expectTapTargets(page: Page, minHeight: number) {
 test.describe('tap targets', () => {
   for (const path of [
     '/bhulkao',
-    '/bhulkao/activity',
     '/bhulkao/scenario/homework-time',
     '/bhulkao/prasang/sparrows-and-the-sea',
     '/bhulkao/activity/doodle',
@@ -40,6 +39,8 @@ test.describe('tap targets', () => {
     '/activity',
     '/scenario',
     '/prasang',
+    // The audience list pages now redirect to the shared hubs above.
+    '/bhulkao/activity',
     '/yuvako',
     '/yuvako/activity',
     '/yuvako/scenario',

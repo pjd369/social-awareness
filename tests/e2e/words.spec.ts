@@ -80,7 +80,9 @@ test.describe('word game', () => {
     await page.reload()
     await expect(page.getByTestId('word-game')).toHaveAttribute('data-status', 'won')
     await expect(
-      page.getByRole('listitem').filter({ hasText: 'Guess 1: M not in the word' }),
+      page
+        .getByRole('listitem')
+        .filter({ hasText: 'Guess 1: H right place, O right place, M not in the word' }),
     ).toHaveCount(1)
     await expect(page.getByTestId('word-result')).toContainText('HOPE')
   })

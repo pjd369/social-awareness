@@ -11,10 +11,10 @@ test('language choice survives reload and navigation', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('lang', 'gu')
   await expect(page.getByRole('button', { name: 'ગુજરાતી' })).toHaveAttribute('aria-pressed', 'true')
 
-  await page.getByRole('link', { name: /યુવકો/ }).click()
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('યુવકો')
+  await page.getByRole('link', { name: /પ્રવૃત્તિ/ }).click()
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('પ્રવૃત્તિ')
   await page.getByRole('button', { name: 'English' }).click()
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Yuvako')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Activity')
   await page.goto('/bhulkao')
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
 })
