@@ -114,6 +114,14 @@ test.describe('story player', () => {
     await expect(endings).toContainText('You have found every ending.')
   })
 
+  test("links to Bhulkao's earlier story address still open the scenario", async ({ page }) => {
+    await page.goto('/bhulkao/story/homework-time')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
+    await page.goto('/bhulkao/story')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+  })
+
   test('a Bhulkao story ending has no choice recap or endings count', async ({ page }) => {
     await page.goto('/bhulkao/scenario/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()

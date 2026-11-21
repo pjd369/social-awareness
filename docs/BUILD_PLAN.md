@@ -93,13 +93,13 @@ The eleven routes from the handoff:
 | `/bhulkao/activity/doodle` | Doodle catcher |
 | `/yuvako/activity/pills` | Pill game |
 | `/yuvako/activity/words` | Word game |
-| `/bhulkao/story/:id`, `/yuvako/scenario/:id` | Story player |
+| `/bhulkao/scenario/:id`, `/yuvako/scenario/:id` | Story player |
 | `/bhulkao/prasang/:id`, `/yuvako/prasang/:id` | Prasang reader |
 
 Additions this plan makes, and why:
 
 - `/yuvako/activity`: the handoff lists a games list only for Bhulkao, but the Yuvako Activity card needs somewhere to offer two games. Same template.
-- `/bhulkao/story`, `/yuvako/scenario`, `/bhulkao/prasang`, `/yuvako/prasang`: list pages. Without them a second story or prasang added through content files would be unreachable. When a section has exactly one item, the list route redirects straight to it.
+- `/bhulkao/scenario`, `/yuvako/scenario`, `/bhulkao/prasang`, `/yuvako/prasang`: list pages. Without them a second story or prasang added through content files would be unreachable. When a section has exactly one item, the list route redirects straight to it.
 - `*`: a not-found page. An unknown story or prasang id shows the same page with a link back to the section.
 
 Every game, story and prasang stays within three taps of the intro page: section card, part card, item.

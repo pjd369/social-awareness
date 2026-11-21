@@ -24,6 +24,11 @@ export interface SectionConfig {
   slug: string
   /** URL segment for the choose-your-path part: "scenario" for both sections. */
   storySegment: string
+  /**
+   * An earlier URL segment for the same part. Links that still use it are
+   * redirected to storySegment (see src/App.tsx), so shared links keep working.
+   */
+  formerStorySegment?: string
   nameKey: MessageKey
   leadKey: MessageKey
   /** Locale keys for the scenario (choose-your-path) part. */
@@ -52,6 +57,7 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
     id: 'bhulkao',
     slug: 'bhulkao',
     storySegment: 'scenario',
+    formerStorySegment: 'story',
     nameKey: 'section.bhulkao.name',
     leadKey: 'section.bhulkao.lead',
     storyTitleKey: 'part.scenario.title',

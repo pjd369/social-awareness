@@ -3,11 +3,13 @@ import {
   useEffect,
   useRef,
   useState,
+  type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
 import { useI18n } from '../i18n/context'
 import { usePrefersReducedMotion } from './motion'
+import { focusElement } from './focus'
 import { isDiyaLit, markDiyaLit } from './diya-lit'
 import { DiyaLamp } from './DiyaLamp'
 import { Fuljadi } from './Fuljadi'
@@ -46,16 +48,26 @@ function tipNearWick(tipX: number, tipY: number, wick: DOMRect, play: DOMRect): 
 
 /**
  * Annakut unveiling: unlit diya, a button that brings out a burning fuljadi
- * above “harmony” to play with, then drag it onto the wick.
+ * above “harmony” to play with, then drag it onto the wick. From the keyboard,
+ * Enter or Space on the fuljadi lights the diya and Escape puts it away.
  */
 export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const { t } = useI18n()
   const reducedMotion = usePrefersReducedMotion()
   const playRef = useRef<HTMLDivElement>(null)
   const wickRef = useRef<HTMLSpanElement>(null)
+  const lightBtnRef = useRef<HTMLButtonElement>(null)
+  const handleRef = useRef<HTMLButtonElement>(null)
+  const litNoteRef = useRef<HTMLParagraphElement>(null)
+  /** Escape put the fuljadi away: focus goes back to the "Light the diya" button. */
+  const returnFocusRef = useRef(false)
+  /** The diya was lit from a focused control: focus moves on to the "lit" note. */
+  const focusNoteRef = useRef(false)
   // Automated browsers start lit (see isDiyaLit), so e2e skips the ritual.
   const [lit, setLit] = useState(isDiyaLit)
   const [fuljadiOut, setFuljadiOut] = useState(false)
+  /** The fuljadi was brought out from the keyboard, so show the key hint. */
+  const [byKeyboard, setByKeyboard] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const [popping, setPopping] = useState(false)
   const [dragging, setDragging] = useState(false)
@@ -72,6 +84,11 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
 
   const lightDiya = useCallback(() => {
     if (litRef.current) return
+    // The focused control is about to go away; keep focus from falling to <body>.
+    const active = document.activeElement
+    if (active && (active === handleRef.current || active === lightBtnRef.current)) {
+      focusNoteRef.current = true
+    }
     markDiyaLit()
     litRef.current = true
     setLit(true)
@@ -151,12 +168,47 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     }
   }, [fuljadiOut, lit])
 
-  function summonFuljadi() {
+  // Focus follows the ritual: onto the fuljadi when it comes out, and back to
+  // the button if Escape puts it away.
+  useEffect(() => {
+    if (fuljadiOut) {
+      handleRef.current?.focus({ preventScroll: true })
+    } else if (returnFocusRef.current) {
+      returnFocusRef.current = false
+      lightBtnRef.current?.focus({ preventScroll: true })
+    }
+  }, [fuljadiOut])
+
+  useEffect(() => {
+    if (lit && focusNoteRef.current) {
+      focusNoteRef.current = false
+      focusElement(litNoteRef.current)
+    }
+  }, [lit])
+
+  // Escape puts the fuljadi away, which also unlocks page scroll.
+  useEffect(() => {
+    if (!fuljadiOut || lit) return
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return
+      returnFocusRef.current = true
+      draggingRef.current = false
+      setDragging(false)
+      setPopping(false)
+      setFuljadiOut(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [fuljadiOut, lit])
+
+  function summonFuljadi(event: ReactMouseEvent<HTMLButtonElement>) {
     if (lit) return
     if (reducedMotion) {
       lightDiya()
       return
     }
+    // A click with no pointer behind it (detail 0) came from the keyboard.
+    setByKeyboard(event.detail === 0)
     const next = restFuljadiAboveHarmony()
     posRef.current = next
     setPos(next)
@@ -241,6 +293,7 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
             <p className={styles.hint}>{t('intro.diya.hint')}</p>
             <button
               type="button"
+              ref={lightBtnRef}
               className={styles.lightBtn}
               onClick={summonFuljadi}
               data-testid="light-diya"
@@ -251,20 +304,19 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
         )}
 
         {!lit && fuljadiOut && !leaving && (
-          <p className={styles.dragHint}>{t('intro.diya.drag')}</p>
+          <p className={styles.dragHint}>{t(byKeyboard ? 'intro.diya.keys' : 'intro.diya.drag')}</p>
         )}
 
-        {lit && <p className={styles.litNote}>{t('intro.diya.lit')}</p>}
+        {lit && (
+          <p ref={litNoteRef} className={styles.litNote}>
+            {t('intro.diya.lit')}
+          </p>
+        )}
       </div>
 
       {fuljadiOut &&
         createPortal(
-          <div
-            ref={playRef}
-            className={styles.playfield}
-            data-testid="fuljadi-playfield"
-            aria-hidden
-          >
+          <div ref={playRef} className={styles.playfield} data-testid="fuljadi-playfield">
             <Fuljadi
               x={pos.x}
               y={pos.y}
@@ -272,7 +324,9 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
               dragging={dragging}
               leaving={leaving}
               popping={popping}
+              handleRef={handleRef}
               onPointerDown={onFuljadiPointerDown}
+              onActivate={lightDiya}
             />
           </div>,
           document.body,

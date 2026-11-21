@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent, type Ref } from 'react'
 import { usePrefersReducedMotion } from './motion'
 import styles from './Fuljadi.module.css'
 
@@ -10,7 +10,11 @@ interface FuljadiProps {
   leaving?: boolean
   /** Short pop-in when the fuljadi first appears at the bottom of the screen. */
   popping?: boolean
+  /** The drag handle, so the parent can move focus onto it. */
+  handleRef?: Ref<HTMLButtonElement>
   onPointerDown: (event: ReactPointerEvent<HTMLButtonElement>) => void
+  /** Pressed from the keyboard (Enter or Space) instead of dragged. */
+  onActivate?: () => void
 }
 
 interface Spark {
@@ -32,7 +36,17 @@ const TIP = CANVAS / 2
  * A burning fuljadi: thin stem with a round 2D sparkler halo.
  * The spark canvas sits in a square wrapper (not clipped by the stick button).
  */
-export function Fuljadi({ x, y, label, dragging, leaving, popping, onPointerDown }: FuljadiProps) {
+export function Fuljadi({
+  x,
+  y,
+  label,
+  dragging,
+  leaving,
+  popping,
+  handleRef,
+  onPointerDown,
+  onActivate,
+}: FuljadiProps) {
   const reducedMotion = usePrefersReducedMotion()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sparksRef = useRef<Spark[]>([])
@@ -160,11 +174,17 @@ export function Fuljadi({ x, y, label, dragging, leaving, popping, onPointerDown
       />
       {/* Drag handle = thin stem only; sparks live in the square layer above. */}
       <button
+        ref={handleRef}
         type="button"
         className={styles.handle}
         aria-label={label}
         aria-grabbed={dragging}
         onPointerDown={onPointerDown}
+        // Keyboard presses arrive as a click with detail 0; a mouse click or
+        // tap (detail 1+) must not light the diya without the drag.
+        onClick={(event) => {
+          if (event.detail === 0) onActivate?.()
+        }}
       >
         <svg className={styles.art} viewBox="0 0 52 200" aria-hidden="true" focusable="false">
           <defs>

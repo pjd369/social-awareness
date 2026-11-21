@@ -28,19 +28,19 @@ Gujarati.
 
 ## What is built
 
-| Page                                                                      | Address                                         |
-| ------------------------------------------------------------------------- | ----------------------------------------------- |
-| Intro                                                                     | `/`                                             |
-| Section home (three cards)                                                | `/bhulkao`, `/yuvako`                           |
-| Games list                                                                | `/bhulkao/activity`, `/yuvako/activity`         |
-| Doodle catcher (Bhulkao)                                                  | `/bhulkao/activity/doodle`                      |
-| Pill game (Yuvako)                                                        | `/yuvako/activity/pills`                        |
-| Word game "Shabd Khoj" (Yuvako)                                           | `/yuvako/activity/words`                        |
-| Story / scenario list (goes straight to the item while there is only one) | `/bhulkao/story`, `/yuvako/scenario`            |
-| Story / scenario player                                                   | `/bhulkao/story/<id>`, `/yuvako/scenario/<id>`  |
-| Prasang list (same rule)                                                  | `/bhulkao/prasang`, `/yuvako/prasang`           |
-| Prasang reader                                                            | `/bhulkao/prasang/<id>`, `/yuvako/prasang/<id>` |
-| Not found                                                                 | any other address                               |
+| Page                                                              | Address                                           |
+| ----------------------------------------------------------------- | ------------------------------------------------- |
+| Intro                                                             | `/`                                               |
+| Section home (three cards)                                        | `/bhulkao`, `/yuvako`                             |
+| Games list                                                        | `/bhulkao/activity`, `/yuvako/activity`           |
+| Doodle catcher (Bhulkao)                                          | `/bhulkao/activity/doodle`                        |
+| Pill game (Yuvako)                                                | `/yuvako/activity/pills`                          |
+| Word game "Shabd Khoj" (Yuvako)                                   | `/yuvako/activity/words`                          |
+| Scenario list (goes straight to the item while there is only one) | `/bhulkao/scenario`, `/yuvako/scenario`           |
+| Scenario player                                                   | `/bhulkao/scenario/<id>`, `/yuvako/scenario/<id>` |
+| Prasang list (same rule)                                          | `/bhulkao/prasang`, `/yuvako/prasang`             |
+| Prasang reader                                                    | `/bhulkao/prasang/<id>`, `/yuvako/prasang/<id>`   |
+| Not found                                                         | any other address                                 |
 
 Every game, story and prasang is at most three taps from the intro page.
 
@@ -146,8 +146,9 @@ Stories are in `content/stories/`, one file per story.
    from. Both are required. Give every step and every ending its own
    picture where you can, so no screen is text alone.
 
-The story appears at `/bhulkao/story/<id>` or `/yuvako/scenario/<id>`. When a
-section has more than one story, a list page appears automatically.
+The story appears at `/bhulkao/scenario/<id>` or `/yuvako/scenario/<id>`. When a
+section has more than one story, a list page appears automatically. (Bhulkao's
+earlier address, `/bhulkao/story/<id>`, redirects to the new one.)
 
 At the end of a Yuvako scenario, two things appear on their own, with no
 extra content needed:
