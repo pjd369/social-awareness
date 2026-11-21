@@ -13,8 +13,7 @@ const GRAVITY = 32
 const COLOURS = ['#ffdc9e', '#edbd74', '#ffc05b', '#f39b3a', '#fff1d2', '#f4a99b']
 
 interface Rocket {
-  /** Launch column — path spirals around this while spinning up. */
-  baseX: number
+  x: number
   startY: number
   targetY: number
   launchAt: number
@@ -22,12 +21,6 @@ interface Rocket {
   colour: string
   /** Relative size of the burst. */
   scale: number
-  /** Path spiral radians over the rise (sign = direction). */
-  spin: number
-  /** Extra tip rotation over the rise (faster than the path spiral). */
-  tipSpin: number
-  /** How wide the spiral wanders while rising. */
-  spiral: number
   burst: boolean
 }
 
@@ -64,9 +57,9 @@ function visibleScreen() {
 }
 
 /**
- * Fireworks when the intro diya is lit: rockets rise with a spinning tip and
- * burst between 50–80% of the *visual* screen height (from the bottom) for
- * about 15 seconds. The canvas never takes pointer events.
+ * Fireworks when the intro diya is lit: rockets rise straight up and burst
+ * between 50–80% of the *visual* screen height (from the bottom) for about
+ * 15 seconds. The canvas never takes pointer events.
  */
 export function Fireworks() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -105,11 +98,8 @@ export function Fireworks() {
       const slot = (i * 5) % rocketCount
       // Burst altitude: 50–80% of the *visual* screen height from the bottom.
       const altitude = 0.5 + Math.random() * 0.3
-      const pathTurns = 1.2 + Math.random() * 1.4
-      const tipTurns = 4 + Math.random() * 5
-      const dir = Math.random() < 0.5 ? 1 : -1
       return {
-        baseX: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
+        x: width * (0.08 + (0.84 * (slot + 0.2 + Math.random() * 0.6)) / rocketCount),
         startY: height + 8,
         targetY: height * (1 - altitude),
         launchAt: finale
@@ -118,9 +108,6 @@ export function Fireworks() {
         riseMs: 1100 + Math.random() * 450,
         colour: COLOURS[i % COLOURS.length] ?? '#edbd74',
         scale: finale ? 1.35 : 0.75 + Math.random() * 0.5,
-        spin: pathTurns * Math.PI * 2 * dir,
-        tipSpin: tipTurns * Math.PI * 2 * dir,
-        spiral: (10 + Math.random() * 16) * size,
         burst: false,
       }
     })
@@ -156,37 +143,6 @@ export function Fireworks() {
       }
     }
 
-    const drawSpinningTip = (x: number, y: number, angle: number, colour: string) => {
-      const r = 3.2 * size
-      ctx.save()
-      ctx.translate(x, y)
-      ctx.rotate(angle)
-      // Bright spinning diamond tip.
-      ctx.fillStyle = '#fffef5'
-      ctx.beginPath()
-      ctx.moveTo(0, -r * 2.1)
-      ctx.lineTo(r * 0.85, 0)
-      ctx.lineTo(0, r * 2.1)
-      ctx.lineTo(-r * 0.85, 0)
-      ctx.closePath()
-      ctx.fill()
-      // Crossed spark arms so the spin is obvious.
-      ctx.strokeStyle = colour
-      ctx.lineWidth = 1.6 * size
-      ctx.lineCap = 'round'
-      ctx.beginPath()
-      ctx.moveTo(-r * 1.6, 0)
-      ctx.lineTo(r * 1.6, 0)
-      ctx.moveTo(0, -r * 1.6)
-      ctx.lineTo(0, r * 1.6)
-      ctx.stroke()
-      ctx.fillStyle = '#fff6dc'
-      ctx.beginPath()
-      ctx.arc(0, 0, r * 0.55, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.restore()
-    }
-
     const tick = (now: number) => {
       if (!start) start = last = now
       const elapsed = now - start
@@ -199,29 +155,25 @@ export function Fireworks() {
       for (const rocket of rockets) {
         if (rocket.burst || elapsed < rocket.launchAt) continue
         const t = Math.min((elapsed - rocket.launchAt) / rocket.riseMs, 1)
-        const rise = easeOut(t)
-        const y = rocket.startY + (rocket.targetY - rocket.startY) * rise
-        const pathAngle = rocket.spin * rise
-        const tipAngle = rocket.tipSpin * rise
-        const spiralR = rocket.spiral * Math.sin(t * Math.PI)
-        const x = rocket.baseX + Math.cos(pathAngle) * spiralR
+        const y = rocket.startY + (rocket.targetY - rocket.startY) * easeOut(t)
         if (t >= 1) {
           rocket.burst = true
-          burst(x, y, rocket.colour, rocket.scale)
+          burst(rocket.x, y, rocket.colour, rocket.scale)
           continue
         }
-        const trailLen = 34 * size
-        const tx = Math.cos(pathAngle + Math.PI / 2) * spiralR * 0.35
-        const trail = ctx.createLinearGradient(x, y, x - tx, y + trailLen)
+        const trail = ctx.createLinearGradient(rocket.x, y, rocket.x, y + 34 * size)
         trail.addColorStop(0, rocket.colour)
         trail.addColorStop(1, 'rgba(255, 220, 158, 0)')
         ctx.strokeStyle = trail
         ctx.lineWidth = 2.5 * size
         ctx.beginPath()
-        ctx.moveTo(x, y)
-        ctx.lineTo(x - tx, y + trailLen)
+        ctx.moveTo(rocket.x, y)
+        ctx.lineTo(rocket.x, y + 34 * size)
         ctx.stroke()
-        drawSpinningTip(x, y, tipAngle, rocket.colour)
+        ctx.fillStyle = '#fff6dc'
+        ctx.beginPath()
+        ctx.arc(rocket.x, y, 2.6 * size, 0, Math.PI * 2)
+        ctx.fill()
       }
 
       // Mild drag + late gravity so the halo stays circular while it expands.
