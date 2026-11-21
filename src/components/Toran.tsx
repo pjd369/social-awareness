@@ -1,18 +1,19 @@
+import marigoldToran from '../assets/brand/marigold-toran.png'
 import styles from './Toran.module.css'
 
-const STRANDS = 12
-
-/** A marigold toran: strands of marigolds between pairs of mango leaves. Decorative. */
+/** Festive marigold toran under the Harisumiran header. Decorative. */
 export function Toran({ className }: { className?: string }) {
   return (
     <div className={[styles.toran, className].filter(Boolean).join(' ')} aria-hidden="true">
-      {Array.from({ length: STRANDS }, (_, i) => (
-        <span key={i}>
-          <i />
-          <b />
-          <i />
-        </span>
-      ))}
+      <img
+        className={styles.art}
+        src={marigoldToran}
+        alt=""
+        width={1648}
+        height={474}
+        decoding="async"
+        draggable={false}
+      />
     </div>
   )
 }
