@@ -29,21 +29,17 @@ function writeLit() {
   }
 }
 
-function tipTouchesFlame(
-  tipX: number,
-  tipY: number,
-  flame: DOMRect,
-  stage: DOMRect,
-): boolean {
+/** Generous hit: tip near the wick / oil bowl counts as lighting. */
+function tipNearWick(tipX: number, tipY: number, wick: DOMRect, stage: DOMRect): boolean {
   const absX = stage.left + tipX
   const absY = stage.top + tipY
-  const pad = 18
-  return (
-    absX >= flame.left - pad &&
-    absX <= flame.right + pad &&
-    absY >= flame.top - pad &&
-    absY <= flame.bottom + pad
-  )
+  const cx = wick.left + wick.width / 2
+  const cy = wick.top + wick.height / 2
+  // Radius scales with the diya so phones and large screens both feel fair.
+  const radius = Math.max(wick.width, wick.height) * 0.75 + 36
+  const dx = absX - cx
+  const dy = absY - cy
+  return dx * dx + dy * dy <= radius * radius
 }
 
 /**
@@ -54,25 +50,33 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
   const { t } = useI18n()
   const reducedMotion = usePrefersReducedMotion()
   const stageRef = useRef<HTMLDivElement>(null)
-  const flameRef = useRef<HTMLSpanElement>(null)
+  const wickRef = useRef<HTMLSpanElement>(null)
   const [lit, setLit] = useState(readLit)
   const [fuljadiOut, setFuljadiOut] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const [dragging, setDragging] = useState(false)
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const dragOffset = useRef({ x: 0, y: 0 })
+  const posRef = useRef(pos)
+  const draggingRef = useRef(false)
+  const litRef = useRef(lit)
   const onLitRef = useRef(onLit)
   onLitRef.current = onLit
+  posRef.current = pos
+  litRef.current = lit
 
   const lightDiya = useCallback(() => {
+    if (litRef.current) return
     writeLit()
+    litRef.current = true
     setLit(true)
     setLeaving(true)
+    draggingRef.current = false
+    setDragging(false)
     onLitRef.current?.()
     window.setTimeout(() => {
       setFuljadiOut(false)
       setLeaving(false)
-      setDragging(false)
     }, 420)
   }, [])
 
@@ -103,6 +107,22 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     setFuljadiOut(true)
   }
 
+  function moveTipTo(clientX: number, clientY: number) {
+    const stage = stageRef.current
+    const wick = wickRef.current
+    if (!stage || !wick || litRef.current) return
+    const rect = stage.getBoundingClientRect()
+    const next = {
+      x: Math.min(Math.max(clientX - rect.left - dragOffset.current.x, 8), rect.width - 8),
+      y: Math.min(Math.max(clientY - rect.top - dragOffset.current.y, 8), rect.height - 8),
+    }
+    posRef.current = next
+    setPos(next)
+    if (tipNearWick(next.x, next.y, wick.getBoundingClientRect(), rect)) {
+      lightDiya()
+    }
+  }
+
   function onFuljadiPointerDown(event: ReactPointerEvent<HTMLButtonElement>) {
     if (lit || leaving) return
     event.preventDefault()
@@ -110,33 +130,37 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
     if (!stage) return
     const rect = stage.getBoundingClientRect()
     dragOffset.current = {
-      x: event.clientX - rect.left - pos.x,
-      y: event.clientY - rect.top - pos.y,
+      x: event.clientX - rect.left - posRef.current.x,
+      y: event.clientY - rect.top - posRef.current.y,
     }
+    draggingRef.current = true
     setDragging(true)
-    event.currentTarget.setPointerCapture(event.pointerId)
-  }
 
-  function onStagePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    if (!dragging || lit) return
-    const stage = stageRef.current
-    const flame = flameRef.current
-    if (!stage || !flame) return
-    const rect = stage.getBoundingClientRect()
-    const next = {
-      x: Math.min(Math.max(event.clientX - rect.left - dragOffset.current.x, 8), rect.width - 8),
-      y: Math.min(Math.max(event.clientY - rect.top - dragOffset.current.y, 8), rect.height - 8),
+    const pointerId = event.pointerId
+    const target = event.currentTarget
+    target.setPointerCapture(pointerId)
+
+    function onMove(ev: PointerEvent) {
+      if (!draggingRef.current) return
+      moveTipTo(ev.clientX, ev.clientY)
     }
-    setPos(next)
-    if (tipTouchesFlame(next.x, next.y, flame.getBoundingClientRect(), rect)) {
+
+    function onUp() {
+      draggingRef.current = false
       setDragging(false)
-      lightDiya()
+      target.removeEventListener('pointermove', onMove)
+      target.removeEventListener('pointerup', onUp)
+      target.removeEventListener('pointercancel', onUp)
+      try {
+        target.releasePointerCapture(pointerId)
+      } catch {
+        /* already released */
+      }
     }
-  }
 
-  function onStagePointerUp() {
-    if (!dragging) return
-    setDragging(false)
+    target.addEventListener('pointermove', onMove)
+    target.addEventListener('pointerup', onUp)
+    target.addEventListener('pointercancel', onUp)
   }
 
   return (
@@ -145,13 +169,11 @@ export function DiyaLighting({ onLit }: { onLit?: () => void }) {
       className={styles.stage}
       data-testid="diya-lighting"
       data-lit={lit ? 'true' : 'false'}
-      onPointerMove={onStagePointerMove}
-      onPointerUp={onStagePointerUp}
-      onPointerCancel={onStagePointerUp}
     >
       <div className={styles.diyaWrap}>
         <DiyaLamp lit={lit} />
-        <span ref={flameRef} className={styles.flameHit} data-testid="diya-flame-hit" />
+        {/* Covers wick + oil bowl — the vaat area people aim for. */}
+        <span ref={wickRef} className={styles.wickHit} data-testid="diya-wick-hit" />
       </div>
 
       {!lit && !fuljadiOut && (

@@ -21,13 +21,16 @@
   height: 100%;
 }
 
-/* Invisible hit target over the wick / flame bowl. */
-.flameHit {
+/*
+ * Invisible hit target over the vaat (wick) and oil bowl.
+ * Sized generously so dragging the fuljadi tip nearby is enough.
+ */
+.wickHit {
   position: absolute;
-  top: 18%;
+  top: 28%;
   left: 50%;
-  width: 42%;
-  height: 38%;
+  width: 58%;
+  height: 48%;
   transform: translateX(-50%);
   border-radius: 50%;
   pointer-events: none;
