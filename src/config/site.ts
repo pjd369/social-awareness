@@ -51,6 +51,12 @@ export const STORAGE_KEYS = {
 } as const
 
 /**
+ * sessionStorage key set when the intro diya has been lit in this tab
+ * (see src/components/diya-lit.ts). Cleared when the tab closes.
+ */
+export const DIYA_LIT_SESSION_KEY = 'outreach.diya.lit'
+
+/**
  * The only cookie this site sets: a Shabd Khoj player's random id and name,
  * saved when they join the streak leaderboard (src/games/words/player.ts).
  */

@@ -4,8 +4,8 @@ test.describe('story player', () => {
   test('plays a Bhulkao story to two different endings, with Back and restart', async ({
     page,
   }) => {
-    await page.goto('/bhulkao/story')
-    await expect(page).toHaveURL(/\/bhulkao\/story\/homework-time$/)
+    await page.goto('/bhulkao/scenario')
+    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
@@ -29,7 +29,7 @@ test.describe('story player', () => {
     await page.getByRole('button', { name: 'Try a different choice' }).click()
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
     await page.getByRole('button', { name: 'Finish homework first' }).click()
-    await page.getByRole('button', { name: 'Ask Mira to do homework with you' }).click()
+    await page.getByRole('button', { name: 'Ask your friend to do homework with you' }).click()
     await page.getByRole('button', { name: 'After homework, play outside' }).click()
     await expect(page.getByText('You both finish early')).toBeVisible()
     await expect(page.getByRole('complementary', { name: 'What we learn' })).toContainText(
@@ -115,7 +115,7 @@ test.describe('story player', () => {
   })
 
   test('a Bhulkao story ending has no choice recap or endings count', async ({ page }) => {
-    await page.goto('/bhulkao/story/homework-time')
+    await page.goto('/bhulkao/scenario/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()
     await page.getByRole('button', { name: 'Keep playing' }).click()
     await page.getByRole('button', { name: 'Play until bedtime' }).click()

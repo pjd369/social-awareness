@@ -24,7 +24,7 @@ test.describe('tap targets', () => {
   for (const path of [
     '/bhulkao',
     '/bhulkao/activity',
-    '/bhulkao/story/homework-time',
+    '/bhulkao/scenario/homework-time',
     '/bhulkao/prasang/sparrows-and-the-sea',
     '/bhulkao/activity/doodle',
   ]) {
@@ -56,7 +56,7 @@ test.describe('tap targets', () => {
 test('every game, story and prasang is within three taps of the intro page', async ({ page }) => {
   const journeys: [string, string, string | null, RegExp][] = [
     ['Bhulkao', 'Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
-    ['Bhulkao', 'Story', null, /\/bhulkao\/story\/homework-time$/],
+    ['Bhulkao', 'Scenario', null, /\/bhulkao\/scenario\/homework-time$/],
     ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],
@@ -138,7 +138,7 @@ test('links that leave the site ask first ("You are leaving this site")', async 
 
 test.describe('no accessibility violations in game and story states', () => {
   test('story ending and pill game screens', async ({ page }) => {
-    await page.goto('/bhulkao/story/homework-time')
+    await page.goto('/bhulkao/scenario/homework-time')
     await page.getByRole('button', { name: 'Play the game now' }).click()
     await page.getByRole('button', { name: 'Keep playing' }).click()
     await page.getByRole('button', { name: 'Play until bedtime' }).click()

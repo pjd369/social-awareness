@@ -22,11 +22,11 @@ export interface SectionConfig {
   id: SectionId
   /** URL segment, e.g. /bhulkao */
   slug: string
-  /** URL segment for stories: "story" for Bhulkao, "scenario" for Yuvako. */
+  /** URL segment for the choose-your-path part: "scenario" for both sections. */
   storySegment: string
   nameKey: MessageKey
   leadKey: MessageKey
-  /** Locale keys for the story part, which is called a story or a scenario. */
+  /** Locale keys for the scenario (choose-your-path) part. */
   storyTitleKey: MessageKey
   storyDescKey: MessageKey
   storyListTitleKey: MessageKey
@@ -51,12 +51,12 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
   bhulkao: {
     id: 'bhulkao',
     slug: 'bhulkao',
-    storySegment: 'story',
+    storySegment: 'scenario',
     nameKey: 'section.bhulkao.name',
     leadKey: 'section.bhulkao.lead',
-    storyTitleKey: 'part.story.title',
-    storyDescKey: 'part.story.desc',
-    storyListTitleKey: 'list.story.title',
+    storyTitleKey: 'part.scenario.title',
+    storyDescKey: 'part.scenario.desc',
+    storyListTitleKey: 'list.scenario.title',
     activityDescKey: 'part.activity.desc.bhulkao',
     prasangLessonKey: 'prasang.lesson.bhulkao',
     games: ['doodle'],
