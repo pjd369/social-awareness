@@ -91,22 +91,28 @@ export function Fireworks() {
     let last = 0
     let frame = 0
 
-    /** One burst of sparks in every direction at similar speed → round bloom. */
+    /**
+     * All sparks launch together; speeds vary so some travel far and some stay
+     * close — a filled round bloom, not equal-length spokes.
+     */
     const burst = (x: number, y: number, colour: string, scale: number) => {
       const count = Math.round(sparksPerBurst * scale)
-      const baseSpeed = 80 * size * scale
+      const minSpeed = 28 * size * scale
+      const maxSpeed = 110 * size * scale
       for (let i = 0; i < count; i++) {
-        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.08
-        const speed = baseSpeed * (0.92 + Math.random() * 0.16)
+        const angle = Math.random() * Math.PI * 2
+        // Bias a bit toward mid/far so the bloom still reads, but keep shorts.
+        const t = Math.random() ** 0.65
+        const speed = minSpeed + (maxSpeed - minSpeed) * t
         sparks.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           age: 0,
-          life: 1.5 + Math.random() * 0.55,
+          life: 1.15 + Math.random() * 0.9,
           colour: Math.random() < 0.3 ? '#fff6dc' : colour,
-          size: (1.4 + Math.random() * 1.2) * size,
+          size: (1.3 + Math.random() * 1.4) * size,
         })
       }
     }
