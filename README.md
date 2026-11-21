@@ -8,9 +8,11 @@ Gujarati.
 - Live preview: <https://social-awareness-hp.vercel.app/>
 - Build plan: [`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) (the owner-amended version)
 
-> **Everything on the site is placeholder content.** It is marked as such on
-> every page and will be replaced with final content from the content owners.
-> Gujarati text is an unreviewed draft.
+> **Most of the site is placeholder content.** It is marked as such on every
+> page and will be replaced with final content from the content owners. The
+> Yuvako scenarios and their shared lesson are no longer marked, at the owner's
+> request, but are still drafts awaiting review. Gujarati text is an
+> unreviewed draft.
 
 ## Contents
 
@@ -50,14 +52,21 @@ Every game, story and prasang is at most three taps from the intro page.
   thin "This site is a preview" strip under the header while any placeholder
   content remains. The strip disappears by itself once nothing is marked
   placeholder.
-- **Privacy and safety**: no analytics, no cookies, no requests to any other
-  website (fonts are bundled), except Firestore for the doodle leaderboard
-  once Firebase is set up. The only free-text input in Bhulkao is the doodle
-  player's name: a first name or nickname, letters only, up to 12 letters,
-  with a basic rude-word filter. It is shown on that day's leaderboard. The
+- **Privacy and safety**: no requests to any other website (fonts are
+  bundled), except Firestore for the doodle and Shabd Khoj leaderboards once
+  Firebase is set up. The Vercel deployment counts page views with Vercel Web
+  Analytics, which runs through the site's own domain and sets no cookies (see
+  Hosting). The only free-text input in Bhulkao is the doodle player's name: a
+  first name or nickname, letters only, up to 12 letters, with a basic
+  rude-word filter. It is shown on that day's leaderboard. In Yuvako, the
+  Shabd Khoj streak leaderboard asks for a name with the same rules. The site
+  sets one cookie, only when a Shabd Khoj player saves that name (see
+  [Shabd Khoj streak leaderboard](#shabd-khoj-streak-leaderboard)). The
   browser's local storage keeps only the language choice, today's word-game
-  guesses, the doodle best score and the doodle player's name. Every link that
-  leaves the site first shows "You are leaving this site".
+  guesses, the doodle best score and the doodle player's name. Session
+  storage keeps only which Yuvako scenario endings were found and whether the
+  shared lesson was revealed, until the tab is closed. Every link that leaves the site first shows "You are leaving
+  this site".
 - **Accessibility**: works by keyboard, skip link, visible focus, one main
   heading per page, colour is never the only signal (ticks, dots, dashes,
   shapes and text), reduced-motion support, and tap targets of 56px in
@@ -118,21 +127,57 @@ Stories are in `content/stories/`, one file per story.
 2. Change `"id"` to match (`"kind-words"`) and set `"audience"` to
    `"bhulkao"` or `"yuvako"`.
 3. Change `"title"`. Set `"startNode"` to the id of the first step.
+   Optionally set `"order"` (1, 2, 3…) to place the story in the list; stories
+   without one come after, sorted by id.
 4. Each step in `"nodes"` has an `"id"`, its `"text"`, an optional `"image"`,
    and **either** `"choices"` **or** an `"ending"`:
    - `"choices"`: a list of `{ "label": {…}, "next": "<id of the step it leads to>" }`
-   - `"ending"`: `{ "outcome": {…}, "lesson": {…} }`. The lesson is shown in
-     the highlighted box.
+   - `"ending"`: `{ "title": {…}, "outcome": {…}, "lesson": {…} }`. The
+     title is a short name for the ending, for example "Groggy morning",
+     shown under "How it ends". The lesson is shown in the highlighted box.
+     The title is optional, but give every ending in a Yuvako scenario one:
+     the check warns when it is missing.
 5. Aim for three to five steps from the start to each ending. The check warns
    (but does not fail) if a path is shorter or longer, and fails if a choice
    points to a step that does not exist or a step can never reach an ending.
 6. A picture is `"image": { "src": "file-name.svg", "alt": {…}, "source": "where it comes from" }`.
    Put the file in `content/images/`. `alt` describes the picture for people
    who cannot see it; `source` records who made it or where it is licensed
-   from. Both are required.
+   from. Both are required. Give every step and every ending its own
+   picture where you can, so no screen is text alone.
 
 The story appears at `/bhulkao/story/<id>` or `/yuvako/scenario/<id>`. When a
 section has more than one story, a list page appears automatically.
+
+At the end of a Yuvako scenario, two things appear on their own, with no
+extra content needed:
+
+- **How you got here**: the labels of the choices taken, in order.
+- **Endings found**: every ending of the scenario, with the ones found so far
+  shown by their title (or "Ending 1", "Ending 2" if a title is missing) and
+  the rest shown as "Not found yet", so players know there is more to find.
+  The count lasts until the browser tab is closed. It only appears when a
+  scenario has two or more endings.
+- **The lesson they share**: see below.
+
+### The lesson the Yuvako scenarios share
+
+`content/scenario-moral.json` holds one lesson that every Yuvako scenario
+leads to. Write each scenario so its best ending shows that lesson. The file
+has `"title"` and `"text"` (the opening paragraph), each `{ "en": …, "gu": … }`,
+and optionally:
+
+- `"points"`: named points listed after the text, each `{ "title": {…}, "text": {…} }`,
+  for example one value per scenario (now Focus, Atmiyata and Seva).
+- `"closing"`: a last line after the points.
+- `"image"` (as in a story step) and `"placeholder"`.
+
+The lesson stays hidden until a visitor has reached an ending, any ending, in
+every Yuvako scenario. Until then, the scenario list and each scenario ending
+show how many scenarios are finished, and a scenario ending links to the next
+unfinished one. Once all are finished, a "Reveal the lesson" button shows it.
+Progress lasts until the browser tab is closed. A new Yuvako scenario joins
+the count by itself. Delete the file to switch the lesson off.
 
 ### Add or change a prasang
 
@@ -232,20 +277,70 @@ Scores are stored in Firebase Firestore, at
 `doodleLeaderboard/<YYYY-MM-DD>/players/<name>`. To connect a Firebase project:
 
 1. In the Firebase console, create a Firestore database and a web app.
-2. Publish the rules in `firestore.rules` (Firestore → Rules, or
-   `firebase deploy --only firestore:rules`). They let visitors save only a
-   valid name and a higher score for it, and lock everything else.
+2. Publish the rules in `firestore.rules` and the index in
+   `firestore.indexes.json` with `firebase deploy --only firestore` (or paste
+   the rules in Firestore → Rules). They let visitors save only a valid name
+   and a higher score for it, or a valid streak (see below), and lock
+   everything else.
 3. For your computer, copy `.env.example` to `.env.local` and fill in the web
    app's settings.
-4. For the live site, add the same four values as repository variables
-   (Settings → Secrets and variables → Actions → Variables):
-   `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_PROJECT_ID`,
-   `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_APP_ID`.
+4. For the live site on Vercel, add the same four values as Vercel
+   environment variables and redeploy: step-by-step in
+   [`docs/FIREBASE_ON_VERCEL.md`](docs/FIREBASE_ON_VERCEL.md). For the GitHub
+   Pages copy, add them as repository variables (Settings → Secrets and
+   variables → Actions → Variables): `VITE_FIREBASE_API_KEY`,
+   `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_AUTH_DOMAIN`,
+   `VITE_FIREBASE_APP_ID`.
 
 Without these settings, the dev server keeps scores in memory until the page
 is reloaded, and a production build shows "The leaderboard is not set up yet".
 Scores are reported by the browser, so a technically skilled visitor could
 submit a false one; preventing that fully would need a server.
+
+### Shabd Khoj streak leaderboard
+
+When a daily word is finished, the result screen shows the **longest
+streaks**: the ten players who have solved the daily word the most days in a
+row. Practice words never count. A streak stays on the board while it can
+still grow, that is until the end of the day after the player's last win.
+Losing the daily word ends it at once. A day is the player's local date: the
+same day number that picks the daily word.
+
+The first time a player solves the daily word, a dialog asks for a name, with
+the same rules as the doodle name (letters only, up to 12, a basic rude-word
+filter, no manual approval). "Not now" or Escape skips it: the board then
+offers an "Add your name" button, and the dialog comes back after the next
+daily win. Once a name is saved, that browser is never asked again, and a
+"Change name" button changes the name without changing the streak.
+
+Where the data is stored:
+
+- **In the browser**: one first-party cookie, `outreach_words_player`,
+  holding a random 20-character player id and the name. It lasts 400 days
+  (the most browsers allow) and is renewed on every visit; it is `SameSite=Lax`,
+  `Secure` on https, and limited to the site's path. Clearing cookies starts a
+  new player with a new streak.
+- **In Firestore**: `wordStreaks/<player id>`, with `name`, `streak`,
+  `lastDay` (the local day number of the player's last daily game) and
+  `updatedAt`. Only players who saved a name are stored. It uses the same
+  Firebase project and settings as the doodle leaderboard (above). The board's
+  query needs the index in `firestore.indexes.json`; without it, the board
+  says it could not be loaded.
+
+Without Firebase settings, the dev server keeps streaks in memory until the
+page is reloaded, and a production build asks for no name and shows "The
+leaderboard is not set up yet".
+
+**Streaks can be faked.** The browser reports each result, and nothing proves
+that the player solved the word. `firestore.rules` limits this: a streak can
+only start at 0 or 1, grow by one on the day after the last one, or start
+again, and each day must be within a day of the server's date, so a false
+streak still has to be built one real day at a time. There is no sign-in, so
+someone technically skilled could also rename another player's entry or end
+their streak (entry ids are visible to anyone who reads the board). Preventing
+that fully would need a server, or sign-in with Firebase Authentication. The
+rules have no automated tests; try changes in the Firebase emulator before
+publishing them.
 
 ### Change the pill game
 
@@ -325,17 +420,17 @@ The palette and type sizes are in `src/styles/tokens.css`. The section URLs
 
 From section 2 of the build plan, with their status after this build.
 
-| #   | Question                                             | Status                                                                                                                                                                                                                                                                                                                                                         |
-| --- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Commit to the default branch, or a branch with a PR? | **Answered.** Work happens on `claude/webapp-build-plan-initial-0ecfpc`. When the owner asked for the site to go live, they approved fast-forwarding `main` to it, so `main` matches the build branch. No pull request has been opened.                                                                                                                        |
-| 2   | What does the green pill open?                       | **Answered.** An on-site set of three solution pages (reconnect with people, digital boundaries, move and be present), reached from the green pill the guide offers after tossing the blue one. Nothing leaves the site except the cited sources, which ask first.                                                                                             |
-| 3   | Word list spellings and length rule                  | **Partly answered.** Owner-confirmed words: `seva`, `swadharma`, `prarthna` (native forms included); their meanings and reflections are placeholders. The other nine words (daya, satya, shanti, dhyan, bhakti, kshama, santosh, vinay, sanyam) are placeholders. The length rule (a–z, 3 to 10 letters) is the plan's default and **still needs confirming**. |
-| 4   | Who translates and reviews Gujarati?                 | **Open.** All Gujarati text is a draft written by the builder, flagged unreviewed, with a note in the footer. Hindi was dropped.                                                                                                                                                                                                                               |
-| 5   | Native-script play in the word game?                 | **Open (default applied).** Played in Latin transliteration in all languages; meaning, reflection and native-script forms are shown in the chosen language.                                                                                                                                                                                                    |
-| 6   | Who supplies and approves real content?              | **Open.** The owner asked for the placeholders to stay until real content arrives. All content is marked placeholder.                                                                                                                                                                                                                                          |
-| 7   | Bhulkao age range                                    | **Open (default applied).** Primary-school age assumed: short sentences, slow starting speed in the doodle game.                                                                                                                                                                                                                                               |
-| 8   | Branding                                             | **Open (default applied).** Working title "Digital Outreach" (a locale string), no logo, placeholder palette in `src/styles/tokens.css`, empty organisation slots in the footer.                                                                                                                                                                               |
-| 9   | Hosting                                              | **Answered.** The owner chose to go live: GitHub Pages at <https://sanketsh4h.github.io/ak_outreach/>, deployed from `main` after CI passes. A custom domain is still possible.                                                                                                                                                                                |
+| #   | Question                                             | Status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Commit to the default branch, or a branch with a PR? | **Answered.** Work happens on `claude/webapp-build-plan-initial-0ecfpc`. When the owner asked for the site to go live, they approved fast-forwarding `main` to it, so `main` matches the build branch. No pull request has been opened.                                                                                                                                                                                                                                                                                   |
+| 2   | What does the green pill open?                       | **Answered.** An on-site set of three solution pages (reconnect with people, digital boundaries, move and be present), reached from the green pill the guide offers after tossing the blue one. Nothing leaves the site except the cited sources, which ask first.                                                                                                                                                                                                                                                        |
+| 3   | Word list spellings and length rule                  | **Partly answered.** Owner-confirmed words: `seva`, `swadharma`, `prarthna` (native forms included). The other nine words (daya, satya, shanti, dhyan, bhakti, kshama, santosh, vinay, sanyam) and all meanings and reflections were drafted by the builder. At the owner's request they are no longer marked as placeholder (no badge, banner or "Placeholder reflection:" prefix), but they still need the owner's review. The length rule (a–z, 3 to 10 letters) is the plan's default and **still needs confirming**. |
+| 4   | Who translates and reviews Gujarati?                 | **Open.** All Gujarati text is a draft written by the builder, flagged unreviewed, with a note in the footer. Hindi was dropped.                                                                                                                                                                                                                                                                                                                                                                                          |
+| 5   | Native-script play in the word game?                 | **Open (default applied).** Played in Latin transliteration in all languages; meaning, reflection and native-script forms are shown in the chosen language.                                                                                                                                                                                                                                                                                                                                                               |
+| 6   | Who supplies and approves real content?              | **Open.** The owner asked for the placeholders to stay until real content arrives. At the owner's request the three Yuvako scenarios and the lesson they share are no longer marked as placeholder (no badge, banner, "Placeholder:" title or "Placeholder reflection:" prefix); the builder drafted them and they still need the owner's review.                                                                                                                                                                         |
+| 7   | Bhulkao age range                                    | **Open (default applied).** Primary-school age assumed: short sentences, slow starting speed in the doodle game.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 8   | Branding                                             | **Open (default applied).** Working title "Digital Outreach" (a locale string), no logo, placeholder palette in `src/styles/tokens.css`, empty organisation slots in the footer.                                                                                                                                                                                                                                                                                                                                          |
+| 9   | Hosting                                              | **Answered.** The owner chose to go live: GitHub Pages at <https://sanketsh4h.github.io/ak_outreach/>, deployed from `main` after CI passes. A custom domain is still possible.                                                                                                                                                                                                                                                                                                                                           |
 
 ## Launch blockers
 
@@ -349,6 +444,8 @@ Before this site is presented as final:
 2. **Real content**: stories, scenarios, prasangs, word meanings and
    reflections, doodle items and their explanations, pill cards, and the intro
    text, all approved by the content owners, with `placeholder` set to `false`.
+   The Yuvako scenarios and their shared lesson are already unmarked but still
+   need that approval.
 3. **Sources for every red-pill claim**: each red card needs a real, checked
    source. The placeholder cards say what will go there and carry no source;
    no statistics or findings were invented.
@@ -458,7 +555,7 @@ src/content/    schemas, loaders (import.meta.glob), front matter parser
 src/components/ layout, header, footer, cards, placeholder marking, lesson box, external link
 src/pages/      intro, section home, games list, item list, story, prasang, not found
 src/features/   story engine (validate, state, player), prasang reader
-src/games/      pills/, words/, doodle/ (each with pure logic and unit tests)
+src/games/      pills/, words/, doodle/ (each with pure logic and unit tests), firebase.ts
 tests/e2e/      Playwright tests
 ```
 
@@ -468,13 +565,15 @@ tests/e2e/      Playwright tests
   content text from `content/`. ESLint enforces this.
 - Game logic is pure and unit-tested (`games/*/machine.ts`, `logic.ts`,
   `sim.ts`); components only render and wire up input.
-- localStorage holds only the keys in `STORAGE_KEYS`.
+- localStorage holds only the keys in `STORAGE_KEYS`; the one cookie is in
+  `COOKIES` (`src/config/site.ts`).
 
 ### Tests
 
 - `npm test`: story validation and state, front matter, i18n, the pill
   machine, word scoring (two-pass, including the three a's in "swadharma") and
-  the daily word, doodle `step()` with a seeded random source, the content
+  the daily word, word streaks and the player cookie, doodle `step()` with a
+  seeded random source, the content
   validator against deliberately broken copies of the content, and a guard
   that the green pill's old stand-in link and wording appear nowhere.
 - `npm run test:e2e`, at 360px with touch and at desktop size: every route in
@@ -482,7 +581,12 @@ tests/e2e/      Playwright tests
   other site); language persistence; two story endings; a prasang to its
   lesson box; each game's main flow by touch and by keyboard; placeholder
   marking; tap-target sizes; three-tap reachability; the skip link; the CSP
-  tag; the "leaving this site" step.
+  tag; the "leaving this site" step; the Shabd Khoj streak leaderboard (name
+  dialog, cookie, board). The leaderboard tests use a second build with
+  made-up Firebase settings on port 4180 (or `E2E_FIREBASE_PORT`), whose
+  Firestore requests are answered inside the test by
+  `tests/e2e/fake-firestore.ts`. That server is never reused, so if the port
+  is busy the run stops with an error instead of testing another site.
 
 ## Hosting
 
@@ -500,3 +604,13 @@ The site is a static build and can be hosted anywhere. The owner chose
   `try_files $uri /index.html`).
 - Production builds include a Content-Security-Policy meta tag that limits
   every request to the site's own origin.
+- **Vercel** also deploys every push (live preview above, and a preview per
+  pull request). Builds made there turn on Vercel Web Analytics
+  (`@vercel/analytics`, mounted in `src/App.tsx`): anonymous page-view counts
+  with no cookies, loaded from `/_vercel/insights/` on the site's own domain,
+  so the Content-Security-Policy still holds. Builds anywhere else (GitHub
+  Pages, local, tests) leave it out; `vite.config.ts` checks for Vercel's
+  `VERCEL=1`. To see the numbers, turn on **Analytics** in the Vercel
+  project's dashboard.
+- To connect the leaderboards to Firebase on Vercel, follow
+  [`docs/FIREBASE_ON_VERCEL.md`](docs/FIREBASE_ON_VERCEL.md).

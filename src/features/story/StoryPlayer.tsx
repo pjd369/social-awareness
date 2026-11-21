@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useReducer, useRef } from 'react'
+import { useEffect, useId, useMemo, useReducer, useRef, useState } from 'react'
 import { useI18n } from '../../i18n/context'
 import { localizedLang } from '../../i18n/localized'
 import { Icon } from '../../components/Icon'
@@ -9,8 +9,19 @@ import { focusElement } from '../../components/focus'
 import { usePrefersReducedMotion } from '../../components/motion'
 import type { Story, StoryNode } from '../../content/schemas'
 import type { SectionId } from '../../config/sections'
+import { playableStories, scenarioMoral } from '../../content'
 import { followedExpectedPath } from './expected'
+import {
+  choicesTaken,
+  isFinished,
+  reachableEndings,
+  readEndingsFound,
+  readFinished,
+  writeEndingsFound,
+} from './endings'
 import { FirecrackerReward } from './firecrackers/FirecrackerReward'
+import { EndingsFound, PathRecap } from './ScenarioEnding'
+import { SharedLesson } from './SharedLesson'
 import { storyReducer } from './state'
 import styles from './Story.module.css'
 
@@ -39,7 +50,12 @@ function NodeMedia({ node, placeholder }: { node: StoryNode; placeholder: boolea
   return null
 }
 
-/** Plays a validated story. Bhulkao leads with the picture; Yuvako leads with the text. */
+/**
+ * Plays a validated story. Bhulkao leads with the picture; Yuvako leads with
+ * the text, and its endings show the choices taken, which endings have been
+ * found in this browser tab and progress towards the lesson all the scenarios
+ * share.
+ */
 export function StoryPlayer({ story, section }: { story: Story; section: SectionId }) {
   const { t, l, lang } = useI18n()
   const [history, dispatch] = useReducer(storyReducer, [story.startNode])
@@ -49,7 +65,30 @@ export function StoryPlayer({ story, section }: { story: Story; section: Section
   const isFirst = useRef(true)
   const headingId = useId()
   const pictureFirst = section === 'bhulkao'
+  const tracksEndings = section === 'yuvako'
   const reducedMotion = usePrefersReducedMotion()
+  const endings = useMemo(() => reachableEndings(story), [story])
+  const [found, setFound] = useState<readonly string[]>(() =>
+    tracksEndings ? readEndingsFound(story.id) : [],
+  )
+  const moral = tracksEndings ? scenarioMoral() : null
+  const scenarios = useMemo(() => (moral ? playableStories(section) : []), [moral, section])
+
+  /** Scenarios with an ending found, counting this one from state in case storage is off. */
+  const finishedScenarios = () => {
+    const finished = readFinished(scenarios)
+    if (isFinished(story, found)) finished.add(story.id)
+    return finished
+  }
+
+  const choose = (next: string) => {
+    dispatch({ type: 'choose', next })
+    if (tracksEndings && nodes.get(next)?.ending && !found.includes(next)) {
+      const updated = [...found, next]
+      setFound(updated)
+      writeEndingsFound(story.id, updated)
+    }
+  }
 
   // Move focus to the new step's heading whenever the step changes (not on first load).
   useEffect(() => {
@@ -73,6 +112,14 @@ export function StoryPlayer({ story, section }: { story: Story; section: Section
       <section className={styles.node} aria-labelledby={headingId} data-testid="story-node">
         <h2 id={headingId} ref={headingRef} className={styles.step}>
           {node.ending ? t('story.ending') : t('story.step', { n: history.length })}
+          {node.ending?.title && (
+            <>
+              <span className="visually-hidden">: </span>
+              <span className={styles.endingTitle} lang={localizedLang(node.ending.title, lang)}>
+                {l(node.ending.title)}
+              </span>
+            </>
+          )}
         </h2>
         {pictureFirst && media}
         <p className={styles.text} lang={localizedLang(node.text, lang)}>
@@ -89,7 +136,7 @@ export function StoryPlayer({ story, section }: { story: Story; section: Section
                   <button
                     type="button"
                     className={styles.choice}
-                    onClick={() => dispatch({ type: 'choose', next: choice.next })}
+                    onClick={() => choose(choice.next)}
                     lang={localizedLang(choice.label, lang)}
                   >
                     <span>{l(choice.label)}</span>
@@ -106,12 +153,25 @@ export function StoryPlayer({ story, section }: { story: Story; section: Section
             <p className={styles.outcome} lang={localizedLang(node.ending.outcome, lang)}>
               {l(node.ending.outcome)}
             </p>
+            {tracksEndings && <PathRecap labels={choicesTaken(story, history)} />}
             <LessonBox
               heading={t(section === 'bhulkao' ? 'story.lesson.bhulkao' : 'story.lesson.yuvako')}
             >
               <p lang={localizedLang(node.ending.lesson, lang)}>{l(node.ending.lesson)}</p>
             </LessonBox>
             {section === 'bhulkao' && followedExpectedPath(story, history) && <FirecrackerReward />}
+            {tracksEndings && endings.length > 1 && (
+              <EndingsFound endings={endings} found={found} current={node.id} />
+            )}
+            {moral && (
+              <SharedLesson
+                section={section}
+                stories={scenarios}
+                moral={moral}
+                finished={finishedScenarios()}
+                current={story.id}
+              />
+            )}
           </>
         )}
       </section>

@@ -16,6 +16,9 @@ export const BRAND_NAME = 'Harisumiran SF'
 export const BRAND_LOGO_SUFFIX = 'SF'
 export const BRAND_LOGO_ALT = 'Harisumiran SF — A Hariprabodham Parivar Event'
 
+/** The copyright holder named at the foot of every page. Not translated. */
+export const COPYRIGHT_HOLDER = 'The Bay Labs'
+
 /**
  * Organisation name and contact for the footer. Left empty until branding is
  * confirmed by the owner (open question 8). Each is a localized text object,
@@ -45,6 +48,14 @@ export const STORAGE_KEYS = {
   wordsDaily: 'outreach.words.daily',
   doodleBest: 'outreach.doodle.best',
   doodleName: 'outreach.doodle.name',
+} as const
+
+/**
+ * The only cookie this site sets: a Shabd Khoj player's random id and name,
+ * saved when they join the streak leaderboard (src/games/words/player.ts).
+ */
+export const COOKIES = {
+  wordsPlayer: 'outreach_words_player',
 } as const
 
 /**

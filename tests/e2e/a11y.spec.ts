@@ -39,6 +39,7 @@ test.describe('tap targets', () => {
     '/',
     '/yuvako',
     '/yuvako/activity',
+    '/yuvako/scenario',
     '/yuvako/scenario/one-am-exam',
     '/yuvako/prasang/lamp-by-the-window',
     '/yuvako/activity/pills',
@@ -59,7 +60,9 @@ test('every game, story and prasang is within three taps of the intro page', asy
     ['Bhulkao', 'Prasang', null, /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Yuvako', 'Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Yuvako', 'Activity', 'Shabd Khoj', /\/yuvako\/activity\/words$/],
-    ['Yuvako', 'Scenario', null, /\/yuvako\/scenario\/one-am-exam$/],
+    ['Yuvako', 'Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
+    ['Yuvako', 'Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
+    ['Yuvako', 'Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
     ['Yuvako', 'Prasang', null, /\/yuvako\/prasang\/lamp-by-the-window$/],
   ]
   for (const [section, part, item, target] of journeys) {
@@ -157,6 +160,58 @@ test.describe('no accessibility violations in game and story states', () => {
     await expectNoAxeViolations(page)
     await page.getByRole('button', { name: 'Next' }).first().click()
     await expectNoAxeViolations(page)
+  })
+
+  test('Yuvako scenario ending, with the choices taken and the endings found', async ({ page }) => {
+    await page.goto('/yuvako/scenario/one-am-exam')
+    await page.getByRole('button', { name: 'Put the phone away now' }).click()
+    await page.getByRole('button', { name: 'Check it one last time' }).click()
+    await page.getByRole('button', { name: 'Stop, even though sleep feels far away' }).click()
+    await expect(page.getByRole('region', { name: /^Endings found/ })).toBeVisible()
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
+    await expectTapTargets(page, 44)
+    await page.getByRole('button', { name: 'ગુજરાતી' }).click()
+    await expect(page.getByRole('region', { name: /^મળેલા અંત/ })).toBeVisible()
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
+  })
+
+  test('the lesson the scenarios share: ready to reveal, then revealed', async ({ page }) => {
+    // Two scenarios already finished in this tab (set once, before the first page).
+    await page.addInitScript(() => {
+      if (sessionStorage.getItem('outreach.scenario.endings')) return
+      sessionStorage.setItem(
+        'outreach.scenario.endings',
+        JSON.stringify({ 'one-am-exam': ['calm'], 'group-chat-joke': ['silence'] }),
+      )
+    })
+    await page.goto('/yuvako/scenario/extra-change')
+    await page.getByRole('button', { name: 'Stop and count it again' }).click()
+    await page.getByRole('button', { name: 'Hand the ₹500 back to the shopkeeper' }).click()
+    const shared = page.getByRole('region', { name: /^The lesson they share/ })
+    await expect(shared.getByRole('button', { name: 'Reveal the lesson' })).toBeVisible()
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
+    await expectTapTargets(page, 44)
+    await shared.getByRole('button', { name: 'Reveal the lesson' }).click()
+    await expect(shared.getByRole('heading', { level: 3 })).toBeFocused()
+    // Let the reveal's fade-in finish: contrast is checked at full opacity.
+    await shared
+      .locator('[data-just-revealed]')
+      .evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)))
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
+
+    await page.goto('/yuvako/scenario')
+    await expect(shared.getByRole('heading', { level: 3 })).toBeVisible()
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
+    await expectTapTargets(page, 44)
+    await page.getByRole('button', { name: 'ગુજરાતી' }).click()
+    await expect(page.getByRole('region', { name: /^સહિયારો બોધ/ })).toBeVisible()
+    await expectNoAxeViolations(page)
+    await expectNoHorizontalOverflow(page)
   })
 
   test('word game result and doodle game over, in Gujarati', async ({ page }) => {

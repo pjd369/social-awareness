@@ -57,6 +57,11 @@ export const storyChoice = z.strictObject({
 })
 
 export const storyEnding = z.strictObject({
+  /**
+   * A short name for the ending, shown under "How it ends" and, in a Yuvako
+   * scenario, in the list of endings found.
+   */
+  title: localizedText.optional(),
   outcome: localizedText,
   lesson: localizedText,
 })
@@ -73,6 +78,8 @@ export const storyNode = z.strictObject({
 export const story = z.strictObject({
   id: contentId,
   audience,
+  /** Place in the list of stories: lower numbers first, then stories without one, by id. */
+  order: z.number().int().optional(),
   title: localizedText,
   startNode: z.string().min(1),
   nodes: z.array(storyNode).min(1),
@@ -80,6 +87,23 @@ export const story = z.strictObject({
 })
 export type Story = z.infer<typeof story>
 export type StoryNode = z.infer<typeof storyNode>
+
+/**
+ * content/scenario-moral.json: the lesson every Yuvako scenario shares. It is
+ * revealed once a visitor has reached an ending in each scenario.
+ */
+export const scenarioMoral = z.strictObject({
+  title: localizedText,
+  /** The opening paragraph. */
+  text: localizedText,
+  /** Named points listed after the text, for example one value per scenario. */
+  points: z.array(z.strictObject({ title: localizedText, text: localizedText })).default([]),
+  /** A last line after the points. */
+  closing: localizedText.optional(),
+  image: storyImage.optional(),
+  placeholder: z.boolean().default(false),
+})
+export type ScenarioMoral = z.infer<typeof scenarioMoral>
 
 /** Front matter of a prasang file (one file per language). */
 export const prasangFrontMatter = z.strictObject({
