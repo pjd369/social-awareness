@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { useI18n } from '../i18n/context'
 import { usePage } from '../components/page-context'
-import { GameArt, PrasangArt, StoryArt } from '../components/Art'
+import { DarshanArt, GameArt, PrasangArt, StoryArt } from '../components/Art'
 import { DiyaLamp } from '../components/DiyaLamp'
 import { EventTitle } from '../components/EventTitle'
 import { SectionCard } from '../components/SectionCard'
@@ -35,6 +35,7 @@ function hubIsPlaceholder(id: HubId): boolean {
 export default function Intro() {
   const { t } = useI18n()
   usePage(t('site.event'))
+  const darshan = SECTIONS.darshan
   return (
     <>
       <div className={styles.hero}>
@@ -50,11 +51,21 @@ export default function Intro() {
         <span aria-hidden="true" />
       </div>
       <ul className={styles.sections}>
+        <li>
+          <SectionCard
+            to={paths.section('darshan')}
+            index={1}
+            title={t(darshan.nameKey)}
+            action={t('intro.explore')}
+            art={<DarshanArt />}
+            placeholder={darshan.placeholder}
+          />
+        </li>
         {HUB_LIST.map((hub, index) => (
           <li key={hub.id}>
             <SectionCard
               to={HUB_PATH[hub.id]()}
-              index={index + 1}
+              index={index + 2}
               title={t(hub.nameKey)}
               action={t('intro.explore')}
               art={HUB_ART[hub.id]}

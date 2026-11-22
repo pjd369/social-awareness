@@ -97,7 +97,7 @@
   text-transform: none;
 }
 
-/* Home cards: Activity / Scenario / Prasang. */
+/* Home cards: Darshan full-width, then Games / Activities / Prasang in a row. */
 .sections {
   display: grid;
   gap: var(--space-4);
@@ -113,6 +113,10 @@
 @media (min-width: 40rem) {
   .sections {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .sections > li:first-child {
+    grid-column: 1 / -1;
   }
 }
 

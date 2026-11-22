@@ -98,8 +98,7 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
   },
 }
 
-/** Active sections. Annakut Darshan is defined above but omitted until content is ready. */
-export const SECTION_LIST: SectionConfig[] = [SECTIONS.bhulkao, SECTIONS.yuvako]
+export const SECTION_LIST: SectionConfig[] = [SECTIONS.darshan, SECTIONS.bhulkao, SECTIONS.yuvako]
 
 /** Audience sections whose games, scenarios and prasangs are merged on the home hubs. */
 export const AUDIENCE_SECTIONS: SectionId[] = ['bhulkao', 'yuvako']
@@ -114,7 +113,7 @@ export interface HubConfig {
   leadKey: MessageKey
 }
 
-/** Merged Activity / Scenario / Prasang hubs linked from the home page. */
+/** Merged Games / Activities / Prasang hubs linked from the home page. */
 export const HUBS: Record<HubId, HubConfig> = {
   activity: {
     id: 'activity',
