@@ -1,5 +1,10 @@
 import { expect, test, type Page } from '@playwright/test'
-import { expectNoAxeViolations, expectNoHorizontalOverflow, skipAudio } from './helpers'
+import {
+  expectNoAxeViolations,
+  expectNoHorizontalOverflow,
+  inaugurateHome,
+  skipAudio,
+} from './helpers'
 
 /** Every visible link and button on the page must be at least this tall (and 24px wide). */
 async function expectTapTargets(page: Page, minHeight: number) {
@@ -73,7 +78,7 @@ test('every game, story and prasang is within three taps of the intro page', asy
     ['Prasang', "Einstein's Prayer", /\/yuvako\/prasang\/einstein-prayer$/],
   ]
   for (const [hub, item, target] of journeys) {
-    await page.goto('/')
+    await inaugurateHome(page)
     await page.getByRole('link', { name: new RegExp(`^${hub}`) }).click()
     await page.getByRole('link', { name: new RegExp(`^${item}`) }).click()
     await expect(page).toHaveURL(target)
