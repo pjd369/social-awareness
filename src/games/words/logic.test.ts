@@ -93,6 +93,20 @@ describe('daily word', () => {
     expect(dailyIndex(new Date(1970, 0, 13), 12)).toBe(0)
   })
 
+  it('does not repeat a word within 365 consecutive days when the list has 365 words', () => {
+    const count = 365
+    const start = new Date(2026, 10, 21)
+    const seen = new Set<number>()
+    for (let i = 0; i < 365; i++) {
+      const day = new Date(start)
+      day.setDate(start.getDate() + i)
+      const index = dailyIndex(day, count)
+      expect(seen.has(index)).toBe(false)
+      seen.add(index)
+    }
+    expect(seen.size).toBe(365)
+  })
+
   it("never picks today's word for practice", () => {
     const day = new Date(2026, 10, 14)
     const daily = dailyIndex(day, 12)

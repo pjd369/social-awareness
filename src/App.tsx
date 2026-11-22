@@ -6,9 +6,9 @@ import { Layout } from './components/Layout'
 import { GAMES, SECTION_LIST, paths, type SectionId } from './config/sections'
 import Intro from './pages/Intro'
 import SectionHome from './pages/SectionHome'
-import GamesList from './pages/GamesList'
+import HubGames from './pages/HubGames'
+import HubItems from './pages/HubItems'
 import GamePage from './pages/GamePage'
-import ItemList from './pages/ItemList'
 import NotFound from './pages/NotFound'
 import { useI18n } from './i18n/context'
 
@@ -24,7 +24,7 @@ function Loading() {
 /** Send a link that uses a section's former story address to the current one. */
 function FormerStoryRedirect({ section }: { section: SectionId }) {
   const { id } = useParams()
-  return <Navigate to={id ? paths.story(section, id) : paths.storyList(section)} replace />
+  return <Navigate to={id ? paths.story(section, id) : paths.scenarioHub()} replace />
 }
 
 /** React Router wants the base path without a trailing slash. */
@@ -37,10 +37,14 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Intro />} />
+            <Route path="activity" element={<HubGames />} />
+            <Route path="scenario" element={<HubItems kind="story" />} />
+            <Route path="prasang" element={<HubItems kind="prasang" />} />
             {SECTION_LIST.map((s) => (
               <Route key={s.id} path={s.slug}>
                 <Route index element={<SectionHome section={s.id} />} />
-                <Route path="activity" element={<GamesList section={s.id} />} />
+                {/* Audience list pages redirect to the merged hubs on the home page. */}
+                <Route path="activity" element={<Navigate to={paths.activityHub()} replace />} />
                 {s.games.map((g) => (
                   <Route
                     key={g}
@@ -48,7 +52,10 @@ export default function App() {
                     element={<GamePage section={s.id} game={g} />}
                   />
                 ))}
-                <Route path={s.storySegment} element={<ItemList section={s.id} kind="story" />} />
+                <Route
+                  path={s.storySegment}
+                  element={<Navigate to={paths.scenarioHub()} replace />}
+                />
                 <Route
                   path={`${s.storySegment}/:id`}
                   element={
@@ -65,7 +72,7 @@ export default function App() {
                       element={<FormerStoryRedirect section={s.id} />}
                     />
                   ))}
-                <Route path="prasang" element={<ItemList section={s.id} kind="prasang" />} />
+                <Route path="prasang" element={<Navigate to={paths.prasangHub()} replace />} />
                 <Route
                   path="prasang/:id"
                   element={

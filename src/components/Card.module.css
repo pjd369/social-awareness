@@ -103,6 +103,33 @@
   color: var(--color-muted);
 }
 
+.curated {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 0.1em;
+  padding: 0.15em 0.65em;
+  border: 1px solid rgb(244 197 82 / 55%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgb(244 197 82 / 22%), rgb(228 87 46 / 16%));
+  color: #ffe6a3;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+:lang(gu) .curated {
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+[data-section='bhulkao'] .curated,
+.stack .curated {
+  align-self: center;
+}
+
 .tag {
   margin-top: var(--space-1);
 }

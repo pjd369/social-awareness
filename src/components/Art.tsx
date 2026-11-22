@@ -39,6 +39,28 @@ export function FamilyArt() {
   )
 }
 
+/** A stacked offering of dishes — Annakut — under a soft glow. */
+export function DarshanArt() {
+  return (
+    <svg {...common}>
+      <ellipse cx="60" cy="68" rx="42" ry="7" fill="#f5d49b" opacity="0.35" />
+      <path d="M28 58 H92 L86 66 H34 Z" fill="#b5651d" />
+      <ellipse cx="60" cy="58" rx="32" ry="6" fill="#e4572e" />
+      <ellipse cx="60" cy="50" rx="24" ry="5.5" fill="#f4c552" />
+      <ellipse cx="60" cy="43" rx="16" ry="4.5" fill="#e88aa8" />
+      <circle cx="60" cy="34" r="7" fill="#f4c552" />
+      <path d="M60 20 C63 26 63 30 60 34 C57 30 57 26 60 20 Z" fill="#ffe6a3" />
+      <path
+        d="M18 40 C30 28 50 24 60 24 C70 24 90 28 102 40"
+        stroke="#d9b07a"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.55"
+      />
+    </svg>
+  )
+}
+
 /** Two young adults talking over chai, a phone left face down on the table. */
 export function YouthArt() {
   return (

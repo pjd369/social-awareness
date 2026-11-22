@@ -10,6 +10,9 @@ import {
 
 const ROUTES = [
   '/',
+  '/activity',
+  '/scenario',
+  '/prasang',
   '/bhulkao',
   '/yuvako',
   '/bhulkao/activity',

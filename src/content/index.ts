@@ -265,7 +265,7 @@ export function siteHasPlaceholders(): boolean {
     STORIES.some((s) => s.placeholder) ||
     MORAL?.moral?.placeholder === true ||
     PRASANGS.some((p) => p.placeholder) ||
-    SECTION_LIST.some((s) => s.games.some(gameIsPlaceholder))
+    SECTION_LIST.some((s) => s.placeholder === true || s.games.some(gameIsPlaceholder))
   )
 }
 

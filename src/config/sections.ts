@@ -6,7 +6,7 @@ import type { MessageKey } from '../i18n/messages'
  * is a one-line change to its `slug` here.
  */
 
-export type SectionId = 'bhulkao' | 'yuvako'
+export type SectionId = 'darshan' | 'bhulkao' | 'yuvako'
 export type GameId = 'doodle' | 'pills' | 'words'
 export type PartId = 'activity' | 'story' | 'prasang'
 
@@ -39,6 +39,8 @@ export interface SectionConfig {
   /** Heading for the lesson box under a prasang. */
   prasangLessonKey: MessageKey
   games: GameId[]
+  /** True while this section has no finished content yet. */
+  placeholder?: boolean
 }
 
 export const GAMES: Record<GameId, GameConfig> = {
@@ -53,6 +55,20 @@ export const GAMES: Record<GameId, GameConfig> = {
 }
 
 export const SECTIONS: Record<SectionId, SectionConfig> = {
+  darshan: {
+    id: 'darshan',
+    slug: 'annakut-darshan',
+    storySegment: 'scenario',
+    nameKey: 'section.darshan.name',
+    leadKey: 'section.darshan.lead',
+    storyTitleKey: 'part.scenario.title',
+    storyDescKey: 'part.scenario.desc',
+    storyListTitleKey: 'list.scenario.title',
+    activityDescKey: 'part.activity.desc.darshan',
+    prasangLessonKey: 'prasang.lesson.darshan',
+    games: [],
+    placeholder: true,
+  },
   bhulkao: {
     id: 'bhulkao',
     slug: 'bhulkao',
@@ -82,10 +98,48 @@ export const SECTIONS: Record<SectionId, SectionConfig> = {
   },
 }
 
+/** Active sections. Annakut Darshan is defined above but omitted until content is ready. */
 export const SECTION_LIST: SectionConfig[] = [SECTIONS.bhulkao, SECTIONS.yuvako]
 
+/** Audience sections whose games, scenarios and prasangs are merged on the home hubs. */
+export const AUDIENCE_SECTIONS: SectionId[] = ['bhulkao', 'yuvako']
+
+export type HubId = 'activity' | 'scenario' | 'prasang'
+
+export interface HubConfig {
+  id: HubId
+  /** Top-level URL segment, e.g. /activity */
+  slug: string
+  nameKey: MessageKey
+  leadKey: MessageKey
+}
+
+/** Merged Activity / Scenario / Prasang hubs linked from the home page. */
+export const HUBS: Record<HubId, HubConfig> = {
+  activity: {
+    id: 'activity',
+    slug: 'activity',
+    nameKey: 'part.activity.title',
+    leadKey: 'hub.activity.lead',
+  },
+  scenario: {
+    id: 'scenario',
+    slug: 'scenario',
+    nameKey: 'part.scenario.title',
+    leadKey: 'hub.scenario.lead',
+  },
+  prasang: {
+    id: 'prasang',
+    slug: 'prasang',
+    nameKey: 'part.prasang.title',
+    leadKey: 'hub.prasang.lead',
+  },
+}
+
+export const HUB_LIST: HubConfig[] = [HUBS.activity, HUBS.scenario, HUBS.prasang]
+
 export function isSectionId(value: unknown): value is SectionId {
-  return value === 'bhulkao' || value === 'yuvako'
+  return value === 'darshan' || value === 'bhulkao' || value === 'yuvako'
 }
 
 /** Find which section a URL path (without the base path) belongs to. */
@@ -106,4 +160,8 @@ export const paths = {
   prasangList: (id: SectionId) => `/${SECTIONS[id].slug}/prasang`,
   prasang: (id: SectionId, prasangId: string) =>
     `/${SECTIONS[id].slug}/prasang/${encodeURIComponent(prasangId)}`,
+  /** Merged hubs on the home page. */
+  activityHub: () => `/${HUBS.activity.slug}`,
+  scenarioHub: () => `/${HUBS.scenario.slug}`,
+  prasangHub: () => `/${HUBS.prasang.slug}`,
 }

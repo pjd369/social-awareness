@@ -55,7 +55,10 @@ export function localDayNumber(date: Date): number {
   return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000)
 }
 
-/** Today's word: local day number modulo the length of the list. */
+/**
+ * Today's word: local day number modulo the length of the list.
+ * With at least 365 words, the same word does not return for a full year of play.
+ */
 export function dailyIndex(date: Date, count: number): number {
   if (count <= 0) throw new Error('the word list is empty')
   return localDayNumber(date) % count

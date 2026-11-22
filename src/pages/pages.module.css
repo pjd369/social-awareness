@@ -34,8 +34,16 @@
   animation-delay: 950ms;
 }
 
-[data-intro='play'] .sections > li + li {
+[data-intro='play'] .sections > li:nth-child(2) {
   animation-delay: 1100ms;
+}
+
+[data-intro='play'] .sections > li:nth-child(3) {
+  animation-delay: 1250ms;
+}
+
+[data-intro='play'] .sections > li:nth-child(4) {
+  animation-delay: 1400ms;
 }
 
 @keyframes pop-in {
@@ -89,7 +97,7 @@
   text-transform: none;
 }
 
-/* The two main sections, side by side from tablet width up. */
+/* Home cards: Activity / Scenario / Prasang. */
 .sections {
   display: grid;
   gap: var(--space-4);
@@ -105,6 +113,12 @@
 @media (min-width: 40rem) {
   .sections {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 56rem) {
+  .sections {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 

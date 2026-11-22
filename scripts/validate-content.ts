@@ -366,6 +366,9 @@ function checkPills(c: Collector, root: string) {
   checkTranslations(c, rel, raw)
 }
 
+/** Daily Wordle must not repeat a word within a year of play. */
+const MIN_WORDLE_WORDS = 365
+
 function checkWords(c: Collector, root: string) {
   const rel = 'content/words.json'
   if (!existsSync(join(root, rel))) return
@@ -374,13 +377,16 @@ function checkWords(c: Collector, root: string) {
   c.checked++
   const parsed = wordsSchema.safeParse(raw)
   if (!parsed.success) return reportZod(c, rel, parsed.error)
+  if (parsed.data.words.length < MIN_WORDLE_WORDS) {
+    c.error(
+      rel,
+      `need at least ${MIN_WORDLE_WORDS} words so the daily puzzle does not repeat within a year (has ${parsed.data.words.length})`,
+    )
+  }
   const seen = new Set<string>()
   parsed.data.words.forEach((w, i) => {
     if (seen.has(w.word)) c.error(rel, `words[${i}]: "${w.word}" is listed twice`)
     seen.add(w.word)
-    if (!w.native?.gu) {
-      c.warn(rel, `words[${i}]: "${w.word}" has no native-script form for Gujarati`)
-    }
   })
   checkTranslations(c, rel, raw)
 }

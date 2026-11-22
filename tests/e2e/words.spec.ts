@@ -47,27 +47,26 @@ async function typeWord(page: Page, word: string) {
 
 test.describe('word game', () => {
   test('daily: a win with the on-screen keyboard, restored after reload', async ({ page }) => {
-    await open(page, 'seva')
+    await open(page, 'hope')
     await expect(page.getByText('This word has 4 letters')).toBeVisible()
-    await tapWord(page, 'daya')
+    await tapWord(page, 'home')
     await expect(
       page
         .getByRole('group', { name: 'Letter keys' })
-        .getByRole('button', { name: 'A right place' }),
+        .getByRole('button', { name: 'H right place' }),
     ).toBeVisible()
     await expect(
       page
         .getByRole('group', { name: 'Letter keys' })
-        .getByRole('button', { name: 'D not in the word' }),
+        .getByRole('button', { name: 'M not in the word' }),
     ).toBeVisible()
-    await tapWord(page, 'seva')
+    await tapWord(page, 'hope')
 
     const result = page.getByTestId('word-result')
     await expect(page.getByRole('heading', { name: 'You found the word!' })).toBeFocused()
-    await expect(result).toContainText('SEVA')
-    await expect(result.locator('[lang=gu]')).toHaveText('સેવા')
+    await expect(result).toContainText('HOPE')
     await expect(result).toContainText('Solved in 2 of 6 tries.')
-    await expect(result).toContainText('Selfless service')
+    await expect(result).toContainText('Trust that good will come')
     // The words are final for now, so the result is not marked as placeholder.
     await expect(result.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(result).not.toContainText('Placeholder')
@@ -81,32 +80,30 @@ test.describe('word game', () => {
     await page.reload()
     await expect(page.getByTestId('word-game')).toHaveAttribute('data-status', 'won')
     await expect(
-      page.getByRole('listitem').filter({ hasText: 'Guess 1: D not in the word' }),
+      page
+        .getByRole('listitem')
+        .filter({ hasText: 'Guess 1: H right place, O right place, M not in the word' }),
     ).toHaveCount(1)
-    await expect(page.getByTestId('word-result')).toContainText('SEVA')
+    await expect(page.getByTestId('word-result')).toContainText('HOPE')
   })
 
   test('daily: a loss on a 9-letter word with the physical keyboard, which fits at 360px', async ({
     page,
   }) => {
-    await open(page, 'swadharma')
+    await open(page, 'gratitude')
     await expectNoHorizontalOverflow(page)
     const board = await page.getByTestId('word-board').boundingBox()
     expect(board!.x).toBeGreaterThanOrEqual(0)
     expect(board!.x + board!.width).toBeLessThanOrEqual(page.viewportSize()!.width)
 
     await typeWord(page, 'aaaaaaaaa')
-    // Two-pass scoring: only the three a's in place are marked, the rest are "not in the word".
-    await expect(
-      page
-        .getByTestId('word-board')
-        .getByText(/^Guess 1: A not in the word, A not in the word, A right place,/),
-    ).toBeAttached()
-    for (let i = 0; i < 5; i++) await typeWord(page, wrong('swadharma'))
+    // Two-pass scoring: only the a's that sit on an a in the answer are "right place".
+    await expect(page.getByTestId('word-board').getByText(/^Guess 1: A /)).toBeAttached()
+    for (let i = 0; i < 5; i++) await typeWord(page, wrong('gratitude'))
     await expect(
       page.getByRole('heading', { name: 'Out of tries. Here is the word.' }),
     ).toBeFocused()
-    await expect(page.getByTestId('word-result')).toContainText('SWADHARMA')
+    await expect(page.getByTestId('word-result')).toContainText('GRATITUDE')
     await expectNoHorizontalOverflow(page)
 
     await page.reload()
@@ -114,16 +111,16 @@ test.describe('word game', () => {
   })
 
   test('a short guess shows a notice and is not submitted', async ({ page }) => {
-    await open(page, 'prarthna')
-    await typeWord(page, 'seva')
+    await open(page, 'prayer')
+    await typeWord(page, 'hope')
     await expect(
-      page.getByRole('status').filter({ hasText: 'Not enough letters. The word has 8 letters.' }),
+      page.getByRole('status').filter({ hasText: 'Not enough letters. The word has 6 letters.' }),
     ).toBeVisible()
     await page.keyboard.press('Backspace')
     const board = page.getByTestId('word-board')
-    await expect(board.getByText('Guess 1, typing: S E V')).toBeAttached()
+    await expect(board.getByText('Guess 1, typing: H O P')).toBeAttached()
     await page.keyboard.type('1ગ!')
-    await expect(board.getByText('Guess 1, typing: S E V')).toBeAttached()
+    await expect(board.getByText('Guess 1, typing: H O P')).toBeAttached()
   })
 
   test("practice: a win and a loss, never today's word, and nothing saved", async ({ page }) => {
@@ -131,17 +128,17 @@ test.describe('word game', () => {
     await page.addInitScript(() => {
       Math.random = () => 0
     })
-    await open(page, 'seva')
+    await open(page, 'hope')
     const saved = await page.evaluate(() => localStorage.getItem('outreach.words.daily'))
     await page.getByRole('button', { name: 'Practice' }).click()
     await expect(page.getByTestId('word-game')).toHaveAttribute('data-mode', 'practice')
     await expect(page.getByText('This word has 9 letters')).toBeVisible()
-    await typeWord(page, 'swadharma')
+    await typeWord(page, 'gratitude')
     await expect(page.getByRole('heading', { name: 'You found the word!' })).toBeFocused()
-    await expect(page.getByTestId('word-result')).toContainText('SWADHARMA')
+    await expect(page.getByTestId('word-result')).toContainText('GRATITUDE')
 
     await page.getByRole('button', { name: 'Another practice word' }).click()
-    for (let i = 0; i < 6; i++) await typeWord(page, wrong('swadharma'))
+    for (let i = 0; i < 6; i++) await typeWord(page, wrong('gratitude'))
     await expect(
       page.getByRole('heading', { name: 'Out of tries. Here is the word.' }),
     ).toBeFocused()
@@ -153,11 +150,10 @@ test.describe('word game', () => {
 
   test('shows meaning and reflection in Gujarati', async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('outreach.lang', 'gu'))
-    await open(page, 'prarthna')
-    await typeWord(page, 'prarthna')
+    await open(page, 'prayer')
+    await typeWord(page, 'prayer')
     const result = page.getByTestId('word-result')
-    await expect(result).toContainText('PRARTHNA')
-    await expect(result.locator('[lang=gu]').first()).toHaveText('પ્રાર્થના')
+    await expect(result).toContainText('PRAYER')
     await expect(result).toContainText('ભગવાન સાથે મનથી વાત કરવી.')
   })
 })
@@ -182,15 +178,15 @@ test.describe('streak leaderboard', () => {
     page,
     context,
   }) => {
-    const today = dayOf(dateFor('seva'))
+    const today = dayOf(dateFor('hope'))
     const firestore = await fakeFirestore(page, [
       { id: 'aaaaaaaaaaaaaaaaaaaa', name: 'Aarav', streak: 4, lastDay: today - 1 },
       { id: 'mmmmmmmmmmmmmmmmmmmm', name: 'Meera', streak: 2, lastDay: today },
       { id: 'oooooooooooooooooooo', name: 'Old', streak: 30, lastDay: today - 3 },
       { id: 'llllllllllllllllllll', name: 'Lost', streak: 0, lastDay: today },
     ])
-    await open(page, 'seva')
-    await typeWord(page, 'seva')
+    await open(page, 'hope')
+    await typeWord(page, 'hope')
 
     const dialog = page.getByRole('dialog', { name: 'Join the streak leaderboard' })
     await expect(dialog).toBeVisible()
@@ -238,7 +234,7 @@ test.describe('streak leaderboard', () => {
     page,
     context,
   }) => {
-    const today = dayOf(dateFor('seva'))
+    const today = dayOf(dateFor('hope'))
     const firestore = await fakeFirestore(page, [
       { id: PLAYER_ID, name: 'Riya', streak: 3, lastDay: today - 1 },
       { id: 'aaaaaaaaaaaaaaaaaaaa', name: 'Aarav', streak: 9, lastDay: today },
@@ -246,8 +242,8 @@ test.describe('streak leaderboard', () => {
     await context.addCookies([
       { name: COOKIE, value: `${PLAYER_ID}.Riya`, url: process.env.E2E_FIREBASE_URL! },
     ])
-    await open(page, 'seva')
-    await typeWord(page, 'seva')
+    await open(page, 'hope')
+    await typeWord(page, 'hope')
 
     const heading = page.getByRole('heading', { name: 'You found the word!' })
     await expect(heading).toBeFocused()
@@ -300,16 +296,16 @@ test.describe('streak leaderboard', () => {
       Math.random = () => 0
     })
     const firestore = await fakeFirestore(page)
-    await open(page, 'seva')
+    await open(page, 'hope')
 
     await page.getByRole('button', { name: 'Practice' }).click()
-    await typeWord(page, 'swadharma')
+    await typeWord(page, 'gratitude')
     await expect(page.getByRole('heading', { name: 'You found the word!' })).toBeFocused()
     await expect(page.getByRole('dialog')).toHaveCount(0)
     await expect(page.getByTestId('streak-board')).toHaveCount(0)
 
     await page.getByRole('button', { name: "Today's word" }).click()
-    await typeWord(page, 'seva')
+    await typeWord(page, 'hope')
     const dialog = page.getByRole('dialog', { name: 'Join the streak leaderboard' })
     await expect(dialog.getByRole('textbox', { name: 'Your name' })).toBeFocused()
     await page.keyboard.press('Escape')

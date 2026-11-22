@@ -4,8 +4,7 @@ test.describe('story player', () => {
   test('plays a Bhulkao story to two different endings, with Back and restart', async ({
     page,
   }) => {
-    await page.goto('/bhulkao/scenario')
-    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+    await page.goto('/bhulkao/scenario/homework-time')
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
     await expect(page.getByRole('heading', { name: 'Step 1' })).toBeVisible()
@@ -119,7 +118,7 @@ test.describe('story player', () => {
     await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Homework Time')
     await page.goto('/bhulkao/story')
-    await expect(page).toHaveURL(/\/bhulkao\/scenario\/homework-time$/)
+    await expect(page).toHaveURL(/\/scenario$/)
   })
 
   test('a Bhulkao story ending has no choice recap or endings count', async ({ page }) => {
@@ -140,11 +139,12 @@ test.describe('story player', () => {
     const picture = (name: RegExp) => page.getByTestId('story-node').getByRole('img', { name })
     const cards = page.getByRole('main').getByRole('list').first().getByRole('link')
 
-    await page.goto('/yuvako/scenario')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Scenarios')
+    await page.goto('/scenario')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Scenario')
     // The scenarios and their lesson are no longer marked as placeholder.
     await expect(page.getByRole('main')).not.toContainText('Placeholder')
     await expect(cards).toHaveText([
+      /^Homework Time\s*Curated for Kids/,
       /^1 a\.m\., Exam Tomorrow\s*Not finished yet/,
       /^The Group Chat Joke\s*Not finished yet/,
       /^The Extra Change\s*Not finished yet/,
@@ -154,7 +154,7 @@ test.describe('story player', () => {
     await expect(shared.getByRole('button')).toHaveCount(0)
 
     // 1. The 1 a.m. exam.
-    await cards.first().click()
+    await page.getByRole('link', { name: /^1 a\.m\., Exam Tomorrow/ }).click()
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await page.getByRole('button', { name: 'Put the phone away now' }).click()
     await page.getByRole('button', { name: 'Sit quietly and take ten slow breaths' }).click()
@@ -205,8 +205,9 @@ test.describe('story player', () => {
     await expect(page.getByRole('main')).not.toContainText('Placeholder')
 
     // The list shows each scenario as finished, and the lesson stays revealed.
-    await page.goto('/yuvako/scenario')
+    await page.goto('/scenario')
     await expect(cards).toHaveText([
+      /^Homework Time\s*Curated for Kids/,
       /Finished · 1 of 3 endings found/,
       /Finished · 1 of 3 endings found/,
       /Finished · 1 of 3 endings found/,
@@ -230,7 +231,7 @@ test.describe('story player', () => {
         }),
       )
     })
-    await page.goto('/yuvako/scenario')
+    await page.goto('/scenario')
     const shared = page.getByRole('region', { name: /^સહિયારો બોધ\s*:\s*3માંથી 3 પૂરી$/ })
     await expect(shared).toContainText('તમે દરેક પરિસ્થિતિમાં એક અંત સુધી પહોંચી ગયા છો.')
     await shared.getByRole('button', { name: 'બોધ જુઓ' }).click()
@@ -261,8 +262,7 @@ test.describe('story player', () => {
 
 test.describe('prasang reader', () => {
   test('reads a Yuvako prasang to its lesson box', async ({ page }) => {
-    await page.goto('/yuvako/prasang')
-    await expect(page).toHaveURL(/\/yuvako\/prasang\/einstein-prayer$/)
+    await page.goto('/yuvako/prasang/einstein-prayer')
     await expect(page.getByTestId('placeholder-notice')).toHaveCount(0)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText("Einstein's Prayer")
     await expect(page.getByTestId('prasang-video')).toBeVisible()
@@ -314,6 +314,6 @@ test('placeholder content is marked unmistakably', async ({ page }) => {
   await expect(page.getByRole('link', { name: /Scenario/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Scenario.*Placeholder/ })).toHaveCount(0)
   await page.goto('/yuvako/activity')
-  await expect(page.getByRole('link', { name: /Shabd Khoj/ })).toBeVisible()
+  await expect(page.getByRole('link', { name: /Wordle/ })).toBeVisible()
   await expect(page.getByRole('link', { name: /Placeholder/ })).toHaveCount(0)
 })
