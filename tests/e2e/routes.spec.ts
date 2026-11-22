@@ -21,6 +21,7 @@ const ROUTES = [
   '/bhulkao/activity/doodle',
   '/yuvako/activity/pills',
   '/yuvako/activity/words',
+  '/bhulkao/activity/temple-run',
   '/bhulkao/scenario',
   '/yuvako/scenario',
   '/bhulkao/prasang',
