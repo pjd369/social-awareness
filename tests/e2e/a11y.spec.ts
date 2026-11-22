@@ -27,6 +27,7 @@ test.describe('tap targets', () => {
     '/bhulkao/scenario/homework-time',
     '/bhulkao/prasang/sparrows-and-the-sea',
     '/bhulkao/activity/doodle',
+    '/bhulkao/activity/temple-run',
   ]) {
     test(`Bhulkao ${path}: 56px or more`, async ({ page }) => {
       await skipAudio(page)
@@ -64,6 +65,7 @@ test('every game, story and prasang is within three taps of the intro page', asy
     ['Prasang', 'The Sparrows', /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
     ['Games', 'Choose your reality', /\/yuvako\/activity\/pills$/],
     ['Games', 'Wordle', /\/yuvako\/activity\/words$/],
+    ['Games', 'Temple Run', /\/bhulkao\/activity\/temple-run$/],
     ['Activities', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
     ['Activities', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
     ['Activities', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
