@@ -140,7 +140,7 @@ test.describe('story player', () => {
     const cards = page.getByRole('main').getByRole('list').first().getByRole('link')
 
     await page.goto('/scenario')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Scenario')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Activities')
     // The scenarios and their lesson are no longer marked as placeholder.
     await expect(page.getByRole('main')).not.toContainText('Placeholder')
     await expect(cards).toHaveText([

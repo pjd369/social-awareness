@@ -37,6 +37,7 @@ test.describe('tap targets', () => {
   }
   for (const path of [
     '/',
+    '/annakut-darshan',
     '/activity',
     '/scenario',
     '/prasang',
@@ -58,14 +59,14 @@ test.describe('tap targets', () => {
 
 test('every game, story and prasang is within three taps of the intro page', async ({ page }) => {
   const journeys: [string, string, RegExp][] = [
-    ['Activity', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
-    ['Scenario', 'Homework Time', /\/bhulkao\/scenario\/homework-time$/],
+    ['Games', 'Doodle Catcher', /\/bhulkao\/activity\/doodle$/],
+    ['Activities', 'Homework Time', /\/bhulkao\/scenario\/homework-time$/],
     ['Prasang', 'The Sparrows', /\/bhulkao\/prasang\/sparrows-and-the-sea$/],
-    ['Activity', 'Choose your reality', /\/yuvako\/activity\/pills$/],
-    ['Activity', 'Wordle', /\/yuvako\/activity\/words$/],
-    ['Scenario', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
-    ['Scenario', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
-    ['Scenario', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
+    ['Games', 'Choose your reality', /\/yuvako\/activity\/pills$/],
+    ['Games', 'Wordle', /\/yuvako\/activity\/words$/],
+    ['Activities', '1 a.m.', /\/yuvako\/scenario\/one-am-exam$/],
+    ['Activities', 'The Group Chat', /\/yuvako\/scenario\/group-chat-joke$/],
+    ['Activities', 'The Extra Change', /\/yuvako\/scenario\/extra-change$/],
     ['Prasang', "Einstein's Prayer", /\/yuvako\/prasang\/einstein-prayer$/],
   ]
   for (const [hub, item, target] of journeys) {
